@@ -1,6 +1,5 @@
-https://grasty-mern-capstone-fe.netlify.app/login
-
 # Frontend Project - Social Match Makers
+https://socialmatch.netlify.app/
 
 ## Table of Contents
 
