@@ -54,7 +54,7 @@ The frontend for **Social Match Makers** is a React-based application designed f
 ### Prerequisites
 
 Make sure you have the following installed on your system:
-- **Node.js** (v16.0.0 or above)
+- **Node.js** (v24.0.0 or above)
 - **npm** (Node Package Manager)
 
 ### Installation
