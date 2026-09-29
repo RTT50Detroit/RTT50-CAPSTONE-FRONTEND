@@ -1,10 +1,9 @@
 // File: ProfileDashboard.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom"; // Necessary to get the "id" from the query string
 import ProfileImage from "./ProfileImage.jsx";
 import MemberInfo from "./MemberInfo.jsx";
 import AboutMe from './aboutMe/AboutMe.jsx';
-import Note from './note/NotePosting.jsx';
 import axios from "axios";
 
 const ProfileDashboard = () => {
@@ -23,7 +22,7 @@ const ProfileDashboard = () => {
           return;
         }
 
-        const apiUrl = import.meta.env.VITE_APP_BASE_URL;
+        const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
         const response = await axios.get(`${apiUrl}/api/members/${id}`, { // Use the `id` to fetch specific user
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -37,7 +36,7 @@ const ProfileDashboard = () => {
     };
 
     fetchUserData();
-  }, [id]);
+  }, [id, token]);
 
   if (isLoading) return <p>Loading profile...</p>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;
@@ -47,10 +46,11 @@ const ProfileDashboard = () => {
         <h1>Profile Dashboard</h1>
         {userData ? (
             <>
-              <ProfileImage profileImageUrl={userData.profileImageUrl} />
+                <ProfileImage
+                  profileImageUrl={userData.profileImageUrl || userData.profileImage}
+                />
               <MemberInfo user={userData} />
               <AboutMe user={userData.aboutme} />
-              <Note userId={userData._id} />
             </>
         ) : (
              <p>No user data found.</p>
