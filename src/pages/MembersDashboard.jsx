@@ -6,6 +6,9 @@ import './css/members_dashboard.css';
 
 const MembersDashboard = () => {
   const [profiles, setProfiles] = useState([]);
+  const [sexFilter, setSexFilter] = useState('all');
+  const [minAge, setMinAge] = useState('');
+  const [maxAge, setMaxAge] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
@@ -46,6 +49,18 @@ const MembersDashboard = () => {
     fetchProfiles();
   }, []);
 
+  const filteredProfiles = profiles.filter((profile) => {
+    const profileSex = profile.gender?.toLowerCase();
+    const profileAge = Number(profile.age);
+    const matchesSex = sexFilter === 'all' || profileSex === sexFilter;
+    const matchesMinAge = !minAge || profileAge >= Number(minAge);
+    const matchesMaxAge = !maxAge || profileAge <= Number(maxAge);
+
+    return matchesSex && matchesMinAge && matchesMaxAge;
+  });
+
+  const hasActiveFilters = sexFilter !== 'all' || minAge || maxAge;
+
   return (
       <main className="page-content dashboard-page">
         <section className="dashboard-hero">
@@ -78,16 +93,72 @@ const MembersDashboard = () => {
               <p className="dashboard-eyebrow">Explore the community</p>
               <h2 id="profiles-heading">Profile cards</h2>
             </div>
-            {!isLoading && !error && <span>{profiles.length} results</span>}
+            {!isLoading && !error && <span>{filteredProfiles.length} results</span>}
           </div>
+
+          {!isLoading && !error && profiles.length > 0 && (
+            <div className="profile-filters" aria-label="Filter profiles">
+              <div className="profile-filter-field">
+                <label htmlFor="sex-filter">Sex</label>
+                <select
+                    id="sex-filter"
+                    value={sexFilter}
+                    onChange={(event) => setSexFilter(event.target.value)}
+                >
+                  <option value="all">All sexes</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div className="profile-filter-field">
+                <label htmlFor="min-age">Minimum age</label>
+                <input
+                    id="min-age"
+                    type="number"
+                    min="0"
+                    value={minAge}
+                    onChange={(event) => setMinAge(event.target.value)}
+                    placeholder="Any"
+                />
+              </div>
+              <div className="profile-filter-field">
+                <label htmlFor="max-age">Maximum age</label>
+                <input
+                    id="max-age"
+                    type="number"
+                    min="0"
+                    value={maxAge}
+                    onChange={(event) => setMaxAge(event.target.value)}
+                    placeholder="Any"
+                />
+              </div>
+              {hasActiveFilters && (
+                <button
+                    type="button"
+                    className="profile-filter-reset"
+                    onClick={() => {
+                      setSexFilter('all');
+                      setMinAge('');
+                      setMaxAge('');
+                    }}
+                >
+                  Clear filters
+                </button>
+              )}
+            </div>
+          )}
 
           {isLoading && <p className="dashboard-status">Loading member profiles...</p>}
           {error && <p className="dashboard-status dashboard-error">{error}</p>}
           {!isLoading && !error && profiles.length === 0 && (
             <p className="dashboard-status">No profiles found yet.</p>
           )}
-          {!isLoading && !error && profiles.length > 0 && (
-            <ProfileCards profiles={profiles} />
+          {!isLoading && !error && profiles.length > 0 && filteredProfiles.length === 0 && (
+            <p className="dashboard-status">No profiles match these filters.</p>
+          )}
+          {!isLoading && !error && filteredProfiles.length > 0 && (
+            <ProfileCards profiles={filteredProfiles} />
           )}
         </section>
       </main>
