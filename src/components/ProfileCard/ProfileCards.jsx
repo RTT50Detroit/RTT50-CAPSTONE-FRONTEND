@@ -7,11 +7,15 @@ const ProfileCards = ({ profiles }) => {
         {profiles.map((profile) => {
           const profileId = profile._id || profile.id;
           const profileImage = profile.profileImage || profile.photo;
+          const genderKey = profile.gender?.toLowerCase();
+          const genderClass = genderKey === 'male' || genderKey === 'female'
+            ? `profile-card--${genderKey}`
+            : 'profile-card--neutral';
           const summary = profile.bio || profile.aboutme ||
             'Open to making a meaningful connection.';
 
           return (
-            <article key={profileId} className="profile-card">
+            <article key={profileId} className={`profile-card ${genderClass}`}>
               <div className="profile-card-image">
                 {profileImage ? (
                   <img src={profileImage} alt={`${profile.name}'s profile`} />
@@ -20,7 +24,10 @@ const ProfileCards = ({ profiles }) => {
                 )}
               </div>
               <div className="profile-card-body">
-                <p className="profile-card-kicker">Community member</p>
+                <p className="profile-card-kicker">
+                  {genderKey === 'male' ? 'Male member' :
+                    genderKey === 'female' ? 'Female member' : 'Community member'}
+                </p>
                 <h3>{profile.name || 'Unnamed member'}</h3>
                 <div className="profile-card-details">
                   <span>{profile.age ? `${profile.age} years` : 'Age private'}</span>

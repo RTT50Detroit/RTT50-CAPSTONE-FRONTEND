@@ -128,6 +128,50 @@ nav a:focus-visible {
   color: var(--theme-cream);
 }
 
+.profile-card {
+  border-top: 3px solid var(--theme-gold);
+}
+
+.profile-card--male {
+  border-top-color: #8297ad;
+}
+
+.profile-card--male .profile-card-image {
+  color: #eef2f5;
+  background: #34424e;
+}
+
+.profile-card--male .profile-card-kicker {
+  color: #a8bfd2;
+}
+
+.profile-card--male .profile-card-details span {
+  color: #c8d7e2;
+  background: rgba(130, 151, 173, 0.18);
+}
+
+.profile-card--female {
+  border-top-color: #d39a9d;
+}
+
+.profile-card--female .profile-card-image {
+  color: #fff0ed;
+  background: #633f49;
+}
+
+.profile-card--female .profile-card-kicker {
+  color: #e4b2ae;
+}
+
+.profile-card--female .profile-card-details span {
+  color: #f0c7c1;
+  background: rgba(211, 154, 157, 0.17);
+}
+
+.profile-card--neutral .profile-card-image {
+  background: var(--theme-gold-muted);
+}
+
 .profile-image {
   background: var(--theme-panel-soft);
 }
