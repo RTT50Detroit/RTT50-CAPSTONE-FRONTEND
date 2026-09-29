@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 import ProfileCards from "../components/ProfileCard/ProfileCards"; // Ensure path is correct
 
 const MembersDashboard = () => {
@@ -8,6 +9,15 @@ const MembersDashboard = () => {
   const [error, setError] = useState(null); // State to manage errors
   const apiUrl = import.meta.env.VITE_APP_BASE_URL; // Backend URL from env variable
   const token = localStorage.getItem("authToken"); // Get token from local storage
+  let loginName = "Member";
+
+  try {
+    const tokenPayload = jwtDecode(token);
+    loginName = tokenPayload.loginName || tokenPayload.username ||
+      tokenPayload.name || tokenPayload.email || loginName;
+  } catch {
+    // Keep the dashboard usable when the token has no readable identity claim.
+  }
 
   // Function to fetch profiles
   const fetchProfiles = async () => {
@@ -41,6 +51,7 @@ const MembersDashboard = () => {
   return (
       <div>
         <h1>Dashboard</h1>
+        <p>Login name: {loginName}</p>
 
         {/* Loading Indicator */}
         {isLoading && <p>Loading profiles...</p>}
