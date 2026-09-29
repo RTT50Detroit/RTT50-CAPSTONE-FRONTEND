@@ -1,35 +1,35 @@
-// File: ProfileDashboard.jsx
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom"; // Necessary to get the "id" from the query string
-import ProfileImage from "./ProfileImage.jsx";
-import MemberInfo from "./MemberInfo.jsx";
+import { useEffect, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import ProfileImage from './ProfileImage.jsx';
+import MemberInfo from './MemberInfo.jsx';
 import AboutMe from './aboutMe/AboutMe.jsx';
-import axios from "axios";
+import axios from 'axios';
+import './Profile.css';
 
 const ProfileDashboard = () => {
   const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchParams] = useSearchParams(); // Get query params from the URL
-  const id = searchParams.get("id"); // Extract the "id" parameter
-  const token = localStorage.getItem("authToken");
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get('id');
+  const token = localStorage.getItem('authToken');
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         if (!id) {
-          setError("No profile ID provided.");
+          setError('No profile ID provided.');
           return;
         }
 
         const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
-        const response = await axios.get(`${apiUrl}/api/members/${id}`, { // Use the `id` to fetch specific user
+        const response = await axios.get(`${apiUrl}/api/members/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserData(response.data);
-      } catch (error) {
-        console.error("Error fetching user profile:", error);
-        setError("Error fetching user profile.");
+      } catch (requestError) {
+        console.error('Error fetching user profile:', requestError);
+        setError('Error fetching user profile.');
       } finally {
         setIsLoading(false);
       }
@@ -38,24 +38,38 @@ const ProfileDashboard = () => {
     fetchUserData();
   }, [id, token]);
 
-  if (isLoading) return <p>Loading profile...</p>;
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
+  if (isLoading) return <p className="profile-status">Loading profile...</p>;
+  if (error) return <p className="profile-status">{error}</p>;
 
   return (
-      <div className="profile-dashboard">
-        <h1>Profile Dashboard</h1>
+      <main className="page-content profile-dashboard">
         {userData ? (
             <>
-                <ProfileImage
-                  profileImageUrl={userData.profileImageUrl || userData.profileImage}
-                />
-              <MemberInfo user={userData} />
-              <AboutMe user={userData.aboutme} />
+              <Link className="profile-back-link" to="/dashboard">
+                &lt;- Back to profiles
+              </Link>
+              <header className="profile-detail-header">
+                <p className="profile-detail-eyebrow">Community profile</p>
+                <h1>{userData.name || 'Member profile'}</h1>
+                <p>Get to know a little more about this member.</p>
+              </header>
+              <div className="profile-detail-grid">
+                <aside className="profile-sidebar">
+                  <ProfileImage
+                      profileImageUrl={userData.profileImageUrl || userData.profileImage}
+                      memberId={userData._id || id}
+                  />
+                  <MemberInfo user={userData} />
+                </aside>
+                <section className="profile-main-content">
+                  <AboutMe user={userData.aboutme} />
+                </section>
+              </div>
             </>
         ) : (
-             <p>No user data found.</p>
+             <p className="profile-status">No user data found.</p>
          )}
-      </div>
+      </main>
   );
 };
 

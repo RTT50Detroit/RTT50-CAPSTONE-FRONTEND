@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import './AboutMe.css'
+import { useState } from 'react';
+import PropTypes from 'prop-types';
+import './AboutMe.css';
 
 
-const AboutMe = () => {
-  const [bio, setBio] = useState("Hello! This is my short bio.");
+const AboutMe = ({ user }) => {
+  const [bio, setBio] = useState(user || 'No biography added yet.');
 
   const handleEdit = () => {
     const updatedBio = prompt("Edit your bio:", bio);
@@ -22,3 +23,7 @@ const AboutMe = () => {
 };
 
 export default AboutMe;
+
+AboutMe.propTypes = {
+  user: PropTypes.string,
+};
