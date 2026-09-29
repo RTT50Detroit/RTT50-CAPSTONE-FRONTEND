@@ -1,18 +1,201 @@
-/* styles.css */
-textarea {
+.notes-page {
+    max-width: 900px;
+}
+
+.notes-heading {
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+.notes-eyebrow,
+.note-date {
+    margin: 0 0 8px;
+    color: #a2643d;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.notes-heading h1 {
+    margin: 0;
+    color: #3f3029;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(2.4rem, 7vw, 4.5rem);
+    font-weight: 400;
+}
+
+.notes-heading > p:last-child {
+    margin: 12px auto 0;
+    color: #7c6d64;
+}
+
+.journal-editor {
+    display: grid;
+    gap: 10px;
+    margin: 0 auto 48px;
+    padding: 28px;
+    border: 1px solid #e1cdbb;
+    border-radius: 8px;
+    background: #fffaf3;
+    box-shadow: 0 14px 30px rgba(91, 61, 42, 0.08);
+}
+
+.journal-editor label,
+.note-edit-form label {
+    color: #6f5849;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.journal-editor input,
+.journal-editor textarea,
+.note-edit-form input,
+.note-edit-form textarea {
     width: 100%;
-    padding: 10px;
+    border: 1px solid #decfbe;
+    border-radius: 5px;
+    padding: 12px 14px;
+    color: #3f3029;
+    background: #fffdf9;
+    font: inherit;
+    resize: vertical;
 }
 
-button {
-    margin-top: 10px;
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
+.journal-editor input:focus,
+.journal-editor textarea:focus,
+.note-edit-form input:focus,
+.note-edit-form textarea:focus {
+    outline: 2px solid #d59b73;
+    outline-offset: 1px;
+}
+
+.journal-editor button,
+.note-actions button {
+    width: fit-content;
+    margin-top: 6px;
+    border: 0;
+    border-radius: 4px;
+    padding: 10px 16px;
+    color: #fffaf3;
+    background: #8a573a;
     cursor: pointer;
+    font: inherit;
+    font-weight: 700;
 }
 
-button:hover {
-    background-color: #0056b3;
+.journal-editor button:hover,
+.note-actions button:hover {
+    background: #6f432d;
+}
+
+.journal-editor button:disabled,
+.note-actions button:disabled {
+    cursor: wait;
+    opacity: 0.6;
+}
+
+.notes-list-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 1px solid #dfd0c2;
+    padding-bottom: 12px;
+}
+
+.notes-list-heading h2 {
+    margin: 0;
+    color: #3f3029;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+}
+
+.notes-list-heading span {
+    color: #987e6c;
+    font-size: 0.85rem;
+}
+
+.note-cards {
+    display: grid;
+    gap: 16px;
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.note-card {
+    border-left: 4px solid #d59b73;
+    padding: 22px 24px;
+    background: #fffdf9;
+    box-shadow: 0 8px 20px rgba(91, 61, 42, 0.06);
+}
+
+.note-card h3 {
+    margin: 0 0 10px;
+    color: #4b362b;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.45rem;
+    font-weight: 400;
+}
+
+.note-content {
+    margin: 0;
+    color: #68584e;
+    line-height: 1.7;
+    white-space: pre-wrap;
+}
+
+.note-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.note-actions button {
+    margin: 0;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+}
+
+.note-actions .button-secondary {
+    color: #6f5849;
+    background: #eadfd3;
+}
+
+.note-actions .button-danger {
+    background: #a65e50;
+}
+
+.note-actions .button-danger:hover {
+    background: #87473c;
+}
+
+.note-edit-form {
+    display: grid;
+    gap: 10px;
+}
+
+.empty-notes,
+.notes-status {
+    margin: 24px 0;
+    color: #7c6d64;
+    text-align: center;
+}
+
+.notes-error {
+    color: #a04f43;
+}
+
+@media (max-width: 600px) {
+    .journal-editor {
+        padding: 20px;
+    }
+
+    .note-card {
+        padding: 18px;
+    }
 }

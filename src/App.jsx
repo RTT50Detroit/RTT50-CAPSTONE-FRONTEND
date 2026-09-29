@@ -1,5 +1,4 @@
 // App.jsx
-import React from 'react';
 import {
   BrowserRouter as Router, Routes, Route, NavLink, useLocation,
 } from 'react-router-dom';
@@ -12,7 +11,7 @@ import ProtectedRoute from './components/ProtectedRoute.jsx';
 import './App.css';
 import './pages/css/styles.css';
 import LogoutButton from './components/LogoutButton.jsx';
-import CreateNote from './components/Dashboard/note/CreateNote.jsx';
+import NotesDashboard from './components/Dashboard/note/NoteDashboard.jsx';
 
 function Navigation() {
   useLocation();
@@ -99,7 +98,7 @@ function App() {
                 path="/notes"
                 element={
                   <ProtectedRoute>
-                    <CreateNote /> {/* Render your Create Note component */}
+                    <NotesDashboard />
                   </ProtectedRoute>
                 }
             />

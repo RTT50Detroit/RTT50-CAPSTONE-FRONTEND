@@ -1,83 +1,93 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import NoteList from './NoteList';
 import NotePosting from './NotePosting';
+import './Notes.css';
 
+const apiUrl = import.meta.env.VITE_APP_BASE_URL;
+
+const authConfig = () => ({
+  headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
+});
 
 const NotesDashboard = () => {
-  const [notes, setNotes] = useState([]); // Stores all notes
-  const [loading, setLoading] = useState(false); // Loading state
+  const [notes, setNotes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
-  // Fetch notes from the API
   const fetchNotes = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get('/api/members/notes', {
-        headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
-      });
-      setNotes(data);
-    } catch (error) {
-      console.error('Error while fetching notes:', error);
+      const { data } = await axios.get(`${apiUrl}/api/members/notes`, authConfig());
+      setNotes(Array.isArray(data) ? data : data.notes || []);
+    } catch (requestError) {
+      console.error('Error while fetching notes:', requestError);
+      setError('Your notes could not be loaded. Please try again.');
     } finally {
       setLoading(false);
     }
   };
 
-  // Create a new note (passed to NotePosting)
-  const addNote = async (noteContent) => {
-    try {
-      const { data } = await axios.post(
-          '/api/members/notes',
-          { content: noteContent },
-          { headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` } }
-      );
-      setNotes((prevNotes) => [...prevNotes, data]); // Add new note to the list
-    } catch (error) {
-      console.error('Error while adding a note:', error);
-    }
+  const addNote = async (note) => {
+    const { data } = await axios.post(
+        `${apiUrl}/api/members/notes`,
+        note,
+        authConfig()
+    );
+    const savedNote = data.note || data;
+    setNotes((prevNotes) => [...prevNotes, {
+      ...note,
+      ...savedNote,
+    }]);
   };
 
-  // Update an existing note (passed to NoteList for editing)
-  const updateNote = async (id, content) => {
-    try {
-      const { data } = await axios.put(
-          `/api/members/notes/${id}`,
-          { content },
-          { headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` } }
-      );
-      setNotes((prevNotes) => prevNotes.map((note) => (note._id === id ? data : note))); // Replace updated note
-    } catch (error) {
-      console.error('Error while updating note:', error);
-    }
+  const updateNote = async (id, updates) => {
+    const { data } = await axios.put(
+        `${apiUrl}/api/members/notes/${id}`,
+        updates,
+        authConfig()
+    );
+    const updatedNote = data.note || data;
+    setNotes((prevNotes) => prevNotes.map((note) => (
+      note._id === id ? { ...note, ...updatedNote, ...updates } : note
+    )));
   };
 
-  // Delete an existing note (also used by NoteList)
   const deleteNote = async (id) => {
-    try {
-      await axios.delete(`/api/members/notes/${id}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
-      });
-      setNotes((prevNotes) => prevNotes.filter((note) => note._id !== id)); // Remove from list
-    } catch (error) {
-      console.error('Error while deleting note:', error);
-    }
+    await axios.delete(`${apiUrl}/api/members/notes/${id}`, authConfig());
+    setNotes((prevNotes) => prevNotes.filter((note) => note._id !== id));
   };
 
-  // Fetch notes on component mount
   useEffect(() => {
     fetchNotes();
   }, []);
 
   return (
-      <div>
-        <h2>Notes Dashboard</h2>
+      <main className="page-content notes-page">
+        <section className="notes-heading">
+          <p className="notes-eyebrow">Private journal</p>
+          <h1>Notes</h1>
+          <p>Capture the thoughts, plans, and little moments worth keeping.</p>
+        </section>
 
-        {/* Note Posting */}
         <NotePosting onAddNote={addNote} />
 
-        {/* Note List */}
-        {loading ? <p>Loading notes...</p> : <NoteList notes={notes} onEditNote={updateNote} onDeleteNote={deleteNote} />}
-      </div>
+        <section className="notes-list-section" aria-labelledby="saved-notes-heading">
+          <div className="notes-list-heading">
+            <h2 id="saved-notes-heading">Saved entries</h2>
+            <span>{notes.length} {notes.length === 1 ? 'entry' : 'entries'}</span>
+          </div>
+          {loading && <p className="notes-status">Opening your journal...</p>}
+          {error && <p className="notes-status notes-error">{error}</p>}
+          {!loading && !error && (
+            <NoteList
+                notes={notes}
+                onEditNote={updateNote}
+                onDeleteNote={deleteNote}
+            />
+          )}
+        </section>
+      </main>
   );
 };
 
