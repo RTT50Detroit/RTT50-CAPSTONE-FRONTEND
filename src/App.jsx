@@ -1,7 +1,7 @@
 // App.jsx
 import React from 'react';
 import {
-  BrowserRouter as Router, Routes, Route, NavLink,
+  BrowserRouter as Router, Routes, Route, NavLink, useLocation,
 } from 'react-router-dom';
 import Registration from './pages/Registration';
 import Home from './pages/Home.jsx';
@@ -14,46 +14,59 @@ import './pages/css/styles.css';
 import LogoutButton from './components/LogoutButton.jsx';
 import CreateNote from './components/Dashboard/note/CreateNote.jsx';
 
+function Navigation() {
+  const { pathname } = useLocation();
+  const isLoginPage = pathname === '/login';
+
+  return (
+    <header>
+      <h1>Social Match Makers</h1>
+      <nav>
+        <ul>
+          <li>
+            <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')}>
+              Home
+            </NavLink>
+          </li>
+          {!isLoginPage && (
+            <>
+              <li>
+                <NavLink to="/register" className={({ isActive }) => (isActive ? 'active' : '')}>
+                  Register
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/login" className={({ isActive }) => (isActive ? 'active' : '')}>
+                  Login
+                </NavLink>
+              </li>
+            </>
+          )}
+          <li>
+            <NavLink to="/dashboard" className={({ isActive }) => (isActive ? 'active' : '')}>
+              Profiles
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/notes" className={({ isActive }) => (isActive ? 'active' : '')}>
+              Notes
+            </NavLink>
+          </li>
+          <li>
+            {localStorage.getItem('token') && <LogoutButton />}
+          </li>
+        </ul>
+      </nav>
+    </header>
+  );
+}
+
 function App() {
   return (
       <Router>
         <div className="App">
           {/* Navigation */}
-          <header>
-            <h1>Social Match Makers</h1>
-            <nav>
-              <ul>
-                <li>
-                  <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')}>
-                    Home
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/register" className={({ isActive }) => (isActive ? 'active' : '')}>
-                    Register
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/login" className={({ isActive }) => (isActive ? 'active' : '')}>
-                    Login
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/dashboard" className={({ isActive }) => (isActive ? 'active' : '')}>
-                    Profiles
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/notes" className={({ isActive }) => (isActive ? 'active' : '')}>
-                    Notes
-                  </NavLink>
-                </li>
-                <li>
-                  {localStorage.getItem('token') && <LogoutButton />}
-                </li>
-              </ul>
-            </nav>
-          </header>
+          <Navigation />
 
           <Routes>
             {/* Public Routes */}
