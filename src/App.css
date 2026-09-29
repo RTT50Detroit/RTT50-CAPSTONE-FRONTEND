@@ -10,33 +10,270 @@
 }
 
 .home-page {
-  display: flex;
-  justify-content: center;
-  text-align: center;
+  overflow: hidden;
+  background: var(--theme-black);
 }
 
-.home-card {
-  width: min(100%, 680px);
-  padding: 64px 40px;
-  border: 1px solid #dce5f2;
-  border-radius: 16px;
-  background: #ffffff;
-  box-shadow: 0 16px 36px rgba(30, 58, 95, 0.1);
+.home-hero {
+  display: grid;
+  min-height: 660px;
+  grid-template-columns: minmax(0, 0.9fr) minmax(380px, 0.75fr);
+  align-items: center;
+  gap: clamp(40px, 8vw, 112px);
+  padding-top: 80px;
+  padding-bottom: 86px;
 }
 
-.home-card h1 {
+.home-eyebrow {
+  margin: 0 0 18px;
+  color: var(--theme-gold);
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.home-hero h1 {
   margin: 0 0 16px;
-  color: #163b65;
-  font-size: clamp(2rem, 5vw, 3.25rem);
+  max-width: 670px;
+  color: var(--theme-gold-bright);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(3.1rem, 6vw, 5.7rem);
+  font-weight: 400;
+  letter-spacing: 0;
   line-height: 1.1;
 }
 
-.home-card p {
+.home-intro {
   max-width: 520px;
-  margin: 0 auto;
-  color: #607089;
-  font-size: 1.05rem;
-  line-height: 1.7;
+  margin: 0;
+  color: var(--theme-muted);
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+
+.home-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 32px;
+}
+
+.home-primary-action,
+.home-secondary-action {
+  border-radius: 4px;
+  padding: 13px 18px;
+  font-size: 0.86rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.home-primary-action {
+  color: var(--theme-black);
+  background: var(--theme-gold);
+}
+
+.home-primary-action:hover {
+  background: var(--theme-gold-bright);
+}
+
+.home-secondary-action {
+  color: var(--theme-cream);
+  border: 1px solid var(--theme-line);
+}
+
+.home-secondary-action:hover {
+  border-color: var(--theme-gold-muted);
+  background: var(--theme-panel);
+}
+
+.home-note {
+  margin: 22px 0 0;
+  color: var(--theme-gold-muted);
+  font-size: 0.78rem;
+}
+
+.home-persona-stage {
+  position: relative;
+  min-height: 500px;
+}
+
+.home-persona-card {
+  position: absolute;
+  z-index: 1;
+  top: 42px;
+  right: 12%;
+  width: min(100%, 350px);
+  border: 1px solid var(--theme-line);
+  border-radius: 8px;
+  padding: 24px;
+  background: var(--theme-panel);
+  box-shadow: 22px 22px 0 rgba(142, 117, 56, 0.24);
+  transform: rotate(3deg);
+}
+
+.home-persona-topline,
+.home-persona-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--theme-muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.home-online-status {
+  color: #a9c990;
+}
+
+.home-persona-avatar {
+  display: grid;
+  width: 86px;
+  height: 86px;
+  place-items: center;
+  margin: 28px 0 18px;
+  border-radius: 50%;
+  color: var(--theme-black);
+  background: var(--theme-gold);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.65rem;
+}
+
+.home-persona-label {
+  margin: 0 0 7px;
+  color: var(--theme-gold);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.home-persona-card h2 {
+  margin: 0;
+  color: var(--theme-cream);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+.home-persona-bio {
+  min-height: 52px;
+  margin: 12px 0 20px;
+  color: var(--theme-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.home-persona-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 22px;
+}
+
+.home-persona-tags span {
+  border-radius: 999px;
+  padding: 6px 9px;
+  color: var(--theme-gold-bright);
+  background: rgba(199, 162, 74, 0.12);
+  font-size: 0.69rem;
+}
+
+.home-persona-footer {
+  border-top: 1px solid var(--theme-line);
+  padding-top: 16px;
+  color: var(--theme-gold-muted);
+  text-transform: none;
+}
+
+.home-note-card {
+  position: absolute;
+  display: grid;
+  gap: 8px;
+  width: 190px;
+  border: 1px solid var(--theme-line);
+  border-radius: 5px;
+  padding: 16px;
+  background: var(--theme-charcoal);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.28);
+}
+
+.home-note-card span {
+  color: var(--theme-gold);
+  font-size: 0.67rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.home-note-card strong {
+  color: var(--theme-cream);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.home-note-card--top {
+  top: 12px;
+  left: 0;
+  transform: rotate(-7deg);
+}
+
+.home-note-card--bottom {
+  right: 0;
+  bottom: 14px;
+  transform: rotate(-4deg);
+}
+
+.home-pillars {
+  border-top: 1px solid var(--theme-line);
+  padding-top: 72px;
+  padding-bottom: 94px;
+}
+
+.home-section-heading h2 {
+  margin: 0 0 34px;
+  color: var(--theme-cream);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(2rem, 4vw, 3.3rem);
+  font-weight: 400;
+}
+
+.home-pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.home-pillar {
+  min-height: 190px;
+  border-top: 2px solid var(--theme-gold-muted);
+  padding: 18px 8px 0 0;
+}
+
+.home-pillar-number {
+  color: var(--theme-gold);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.home-pillar h3 {
+  margin: 26px 0 9px;
+  color: var(--theme-cream);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.65rem;
+  font-weight: 400;
+}
+
+.home-pillar p {
+  max-width: 280px;
+  margin: 0;
+  color: var(--theme-muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
 }
 
 @media (max-width: 600px) {
@@ -45,7 +282,46 @@
     padding: 32px 0;
   }
 
-  .home-card {
-    padding: 44px 24px;
+  .home-hero {
+    display: block;
+    min-height: 0;
+    padding-top: 54px;
+    padding-bottom: 64px;
+  }
+
+  .home-hero h1 {
+    font-size: 3.3rem;
+  }
+
+  .home-persona-stage {
+    min-height: 510px;
+    margin-top: 42px;
+  }
+
+  .home-persona-card {
+    right: 4%;
+    width: 88%;
+  }
+
+  .home-note-card--top {
+    left: -4px;
+  }
+
+  .home-note-card--bottom {
+    right: -4px;
+  }
+
+  .home-pillars {
+    padding-top: 54px;
+    padding-bottom: 60px;
+  }
+
+  .home-pillar-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .home-pillar {
+    min-height: 0;
   }
 }
