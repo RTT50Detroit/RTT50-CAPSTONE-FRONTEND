@@ -2,11 +2,21 @@ import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 
 const ProfileCards = ({ profiles }) => {
+  const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
+
   return (
       <div className="profile-cards-grid">
         {profiles.map((profile) => {
           const profileId = profile._id || profile.id;
-          const profileImage = profile.profileImage || profile.photo;
+          const rawProfileImage = profile.profileImage || profile.photo;
+          const profileImage = rawProfileImage?.startsWith('/')
+            ? `${apiUrl}${rawProfileImage}`
+            : rawProfileImage;
+          const nameParts = (profile.name || '').trim().split(/\s+/).filter(Boolean);
+          const firstName = nameParts[0] || 'member';
+          const initials = nameParts.length > 1
+            ? `${nameParts[0][0]}${nameParts[nameParts.length - 1][0]}`
+            : (nameParts[0]?.slice(0, 2) || '?');
           const genderKey = profile.gender?.toLowerCase();
           const genderClass = genderKey === 'male' || genderKey === 'female'
             ? `profile-card--${genderKey}`
@@ -18,9 +28,19 @@ const ProfileCards = ({ profiles }) => {
             <article key={profileId} className={`profile-card ${genderClass}`}>
               <div className="profile-card-image">
                 {profileImage ? (
-                  <img src={profileImage} alt={`${profile.name}'s profile`} />
+                  <>
+                    <img
+                        src={profileImage}
+                        alt={`${profile.name}'s profile`}
+                        onError={(event) => {
+                          event.currentTarget.hidden = true;
+                          event.currentTarget.nextElementSibling.hidden = false;
+                        }}
+                    />
+                    <span className="profile-card-initials" hidden>{initials.toUpperCase()}</span>
+                  </>
                 ) : (
-                  <span>{profile.name?.charAt(0).toUpperCase() || '?'}</span>
+                  <span className="profile-card-initials">{initials.toUpperCase()}</span>
                 )}
               </div>
               <div className="profile-card-body">
@@ -36,7 +56,7 @@ const ProfileCards = ({ profiles }) => {
                 <p className="profile-card-summary">{summary}</p>
                 {profileId && (
                   <Link className="profile-card-link" to={`/dashboard/profile?id=${profileId}`}>
-                    View profile <span aria-hidden="true">-&gt;</span>
+                    View {firstName}&apos;s profile <span aria-hidden="true">-&gt;</span>
                   </Link>
                 )}
               </div>

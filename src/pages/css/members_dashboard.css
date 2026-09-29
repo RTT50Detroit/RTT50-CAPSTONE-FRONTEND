@@ -141,6 +141,18 @@
   object-fit: cover;
 }
 
+.profile-card-initials {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  font-size: 3.5rem;
+}
+
+.profile-card-initials[hidden] {
+  display: none;
+}
+
 .profile-card-body {
   padding: 20px;
 }
