@@ -74,6 +74,42 @@
     object-fit: cover;
 }
 
+.profile-image {
+    background: #e7f1ef;
+}
+
+.profile-image-button {
+    display: block;
+    margin: 16px 26px 8px;
+    border-radius: 4px;
+    padding: 10px 12px;
+    color: #fff;
+    background: #287c78;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.profile-image-button:hover {
+    background: #1d625f;
+}
+
+.profile-image input[type='file'] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+
+.profile-image-error {
+    margin: 8px 26px 18px;
+    color: #a04f43;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
 .user-bio {
     padding: 30px;
 }

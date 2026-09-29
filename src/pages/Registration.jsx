@@ -61,7 +61,6 @@ const Registration = () => {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-            setIsSubmitting(false);
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
