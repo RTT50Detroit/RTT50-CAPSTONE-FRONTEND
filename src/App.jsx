@@ -1,6 +1,6 @@
 // App.jsx
 import {
-  BrowserRouter as Router, Routes, Route, NavLink, useLocation,
+  BrowserRouter as Router, Routes, Route, Link, NavLink, useLocation,
 } from 'react-router-dom';
 import Registration from './pages/Registration';
 import Home from './pages/Home.jsx';
@@ -19,7 +19,9 @@ function Navigation() {
 
   return (
     <header>
-      <h1>Social Match Makers</h1>
+      <h1>
+        <Link className="header-brand" to="/">Social Match Makers</Link>
+      </h1>
       <nav>
         <ul>
           <li>
