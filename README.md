@@ -15,6 +15,7 @@ https://socialmatchapp.onrender.com/
   - [Environment Variables](#environment-variables)
 - [Folder Structure](#folder-structure)
 - [Application Routes](#application-routes)
+- [Sitemap](#sitemap)
 - [Scripts](#scripts)
 - [License](#license)
 
@@ -155,6 +156,12 @@ Here’s an overview of the application routes, divided into **public** and **pr
 - Protected routes use the `ProtectedRoute` component for authentication checks.
 
 ---
+
+## Sitemap
+
+The public routes are listed in [`public/sitemap.xml`](public/sitemap.xml). Keep
+this file updated whenever an indexable public route is added, removed, or
+renamed. Authenticated routes are intentionally excluded.
 
 ## Scripts
 

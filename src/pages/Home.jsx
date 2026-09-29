@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
+import { getAuthToken, getCurrentMemberId, getTokenPayload } from '../utils/auth.js';
 
-const Home = () => {
+const LandingPage = () => {
   return (
       <main className="home-page">
         <section className="home-hero page-content">
@@ -77,5 +78,66 @@ const Home = () => {
       </main>
   );
 };
+
+const MemberHub = () => {
+  const payload = getTokenPayload();
+  const memberId = getCurrentMemberId();
+  const memberName = payload?.loginName || payload?.username || payload?.name || 'Member';
+  const profilePath = memberId ? `/dashboard/profile?id=${memberId}` : '/dashboard';
+
+  return (
+      <main className="home-page member-home-page">
+        <section className="member-home-hero page-content">
+          <div>
+            <p className="home-eyebrow">Your member hub</p>
+            <h1>Welcome back, {memberName}.</h1>
+            <p className="home-intro">
+              Your space to meet people, keep your story moving, and stay close to
+              the conversations that matter to you.
+            </p>
+          </div>
+          <div className="member-home-mark" aria-hidden="true">
+            <span>SM</span>
+            <small>your space</small>
+          </div>
+        </section>
+
+        <section className="member-home-content page-content" aria-labelledby="member-home-heading">
+          <div className="home-section-heading">
+            <p className="home-eyebrow">Make yourself at home</p>
+            <h2 id="member-home-heading">Where would you like to begin?</h2>
+          </div>
+          <div className="member-hub-grid">
+            <Link className="member-hub-card member-hub-card--primary" to="/dashboard">
+              <span className="member-hub-number">01 / DISCOVER</span>
+              <h3>Meet the community</h3>
+              <p>Explore member profiles and find the people, ideas, and energy that fit your world.</p>
+              <span className="member-hub-arrow" aria-hidden="true">-&gt;</span>
+            </Link>
+            <Link className="member-hub-card" to="/notes">
+              <span className="member-hub-number">02 / REFLECT</span>
+              <h3>Open your journal</h3>
+              <p>Write down a moment, hold onto a lesson, or share a story with your community.</p>
+              <span className="member-hub-arrow" aria-hidden="true">-&gt;</span>
+            </Link>
+            <Link className="member-hub-card" to={profilePath}>
+              <span className="member-hub-number">03 / BE KNOWN</span>
+              <h3>Shape your profile</h3>
+              <p>Let people see the details that make you you. Your profile is yours to keep current.</p>
+              <span className="member-hub-arrow" aria-hidden="true">-&gt;</span>
+            </Link>
+          </div>
+        </section>
+
+        <section className="member-home-prompt page-content" aria-label="Member prompt">
+          <p className="home-eyebrow">A small invitation</p>
+          <blockquote>“What is something you know now that you wish you knew a year ago?”</blockquote>
+          <Link className="home-secondary-action" to="/notes">Write a note</Link>
+        </section>
+      </main>
+  );
+};
+
+const Home = () => (getAuthToken() ? <MemberHub /> : <LandingPage />);
 
 export default Home;
