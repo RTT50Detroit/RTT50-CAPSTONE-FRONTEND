@@ -51,7 +51,7 @@ function App() {
                 <li>
                   {localStorage.getItem('token') && <LogoutButton />}
                 </li>
-              </ul>
+              </ul>,
             </nav>
           </header>
 
