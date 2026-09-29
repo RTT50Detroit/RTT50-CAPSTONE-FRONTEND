@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import axios from 'axios'; // Import Axios
 import './css/Login.css';
 
@@ -9,14 +9,17 @@ const Registration = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  const [error, setError] = useState(''); // For error messages
+  const [error, setError] = useState('');
   const [previewImage, setPreviewImage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevents page reload
+    e.preventDefault();
+    setIsSubmitting(true);
+    setMessage('');
+    setError('');
 
     try {
-      // Prepare the request body using FormData
       const formData = new FormData();
       formData.append('name', name);
       formData.append('age', age);
@@ -24,58 +27,41 @@ const Registration = () => {
       formData.append('email', email);
       formData.append('password', password);
 
-      // Add the profile image if the user uploaded it
-      const fileInput = document.getElementById('profileImage'); // Access the
-                                                                 // file input
+      const fileInput = document.getElementById('profileImage');
       if (fileInput.files[0]) {
-        formData.append('photo', fileInput.files[0]); // Append the uploaded
-                                                      // file
+        formData.append('photo', fileInput.files[0]);
       }
-      try {
-        // Send API request using Axios
-        const apiUrl = import.meta.env.VITE_APP_BASE_URL;
-        const response = await axios.post(`${apiUrl}/api/register`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-        // Handle success
-        setMessage(response.data.message || 'Registration successful!');
-      }
-      catch (err) {
-        console.error('Error making the API call:', err);
-        if (err.response) {
-          setError(err.response.data.message ||
-              'An error occurred during registration.');
-        }
-        else {
-          setError('Unable to connect to the server. Please try again later.');
-        }
-      }
+      const apiUrl = import.meta.env.VITE_APP_BASE_URL;
+      const response = await axios.post(`${apiUrl}/api/register`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
-      // Clear form fields
+      setMessage(response.data.message || 'Registration successful!');
       setName('');
       setAge('');
       setGender('');
       setEmail('');
       setPassword('');
-      fileInput.value = ''; // Clear file input
-    }
-    catch (err) {
-      // Handle errors
-      if (err.response && err.response.data) {
+      setPreviewImage('');
+      fileInput.value = '';
+    } catch (err) {
+      console.error('Error making the API call:', err);
+      if (err.response?.data) {
         setError(err.response.data.message ||
             'An error occurred during registration.');
-      }
-      else {
-        // General or network error
+      } else {
         setError('Unable to connect to the server. Please try again later.');
       }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
+            setIsSubmitting(false);
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -180,7 +166,8 @@ const Registration = () => {
                 </div >
             )}
 
-            <button type = "submit" className = "submit-button" >Register
+            <button type = "submit" className = "submit-button" disabled = {isSubmitting}>
+              {isSubmitting ? 'Creating account...' : 'Register'}
             </button >
           </form >
           <p className = "login-footer" >

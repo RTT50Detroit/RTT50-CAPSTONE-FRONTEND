@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './css/Login.css';
@@ -9,11 +9,15 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate(); // For navigation after login
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent page refresh
+    setIsSubmitting(true);
+    setMessage('');
+    setError('');
 
     try {
       // Prepare login data
@@ -48,6 +52,8 @@ const Login = () => {
         // Generic error (e.g., network issue)
         setError('Unable to connect to the server. Please try again later.');
       }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -78,10 +84,12 @@ const Login = () => {
                 required
                 placeholder="Enter your password"
             />
-            <button type="submit" className="submit-button">Login</button>
+            <button type="submit" className="submit-button" disabled={isSubmitting}>
+              {isSubmitting ? 'Signing in...' : 'Login'}
+            </button>
           </form>
           <p className="login-footer">
-            Don't have an account? <a href="/register" target="_blank">Sign up</a>
+            Don&apos;t have an account? <a href="/register" target="_blank">Sign up</a>
           </p>
         </div>
       </main>
