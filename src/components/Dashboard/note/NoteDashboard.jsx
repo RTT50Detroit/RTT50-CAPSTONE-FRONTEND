@@ -13,7 +13,7 @@ const NotesDashboard = () => {
     setLoading(true);
     try {
       const { data } = await axios.get('/api/members/notes', {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
       });
       setNotes(data);
     } catch (error) {
@@ -29,7 +29,7 @@ const NotesDashboard = () => {
       const { data } = await axios.post(
           '/api/members/notes',
           { content: noteContent },
-          { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
+          { headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` } }
       );
       setNotes((prevNotes) => [...prevNotes, data]); // Add new note to the list
     } catch (error) {
@@ -43,7 +43,7 @@ const NotesDashboard = () => {
       const { data } = await axios.put(
           `/api/members/notes/${id}`,
           { content },
-          { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
+          { headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` } }
       );
       setNotes((prevNotes) => prevNotes.map((note) => (note._id === id ? data : note))); // Replace updated note
     } catch (error) {
@@ -55,7 +55,7 @@ const NotesDashboard = () => {
   const deleteNote = async (id) => {
     try {
       await axios.delete(`/api/members/notes/${id}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
       });
       setNotes((prevNotes) => prevNotes.filter((note) => note._id !== id)); // Remove from list
     } catch (error) {

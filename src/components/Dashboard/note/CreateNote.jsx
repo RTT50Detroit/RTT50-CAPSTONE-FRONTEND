@@ -10,7 +10,7 @@ const CreateNote = () => {
     e.preventDefault(); // Prevent reload
 
     try {
-      const token = localStorage.getItem('token'); // Assuming you store the token in localStorage
+      const token = localStorage.getItem('authToken');
 
       const response = await axios.post(
           'http://localhost:5000/api/members/notes',
