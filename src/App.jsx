@@ -15,8 +15,8 @@ import LogoutButton from './components/LogoutButton.jsx';
 import CreateNote from './components/Dashboard/note/CreateNote.jsx';
 
 function Navigation() {
-  const { pathname } = useLocation();
-  const isLoginPage = pathname === '/login';
+  useLocation();
+  const isLoggedIn = Boolean(localStorage.getItem('authToken'));
 
   return (
     <header>
@@ -28,7 +28,7 @@ function Navigation() {
               Home
             </NavLink>
           </li>
-          {!isLoginPage && (
+          {!isLoggedIn && (
             <>
               <li>
                 <NavLink to="/register" className={({ isActive }) => (isActive ? 'active' : '')}>
@@ -42,19 +42,23 @@ function Navigation() {
               </li>
             </>
           )}
-          <li>
-            <NavLink to="/dashboard" className={({ isActive }) => (isActive ? 'active' : '')}>
-              Profiles
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/notes" className={({ isActive }) => (isActive ? 'active' : '')}>
-              Notes
-            </NavLink>
-          </li>
-          <li>
-            {localStorage.getItem('token') && <LogoutButton />}
-          </li>
+          {isLoggedIn && (
+            <>
+              <li>
+                <NavLink to="/dashboard" className={({ isActive }) => (isActive ? 'active' : '')}>
+                  Profiles
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/notes" className={({ isActive }) => (isActive ? 'active' : '')}>
+                  Notes
+                </NavLink>
+              </li>
+              <li>
+                <LogoutButton />
+              </li>
+            </>
+          )}
         </ul>
       </nav>
     </header>

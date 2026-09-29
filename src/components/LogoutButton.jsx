@@ -6,10 +6,10 @@ const LogoutButton = () => {
 
   const handleLogout = () => {
     // Clear user authentication details (e.g., token)
-    localStorage.removeItem("token");
+    localStorage.removeItem('authToken');
 
     // Redirect to login route
-    navigate("/login");
+    navigate('/login');
   };
 
   return (
