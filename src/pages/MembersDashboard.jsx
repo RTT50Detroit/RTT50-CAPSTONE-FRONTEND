@@ -51,7 +51,7 @@ const MembersDashboard = () => {
   return (
       <div>
         <h1>Dashboard</h1>
-        <p>Login name: {loginName}</p>
+        <p>Hello: {loginName}</p>
 
         {/* Loading Indicator */}
         {isLoading && <p>Loading profiles...</p>}
