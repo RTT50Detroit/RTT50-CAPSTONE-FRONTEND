@@ -1,13 +1,16 @@
 /* index.css */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
+  min-width: 320px;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  color: #1f2937;
+  background: #f3f6fb;
 }
 
 #root {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
 }

@@ -12,8 +12,9 @@ nav ul {
 }
 
 header {
+    width: 100%;
     background: #ffffff;
-    padding: 8px 12px;
+    padding: 14px 32px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
@@ -21,6 +22,16 @@ header {
     height: auto;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    box-sizing: border-box;
+}
+
+header h1 {
+    margin: 0;
+    color: #163b65;
+    font-size: 1.25rem;
+    white-space: nowrap;
 }
 /* Navigation links */
 nav a {
@@ -55,9 +66,8 @@ nav ul {
 /* Mobile responsive */
 @media (max-width: 768px) {
     nav ul {
-        flex-direction: column; /* Stack items vertically for mobile */
-        align-items: flex-start;
-        gap: 1rem;
+        justify-content: center;
+        gap: 0.5rem;
     }
 
     nav a {
@@ -102,12 +112,12 @@ nav a:focus-visible {
         padding: 8px 15px; /* Add a bit more compact styling for mobile */
         height: auto; /* Let it resize automatically */
         flex-wrap: wrap; /* Ensure it doesn't occupy unnecessary space */
+        justify-content: center;
     }
 
     nav ul {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem; /* Adjust spacing between links */
-        padding: 10px 0;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 6px 0;
     }
 }

@@ -1,33 +1,17 @@
-/* Login.css */
-
-body {
-  font-family: 'Inter', sans-serif; /* You can load this from Google Fonts */
-  background-color: #f7f8fc;
-  margin: 0;
-  padding: 0;
+.auth-page {
   display: flex;
   justify-content: center;
   align-items: center;
-  /*height: 100vh; !* Fullscreen height *!*/
-  color: #333;
-}
-
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 400px;
-  padding: 20px;
-  box-sizing: border-box;
+  min-height: calc(100vh - 92px);
 }
 
 .login-card {
   background-color: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
+  padding: 36px;
+  border: 1px solid #dce5f2;
+  border-radius: 16px;
+  box-shadow: 0 16px 36px rgba(30, 58, 95, 0.1);
+  width: min(100%, 440px);
   text-align: center;
 }
 

@@ -52,7 +52,7 @@ const Login = () => {
   };
 
   return (
-      <div className="login-container">
+      <main className="page-content auth-page">
         <div className="login-card">
           <h1 className="login-title">Welcome Back</h1>
           {message && <p className="success-message">{message}</p>}
@@ -84,7 +84,7 @@ const Login = () => {
             Don't have an account? <a href="/register" target="_blank">Sign up</a>
           </p>
         </div>
-      </div>
+      </main>
   );
 };
 

@@ -89,7 +89,7 @@ const Registration = () => {
   };
 
   return (
-      <div className = "login-container" >
+      <main className = "page-content auth-page" >
         <div className = "login-card" >
           <h1 className = "login-title" >Create an Account</h1 >
           {message && <p className = "success-message" >{message}</p >}
@@ -187,7 +187,7 @@ const Registration = () => {
             Already have an account? <a href = "/login" target = "_blank" >Login</a >
           </p >
         </div >
-      </div >
+      </main >
   );
 };
 
