@@ -1,7 +1,8 @@
-# Frontend Project - Social Match Makers
-https://socialmatchmaker.netlify.app/
+# Frontend Project - Social Match App
+https://socialmatchapp.onrender.com/
+<!-- https://socialmatchmaker.netlify.app/
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/f5360ea0-66c1-4688-a689-85154619cb05/deploy-status)](https://app.netlify.com/projects/socialmatch/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f5360ea0-66c1-4688-a689-85154619cb05/deploy-status)](https://app.netlify.com/projects/socialmatch/deploys) -->
 
 ## Table of Contents
 
