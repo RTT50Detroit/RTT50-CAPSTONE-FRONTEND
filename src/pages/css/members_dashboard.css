@@ -126,16 +126,26 @@
 }
 
 .profile-card-image {
+  position: relative;
   display: grid;
-  height: 150px;
+  height: 170px;
+  min-height: 170px;
   place-items: center;
+  overflow: hidden;
   color: #fffaf3;
   background: #287c78;
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 3.5rem;
 }
 
-.profile-card-image img {
+.profile-card-image > img,
+.profile-card-image > .profile-card-initials {
+  position: absolute;
+  inset: 0;
+}
+
+.profile-card-image > img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -143,8 +153,6 @@
 
 .profile-card-initials {
   display: grid;
-  width: 100%;
-  height: 100%;
   place-items: center;
   font-size: 3.5rem;
 }
@@ -154,6 +162,7 @@
 }
 
 .profile-card-body {
+  min-height: 238px;
   padding: 20px;
 }
 
