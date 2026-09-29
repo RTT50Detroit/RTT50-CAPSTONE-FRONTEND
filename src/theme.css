@@ -1,0 +1,257 @@
+:root {
+  --theme-black: #09090a;
+  --theme-charcoal: #141416;
+  --theme-panel: #1c1c1f;
+  --theme-panel-soft: #242427;
+  --theme-gold: #c7a24a;
+  --theme-gold-bright: #e3c36a;
+  --theme-gold-muted: #8e7538;
+  --theme-cream: #f4efe3;
+  --theme-muted: #b7ae9d;
+  --theme-line: #3b3528;
+  --theme-danger: #d2796e;
+}
+
+body {
+  color: var(--theme-cream);
+  background: var(--theme-black);
+}
+
+header {
+  border-bottom: 1px solid var(--theme-line);
+  background: rgba(9, 9, 10, 0.96);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+}
+
+header h1 {
+  color: var(--theme-gold-bright);
+  font-family: Georgia, 'Times New Roman', serif;
+  letter-spacing: 0.02em;
+}
+
+nav a {
+  color: var(--theme-muted);
+}
+
+nav a:hover {
+  color: var(--theme-cream);
+  background: var(--theme-panel);
+  box-shadow: none;
+}
+
+nav a.active {
+  color: var(--theme-black);
+  background: var(--theme-gold);
+  box-shadow: 0 4px 14px rgba(199, 162, 74, 0.24);
+}
+
+nav a:focus-visible {
+  box-shadow: 0 0 0 3px rgba(227, 195, 106, 0.35);
+}
+
+.home-card,
+.login-card,
+.dashboard-stat,
+.profile-card,
+.profile-sidebar,
+.profile-main-content {
+  border-color: var(--theme-line);
+  background: var(--theme-panel);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.24);
+}
+
+.home-card h1,
+.dashboard-hero h1,
+.profiles-section-heading h2,
+.profile-detail-header h1,
+.profile-card h3,
+.dashboard-stat-value,
+.user-bio h2,
+.user-info-container h2 {
+  color: var(--theme-gold-bright);
+}
+
+.home-card p,
+.dashboard-welcome,
+.dashboard-stat-label,
+.profile-card-summary,
+.profile-detail-header > p:last-child,
+.user-bio p,
+.additional-info p {
+  color: var(--theme-muted);
+}
+
+.dashboard-eyebrow,
+.profile-card-kicker,
+.profile-detail-eyebrow {
+  color: var(--theme-gold);
+}
+
+.dashboard-accent {
+  color: var(--theme-black);
+  background: var(--theme-gold);
+  box-shadow: 12px 12px 0 var(--theme-gold-muted);
+}
+
+.dashboard-stat,
+.profiles-section-heading,
+.profile-detail-header {
+  border-color: var(--theme-line);
+}
+
+.profile-card-image {
+  color: var(--theme-black);
+  background: var(--theme-gold-muted);
+}
+
+.profile-card-details span {
+  color: var(--theme-gold-bright);
+  background: rgba(199, 162, 74, 0.14);
+}
+
+.profile-card-link,
+.profile-back-link {
+  color: var(--theme-gold-bright);
+}
+
+.profile-card-link:hover,
+.profile-back-link:hover {
+  color: var(--theme-cream);
+}
+
+.profile-image {
+  background: var(--theme-panel-soft);
+}
+
+.profile-image-button,
+.user-bio button {
+  color: var(--theme-black);
+  background: var(--theme-gold);
+}
+
+.profile-image-button:hover,
+.user-bio button:hover {
+  background: var(--theme-gold-bright);
+}
+
+.login-title {
+  color: var(--theme-gold-bright);
+}
+
+.form-label {
+  color: var(--theme-muted);
+}
+
+.form-input,
+.journal-editor input,
+.journal-editor textarea,
+.note-edit-form input,
+.note-edit-form textarea {
+  border-color: var(--theme-line);
+  color: var(--theme-cream);
+  background: var(--theme-charcoal);
+}
+
+.form-input:focus,
+.journal-editor input:focus,
+.journal-editor textarea:focus,
+.note-edit-form input:focus,
+.note-edit-form textarea:focus {
+  border-color: var(--theme-gold);
+  box-shadow: 0 0 0 2px rgba(199, 162, 74, 0.2);
+  outline: none;
+}
+
+.submit-button,
+.journal-editor button,
+.note-actions button {
+  color: var(--theme-black);
+  background: var(--theme-gold);
+}
+
+.submit-button:hover,
+.journal-editor button:hover,
+.note-actions button:hover {
+  background: var(--theme-gold-bright);
+}
+
+.login-footer,
+.notes-heading > p:last-child,
+.notes-list-heading span,
+.empty-notes,
+.notes-status {
+  color: var(--theme-muted);
+}
+
+.login-footer a {
+  color: var(--theme-gold-bright);
+}
+
+.notes-heading h1,
+.notes-list-heading h2,
+.note-card h3 {
+  color: var(--theme-gold-bright);
+}
+
+.journal-editor {
+  border-color: var(--theme-line);
+  background: var(--theme-panel);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.24);
+}
+
+.journal-editor label,
+.note-edit-form label {
+  color: var(--theme-gold);
+}
+
+.notes-list-heading {
+  border-color: var(--theme-line);
+}
+
+.note-card {
+  border-left-color: var(--theme-gold);
+  background: var(--theme-panel);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.note-date {
+  color: var(--theme-gold);
+}
+
+.note-content {
+  color: var(--theme-muted);
+}
+
+.note-actions .button-secondary {
+  color: var(--theme-cream);
+  background: var(--theme-panel-soft);
+}
+
+.note-actions .button-danger,
+.logout-button {
+  color: var(--theme-black);
+  background: var(--theme-danger);
+}
+
+.note-actions .button-danger:hover,
+.logout-button:hover {
+  background: #ea9185;
+}
+
+.success-message {
+  color: #b5d99f;
+}
+
+.error-message,
+.dashboard-error,
+.profile-status,
+.notes-error,
+.profile-image-error {
+  color: #ee9b8d;
+}
+
+@media (max-width: 640px) {
+  .dashboard-accent {
+    box-shadow: 7px 7px 0 var(--theme-gold-muted);
+  }
+}
