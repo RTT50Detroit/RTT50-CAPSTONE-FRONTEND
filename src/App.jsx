@@ -22,7 +22,7 @@ function Navigation() {
   return (
     <header>
       <h1>
-        <Link className="header-brand" to="/">Social Match Makers</Link>
+        <Link className="header-brand" to="/">The Social Match Game</Link>
       </h1>
       <nav>
         <ul>

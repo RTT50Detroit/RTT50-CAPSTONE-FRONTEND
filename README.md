@@ -1,4 +1,4 @@
-# Frontend Project - Social Match App
+# Frontend Project - The Social Match Game
 https://socialmatchapp.onrender.com/
 <!-- https://socialmatchmaker.netlify.app/
 
@@ -22,7 +22,7 @@ https://socialmatchapp.onrender.com/
 
 ## Overview
 
-The frontend for **Social Match Makers** is a React-based application designed for user registration, login, protected user dashboards, and other core features. This project utilizes **React Router** for navigation and includes both public and protected routes to distinguish between authenticated and unauthenticated user flows.
+The frontend for **The Social Match Game** is a React-based application designed for user registration, login, protected user dashboards, and other core features. This project utilizes **React Router** for navigation and includes both public and protected routes to distinguish between authenticated and unauthenticated user flows.
 
 ---
 
