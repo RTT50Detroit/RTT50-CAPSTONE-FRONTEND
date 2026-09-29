@@ -4,6 +4,7 @@ import ProfileImage from './ProfileImage.jsx';
 import MemberInfo from './MemberInfo.jsx';
 import AboutMe from './aboutMe/AboutMe.jsx';
 import axios from 'axios';
+import { getCurrentMemberId } from '../../utils/auth.js';
 import './Profile.css';
 
 const ProfileDashboard = () => {
@@ -13,6 +14,7 @@ const ProfileDashboard = () => {
   const [searchParams] = useSearchParams();
   const id = searchParams.get('id');
   const token = localStorage.getItem('authToken');
+  const currentMemberId = getCurrentMemberId();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -41,6 +43,10 @@ const ProfileDashboard = () => {
   if (isLoading) return <p className="profile-status">Loading profile...</p>;
   if (error) return <p className="profile-status">{error}</p>;
 
+  const profileId = userData?._id || userData?.id || id;
+  const canEdit = Boolean(currentMemberId && profileId &&
+    currentMemberId === String(profileId));
+
   return (
       <main className="page-content profile-dashboard">
         {userData ? (
@@ -57,12 +63,13 @@ const ProfileDashboard = () => {
                 <aside className="profile-sidebar">
                   <ProfileImage
                       profileImageUrl={userData.profileImageUrl || userData.profileImage}
-                      memberId={userData._id || id}
+                      memberId={profileId}
+                      canEdit={canEdit}
                   />
                   <MemberInfo user={userData} />
                 </aside>
                 <section className="profile-main-content">
-                  <AboutMe user={userData.aboutme} />
+                  <AboutMe user={userData.aboutme} canEdit={canEdit} />
                 </section>
               </div>
             </>

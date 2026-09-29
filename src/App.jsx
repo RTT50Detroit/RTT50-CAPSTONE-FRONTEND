@@ -12,10 +12,12 @@ import './App.css';
 import './pages/css/styles.css';
 import LogoutButton from './components/LogoutButton.jsx';
 import NotesDashboard from './components/Dashboard/note/NoteDashboard.jsx';
+import { getAuthToken, getCurrentMemberId } from './utils/auth.js';
 
 function Navigation() {
   useLocation();
-  const isLoggedIn = Boolean(localStorage.getItem('authToken'));
+  const isLoggedIn = Boolean(getAuthToken());
+  const currentMemberId = getCurrentMemberId();
 
   return (
     <header>
@@ -53,6 +55,20 @@ function Navigation() {
               <li>
                 <NavLink to="/notes" className={({ isActive }) => (isActive ? 'active' : '')}>
                   Notes
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                    to={currentMemberId ? `/dashboard/profile?id=${currentMemberId}` : '/dashboard'}
+                    className={({ isActive }) => `profile-nav-link${isActive ? ' active' : ''}`}
+                    aria-label="View my profile"
+                    title="My profile"
+                >
+                  <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                    <circle cx="12" cy="8" r="3.5" />
+                    <path d="M5 20c.8-3.3 3.2-5 7-5s6.2 1.7 7 5" />
+                  </svg>
+                  <span className="profile-nav-label">My profile</span>
                 </NavLink>
               </li>
               <li>

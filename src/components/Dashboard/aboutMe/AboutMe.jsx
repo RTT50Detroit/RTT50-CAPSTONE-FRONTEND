@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './AboutMe.css';
 
 
-const AboutMe = ({ user }) => {
+const AboutMe = ({ user, canEdit }) => {
   const [bio, setBio] = useState(user || 'No biography added yet.');
 
   const handleEdit = () => {
@@ -17,7 +17,7 @@ const AboutMe = ({ user }) => {
       <div className="user-bio">
         <h2>Bio</h2>
         <p>{bio}</p>
-        <button onClick={handleEdit}>Edit Bio</button>
+        {canEdit && <button onClick={handleEdit}>Edit Bio</button>}
       </div>
   );
 };
@@ -26,4 +26,5 @@ export default AboutMe;
 
 AboutMe.propTypes = {
   user: PropTypes.string,
+  canEdit: PropTypes.bool,
 };

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-const ProfileImage = ({ profileImageUrl, memberId }) => {
+const ProfileImage = ({ profileImageUrl, memberId, canEdit }) => {
   const [imageUrl, setImageUrl] = useState(profileImageUrl);
   const [error, setError] = useState('');
 
@@ -34,15 +34,19 @@ const ProfileImage = ({ profileImageUrl, memberId }) => {
             src={imageUrl || 'https://api.dicebear.com/5.x/initials/svg?seed=member'}
             alt="Member profile"
         />
-        <label className="profile-image-button" htmlFor="image-upload">
-          Change profile picture
-        </label>
-        <input
-            id="image-upload"
-            type="file"
-            accept=".jpg,.jpeg,.png"
-            onChange={handleImageUpload}
-        />
+        {canEdit && (
+          <>
+            <label className="profile-image-button" htmlFor="image-upload">
+              Change profile picture
+            </label>
+            <input
+                id="image-upload"
+                type="file"
+                accept=".jpg,.jpeg,.png"
+                onChange={handleImageUpload}
+            />
+          </>
+        )}
         {error && <p className="profile-image-error">{error}</p>}
       </div>
   );
@@ -53,4 +57,5 @@ export default ProfileImage;
 ProfileImage.propTypes = {
   profileImageUrl: PropTypes.string,
   memberId: PropTypes.string.isRequired,
+  canEdit: PropTypes.bool,
 };
