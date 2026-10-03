@@ -1,14 +1,25 @@
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const LogoutButton = () => {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    // Clear user authentication details (e.g., token)
-    localStorage.removeItem('authToken');
+  const handleLogout = async () => {
+    const token = localStorage.getItem('authToken');
+    const apiUrl = (import.meta.env.VITE_APP_BASE_URL || '').replace(/\/$/, '');
 
-    // Redirect to login route
-    navigate('/login');
+    try {
+      if (token) {
+        await axios.post(`${apiUrl}/api/login/logout`, null, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+      }
+    } catch (error) {
+      console.error('Error updating online status on logout:', error);
+    } finally {
+    localStorage.removeItem('authToken');
+      navigate('/login');
+    }
   };
 
   return (

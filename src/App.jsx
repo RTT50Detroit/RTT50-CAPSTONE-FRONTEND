@@ -2,6 +2,8 @@
 import {
   BrowserRouter as Router, Routes, Route, Link, NavLink, useLocation,
 } from 'react-router-dom';
+import { useEffect } from 'react';
+import axios from 'axios';
 import Registration from './pages/Registration';
 import Home from './pages/Home.jsx';
 import Login from './pages/Login';
@@ -82,10 +84,37 @@ function Navigation() {
   );
 }
 
+function PresenceTracker() {
+  useLocation();
+  const token = localStorage.getItem('authToken');
+  const apiUrl = (import.meta.env.VITE_APP_BASE_URL || '').replace(/\/$/, '');
+
+  useEffect(() => {
+    if (!token) return undefined;
+
+    const markPresence = async () => {
+      try {
+        await axios.post(`${apiUrl}/api/members/presence`, null, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+      } catch (error) {
+        console.error('Error updating online status:', error);
+      }
+    };
+
+    markPresence();
+    const presenceInterval = window.setInterval(markPresence, 60 * 1000);
+    return () => window.clearInterval(presenceInterval);
+  }, [apiUrl, token]);
+
+  return null;
+}
+
 function App() {
   return (
       <Router>
         <div className="App">
+          <PresenceTracker />
           {/* Navigation */}
           <Navigation />
 
