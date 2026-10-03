@@ -7,6 +7,7 @@ import './css/members_dashboard.css';
 const MembersDashboard = () => {
   const [profiles, setProfiles] = useState([]);
   const [sexFilter, setSexFilter] = useState('all');
+  const [onlineStatusFilter, setOnlineStatusFilter] = useState('all');
   const [minAge, setMinAge] = useState('');
   const [maxAge, setMaxAge] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -52,14 +53,20 @@ const MembersDashboard = () => {
   const filteredProfiles = profiles.filter((profile) => {
     const profileSex = profile.gender?.toLowerCase();
     const profileAge = Number(profile.age);
+    const isOnline = profile.isOnline === true ||
+      profile.online === true ||
+      profile.status?.toLowerCase() === 'online';
     const matchesSex = sexFilter === 'all' || profileSex === sexFilter;
+    const matchesOnlineStatus = onlineStatusFilter === 'all' ||
+      (onlineStatusFilter === 'online' && isOnline) ||
+      (onlineStatusFilter === 'offline' && !isOnline);
     const matchesMinAge = !minAge || profileAge >= Number(minAge);
     const matchesMaxAge = !maxAge || profileAge <= Number(maxAge);
 
-    return matchesSex && matchesMinAge && matchesMaxAge;
+    return matchesSex && matchesOnlineStatus && matchesMinAge && matchesMaxAge;
   });
 
-  const hasActiveFilters = sexFilter !== 'all' || minAge || maxAge;
+  const hasActiveFilters = sexFilter !== 'all' || onlineStatusFilter !== 'all' || minAge || maxAge;
 
   return (
       <main className="page-content dashboard-page">
@@ -112,6 +119,18 @@ const MembersDashboard = () => {
                 </select>
               </div>
               <div className="profile-filter-field">
+                <label htmlFor="online-status-filter">Online status</label>
+                <select
+                    id="online-status-filter"
+                    value={onlineStatusFilter}
+                    onChange={(event) => setOnlineStatusFilter(event.target.value)}
+                >
+                  <option value="all">All statuses</option>
+                  <option value="online">Online</option>
+                  <option value="offline">Offline</option>
+                </select>
+              </div>
+              <div className="profile-filter-field">
                 <label htmlFor="min-age">Minimum age</label>
                 <input
                     id="min-age"
@@ -139,6 +158,7 @@ const MembersDashboard = () => {
                     className="profile-filter-reset"
                     onClick={() => {
                       setSexFilter('all');
+                      setOnlineStatusFilter('all');
                       setMinAge('');
                       setMaxAge('');
                     }}
