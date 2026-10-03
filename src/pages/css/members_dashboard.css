@@ -163,6 +163,29 @@
   gap: 20px;
 }
 
+.profile-card-groups {
+  display: grid;
+  gap: 42px;
+}
+
+.profile-card-group {
+  display: grid;
+  gap: 16px;
+}
+
+.profile-card-group + .profile-card-group {
+  border-top: 1px solid #dbe5e1;
+  padding-top: 30px;
+}
+
+.profile-card-group-heading {
+  margin: 0;
+  color: #123b4a;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+}
+
 .profile-card {
   overflow: hidden;
   border: 1px solid #dbe5e1;

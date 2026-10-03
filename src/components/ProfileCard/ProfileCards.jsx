@@ -3,10 +3,18 @@ import PropTypes from 'prop-types';
 
 const ProfileCards = ({ profiles, currentMemberId }) => {
   const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
+  const onlineProfiles = profiles.filter((profile) => {
+    const profileId = profile._id || profile.id;
+    return String(profileId) === currentMemberId ||
+      profile.isOnline === true ||
+      profile.online === true ||
+      profile.status?.toLowerCase() === 'online';
+  });
+  const offlineProfiles = profiles.filter((profile) => !onlineProfiles.includes(profile));
 
-  return (
-      <div className="profile-cards-grid">
-        {profiles.map((profile) => {
+  const renderProfileCards = (profilesToRender) => (
+    <div className="profile-cards-grid">
+      {profilesToRender.map((profile) => {
           const profileId = profile._id || profile.id;
           const rawProfileImage = profile.profileImage || profile.photo;
           const profileImage = rawProfileImage?.startsWith('/')
@@ -28,8 +36,8 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
           const summary = profile.bio || profile.aboutme ||
             'Open to making a meaningful connection.';
 
-          return (
-            <article key={profileId} className={`profile-card ${genderClass}`}>
+        return (
+          <article key={profileId} className={`profile-card ${genderClass}`}>
               <div className="profile-card-image">
                 {profileImage ? (
                   <>
@@ -71,9 +79,30 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
                   </Link>
                 )}
               </div>
-            </article>
-          );
-        })}
+          </article>
+        );
+      })}
+    </div>
+  );
+
+  return (
+      <div className="profile-card-groups">
+        {onlineProfiles.length > 0 && (
+          <section className="profile-card-group" aria-labelledby="online-profiles-heading">
+            <h3 id="online-profiles-heading" className="profile-card-group-heading">
+              Online now
+            </h3>
+            {renderProfileCards(onlineProfiles)}
+          </section>
+        )}
+        {offlineProfiles.length > 0 && (
+          <section className="profile-card-group" aria-labelledby="offline-profiles-heading">
+            <h3 id="offline-profiles-heading" className="profile-card-group-heading">
+              Offline
+            </h3>
+            {renderProfileCards(offlineProfiles)}
+          </section>
+        )}
       </div>
   );
 };
