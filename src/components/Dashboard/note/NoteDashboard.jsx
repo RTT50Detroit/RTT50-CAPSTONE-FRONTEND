@@ -4,7 +4,7 @@ import NoteList from './NoteList';
 import NotePosting from './NotePosting';
 import './Notes.css';
 
-const apiUrl = import.meta.env.VITE_APP_BASE_URL;
+const apiUrl = (import.meta.env.VITE_APP_BASE_URL || '').replace(/\/$/, '');
 
 const authConfig = () => ({
   headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
@@ -17,9 +17,10 @@ const NotesDashboard = () => {
 
   const fetchNotes = async () => {
     setLoading(true);
+    setError('');
     try {
       const { data } = await axios.get(`${apiUrl}/api/members/notes`, authConfig());
-      setNotes(Array.isArray(data) ? data : data.notes || []);
+      setNotes(Array.isArray(data) ? data : data?.notes || []);
     } catch (requestError) {
       console.error('Error while fetching notes:', requestError);
       setError('Your notes could not be loaded. Please try again.');
@@ -29,33 +30,54 @@ const NotesDashboard = () => {
   };
 
   const addNote = async (note) => {
-    const { data } = await axios.post(
-        `${apiUrl}/api/members/notes`,
-        note,
-        authConfig()
-    );
-    const savedNote = data.note || data;
-    setNotes((prevNotes) => [...prevNotes, {
-      ...note,
-      ...savedNote,
-    }]);
+    setError('');
+    try {
+      const { data } = await axios.post(
+          `${apiUrl}/api/members/notes`,
+          note,
+          authConfig()
+      );
+      const savedNote = data.note || data;
+      setNotes((prevNotes) => [...prevNotes, {
+        ...note,
+        ...savedNote,
+      }]);
+    } catch (requestError) {
+      console.error('Error while saving note:', requestError);
+      setError('Your note could not be saved. Please try again.');
+      throw requestError;
+    }
   };
 
   const updateNote = async (id, updates) => {
-    const { data } = await axios.put(
-        `${apiUrl}/api/members/notes/${id}`,
-        updates,
-        authConfig()
-    );
-    const updatedNote = data.note || data;
-    setNotes((prevNotes) => prevNotes.map((note) => (
-      note._id === id ? { ...note, ...updatedNote, ...updates } : note
-    )));
+    setError('');
+    try {
+      const { data } = await axios.put(
+          `${apiUrl}/api/members/notes/${id}`,
+          updates,
+          authConfig()
+      );
+      const updatedNote = data.note || data;
+      setNotes((prevNotes) => prevNotes.map((note) => (
+        note._id === id ? { ...note, ...updatedNote, ...updates } : note
+      )));
+    } catch (requestError) {
+      console.error('Error while updating note:', requestError);
+      setError('Your note could not be updated. Please try again.');
+      throw requestError;
+    }
   };
 
   const deleteNote = async (id) => {
-    await axios.delete(`${apiUrl}/api/members/notes/${id}`, authConfig());
-    setNotes((prevNotes) => prevNotes.filter((note) => note._id !== id));
+    setError('');
+    try {
+      await axios.delete(`${apiUrl}/api/members/notes/${id}`, authConfig());
+      setNotes((prevNotes) => prevNotes.filter((note) => note._id !== id));
+    } catch (requestError) {
+      console.error('Error while deleting note:', requestError);
+      setError('Your note could not be deleted. Please try again.');
+      throw requestError;
+    }
   };
 
   useEffect(() => {
