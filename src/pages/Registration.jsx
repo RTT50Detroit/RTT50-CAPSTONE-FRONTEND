@@ -31,7 +31,7 @@ const Registration = () => {
       if (fileInput.files[0]) {
         formData.append('photo', fileInput.files[0]);
       }
-      const apiUrl = import.meta.env.VITE_APP_BASE_URL;
+      const apiUrl = (import.meta.env.VITE_APP_BASE_URL || '').replace(/\/$/, '');
       const response = await axios.post(`${apiUrl}/api/register`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',

@@ -23,7 +23,7 @@ const Login = () => {
       // Prepare login data
       const loginData = { email, password };
       // Send request to backend
-      const apiUrl = import.meta.env.VITE_APP_BASE_URL;
+      const apiUrl = (import.meta.env.VITE_APP_BASE_URL || '').replace(/\/$/, '');
       const response = await axios.post(`${apiUrl}/api/login`, loginData);
 
       // Extract the token from the response and store it
