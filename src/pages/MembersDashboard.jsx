@@ -23,31 +23,31 @@ const MembersDashboard = () => {
     // Keep the dashboard usable when the token has no readable identity claim.
   }
 
-  const fetchProfiles = async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-
-      const response = await axios.get(`${apiUrl}/api/members`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      setProfiles(response.data || []);
-    } catch (err) {
-      console.error('Error fetching profiles:', err);
-      setError(
-          err.response?.data?.message || 'Failed to load profile cards. Please try again.'
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchProfiles = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+
+        const response = await axios.get(`${apiUrl}/api/members`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setProfiles(response.data || []);
+      } catch (err) {
+        console.error('Error fetching profiles:', err);
+        setError(
+            err.response?.data?.message || 'Failed to load profile cards. Please try again.'
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     fetchProfiles();
-  }, []);
+  }, [apiUrl, token]);
 
   const filteredProfiles = profiles.filter((profile) => {
     const profileSex = profile.gender?.toLowerCase();

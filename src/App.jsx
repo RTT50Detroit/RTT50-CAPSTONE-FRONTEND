@@ -12,11 +12,11 @@ import './App.css';
 import './pages/css/styles.css';
 import LogoutButton from './components/LogoutButton.jsx';
 import NotesDashboard from './components/Dashboard/note/NoteDashboard.jsx';
-import { getAuthToken, getCurrentMemberId } from './utils/auth.js';
+import { getCurrentMemberId, hasValidAuthToken } from './utils/auth.js';
 
 function Navigation() {
   useLocation();
-  const isLoggedIn = Boolean(getAuthToken());
+  const isLoggedIn = hasValidAuthToken();
   const currentMemberId = getCurrentMemberId();
 
   return (

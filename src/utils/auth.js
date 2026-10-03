@@ -12,6 +12,16 @@ export const getTokenPayload = () => {
   }
 };
 
+export const hasValidAuthToken = () => {
+  const payload = getTokenPayload();
+
+  if (!payload) {
+    return false;
+  }
+
+  return !payload.exp || payload.exp * 1000 > Date.now();
+};
+
 export const getCurrentMemberId = () => {
   const payload = getTokenPayload();
   const memberId = payload?.id || payload?._id || payload?.userId ||

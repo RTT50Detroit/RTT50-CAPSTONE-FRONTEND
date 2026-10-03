@@ -91,7 +91,7 @@ Make sure you have the following installed on your system:
 You can set environment-specific variables in a `.env` file at the root of your project:
 
 ```plaintext
-VITE_API_BASE_URL=<base_url_for_backend>   # Base URL of the backend server
+VITE_APP_BASE_URL=<base_url_for_backend>   # Base URL of the backend server
 ```
 
 ---
@@ -110,7 +110,9 @@ project-folder/
 │   │   └── Dashboard/           # Dashboard-related components
 │   │       ├── ProfileDashboard.jsx
 │   │       └── note/
-│   │           └── CreateNote.jsx
+│   │           ├── NoteDashboard.jsx
+│   │           ├── NoteList.jsx
+│   │           └── NotePosting.jsx
 │   │
 │   ├── pages/                   # Pages for routing
 │   │   ├── Home.jsx
@@ -150,7 +152,7 @@ Here’s an overview of the application routes, divided into **public** and **pr
 |----------------------|---------------------|-----------------------------------|
 | `/dashboard`         | MembersDashboard   | Protected members' dashboard.    |
 | `/dashboard/profile` | ProfileDashboard   | User profile dashboard.           |
-| `/notes`             | CreateNote         | Create and manage user notes.     |
+| `/notes`             | NotesDashboard     | Create and manage user notes.     |
 
 - Protected routes require the user to be logged in. Guests are redirected to the login page.
 - Protected routes use the `ProtectedRoute` component for authentication checks.

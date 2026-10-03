@@ -1,9 +1,13 @@
-import React from 'react';
 import { Navigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { hasValidAuthToken } from '../utils/auth.js';
 
 const ProtectedRoute = ({ children }) => {
-  const token = localStorage.getItem('authToken'); // Check token
-  return token ? children : <Navigate to="/" />;
+  return hasValidAuthToken() ? children : <Navigate to="/login" replace />;
 };
 
 export default ProtectedRoute;
+
+ProtectedRoute.propTypes = {
+  children: PropTypes.node.isRequired,
+};
