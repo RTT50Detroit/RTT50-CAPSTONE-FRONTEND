@@ -1,22 +1,19 @@
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
+import { getMemberId, getProfileImage, isMemberOnline } from '../../utils/member.js';
 
 const ProfileCards = ({ profiles, currentMemberId }) => {
   const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
   const onlineProfiles = profiles.filter((profile) => {
-    const profileId = profile._id || profile.id;
-    return String(profileId) === currentMemberId ||
-      profile.isOnline === true ||
-      profile.online === true ||
-      profile.status?.toLowerCase() === 'online';
+    return isMemberOnline(profile, currentMemberId);
   });
   const offlineProfiles = profiles.filter((profile) => !onlineProfiles.includes(profile));
 
   const renderProfileCards = (profilesToRender) => (
     <div className="profile-cards-grid">
       {profilesToRender.map((profile) => {
-          const profileId = profile._id || profile.id;
-          const rawProfileImage = profile.profileImage || profile.photo;
+          const profileId = getMemberId(profile);
+          const rawProfileImage = getProfileImage(profile);
           const profileImage = rawProfileImage?.startsWith('/')
             ? `${apiUrl}${rawProfileImage}`
             : rawProfileImage;
@@ -29,10 +26,7 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
           const genderClass = genderKey === 'male' || genderKey === 'female'
             ? `profile-card--${genderKey}`
             : 'profile-card--neutral';
-          const isOnline = String(profileId) === currentMemberId ||
-            profile.isOnline === true ||
-            profile.online === true ||
-            profile.status?.toLowerCase() === 'online';
+          const isOnline = isMemberOnline(profile, currentMemberId);
           const summary = profile.bio || profile.aboutme ||
             'Open to making a meaningful connection.';
 

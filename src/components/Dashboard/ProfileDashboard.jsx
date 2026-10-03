@@ -5,6 +5,7 @@ import MemberInfo from './MemberInfo.jsx';
 import AboutMe from './aboutMe/AboutMe.jsx';
 import axios from 'axios';
 import { getCurrentMemberId } from '../../utils/auth.js';
+import { getMemberId, getProfileImage, isMemberOnline } from '../../utils/member.js';
 import './Profile.css';
 
 const ProfileDashboard = () => {
@@ -43,9 +44,10 @@ const ProfileDashboard = () => {
   if (isLoading) return <p className="profile-status">Loading profile...</p>;
   if (error) return <p className="profile-status">{error}</p>;
 
-  const profileId = userData?._id || userData?.id || id;
+  const profileId = getMemberId(userData) || id;
   const canEdit = Boolean(currentMemberId && profileId &&
     currentMemberId === String(profileId));
+  const isOnline = isMemberOnline(userData, currentMemberId);
 
   return (
       <main className="page-content profile-dashboard">
@@ -57,12 +59,15 @@ const ProfileDashboard = () => {
               <header className="profile-detail-header">
                 <p className="profile-detail-eyebrow">Community profile</p>
                 <h1>{userData.name || 'Member profile'}</h1>
-                <p>Get to know a little more about this member.</p>
+                <p className={`profile-detail-status${isOnline ? ' profile-detail-status--online' : ''}`}>
+                  <span className="profile-detail-status-dot" aria-hidden="true" />
+                  {isOnline ? 'Online now' : 'Offline'}
+                </p>
               </header>
               <div className="profile-detail-grid">
                 <aside className="profile-sidebar">
                   <ProfileImage
-                      profileImageUrl={userData.profileImageUrl || userData.profileImage}
+                      profileImageUrl={getProfileImage(userData)}
                       memberId={profileId}
                       canEdit={canEdit}
                   />

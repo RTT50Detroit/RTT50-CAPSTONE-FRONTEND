@@ -43,6 +43,30 @@
     color: #708287;
 }
 
+.profile-detail-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.85rem;
+    font-weight: 800;
+}
+
+.profile-detail-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #b8c1c0;
+}
+
+.profile-detail-status--online {
+    color: #287c78;
+}
+
+.profile-detail-status--online .profile-detail-status-dot {
+    background: #6eaf62;
+    box-shadow: 0 0 0 3px rgba(110, 175, 98, 0.18);
+}
+
 .profile-detail-grid {
     display: grid;
     grid-template-columns: minmax(240px, 0.7fr) minmax(0, 1.3fr);

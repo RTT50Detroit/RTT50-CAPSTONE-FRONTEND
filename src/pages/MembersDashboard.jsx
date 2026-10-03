@@ -3,6 +3,7 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import ProfileCards from '../components/ProfileCard/ProfileCards';
 import { getCurrentMemberId } from '../utils/auth.js';
+import { isMemberOnline } from '../utils/member.js';
 import './css/members_dashboard.css';
 
 const MembersDashboard = () => {
@@ -55,10 +56,7 @@ const MembersDashboard = () => {
   const filteredProfiles = profiles.filter((profile) => {
     const profileSex = profile.gender?.toLowerCase();
     const profileAge = Number(profile.age);
-    const isOnline = String(profile._id || profile.id) === currentMemberId ||
-      profile.isOnline === true ||
-      profile.online === true ||
-      profile.status?.toLowerCase() === 'online';
+    const isOnline = isMemberOnline(profile, currentMemberId);
     const matchesSex = sexFilter === 'all' || profileSex === sexFilter;
     const matchesOnlineStatus = onlineStatusFilter === 'all' ||
       (onlineStatusFilter === 'online' && isOnline) ||
