@@ -213,6 +213,37 @@
   display: none;
 }
 
+.profile-card-status {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(255, 250, 243, 0.4);
+  border-radius: 999px;
+  padding: 5px 9px;
+  color: #fffaf3;
+  background: rgba(18, 59, 74, 0.78);
+  font-family: inherit;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.profile-card-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #b8c1c0;
+}
+
+.profile-card-status--online .profile-card-status-dot {
+  background: #9fd38b;
+  box-shadow: 0 0 0 3px rgba(159, 211, 139, 0.2);
+}
+
 .profile-card-body {
   min-height: 238px;
   padding: 20px;

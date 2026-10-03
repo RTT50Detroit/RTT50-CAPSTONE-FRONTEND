@@ -21,6 +21,9 @@ const ProfileCards = ({ profiles }) => {
           const genderClass = genderKey === 'male' || genderKey === 'female'
             ? `profile-card--${genderKey}`
             : 'profile-card--neutral';
+          const isOnline = profile.isOnline === true ||
+            profile.online === true ||
+            profile.status?.toLowerCase() === 'online';
           const summary = profile.bio || profile.aboutme ||
             'Open to making a meaningful connection.';
 
@@ -42,6 +45,13 @@ const ProfileCards = ({ profiles }) => {
                 ) : (
                   <span className="profile-card-initials">{initials.toUpperCase()}</span>
                 )}
+                <span
+                    className={`profile-card-status${isOnline ? ' profile-card-status--online' : ''}`}
+                    aria-label={`${profile.name || 'Member'} is ${isOnline ? 'online' : 'offline'}`}
+                >
+                  <span className="profile-card-status-dot" aria-hidden="true" />
+                  {isOnline ? 'Online' : 'Offline'}
+                </span>
               </div>
               <div className="profile-card-body">
                 <p className="profile-card-kicker">
