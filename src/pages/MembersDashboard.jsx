@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import ProfileCards from '../components/ProfileCard/ProfileCards';
+import { getCurrentMemberId } from '../utils/auth.js';
 import './css/members_dashboard.css';
 
 const MembersDashboard = () => {
@@ -14,6 +15,7 @@ const MembersDashboard = () => {
   const [error, setError] = useState(null);
   const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
   const token = localStorage.getItem('authToken');
+  const currentMemberId = getCurrentMemberId();
   let loginName = 'Member';
 
   try {
@@ -53,7 +55,8 @@ const MembersDashboard = () => {
   const filteredProfiles = profiles.filter((profile) => {
     const profileSex = profile.gender?.toLowerCase();
     const profileAge = Number(profile.age);
-    const isOnline = profile.isOnline === true ||
+    const isOnline = String(profile._id || profile.id) === currentMemberId ||
+      profile.isOnline === true ||
       profile.online === true ||
       profile.status?.toLowerCase() === 'online';
     const matchesSex = sexFilter === 'all' || profileSex === sexFilter;
@@ -178,7 +181,7 @@ const MembersDashboard = () => {
             <p className="dashboard-status">No profiles match these filters.</p>
           )}
           {!isLoading && !error && filteredProfiles.length > 0 && (
-            <ProfileCards profiles={filteredProfiles} />
+            <ProfileCards profiles={filteredProfiles} currentMemberId={currentMemberId} />
           )}
         </section>
       </main>

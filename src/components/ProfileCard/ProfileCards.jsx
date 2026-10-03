@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 
-const ProfileCards = ({ profiles }) => {
+const ProfileCards = ({ profiles, currentMemberId }) => {
   const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
 
   return (
@@ -21,7 +21,8 @@ const ProfileCards = ({ profiles }) => {
           const genderClass = genderKey === 'male' || genderKey === 'female'
             ? `profile-card--${genderKey}`
             : 'profile-card--neutral';
-          const isOnline = profile.isOnline === true ||
+          const isOnline = String(profileId) === currentMemberId ||
+            profile.isOnline === true ||
             profile.online === true ||
             profile.status?.toLowerCase() === 'online';
           const summary = profile.bio || profile.aboutme ||
@@ -81,4 +82,5 @@ export default ProfileCards;
 
 ProfileCards.propTypes = {
   profiles: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentMemberId: PropTypes.string,
 };
