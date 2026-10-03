@@ -1,10 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
+const apiUrl = (import.meta.env.VITE_APP_BASE_URL || '').replace(/\/$/, '');
+
+const resolveImageUrl = (imageUrl) => (
+  imageUrl?.startsWith('/') ? `${apiUrl}${imageUrl}` : imageUrl
+);
+
 const ProfileImage = ({ profileImageUrl, memberId, canEdit }) => {
-  const [imageUrl, setImageUrl] = useState(profileImageUrl);
+  const [imageUrl, setImageUrl] = useState(resolveImageUrl(profileImageUrl));
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    setImageUrl(resolveImageUrl(profileImageUrl));
+  }, [profileImageUrl]);
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
@@ -15,7 +25,6 @@ const ProfileImage = ({ profileImageUrl, memberId, canEdit }) => {
 
     try {
       setError('');
-      const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
       await axios.post(
           `${apiUrl}/api/members/profile-image/${memberId}`,
           formData,
