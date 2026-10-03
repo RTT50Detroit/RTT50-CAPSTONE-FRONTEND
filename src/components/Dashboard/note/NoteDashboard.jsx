@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import NoteList from './NoteList';
 import NotePosting from './NotePosting';
 import './Notes.css';
@@ -10,24 +11,22 @@ const authConfig = () => ({
   headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
 });
 
+const handleRequestError = (requestError, message, navigate) => {
+  const status = requestError.response?.status;
+  if (status === 400 || status === 401) {
+    localStorage.removeItem('authToken');
+    navigate('/login', { replace: true });
+    return;
+  }
+
+  return message;
+};
+
 const NotesDashboard = () => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-
-  const fetchNotes = async () => {
-    setLoading(true);
-    setError('');
-    try {
-      const { data } = await axios.get(`${apiUrl}/api/members/notes`, authConfig());
-      setNotes(Array.isArray(data) ? data : data?.notes || []);
-    } catch (requestError) {
-      console.error('Error while fetching notes:', requestError);
-      setError('Your notes could not be loaded. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const navigate = useNavigate();
 
   const addNote = async (note) => {
     setError('');
@@ -44,7 +43,12 @@ const NotesDashboard = () => {
       }]);
     } catch (requestError) {
       console.error('Error while saving note:', requestError);
-      setError('Your note could not be saved. Please try again.');
+      const message = handleRequestError(
+          requestError,
+          'Your note could not be saved. Please try again.',
+          navigate
+      );
+      if (message) setError(message);
       throw requestError;
     }
   };
@@ -63,7 +67,12 @@ const NotesDashboard = () => {
       )));
     } catch (requestError) {
       console.error('Error while updating note:', requestError);
-      setError('Your note could not be updated. Please try again.');
+      const message = handleRequestError(
+          requestError,
+          'Your note could not be updated. Please try again.',
+          navigate
+      );
+      if (message) setError(message);
       throw requestError;
     }
   };
@@ -75,14 +84,38 @@ const NotesDashboard = () => {
       setNotes((prevNotes) => prevNotes.filter((note) => note._id !== id));
     } catch (requestError) {
       console.error('Error while deleting note:', requestError);
-      setError('Your note could not be deleted. Please try again.');
+      const message = handleRequestError(
+          requestError,
+          'Your note could not be deleted. Please try again.',
+          navigate
+      );
+      if (message) setError(message);
       throw requestError;
     }
   };
 
   useEffect(() => {
+    const fetchNotes = async () => {
+      setLoading(true);
+      setError('');
+      try {
+        const { data } = await axios.get(`${apiUrl}/api/members/notes`, authConfig());
+        setNotes(Array.isArray(data) ? data : data?.notes || []);
+      } catch (requestError) {
+        console.error('Error while fetching notes:', requestError);
+        const message = handleRequestError(
+            requestError,
+            'Your notes could not be loaded. Please try again.',
+            navigate
+        );
+        if (message) setError(message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchNotes();
-  }, []);
+  }, [navigate]);
 
   return (
       <main className="page-content notes-page">
