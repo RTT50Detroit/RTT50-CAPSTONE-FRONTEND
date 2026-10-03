@@ -26,10 +26,24 @@ const ProfileDashboard = () => {
         }
 
         const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
-        const response = await axios.get(`${apiUrl}/api/members/${id}`, {
+        const authConfig = {
           headers: { Authorization: `Bearer ${token}` },
+        };
+        const [memberResponse, aboutMeResponse] = await Promise.all([
+          axios.get(`${apiUrl}/api/members/${id}`, authConfig),
+          axios.get(`${apiUrl}/api/members/aboutme`, authConfig),
+        ]);
+        const profiles = Array.isArray(aboutMeResponse.data)
+          ? aboutMeResponse.data
+          : aboutMeResponse.data?.profiles || [];
+        const persistedProfile = profiles.find((profile) => (
+          String(getMemberId(profile)) === String(id)
+        ));
+
+        setUserData({
+          ...memberResponse.data,
+          ...(persistedProfile || {}),
         });
-        setUserData(response.data);
       } catch (requestError) {
         console.error('Error fetching user profile:', requestError);
         setError('Error fetching user profile.');

@@ -25,12 +25,13 @@ const ProfileImage = ({ profileImageUrl, memberId, canEdit }) => {
 
     try {
       setError('');
-      await axios.post(
+      const response = await axios.post(
           `${apiUrl}/api/members/profile-image/${memberId}`,
           formData,
           { headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` } }
       );
-      setImageUrl(URL.createObjectURL(file));
+      const savedImageUrl = response.data?.profileImageUrl;
+      setImageUrl(resolveImageUrl(savedImageUrl) || URL.createObjectURL(file));
     } catch (uploadError) {
       console.error('Error uploading image:', uploadError);
       setError('Unable to update profile picture.');
