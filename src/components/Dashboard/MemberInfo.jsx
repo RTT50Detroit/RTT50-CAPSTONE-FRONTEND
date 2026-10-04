@@ -53,6 +53,7 @@ const MemberInfo = ({ user, canEdit, onSaved }) => {
       const { data } = await axios.patch(
           `${apiUrl}/api/members/aboutme`,
           {
+            bio: user.bio ?? user.aboutme ?? '',
             occupation: form.occupation.trim(),
             hobbies: form.hobbies.split(',').map((hobby) => hobby.trim()).filter(Boolean),
             links,
@@ -99,7 +100,7 @@ const MemberInfo = ({ user, canEdit, onSaved }) => {
             <fieldset>
               <legend>Links and socials</legend>
               {form.links.map((link, index) => (
-                <div className="profile-link-edit-row" key={`${index}-${link.label}`}>
+                <div className="profile-link-edit-row" key={index}>
                   <input
                       aria-label={`Link ${index + 1} label`}
                       value={link.label}
@@ -182,6 +183,8 @@ MemberInfo.propTypes = {
     name: PropTypes.string,
     age: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     gender: PropTypes.string,
+    bio: PropTypes.string,
+    aboutme: PropTypes.string,
     occupation: PropTypes.string,
     hobbies: PropTypes.arrayOf(PropTypes.string),
     links: PropTypes.arrayOf(PropTypes.shape({
