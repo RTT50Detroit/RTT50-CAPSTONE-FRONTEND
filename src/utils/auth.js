@@ -6,7 +6,9 @@ export const getTokenPayload = () => {
   const token = getAuthToken();
 
   try {
-    return token ? jwtDecode(token) : null;
+    if (token) return jwtDecode(token);
+    const sessionUser = localStorage.getItem('authUser');
+    return sessionUser ? JSON.parse(sessionUser) : null;
   } catch {
     return null;
   }
@@ -17,12 +19,14 @@ export const hasValidAuthToken = () => {
 
   if (!payload) {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('authUser');
     return false;
   }
 
   const isValid = !payload.exp || payload.exp * 1000 > Date.now();
   if (!isValid) {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('authUser');
   }
 
   return isValid;

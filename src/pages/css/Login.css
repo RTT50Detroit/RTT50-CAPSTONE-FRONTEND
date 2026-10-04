@@ -99,6 +99,32 @@
   text-decoration: underline;
 }
 
+.social-login {
+  margin-top: 24px;
+}
+
+.social-login-divider {
+  color: #6b7280;
+  font-size: 13px;
+  margin: 0 0 12px;
+}
+
+.social-login-button {
+  display: block;
+  margin-top: 8px;
+  padding: 10px 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.social-login-button:hover {
+  background: #f3f4f6;
+}
+
 .image-preview-container {
   margin-top: 10px;
   text-align: left;

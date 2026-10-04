@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import Registration from './pages/Registration';
 import Home from './pages/Home.jsx';
-import Login from './pages/Login';
+import Login, { OAuthCallback } from './pages/Login';
 import MembersDashboard from './pages/MembersDashboard.jsx';
 import ProfileDashboard from './components/Dashboard/ProfileDashboard.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
@@ -94,7 +94,7 @@ function Navigation() {
 
 function PresenceTracker() {
   useLocation();
-  const token = localStorage.getItem('authToken');
+  const token = localStorage.getItem('authToken') || localStorage.getItem('authUser');
   const apiUrl = (import.meta.env.VITE_APP_BASE_URL || '').replace(/\/$/, '');
 
   useEffect(() => {
@@ -109,6 +109,7 @@ function PresenceTracker() {
         console.error('Error updating online status:', error);
         if (error.response?.status === 401) {
           localStorage.removeItem('authToken');
+          localStorage.removeItem('authUser');
           window.location.replace('/login');
         }
       }
@@ -135,6 +136,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Registration />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/auth/callback" element={<OAuthCallback />} />
 
             {/* Protected Routes */}
             <Route
