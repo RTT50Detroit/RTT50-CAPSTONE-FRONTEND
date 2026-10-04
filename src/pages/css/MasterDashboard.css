@@ -119,6 +119,21 @@
   color: var(--theme-gold-muted);
 }
 
+.master-form-hint {
+  color: var(--theme-muted);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.master-profile-preview {
+  width: 100px;
+  height: 100px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
 .master-form-actions,
 .master-password-reset {
   display: flex;

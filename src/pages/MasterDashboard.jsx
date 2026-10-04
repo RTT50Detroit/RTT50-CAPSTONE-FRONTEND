@@ -10,6 +10,9 @@ const emptyProfile = {
   email: '',
   password: '',
   bio: '',
+  occupation: '',
+  hobbies: '',
+  profileImage: '',
 };
 
 const apiUrl = (import.meta.env.VITE_APP_BASE_URL || '').replace(/\/$/, '');
@@ -25,6 +28,7 @@ const MasterDashboard = () => {
   const [error, setError] = useState('');
   const [isSaving, setIsSaving] = useState(false);
   const [resetPassword, setResetPassword] = useState('');
+  const [profilePhoto, setProfilePhoto] = useState(null);
 
   const loadProfiles = async () => {
     try {
@@ -53,8 +57,12 @@ const MasterDashboard = () => {
       email: profile.email || '',
       password: '',
       bio: profile.bio || profile.aboutme || '',
+      occupation: profile.occupation || '',
+      hobbies: Array.isArray(profile.hobbies) ? profile.hobbies.join(', ') : profile.hobbies || '',
+      profileImage: profile.profileImage || profile.photo || '',
     });
     setResetPassword('');
+    setProfilePhoto(null);
     setStatus('');
     setError('');
   };
@@ -63,6 +71,7 @@ const MasterDashboard = () => {
     setEditingId(null);
     setForm(emptyProfile);
     setResetPassword('');
+    setProfilePhoto(null);
   };
 
   const handlePasswordReset = async () => {
@@ -100,7 +109,16 @@ const MasterDashboard = () => {
       const payload = { ...form, age: form.age === '' ? undefined : Number(form.age) };
       if (editingId) delete payload.password;
       if (editingId) {
-        await axios.put(`${apiUrl}/api/members/${editingId}`, payload, authConfig());
+        const formData = new FormData();
+        Object.entries(payload).forEach(([key, value]) => {
+          if (key !== 'profileImage' && value !== undefined) {
+            formData.append(key, key === 'hobbies'
+              ? JSON.stringify(value.split(',').map((hobby) => hobby.trim()).filter(Boolean))
+              : value);
+          }
+        });
+        if (profilePhoto) formData.append('photo', profilePhoto);
+        await axios.put(`${apiUrl}/api/members/${editingId}`, formData, authConfig());
         setStatus('Profile updated.');
       } else {
         await axios.post(`${apiUrl}/api/members`, payload, authConfig());
@@ -150,6 +168,40 @@ const MasterDashboard = () => {
               <option value="female">Female</option>
               <option value="other">Other</option>
             </select>
+          </label>
+          {editingId && (
+            <label className="master-form-label" htmlFor="master-profile-photo">
+              Profile photo
+              <input
+                  id="master-profile-photo"
+                  type="file"
+                  accept=".jpg,.jpeg,.png"
+                  onChange={(event) => setProfilePhoto(event.target.files[0] || null)}
+              />
+              {form.profileImage && !profilePhoto && (
+                <img className="master-profile-preview" src={form.profileImage} alt="Current profile" />
+              )}
+            </label>
+          )}
+          <label className="master-form-label" htmlFor="master-occupation">
+            Occupation
+            <input
+                id="master-occupation"
+                name="occupation"
+                value={form.occupation}
+                onChange={handleChange}
+                maxLength="120"
+            />
+          </label>
+          <label className="master-form-label" htmlFor="master-hobbies">
+            Hobbies / interests <span className="master-form-hint">(separate with commas)</span>
+            <input
+                id="master-hobbies"
+                name="hobbies"
+                value={form.hobbies}
+                onChange={handleChange}
+                placeholder="Reading, hiking, music"
+            />
           </label>
           <label className="master-form-label" htmlFor="master-bio">
             Bio
