@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { getAuthToken } from '../../utils/auth.js';
+import { getAuthToken, isMasterUser } from '../../utils/auth.js';
 
 const emptyLink = { label: '', url: '' };
 
@@ -9,7 +9,7 @@ const normalizeHobbies = (hobbies) => (
   Array.isArray(hobbies) ? hobbies : hobbies ? [hobbies] : []
 );
 
-const MemberInfo = ({ user, canEdit, onSaved }) => {
+const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState('');
@@ -50,17 +50,23 @@ const MemberInfo = ({ user, canEdit, onSaved }) => {
 
     try {
       const apiUrl = (import.meta.env.VITE_APP_BASE_URL || '').replace(/\/$/, '');
-      const { data } = await axios.patch(
-          `${apiUrl}/api/members/aboutme`,
-          {
-            bio: user.bio ?? user.aboutme ?? '',
-            occupation: form.occupation.trim(),
-            hobbies: form.hobbies.split(',').map((hobby) => hobby.trim()).filter(Boolean),
-            links,
-          },
+      const isMasterEditingMember = isMasterUser() && memberId;
+      const saveUrl = isMasterEditingMember
+        ? `${apiUrl}/api/members/${memberId}`
+        : `${apiUrl}/api/members/aboutme`;
+      const saveMethod = isMasterEditingMember ? 'put' : 'patch';
+      const payload = {
+        bio: user.bio ?? user.aboutme ?? '',
+        occupation: form.occupation.trim(),
+        hobbies: form.hobbies.split(',').map((hobby) => hobby.trim()).filter(Boolean),
+        links,
+      };
+      const { data } = await axios[saveMethod](
+          saveUrl,
+          payload,
           { headers: { Authorization: `Bearer ${getAuthToken()}` } },
       );
-      onSaved(data.profile || {
+      onSaved(data.profile || data.member || {
         ...user,
         occupation: form.occupation.trim(),
         hobbies: form.hobbies.split(',').map((hobby) => hobby.trim()).filter(Boolean),
@@ -202,5 +208,6 @@ MemberInfo.propTypes = {
     })),
   }),
   canEdit: PropTypes.bool,
+  memberId: PropTypes.string,
   onSaved: PropTypes.func,
 };

@@ -12,6 +12,7 @@ const emptyProfile = {
   bio: '',
   occupation: '',
   hobbies: '',
+  links: '',
   profileImage: '',
 };
 
@@ -59,6 +60,9 @@ const MasterDashboard = () => {
       bio: profile.bio || profile.aboutme || '',
       occupation: profile.occupation || '',
       hobbies: Array.isArray(profile.hobbies) ? profile.hobbies.join(', ') : profile.hobbies || '',
+      links: Array.isArray(profile.links)
+        ? profile.links.map((link) => `${link.label} | ${link.url}`).join('\n')
+        : '',
       profileImage: profile.profileImage || profile.photo || '',
     });
     setResetPassword('');
@@ -114,6 +118,11 @@ const MasterDashboard = () => {
           if (key !== 'profileImage' && value !== undefined) {
             formData.append(key, key === 'hobbies'
               ? JSON.stringify(value.split(',').map((hobby) => hobby.trim()).filter(Boolean))
+              : key === 'links'
+                ? JSON.stringify(value.split('\n').map((line) => {
+                  const [label, url] = line.split('|').map((part) => part.trim());
+                  return { label, url };
+                }).filter((link) => link.label && link.url))
               : value);
           }
         });
@@ -126,6 +135,11 @@ const MasterDashboard = () => {
           if (key !== 'profileImage' && value !== undefined) {
             formData.append(key, key === 'hobbies'
               ? JSON.stringify(value.split(',').map((hobby) => hobby.trim()).filter(Boolean))
+              : key === 'links'
+                ? JSON.stringify(value.split('\n').map((line) => {
+                  const [label, url] = line.split('|').map((part) => part.trim());
+                  return { label, url };
+                }).filter((link) => link.label && link.url))
               : value);
           }
         });
@@ -208,6 +222,17 @@ const MasterDashboard = () => {
                 value={form.hobbies}
                 onChange={handleChange}
                 placeholder="Reading, hiking, music"
+            />
+          </label>
+          <label className="master-form-label" htmlFor="master-links">
+            Links / socials <span className="master-form-hint">(one per line: Label | URL)</span>
+            <textarea
+                id="master-links"
+                name="links"
+                value={form.links}
+                onChange={handleChange}
+                rows="4"
+                placeholder={'Instagram | https://instagram.com/username'}
             />
           </label>
           <label className="master-form-label" htmlFor="master-bio">
