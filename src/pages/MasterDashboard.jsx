@@ -8,6 +8,7 @@ const emptyProfile = {
   age: '',
   gender: '',
   email: '',
+  password: '',
   bio: '',
 };
 
@@ -49,6 +50,7 @@ const MasterDashboard = () => {
       age: profile.age || '',
       gender: profile.gender || '',
       email: profile.email || '',
+      password: '',
       bio: profile.bio || profile.aboutme || '',
     });
     setStatus('');
@@ -68,6 +70,7 @@ const MasterDashboard = () => {
 
     try {
       const payload = { ...form, age: form.age === '' ? undefined : Number(form.age) };
+      if (editingId) delete payload.password;
       if (editingId) {
         await axios.put(`${apiUrl}/api/members/${editingId}`, payload, authConfig());
         setStatus('Profile updated.');
@@ -98,7 +101,7 @@ const MasterDashboard = () => {
           <h2>{editingId ? 'Update profile' : 'Create profile'}</h2>
           {error && <p className="dashboard-status dashboard-error">{error}</p>}
           {status && <p className="master-success">{status}</p>}
-          {['name', 'age', 'email'].map((field) => (
+          {['name', 'age', 'email', ...(editingId ? [] : ['password'])].map((field) => (
             <label key={field} className="master-form-label" htmlFor={`master-${field}`}>
               {field[0].toUpperCase() + field.slice(1)}
               <input
@@ -107,7 +110,7 @@ const MasterDashboard = () => {
                   type={field === 'age' ? 'number' : field}
                   value={form[field]}
                   onChange={handleChange}
-                  required={field !== 'email'}
+                  required={field !== 'email' || field === 'password'}
               />
             </label>
           ))}
