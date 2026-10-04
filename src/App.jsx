@@ -171,6 +171,16 @@ function App() {
             />
 
           </Routes>
+          <footer className="site-footer">
+            <p>Part of a more intentional approach to connection.</p>
+            <a
+                href="https://therelationshipresume.netlify.app/"
+                target="_blank"
+                rel="noreferrer"
+            >
+              Explore the Relationship Resume
+            </a>
+          </footer>
         </div>
       </Router>
   );

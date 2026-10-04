@@ -12,6 +12,10 @@ const LandingPage = () => {
               Meet someone who gets your pace, share the stories that shaped you,
               and find a community where showing up as yourself feels natural.
             </p>
+            <p className="home-companion-note">
+              Build a fuller picture of what you bring to a relationship with our
+              companion tool, Relationship Resume.
+            </p>
             <div className="home-actions">
               <Link className="home-primary-action" to="/register">Join the conversation</Link>
               <Link className="home-secondary-action" to="/login">Sign in</Link>
@@ -73,6 +77,26 @@ const LandingPage = () => {
               <h3>Collaborate</h3>
               <p>Turn shared interests into thoughtful conversations and real momentum.</p>
             </article>
+          </div>
+        </section>
+        <section className="home-companion page-content" aria-labelledby="home-companion-heading">
+          <div>
+            <p className="home-eyebrow">A companion for your story</p>
+            <h2 id="home-companion-heading">Know what you bring.</h2>
+          </div>
+          <div>
+            <p>
+              The Relationship Resume helps you reflect on your values, communication
+              style, and relationship goals before you connect with someone new.
+            </p>
+            <a
+                className="home-secondary-action"
+                href="https://therelationshipresume.netlify.app/"
+                target="_blank"
+                rel="noreferrer"
+            >
+              Visit Relationship Resume <span aria-hidden="true">-&gt;</span>
+            </a>
           </div>
         </section>
       </main>
