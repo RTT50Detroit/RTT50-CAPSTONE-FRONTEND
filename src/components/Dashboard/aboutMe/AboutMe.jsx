@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { isMasterUser } from '../../../utils/auth.js';
+import { getCurrentMemberId, isMasterUser } from '../../../utils/auth.js';
 import './AboutMe.css';
 
 const AboutMe = ({ user, memberId, canEdit }) => {
@@ -26,7 +26,8 @@ const AboutMe = ({ user, memberId, canEdit }) => {
       setIsSaving(true);
       setError('');
       const apiUrl = (import.meta.env.VITE_APP_BASE_URL || '').replace(/\/$/, '');
-      const isMasterEditingMember = isMasterUser() && memberId;
+      const isOwnProfile = getCurrentMemberId() === String(memberId);
+      const isMasterEditingMember = isMasterUser() && memberId && !isOwnProfile;
       const saveUrl = isMasterEditingMember
         ? `${apiUrl}/api/members/${memberId}`
         : `${apiUrl}/api/members/aboutme`;
