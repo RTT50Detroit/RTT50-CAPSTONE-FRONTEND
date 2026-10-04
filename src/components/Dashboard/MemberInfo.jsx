@@ -13,10 +13,18 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState('');
-  const [form, setForm] = useState({ occupation: '', hobbies: '', links: [] });
+  const [form, setForm] = useState({
+    age: '',
+    gender: '',
+    occupation: '',
+    hobbies: '',
+    links: [],
+  });
 
   useEffect(() => {
     setForm({
+      age: user?.age ?? '',
+      gender: user?.gender || '',
       occupation: user?.occupation || '',
       hobbies: normalizeHobbies(user?.hobbies).join(', '),
       links: user?.links?.length ? user.links : [],
@@ -47,6 +55,17 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
       setIsSaving(false);
       return;
     }
+    const age = Number(form.age);
+    if (!Number.isInteger(age) || age < 18 || age > 120) {
+      setError('Age must be a whole number between 18 and 120.');
+      setIsSaving(false);
+      return;
+    }
+    if (!form.gender.trim()) {
+      setError('Please select a gender.');
+      setIsSaving(false);
+      return;
+    }
 
     try {
       const apiUrl = (import.meta.env.VITE_APP_BASE_URL || '').replace(/\/$/, '');
@@ -56,6 +75,8 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
         : `${apiUrl}/api/members/aboutme`;
       const saveMethod = isMasterEditingMember ? 'put' : 'patch';
       const payload = {
+        age,
+        gender: form.gender.trim(),
         aboutMe: user.aboutMe ?? user.aboutme ?? '',
         occupation: form.occupation.trim(),
         hobbies: form.hobbies.split(',').map((hobby) => hobby.trim()).filter(Boolean),
@@ -68,6 +89,8 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
       );
       onSaved(data.profile || data.member || {
         ...user,
+        age,
+        gender: form.gender.trim(),
         occupation: form.occupation.trim(),
         hobbies: form.hobbies.split(',').map((hobby) => hobby.trim()).filter(Boolean),
         links,
@@ -88,6 +111,37 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
         <h2>{user.name || 'Unnamed member'}</h2>
         {isEditing ? (
           <form className="profile-details-form" onSubmit={handleSave}>
+            <label>
+              Age
+              <input
+                  type="number"
+                  min="18"
+                  max="120"
+                  step="1"
+                  value={form.age}
+                  onChange={(event) => setForm((current) => ({
+                    ...current, age: event.target.value,
+                  }))}
+                  required
+                  autoComplete="bday"
+              />
+            </label>
+            <label>
+              Gender
+              <select
+                  value={form.gender}
+                  onChange={(event) => setForm((current) => ({
+                    ...current, gender: event.target.value,
+                  }))}
+                  required
+              >
+                <option value="">Select gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="non-binary">Non-binary</option>
+                <option value="prefer-not-to-say">Prefer not to say</option>
+              </select>
+            </label>
             <label>
               Occupation
               <input
