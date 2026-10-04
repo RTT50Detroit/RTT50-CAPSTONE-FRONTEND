@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { getAuthToken, getCurrentMemberId, getTokenPayload } from '../utils/auth.js';
+import { getCurrentMemberId, getTokenPayload, hasValidAuthToken } from '../utils/auth.js';
 
 const LandingPage = () => {
   return (
@@ -113,7 +113,7 @@ const MemberHub = () => {
       <main className="home-page member-home-page">
         <section className="member-home-hero page-content">
           <div>
-            <p className="home-eyebrow">Your member hub</p>
+            <p className="home-eyebrow">Welcome to the beta</p>
             <h1>Welcome back, {memberName}.</h1>
             <p className="home-intro">
               Your space to meet people, keep your story moving, and stay close to
@@ -126,26 +126,39 @@ const MemberHub = () => {
           </div>
         </section>
 
+        <section className="member-home-notice page-content" aria-labelledby="member-home-notice-heading">
+          <div className="member-home-notice-mark" aria-hidden="true">!</div>
+          <div>
+            <p className="home-eyebrow">Early access</p>
+            <h2 id="member-home-notice-heading">You are helping us build what comes next.</h2>
+            <p>
+              The Social Match Game is still under development. Try the features below,
+              let us know what feels useful, and share your feedback as you explore.
+              Your experience will help shape the next version of the community.
+            </p>
+          </div>
+        </section>
+
         <section className="member-home-content page-content" aria-labelledby="member-home-heading">
           <div className="home-section-heading">
-            <p className="home-eyebrow">Make yourself at home</p>
-            <h2 id="member-home-heading">Where would you like to begin?</h2>
+            <p className="home-eyebrow">Available now</p>
+            <h2 id="member-home-heading">Start exploring the community.</h2>
           </div>
           <div className="member-hub-grid">
             <Link className="member-hub-card member-hub-card--primary" to="/dashboard">
-              <span className="member-hub-number">01 / DISCOVER</span>
+              <span className="member-hub-number">01 / PROFILES</span>
               <h3>Meet the community</h3>
               <p>Explore member profiles and find the people, ideas, and energy that fit your world.</p>
               <span className="member-hub-arrow" aria-hidden="true">-&gt;</span>
             </Link>
             <Link className="member-hub-card" to="/notes">
-              <span className="member-hub-number">02 / REFLECT</span>
+              <span className="member-hub-number">02 / NOTES</span>
               <h3>Open your journal</h3>
               <p>Write down a moment, hold onto a lesson, or share a story with your community.</p>
               <span className="member-hub-arrow" aria-hidden="true">-&gt;</span>
             </Link>
             <Link className="member-hub-card" to={profilePath}>
-              <span className="member-hub-number">03 / BE KNOWN</span>
+              <span className="member-hub-number">03 / PROFILE</span>
               <h3>Shape your profile</h3>
               <p>Let people see the details that make you you. Your profile is yours to keep current.</p>
               <span className="member-hub-arrow" aria-hidden="true">-&gt;</span>
@@ -155,13 +168,13 @@ const MemberHub = () => {
 
         <section className="member-home-prompt page-content" aria-label="Member prompt">
           <p className="home-eyebrow">A small invitation</p>
-          <blockquote>“What is something you know now that you wish you knew a year ago?”</blockquote>
+          <blockquote>“What would make this space more useful, welcoming, and meaningful for you?”</blockquote>
           <Link className="home-secondary-action" to="/notes">Write a note</Link>
         </section>
       </main>
   );
 };
 
-const Home = () => (getAuthToken() ? <MemberHub /> : <LandingPage />);
+const Home = () => (hasValidAuthToken() ? <MemberHub /> : <LandingPage />);
 
 export default Home;
