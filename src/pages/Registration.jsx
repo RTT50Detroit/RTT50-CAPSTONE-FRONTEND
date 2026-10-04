@@ -1,8 +1,10 @@
 import {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Import Axios
 import './css/Login.css';
 
 const Registration = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
@@ -38,6 +40,12 @@ const Registration = () => {
         },
       });
 
+      const loginResponse = await axios.post(`${apiUrl}/api/login`, {
+        email,
+        password,
+      });
+      localStorage.setItem('authToken', loginResponse.data.token);
+
       setMessage(response.data.message || 'Registration successful!');
       setName('');
       setAge('');
@@ -46,6 +54,7 @@ const Registration = () => {
       setPassword('');
       setPreviewImage('');
       fileInput.value = '';
+      navigate('/dashboard');
     } catch (err) {
       console.error('Error making the API call:', err);
       if (err.response?.data) {
