@@ -153,6 +153,20 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
                   + Add a link
                 </button>
               )}
+              {!form.links.some((link) => (
+                link.label.toLowerCase() === 'relationship resume'
+              )) && form.links.length < 10 && (
+                <button
+                    type="button"
+                    className="profile-link-add"
+                    onClick={() => setForm((current) => ({
+                      ...current,
+                      links: [...current.links, { label: 'Relationship Resume', url: '' }],
+                    }))}
+                >
+                  + Add Relationship Resume
+                </button>
+              )}
             </fieldset>
             <div className="profile-details-actions">
               <button type="submit" disabled={isSaving}>

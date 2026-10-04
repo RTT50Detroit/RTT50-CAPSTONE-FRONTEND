@@ -134,6 +134,18 @@
   object-fit: cover;
 }
 
+.master-link-preset {
+  justify-self: start;
+  border: 1px solid var(--theme-gold);
+  border-radius: 4px;
+  padding: 7px 10px;
+  color: var(--theme-gold-bright);
+  background: transparent;
+  font: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
 .master-form-actions,
 .master-password-reset {
   display: flex;

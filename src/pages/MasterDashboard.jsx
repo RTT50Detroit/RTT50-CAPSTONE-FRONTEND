@@ -234,6 +234,18 @@ const MasterDashboard = () => {
                 rows="4"
                 placeholder={'Instagram | https://instagram.com/username'}
             />
+            <button
+                type="button"
+                className="master-link-preset"
+                onClick={() => setForm((current) => ({
+                  ...current,
+                  links: current.links.includes('Relationship Resume |')
+                    ? current.links
+                    : `${current.links}${current.links ? '\n' : ''}Relationship Resume |`,
+                }))}
+            >
+              + Add Relationship Resume
+            </button>
           </label>
           <label className="master-form-label" htmlFor="master-bio">
             Bio
