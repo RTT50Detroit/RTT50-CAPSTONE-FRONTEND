@@ -16,10 +16,16 @@ export const hasValidAuthToken = () => {
   const payload = getTokenPayload();
 
   if (!payload) {
+    localStorage.removeItem('authToken');
     return false;
   }
 
-  return !payload.exp || payload.exp * 1000 > Date.now();
+  const isValid = !payload.exp || payload.exp * 1000 > Date.now();
+  if (!isValid) {
+    localStorage.removeItem('authToken');
+  }
+
+  return isValid;
 };
 
 export const getCurrentMemberId = () => {

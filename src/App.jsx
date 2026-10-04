@@ -107,6 +107,10 @@ function PresenceTracker() {
         });
       } catch (error) {
         console.error('Error updating online status:', error);
+        if (error.response?.status === 401) {
+          localStorage.removeItem('authToken');
+          window.location.replace('/login');
+        }
       }
     };
 
