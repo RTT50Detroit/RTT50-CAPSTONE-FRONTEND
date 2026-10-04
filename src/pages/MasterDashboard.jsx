@@ -121,7 +121,16 @@ const MasterDashboard = () => {
         await axios.put(`${apiUrl}/api/members/${editingId}`, formData, authConfig());
         setStatus('Profile updated.');
       } else {
-        await axios.post(`${apiUrl}/api/members`, payload, authConfig());
+        const formData = new FormData();
+        Object.entries(payload).forEach(([key, value]) => {
+          if (key !== 'profileImage' && value !== undefined) {
+            formData.append(key, key === 'hobbies'
+              ? JSON.stringify(value.split(',').map((hobby) => hobby.trim()).filter(Boolean))
+              : value);
+          }
+        });
+        if (profilePhoto) formData.append('photo', profilePhoto);
+        await axios.post(`${apiUrl}/api/members`, formData, authConfig());
         setStatus('Profile created.');
       }
       resetForm();
@@ -169,20 +178,18 @@ const MasterDashboard = () => {
               <option value="other">Other</option>
             </select>
           </label>
-          {editingId && (
-            <label className="master-form-label" htmlFor="master-profile-photo">
-              Profile photo
-              <input
-                  id="master-profile-photo"
-                  type="file"
-                  accept=".jpg,.jpeg,.png"
-                  onChange={(event) => setProfilePhoto(event.target.files[0] || null)}
-              />
-              {form.profileImage && !profilePhoto && (
-                <img className="master-profile-preview" src={form.profileImage} alt="Current profile" />
-              )}
-            </label>
-          )}
+          <label className="master-form-label" htmlFor="master-profile-photo">
+            Profile photo
+            <input
+                id="master-profile-photo"
+                type="file"
+                accept=".jpg,.jpeg,.png"
+                onChange={(event) => setProfilePhoto(event.target.files[0] || null)}
+            />
+            {form.profileImage && !profilePhoto && (
+              <img className="master-profile-preview" src={form.profileImage} alt="Current profile" />
+            )}
+          </label>
           <label className="master-form-label" htmlFor="master-occupation">
             Occupation
             <input
