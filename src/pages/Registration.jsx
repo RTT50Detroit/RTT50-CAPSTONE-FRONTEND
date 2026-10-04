@@ -40,11 +40,16 @@ const Registration = () => {
         },
       });
 
-      const loginResponse = await axios.post(`${apiUrl}/api/login`, {
-        email,
-        password,
-      });
-      localStorage.setItem('authToken', loginResponse.data.token);
+      const token = response.data.token;
+      if (token) {
+        localStorage.setItem('authToken', token);
+      } else {
+        const loginResponse = await axios.post(`${apiUrl}/api/login`, {
+          email,
+          password,
+        });
+        localStorage.setItem('authToken', loginResponse.data.token);
+      }
 
       setMessage(response.data.message || 'Registration successful!');
       setName('');
