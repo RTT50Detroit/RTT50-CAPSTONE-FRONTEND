@@ -43,6 +43,15 @@ const ProfileDashboard = () => {
         setUserData({
           ...memberResponse.data,
           ...(persistedProfile || {}),
+          occupation: memberResponse.data.occupation ??
+            persistedProfile?.occupation ?? '',
+          hobbies: memberResponse.data.hobbies ??
+            persistedProfile?.hobbies ?? [],
+          links: memberResponse.data.links ??
+            persistedProfile?.links ?? [],
+          profileImage: memberResponse.data.profileImage ||
+            persistedProfile?.profileImage ||
+            memberResponse.data.photo,
         });
       } catch (requestError) {
         console.error('Error fetching user profile:', requestError);
