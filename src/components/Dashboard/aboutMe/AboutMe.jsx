@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { getAuthToken, getCurrentMemberId, isMasterUser } from '../../../utils/auth.js';
+import { getAuthToken, isMasterUser } from '../../../utils/auth.js';
 import './AboutMe.css';
 
 const AboutMe = ({ user, memberId, canEdit }) => {
@@ -33,8 +33,7 @@ const AboutMe = ({ user, memberId, canEdit }) => {
         navigate('/login', { replace: true });
         return;
       }
-      const isOwnProfile = getCurrentMemberId() === String(memberId);
-      const isMasterEditingMember = isMasterUser() && memberId && !isOwnProfile;
+      const isMasterEditingMember = isMasterUser() && memberId;
       const saveUrl = isMasterEditingMember
         ? `${apiUrl}/api/members/${memberId}`
         : `${apiUrl}/api/members/aboutme`;
