@@ -94,11 +94,12 @@ function Navigation() {
 
 function PresenceTracker() {
   useLocation();
-  const token = localStorage.getItem('authToken') || localStorage.getItem('authUser');
+  const token = localStorage.getItem('authToken');
+  const hasSession = Boolean(token || localStorage.getItem('authUser'));
   const apiUrl = (import.meta.env.VITE_APP_BASE_URL || '').replace(/\/$/, '');
 
   useEffect(() => {
-    if (!token) return undefined;
+    if (!hasSession) return undefined;
 
     const markPresence = async () => {
       try {
@@ -118,7 +119,7 @@ function PresenceTracker() {
     markPresence();
     const presenceInterval = window.setInterval(markPresence, 60 * 1000);
     return () => window.clearInterval(presenceInterval);
-  }, [apiUrl, token]);
+  }, [apiUrl, hasSession, token]);
 
   return null;
 }
