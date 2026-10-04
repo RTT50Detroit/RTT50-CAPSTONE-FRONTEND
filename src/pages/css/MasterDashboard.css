@@ -37,6 +37,12 @@
   margin-top: 1rem;
 }
 
+.master-password-reset {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border, #ddd);
+}
+
 .master-profile-row {
   display: flex;
   align-items: center;

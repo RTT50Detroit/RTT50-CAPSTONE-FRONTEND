@@ -24,6 +24,7 @@ const MasterDashboard = () => {
   const [status, setStatus] = useState('');
   const [error, setError] = useState('');
   const [isSaving, setIsSaving] = useState(false);
+  const [resetPassword, setResetPassword] = useState('');
 
   const loadProfiles = async () => {
     try {
@@ -53,6 +54,7 @@ const MasterDashboard = () => {
       password: '',
       bio: profile.bio || profile.aboutme || '',
     });
+    setResetPassword('');
     setStatus('');
     setError('');
   };
@@ -60,6 +62,32 @@ const MasterDashboard = () => {
   const resetForm = () => {
     setEditingId(null);
     setForm(emptyProfile);
+    setResetPassword('');
+  };
+
+  const handlePasswordReset = async () => {
+    if (!editingId || resetPassword.length < 8) {
+      setError('Enter a new password with at least 8 characters.');
+      return;
+    }
+
+    setIsSaving(true);
+    setStatus('');
+    setError('');
+    try {
+      await axios.put(
+          `${apiUrl}/api/members/${editingId}/password`,
+          { password: resetPassword },
+          authConfig()
+      );
+      setResetPassword('');
+      setStatus('Password reset successfully.');
+    } catch (requestError) {
+      console.error('Error resetting password:', requestError);
+      setError(requestError.response?.data?.error || 'Unable to reset password.');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -127,6 +155,25 @@ const MasterDashboard = () => {
             Bio
             <textarea id="master-bio" name="bio" value={form.bio} onChange={handleChange} rows="5" />
           </label>
+          {editingId && (
+            <div className="master-password-reset">
+              <label className="master-form-label" htmlFor="master-reset-password">
+                New password
+                <input
+                    id="master-reset-password"
+                    type="password"
+                    value={resetPassword}
+                    onChange={(event) => setResetPassword(event.target.value)}
+                    minLength="8"
+                    autoComplete="new-password"
+                    placeholder="At least 8 characters"
+                />
+              </label>
+              <button type="button" onClick={handlePasswordReset} disabled={isSaving}>
+                Reset password
+              </button>
+            </div>
+          )}
           <div className="master-form-actions">
             <button type="submit" disabled={isSaving}>
               {isSaving ? 'Saving...' : editingId ? 'Update profile' : 'Create profile'}
