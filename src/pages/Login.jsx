@@ -73,6 +73,7 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="Enter your email"
+                autoComplete="email"
             />
             <label htmlFor="password" className="form-label">Password</label>
             <input
@@ -83,6 +84,7 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 placeholder="Enter your password"
+                autoComplete="current-password"
             />
             <button type="submit" className="submit-button" disabled={isSubmitting}>
               {isSubmitting ? 'Signing in...' : 'Login'}

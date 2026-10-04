@@ -90,6 +90,7 @@ const MemberInfo = ({ user, canEdit, onSaved }) => {
                     ...current, occupation: event.target.value,
                   }))}
                   maxLength="120"
+                  autoComplete="organization-title"
               />
             </label>
             <label>
@@ -100,6 +101,7 @@ const MemberInfo = ({ user, canEdit, onSaved }) => {
                     ...current, hobbies: event.target.value,
                   }))}
                   placeholder="Reading, hiking, cooking"
+                  autoComplete="off"
               />
             </label>
             <fieldset>
@@ -112,6 +114,7 @@ const MemberInfo = ({ user, canEdit, onSaved }) => {
                       onChange={(event) => updateLink(index, 'label', event.target.value)}
                       placeholder="Instagram"
                       maxLength="50"
+                      autoComplete="off"
                   />
                   <input
                       aria-label={`Link ${index + 1} URL`}
@@ -120,6 +123,7 @@ const MemberInfo = ({ user, canEdit, onSaved }) => {
                       onChange={(event) => updateLink(index, 'url', event.target.value)}
                       placeholder="https://..."
                       maxLength="500"
+                      autoComplete="url"
                   />
                   <button
                       type="button"
