@@ -7,19 +7,19 @@ import './AboutMe.css';
 
 const AboutMe = ({ user, memberId, canEdit }) => {
   const navigate = useNavigate();
-  const [bio, setBio] = useState(user || '');
+  const [aboutMe, setAboutMe] = useState(user || '');
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    setBio(user || '');
+    setAboutMe(user || '');
   }, [user]);
 
   const handleSave = async (event) => {
     event.preventDefault();
-    const updatedBio = bio.trim();
-    if (updatedBio === (user || '').trim()) {
+    const updatedAboutMe = aboutMe.trim();
+    if (updatedAboutMe === (user || '').trim()) {
       setIsEditing(false);
       return;
     }
@@ -40,19 +40,19 @@ const AboutMe = ({ user, memberId, canEdit }) => {
       const saveMethod = isMasterEditingMember ? 'put' : 'patch';
       await axios[saveMethod](
           saveUrl,
-          { bio: updatedBio },
+          { aboutMe: updatedAboutMe },
           { headers: { Authorization: `Bearer ${token}` } }
       );
-      setBio(updatedBio);
+      setAboutMe(updatedAboutMe);
       setIsEditing(false);
     } catch (requestError) {
-      console.error('Error updating bio:', requestError);
+      console.error('Error updating about-me content:', requestError);
       if (requestError.response?.status === 401) {
         localStorage.removeItem('authToken');
         navigate('/login', { replace: true });
         return;
       }
-      setError('Unable to update your bio. Please try again.');
+      setError('Unable to update your about-me content. Please try again.');
     } finally {
       setIsSaving(false);
     }
@@ -60,24 +60,24 @@ const AboutMe = ({ user, memberId, canEdit }) => {
 
   return (
       <div className="user-bio">
-        <h2>Bio</h2>
+        <h2>About me</h2>
         {isEditing ? (
           <form className="about-me-edit-form" onSubmit={handleSave}>
             <textarea
-                value={bio}
-                onChange={(event) => setBio(event.target.value)}
+                value={aboutMe}
+                onChange={(event) => setAboutMe(event.target.value)}
                 rows="7"
                 maxLength="2000"
                 autoFocus
             />
             <div className="about-me-actions">
               <button type="submit" disabled={isSaving}>
-                {isSaving ? 'Saving...' : 'Save Bio'}
+                {isSaving ? 'Saving...' : 'Save about me'}
               </button>
               <button
                   type="button"
                   onClick={() => {
-                    setBio(user || '');
+                    setAboutMe(user || '');
                     setIsEditing(false);
                     setError('');
                   }}
@@ -87,11 +87,11 @@ const AboutMe = ({ user, memberId, canEdit }) => {
             </div>
           </form>
         ) : (
-          <p>{bio || 'No biography added yet.'}</p>
+          <p>{aboutMe || 'No biography added yet.'}</p>
         )}
         {canEdit && !isEditing && (
           <button onClick={() => setIsEditing(true)} disabled={isSaving}>
-            Edit Bio
+            Edit about me
           </button>
         )}
         {error && <p className="about-me-error">{error}</p>}

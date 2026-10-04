@@ -27,7 +27,7 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
             ? `profile-card--${genderKey}`
             : 'profile-card--neutral';
           const isOnline = isMemberOnline(profile, currentMemberId);
-          const summary = profile.bio || profile.aboutme ||
+          const summary = profile.aboutMe || profile.aboutme ||
             'Open to making a meaningful connection.';
 
         return (

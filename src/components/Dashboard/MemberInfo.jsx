@@ -56,7 +56,7 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
         : `${apiUrl}/api/members/aboutme`;
       const saveMethod = isMasterEditingMember ? 'put' : 'patch';
       const payload = {
-        bio: user.bio ?? user.aboutme ?? '',
+        aboutMe: user.aboutMe ?? user.aboutme ?? '',
         occupation: form.occupation.trim(),
         hobbies: form.hobbies.split(',').map((hobby) => hobby.trim()).filter(Boolean),
         links,
@@ -212,7 +212,7 @@ MemberInfo.propTypes = {
     name: PropTypes.string,
     age: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     gender: PropTypes.string,
-    bio: PropTypes.string,
+    aboutMe: PropTypes.string,
     aboutme: PropTypes.string,
     occupation: PropTypes.string,
     hobbies: PropTypes.arrayOf(PropTypes.string),

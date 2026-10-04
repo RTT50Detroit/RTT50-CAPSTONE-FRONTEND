@@ -9,7 +9,7 @@ const emptyProfile = {
   gender: '',
   email: '',
   password: '',
-  bio: '',
+  aboutMe: '',
   occupation: '',
   hobbies: '',
   links: '',
@@ -57,7 +57,7 @@ const MasterDashboard = () => {
       gender: profile.gender || '',
       email: profile.email || '',
       password: '',
-      bio: profile.bio || profile.aboutme || '',
+      aboutMe: profile.aboutMe || profile.aboutme || '',
       occupation: profile.occupation || '',
       hobbies: Array.isArray(profile.hobbies) ? profile.hobbies.join(', ') : profile.hobbies || '',
       links: Array.isArray(profile.links)
@@ -247,9 +247,9 @@ const MasterDashboard = () => {
               + Add Relationship Resume
             </button>
           </label>
-          <label className="master-form-label" htmlFor="master-bio">
-            Bio
-            <textarea id="master-bio" name="bio" value={form.bio} onChange={handleChange} rows="5" />
+          <label className="master-form-label" htmlFor="master-about-me">
+            About me
+            <textarea id="master-about-me" name="aboutMe" value={form.aboutMe} onChange={handleChange} rows="5" />
           </label>
           {editingId && (
             <div className="master-password-reset">
