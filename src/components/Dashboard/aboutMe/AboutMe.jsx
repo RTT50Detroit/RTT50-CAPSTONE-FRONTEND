@@ -1,16 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import './AboutMe.css';
 
 
 const AboutMe = ({ user, canEdit }) => {
-  const [bio, setBio] = useState(user || 'No biography added yet.');
+  const [bio, setBio] = useState(user || '');
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState('');
 
+  useEffect(() => {
+    setBio(user || '');
+  }, [user]);
+
   const handleEdit = async () => {
-    const updatedBio = prompt("Edit your bio:", bio);
+    const updatedBio = prompt("Edit your bio:", bio || 'No biography added yet.');
     if (updatedBio === null || updatedBio.trim() === bio) {
       return;
     }
@@ -36,7 +40,7 @@ const AboutMe = ({ user, canEdit }) => {
   return (
       <div className="user-bio">
         <h2>Bio</h2>
-        <p>{bio}</p>
+        <p>{bio || 'No biography added yet.'}</p>
         {canEdit && (
           <button onClick={handleEdit} disabled={isSaving}>
             {isSaving ? 'Saving...' : 'Edit Bio'}

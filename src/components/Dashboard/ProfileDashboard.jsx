@@ -88,7 +88,10 @@ const ProfileDashboard = () => {
                   <MemberInfo user={userData} />
                 </aside>
                 <section className="profile-main-content">
-                  <AboutMe user={userData.aboutme} canEdit={canEdit} />
+                  <AboutMe
+                      user={userData.bio ?? userData.aboutme}
+                      canEdit={canEdit}
+                  />
                 </section>
               </div>
             </>
