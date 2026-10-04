@@ -34,7 +34,8 @@ const ProfileImage = ({ profileImageUrl, memberId, canEdit }) => {
       setImageUrl(resolveImageUrl(savedImageUrl) || URL.createObjectURL(file));
     } catch (uploadError) {
       console.error('Error uploading image:', uploadError);
-      setError('Unable to update profile picture.');
+      setError(uploadError.response?.data?.message ||
+        'Unable to update profile picture.');
     }
   };
 

@@ -83,7 +83,8 @@ const ProfileDashboard = () => {
                   <ProfileImage
                       profileImageUrl={getProfileImage(userData)}
                       memberId={profileId}
-                      canEdit={canEdit}
+                      canEdit={Boolean(currentMemberId && profileId &&
+                        currentMemberId === String(profileId))}
                   />
                   <MemberInfo
                       user={userData}
