@@ -60,7 +60,12 @@ const MemberInfo = ({ user, canEdit, onSaved }) => {
           },
           { headers: { Authorization: `Bearer ${getAuthToken()}` } },
       );
-      onSaved(data.profile);
+      onSaved(data.profile || {
+        ...user,
+        occupation: form.occupation.trim(),
+        hobbies: form.hobbies.split(',').map((hobby) => hobby.trim()).filter(Boolean),
+        links,
+      });
       setIsEditing(false);
     } catch (requestError) {
       console.error('Error updating profile details:', requestError);
