@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { getCurrentMemberId, isMasterUser } from '../../../utils/auth.js';
+import { useNavigate } from 'react-router-dom';
+import { getAuthToken, getCurrentMemberId, isMasterUser } from '../../../utils/auth.js';
 import './AboutMe.css';
 
 const AboutMe = ({ user, memberId, canEdit }) => {
+  const navigate = useNavigate();
   const [bio, setBio] = useState(user || '');
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -26,6 +28,11 @@ const AboutMe = ({ user, memberId, canEdit }) => {
       setIsSaving(true);
       setError('');
       const apiUrl = (import.meta.env.VITE_APP_BASE_URL || '').replace(/\/$/, '');
+      const token = getAuthToken();
+      if (!token) {
+        navigate('/login', { replace: true });
+        return;
+      }
       const isOwnProfile = getCurrentMemberId() === String(memberId);
       const isMasterEditingMember = isMasterUser() && memberId && !isOwnProfile;
       const saveUrl = isMasterEditingMember
@@ -35,12 +42,17 @@ const AboutMe = ({ user, memberId, canEdit }) => {
       await axios[saveMethod](
           saveUrl,
           { bio: updatedBio },
-          { headers: { Authorization: `******'authToken')}` } }
+          { headers: { Authorization: `Bearer ${token}` } }
       );
       setBio(updatedBio);
       setIsEditing(false);
     } catch (requestError) {
       console.error('Error updating bio:', requestError);
+      if (requestError.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        navigate('/login', { replace: true });
+        return;
+      }
       setError('Unable to update your bio. Please try again.');
     } finally {
       setIsSaving(false);
