@@ -34,3 +34,27 @@
 .user-bio button:hover {
   background-color: #45a049;
 }
+
+.about-me-edit-form textarea {
+  width: 100%;
+  min-height: 140px;
+  box-sizing: border-box;
+  border: 1px solid #cbdad6;
+  border-radius: 4px;
+  padding: 10px;
+  color: #355b62;
+  font: inherit;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.about-me-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.about-me-actions button:last-child {
+  color: #355b62;
+  background: #e7f1ef;
+}
