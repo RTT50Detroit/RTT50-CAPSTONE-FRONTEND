@@ -177,17 +177,17 @@ function App() {
           <footer className="site-footer">
             <div>
               <p>Part of a more intentional approach to connection.</p>
-              <p className="site-footer-copyright">
-                &copy; {new Date().getFullYear()} The Social Match Game. All rights reserved.
-              </p>
-            </div>
-            <a
+                <a
               href="https://therelationshipresume.netlify.app/"
               target="_blank"
               rel="noreferrer"
             >
               Explore the Relationship Resume
             </a>
+            <p className="site-footer-copyright">
+                &copy; {new Date().getFullYear()} The Social Match Game. All rights reserved.
+              </p>
+            </div>
           </footer>
         </div>
       </Router>
