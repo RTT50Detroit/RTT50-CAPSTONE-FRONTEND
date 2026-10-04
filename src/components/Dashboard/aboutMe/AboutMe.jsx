@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { isMasterUser } from '../../../utils/auth.js';
 import './AboutMe.css';
 
-const AboutMe = ({ user, canEdit }) => {
+const AboutMe = ({ user, memberId, canEdit }) => {
   const [bio, setBio] = useState(user || '');
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -25,8 +26,13 @@ const AboutMe = ({ user, canEdit }) => {
       setIsSaving(true);
       setError('');
       const apiUrl = (import.meta.env.VITE_APP_BASE_URL || '').replace(/\/$/, '');
-      await axios.patch(
-          `${apiUrl}/api/members/aboutme`,
+      const isMasterEditingMember = isMasterUser() && memberId;
+      const saveUrl = isMasterEditingMember
+        ? `${apiUrl}/api/members/${memberId}`
+        : `${apiUrl}/api/members/aboutme`;
+      const saveMethod = isMasterEditingMember ? 'put' : 'patch';
+      await axios[saveMethod](
+          saveUrl,
           { bio: updatedBio },
           { headers: { Authorization: `******'authToken')}` } }
       );
@@ -85,5 +91,6 @@ export default AboutMe;
 
 AboutMe.propTypes = {
   user: PropTypes.string,
+  memberId: PropTypes.string,
   canEdit: PropTypes.bool,
 };
