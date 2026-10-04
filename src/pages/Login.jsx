@@ -108,8 +108,6 @@ const Login = () => {
             <p className="social-login-divider">Or continue with</p>
             {[
               ['google', 'Google'],
-              ['facebook', 'Facebook'],
-              ['apple', 'Apple'],
               ['github', 'GitHub'],
             ].filter(([provider]) => configuredProviders.includes(provider))
                 .map(([provider, label]) => (
