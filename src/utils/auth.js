@@ -29,3 +29,14 @@ export const getCurrentMemberId = () => {
 
   return memberId ? String(memberId) : null;
 };
+
+export const getCurrentUserRole = () => {
+  const payload = getTokenPayload();
+  const role = payload?.role || payload?.userRole || payload?.permissions;
+
+  return Array.isArray(role) ? role : role ? [role] : [];
+};
+
+export const isMasterUser = () => (
+  getCurrentUserRole().some((role) => String(role).toLowerCase() === 'master')
+);

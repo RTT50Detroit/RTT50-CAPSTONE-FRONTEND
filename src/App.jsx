@@ -14,7 +14,8 @@ import './App.css';
 import './pages/css/styles.css';
 import LogoutButton from './components/LogoutButton.jsx';
 import NotesDashboard from './components/Dashboard/note/NoteDashboard.jsx';
-import { getCurrentMemberId, hasValidAuthToken } from './utils/auth.js';
+import MasterDashboard from './pages/MasterDashboard.jsx';
+import { getCurrentMemberId, hasValidAuthToken, isMasterUser } from './utils/auth.js';
 
 function Navigation() {
   useLocation();
@@ -73,6 +74,13 @@ function Navigation() {
                   <span className="profile-nav-label">My profile</span>
                 </NavLink>
               </li>
+              {isMasterUser() && (
+                <li>
+                  <NavLink to="/master" className={({ isActive }) => (isActive ? 'active' : '')}>
+                    Manage profiles
+                  </NavLink>
+                </li>
+              )}
               <li>
                 <LogoutButton />
               </li>
@@ -146,6 +154,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <NotesDashboard />
+                  </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/master"
+                element={
+                  <ProtectedRoute requiredRole="master">
+                    <MasterDashboard />
                   </ProtectedRoute>
                 }
             />

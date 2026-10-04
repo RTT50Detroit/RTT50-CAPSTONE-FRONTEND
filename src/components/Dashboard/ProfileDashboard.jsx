@@ -4,7 +4,7 @@ import ProfileImage from './ProfileImage.jsx';
 import MemberInfo from './MemberInfo.jsx';
 import AboutMe from './aboutMe/AboutMe.jsx';
 import axios from 'axios';
-import { getCurrentMemberId } from '../../utils/auth.js';
+import { getCurrentMemberId, isMasterUser } from '../../utils/auth.js';
 import { getMemberId, getProfileImage, isMemberOnline } from '../../utils/member.js';
 import './Profile.css';
 
@@ -59,7 +59,7 @@ const ProfileDashboard = () => {
   if (error) return <p className="profile-status">{error}</p>;
 
   const profileId = getMemberId(userData) || id;
-  const canEdit = Boolean(currentMemberId && profileId &&
+  const canEdit = isMasterUser() || Boolean(currentMemberId && profileId &&
     currentMemberId === String(profileId));
   const isOnline = isMemberOnline(userData, currentMemberId);
 
