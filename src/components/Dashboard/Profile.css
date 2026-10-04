@@ -191,6 +191,126 @@
     color: #355b62;
 }
 
+.profile-links {
+    display: grid;
+    gap: 8px;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid #dbe5e1;
+}
+
+.profile-links strong {
+    color: #355b62;
+    font-size: 0.9rem;
+}
+
+.profile-links a {
+    color: #287c78;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.profile-links a:hover {
+    color: #d0734f;
+    text-decoration: underline;
+}
+
+.profile-details-edit,
+.profile-details-actions button,
+.profile-link-add,
+.profile-link-remove {
+    border: 0;
+    border-radius: 4px;
+    padding: 9px 14px;
+    color: #fff;
+    background: #287c78;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.profile-details-edit {
+    margin-top: 22px;
+}
+
+.profile-details-form {
+    display: grid;
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.profile-details-form label,
+.profile-details-form legend {
+    color: #355b62;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.profile-details-form label {
+    display: grid;
+    gap: 7px;
+}
+
+.profile-details-form label span {
+    color: #708287;
+    font-size: 0.75rem;
+    font-weight: 400;
+}
+
+.profile-details-form input {
+    width: 100%;
+    border: 1px solid #cbdad6;
+    border-radius: 4px;
+    padding: 10px;
+    color: #355b62;
+    font: inherit;
+    box-sizing: border-box;
+}
+
+.profile-details-form fieldset {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+.profile-link-edit-row {
+    display: grid;
+    grid-template-columns: 0.7fr 1.3fr auto;
+    gap: 8px;
+    align-items: center;
+}
+
+.profile-link-remove {
+    padding: 8px 10px;
+    background: #a04f43;
+}
+
+.profile-link-add {
+    justify-self: start;
+    padding: 7px 11px;
+    background: #d0734f;
+}
+
+.profile-details-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.profile-details-actions button:last-child {
+    color: #355b62;
+    background: #e7f1ef;
+}
+
+.profile-edit-error {
+    margin: 0;
+    color: #a04f43;
+    font-size: 0.82rem;
+}
+
 .profile-status {
     color: #a04f43;
 }
@@ -203,5 +323,9 @@
     .profile-main-content {
         min-height: 0;
         padding: 0;
+    }
+
+    .profile-link-edit-row {
+        grid-template-columns: 1fr;
     }
 }

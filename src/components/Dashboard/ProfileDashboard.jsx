@@ -85,7 +85,14 @@ const ProfileDashboard = () => {
                       memberId={profileId}
                       canEdit={canEdit}
                   />
-                  <MemberInfo user={userData} />
+                  <MemberInfo
+                      user={userData}
+                      canEdit={canEdit}
+                      onSaved={(profile) => setUserData((current) => ({
+                        ...current,
+                        ...profile,
+                      }))}
+                  />
                 </aside>
                 <section className="profile-main-content">
                   <AboutMe
