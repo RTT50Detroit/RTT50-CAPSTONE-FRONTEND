@@ -120,13 +120,13 @@ const MasterDashboard = () => {
     <main className="page-content master-dashboard">
       <header className="master-dashboard-heading">
         <p className="dashboard-eyebrow">Master controls</p>
-        <h1>Manage profiles</h1>
+        <h1>Manage Profiles</h1>
         <p>Create profiles and update any member in the community.</p>
       </header>
 
       <section className="master-dashboard-grid">
         <form className="master-profile-form" onSubmit={handleSubmit}>
-          <h2>{editingId ? 'Update profile' : 'Create profile'}</h2>
+          <h2>{editingId ? 'Update Profile' : 'Create Profile'}</h2>
           {error && <p className="dashboard-status dashboard-error">{error}</p>}
           {status && <p className="master-success">{status}</p>}
           {['name', 'age', 'email', ...(editingId ? [] : ['password'])].map((field) => (
@@ -183,7 +183,7 @@ const MasterDashboard = () => {
         </form>
 
         <section className="master-profile-list" aria-labelledby="master-profiles-heading">
-          <h2 id="master-profiles-heading">All profiles</h2>
+          <h2 id="master-profiles-heading">All Profiles</h2>
           {profiles.map((profile) => {
             const profileId = profile._id || profile.id || profile.memberId;
             return (

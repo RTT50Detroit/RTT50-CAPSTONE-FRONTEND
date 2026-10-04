@@ -129,7 +129,7 @@ const NotesDashboard = () => {
 
         <section className="notes-list-section" aria-labelledby="saved-notes-heading">
           <div className="notes-list-heading">
-            <h2 id="saved-notes-heading">Saved entries</h2>
+            <h2 id="saved-notes-heading">Saved Entries</h2>
             <span>{notes.length} {notes.length === 1 ? 'entry' : 'entries'}</span>
           </div>
           {loading && <p className="notes-status">Opening your journal...</p>}

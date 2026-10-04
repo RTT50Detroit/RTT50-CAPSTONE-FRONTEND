@@ -74,7 +74,7 @@ const MembersDashboard = () => {
         <section className="dashboard-hero">
           <div>
             <p className="dashboard-eyebrow">Member directory</p>
-            <h1>Find your people</h1>
+            <h1>Find Your People</h1>
             <p className="dashboard-welcome">Welcome back, {loginName}.</p>
           </div>
           <div className="dashboard-accent" aria-hidden="true">SM</div>
@@ -99,7 +99,7 @@ const MembersDashboard = () => {
           <div className="profiles-section-heading">
             <div>
               <p className="dashboard-eyebrow">Explore the community</p>
-              <h2 id="profiles-heading">Profile cards</h2>
+              <h2 id="profiles-heading">Profile Cards</h2>
             </div>
             {!isLoading && !error && <span>{filteredProfiles.length} results</span>}
           </div>

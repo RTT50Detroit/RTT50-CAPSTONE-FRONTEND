@@ -71,7 +71,7 @@ const ProfileDashboard = () => {
                 &lt;- Back to profiles
               </Link>
               <header className="profile-detail-header">
-                <p className="profile-detail-eyebrow">Community profile</p>
+                <p className="profile-detail-eyebrow">Community Profile</p>
                 <h1>{userData.name || 'Member profile'}</h1>
                 <p className={`profile-detail-status${isOnline ? ' profile-detail-status--online' : ''}`}>
                   <span className="profile-detail-status-dot" aria-hidden="true" />

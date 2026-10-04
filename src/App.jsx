@@ -71,13 +71,13 @@ function Navigation() {
                     <circle cx="12" cy="8" r="3.5" />
                     <path d="M5 20c.8-3.3 3.2-5 7-5s6.2 1.7 7 5" />
                   </svg>
-                  <span className="profile-nav-label">My profile</span>
+                  <span className="profile-nav-label">My Profile</span>
                 </NavLink>
               </li>
               {isMasterUser() && (
                 <li>
                   <NavLink to="/master" className={({ isActive }) => (isActive ? 'active' : '')}>
-                    Manage profiles
+                    Manage Profiles
                   </NavLink>
                 </li>
               )}
