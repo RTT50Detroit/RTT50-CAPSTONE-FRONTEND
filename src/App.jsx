@@ -130,11 +130,37 @@ function PresenceTracker() {
   return null;
 }
 
+function EnterKeySubmitter() {
+  useEffect(() => {
+    const submitFormOnEnter = (event) => {
+      if (event.key !== 'Enter' || event.shiftKey) return;
+
+      const target = event.target;
+      if (!(target instanceof HTMLInputElement
+        || target instanceof HTMLSelectElement)) {
+        return;
+      }
+
+      const form = target.form;
+      if (!form) return;
+
+      event.preventDefault();
+      form.requestSubmit();
+    };
+
+    document.addEventListener('keydown', submitFormOnEnter);
+    return () => document.removeEventListener('keydown', submitFormOnEnter);
+  }, []);
+
+  return null;
+}
+
 function App() {
   return (
       <Router>
         <div className="App">
           <PresenceTracker />
+          <EnterKeySubmitter />
           {/* Navigation */}
           <Navigation />
 
