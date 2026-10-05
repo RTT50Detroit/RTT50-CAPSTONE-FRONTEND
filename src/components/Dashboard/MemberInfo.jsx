@@ -34,8 +34,15 @@ const getProfileRelationshipResumeUsername = (user) => {
     link.label?.toLowerCase() === 'relationship resume'
   ));
 
-  return user?.username || user?.loginName ||
-    getRelationshipResumeUsername(relationshipResume) || '';
+  return getRelationshipResumeUsername(relationshipResume);
+};
+
+const getProfileRelationshipResumeLink = (user) => {
+  const relationshipResume = user?.links?.find((link) => (
+    link.label?.toLowerCase() === 'relationship resume'
+  ));
+
+  return relationshipResume || relationshipResumeLink('');
 };
 
 const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
@@ -104,8 +111,9 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
           payload,
           { headers: { Authorization: `Bearer ${getAuthToken()}` } },
       );
-      onSaved(data.profile || data.member || {
+      onSaved({
         ...user,
+        ...(data.profile || data.member || {}),
         age,
         gender: form.gender.trim(),
         occupation: form.occupation.trim(),
@@ -224,11 +232,11 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
             <div className="profile-links">
               <strong>Relationship Resume</strong>
               <a
-                  href={relationshipResumeLink(getProfileRelationshipResumeUsername(user)).url}
+                  href={getProfileRelationshipResumeLink(user).url}
                   target="_blank"
                   rel="noreferrer"
               >
-                <span>{relationshipResumeLink(getProfileRelationshipResumeUsername(user)).url}</span>
+                <span>{getProfileRelationshipResumeLink(user).url}</span>
               </a>
             </div>
             {canEdit && (
