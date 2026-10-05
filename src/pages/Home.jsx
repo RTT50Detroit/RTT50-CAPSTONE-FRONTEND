@@ -114,7 +114,7 @@ const MemberHub = () => {
         <section className="member-home-hero page-content">
           <div>
             <p className="home-eyebrow">Welcome to the beta</p>
-            <h1>Welcome back, {memberName}.</h1>
+            <h1>Welcome Back, {memberName}.</h1>
             <p className="home-intro">
               Your space to meet people, keep your story moving, and stay close to
               the conversations that matter to you.
