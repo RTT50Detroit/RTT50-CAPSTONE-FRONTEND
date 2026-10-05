@@ -199,6 +199,12 @@
     border-top: 1px solid #dbe5e1;
 }
 
+.profile-links-editor {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+}
+
 .profile-links strong {
     color: #355b62;
     font-size: 0.9rem;
@@ -269,19 +275,15 @@
     box-sizing: border-box;
 }
 
-.profile-details-form fieldset {
-    display: grid;
-    gap: 10px;
-    margin: 0;
-    border: 0;
-    padding: 0;
-}
-
 .profile-link-edit-row {
     display: grid;
-    grid-template-columns: 0.7fr 1.3fr auto;
+    grid-template-columns: minmax(0, 1fr);
     gap: 8px;
     align-items: center;
+}
+
+.profile-link-edit-row a {
+    overflow-wrap: anywhere;
 }
 
 .profile-link-remove {

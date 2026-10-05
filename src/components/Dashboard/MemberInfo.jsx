@@ -180,11 +180,10 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
                   autoComplete="off"
               />
             </label>
-            <fieldset>
-              <legend>Links and socials</legend>
+            <div className="profile-links profile-links-editor">
+              <strong>Relationship Resume</strong>
               {form.links.map((link, index) => (
                 <div className="profile-link-edit-row" key={index}>
-                  <strong>{link.label}</strong>
                   <a href={link.url} target="_blank" rel="noreferrer">{link.url}</a>
                 </div>
               ))}
@@ -204,7 +203,7 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
                     autoComplete="username"
                 />
               </label>
-            </fieldset>
+            </div>
             <div className="profile-details-actions">
               <button type="submit" disabled={isSaving}>
                 {isSaving ? 'Saving...' : 'Save details'}
@@ -222,7 +221,7 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
               <p><strong>Hobbies:</strong> {normalizeHobbies(user.hobbies).join(', ') || 'Not provided'}</p>
             </div>
             <div className="profile-links">
-              <strong>Links & socials</strong>
+              <strong>Relationship Resume</strong>
               <a
                   href={relationshipResumeLink(getProfileRelationshipResumeUsername(user)).url}
                   target="_blank"
