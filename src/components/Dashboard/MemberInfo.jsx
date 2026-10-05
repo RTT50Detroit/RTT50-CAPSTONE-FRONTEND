@@ -3,11 +3,22 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { getAuthToken, isMasterUser } from '../../utils/auth.js';
 
-const emptyLink = { label: '', url: '' };
+const relationshipResumeBaseUrl = 'https://therelationshipresume.netlify.app/';
+
+const getRelationshipResumeUrl = (username) => {
+  const url = new URL(relationshipResumeBaseUrl);
+  if (username) url.searchParams.set('username', username);
+  return url.toString();
+};
 
 const normalizeHobbies = (hobbies) => (
   Array.isArray(hobbies) ? hobbies : hobbies ? [hobbies] : []
 );
+
+const relationshipResumeLink = (username) => ({
+  label: 'Relationship Resume',
+  url: getRelationshipResumeUrl(username),
+});
 
 const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -20,6 +31,7 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
     hobbies: '',
     links: [],
   });
+  const username = user?.username || user?.loginName || '';
 
   useEffect(() => {
     setForm({
@@ -27,9 +39,11 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
       gender: user?.gender || '',
       occupation: user?.occupation || '',
       hobbies: normalizeHobbies(user?.hobbies).join(', '),
-      links: user?.links?.length ? user.links : [],
+      links: user?.links?.some((link) => (
+        link.label?.toLowerCase() === 'relationship resume'
+      )) ? [relationshipResumeLink(username)] : [],
     });
-  }, [user]);
+  }, [user, username]);
 
   if (!user) return <p>No member information found.</p>;
 
@@ -46,15 +60,7 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
     event.preventDefault();
     setIsSaving(true);
     setError('');
-    const links = form.links
-        .map(({ label, url }) => ({ label: label.trim(), url: url.trim() }))
-        .filter(({ label, url }) => label || url);
-
-    if (links.some(({ label, url }) => !label || !url)) {
-      setError('Each link needs both a label and a URL.');
-      setIsSaving(false);
-      return;
-    }
+    const links = form.links.length ? [relationshipResumeLink(username)] : [];
     const age = Number(form.age);
     if (!Number.isInteger(age) || age < 18 || age > 120) {
       setError('Age must be a whole number between 18 and 120.');
@@ -175,6 +181,7 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
                       placeholder="Instagram"
                       maxLength="50"
                       autoComplete="off"
+                      readOnly
                   />
                   <input
                       aria-label={`Link ${index + 1} URL`}
@@ -184,41 +191,17 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
                       placeholder="https://..."
                       maxLength="500"
                       autoComplete="url"
+                      readOnly
                   />
-                  <button
-                      type="button"
-                      className="profile-link-remove"
-                      onClick={() => setForm((current) => ({
-                        ...current, links: current.links.filter((_, linkIndex) => linkIndex !== index),
-                      }))}
-                  >
-                    Remove
-                  </button>
                 </div>
               ))}
-              {form.links.length < 10 && (
-                <button
-                    type="button"
-                    className="profile-link-add"
-                    onClick={() => setForm((current) => ({
-                      ...current, links: [...current.links, { ...emptyLink }],
-                    }))}
-                >
-                  + Add a link
-                </button>
-              )}
-              {!form.links.some((link) => (
-                link.label.toLowerCase() === 'relationship resume'
-              )) && form.links.length < 10 && (
+              {!form.links.length && (
                 <button
                     type="button"
                     className="profile-link-add"
                     onClick={() => setForm((current) => ({
                       ...current,
-                      links: [...current.links, {
-                        label: 'Relationship Resume',
-                        url: 'https://therelationshipresume.netlify.app/',
-                      }],
+                      links: [relationshipResumeLink(username)],
                     }))}
                 >
                   + Add Relationship Resume
@@ -241,10 +224,14 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
               <p><strong>Occupation:</strong> {user.occupation || 'Not provided'}</p>
               <p><strong>Hobbies:</strong> {normalizeHobbies(user.hobbies).join(', ') || 'Not provided'}</p>
             </div>
-            {user.links?.length > 0 && (
+            {user.links?.some((link) => (
+              link.label?.toLowerCase() === 'relationship resume'
+            )) && (
               <div className="profile-links">
                 <strong>Links & socials</strong>
-                {user.links.map((link) => (
+                {user.links.filter((link) => (
+                  link.label?.toLowerCase() === 'relationship resume'
+                )).map((link) => (
                   <a key={`${link.label}-${link.url}`} href={link.url} target="_blank" rel="noreferrer">
                     {link.label}
                   </a>
@@ -267,6 +254,8 @@ export default MemberInfo;
 MemberInfo.propTypes = {
   user: PropTypes.shape({
     name: PropTypes.string,
+    username: PropTypes.string,
+    loginName: PropTypes.string,
     age: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     gender: PropTypes.string,
     aboutMe: PropTypes.string,
