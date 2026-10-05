@@ -28,6 +28,15 @@ const relationshipResumeLink = (username) => ({
   url: getRelationshipResumeUrl(username),
 });
 
+const getProfileRelationshipResumeUsername = (user) => {
+  const relationshipResume = user?.links?.find((link) => (
+    link.label?.toLowerCase() === 'relationship resume'
+  ));
+
+  return user?.username || user?.loginName ||
+    getRelationshipResumeUsername(relationshipResume) || '';
+};
+
 const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -42,18 +51,14 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
   });
 
   useEffect(() => {
-    const relationshipResume = user?.links?.find((link) => (
-      link.label?.toLowerCase() === 'relationship resume'
-    ));
-    const username = user?.username || user?.loginName ||
-      getRelationshipResumeUsername(relationshipResume) || '';
+    const username = getProfileRelationshipResumeUsername(user);
 
     setForm({
       age: user?.age ?? '',
       gender: user?.gender || '',
       occupation: user?.occupation || '',
       hobbies: normalizeHobbies(user?.hobbies).join(', '),
-      links: relationshipResume ? [relationshipResumeLink(username)] : [],
+      links: [relationshipResumeLink(username)],
       relationshipResumeUsername: username,
     });
   }, [user]);
@@ -216,21 +221,17 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
               <p><strong>Occupation:</strong> {user.occupation || 'Not provided'}</p>
               <p><strong>Hobbies:</strong> {normalizeHobbies(user.hobbies).join(', ') || 'Not provided'}</p>
             </div>
-            {user.links?.some((link) => (
-              link.label?.toLowerCase() === 'relationship resume'
-            )) && (
-              <div className="profile-links">
-                <strong>Links & socials</strong>
-                {user.links.filter((link) => (
-                  link.label?.toLowerCase() === 'relationship resume'
-                )).map((link) => (
-                  <a key={`${link.label}-${link.url}`} href={link.url} target="_blank" rel="noreferrer">
-                    <span>{link.label}</span>
-                    <span>{link.url}</span>
-                  </a>
-                ))}
-              </div>
-            )}
+            <div className="profile-links">
+              <strong>Links & socials</strong>
+              <a
+                  href={relationshipResumeLink(getProfileRelationshipResumeUsername(user)).url}
+                  target="_blank"
+                  rel="noreferrer"
+              >
+                <span>Relationship Resume</span>
+                <span>{relationshipResumeLink(getProfileRelationshipResumeUsername(user)).url}</span>
+              </a>
+            </div>
             {canEdit && (
               <button className="profile-details-edit" type="button" onClick={() => setIsEditing(true)}>
                 Edit details
