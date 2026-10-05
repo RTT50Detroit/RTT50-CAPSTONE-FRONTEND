@@ -215,7 +215,10 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
                     className="profile-link-add"
                     onClick={() => setForm((current) => ({
                       ...current,
-                      links: [...current.links, { label: 'Relationship Resume', url: '' }],
+                      links: [...current.links, {
+                        label: 'Relationship Resume',
+                        url: 'https://therelationshipresume.netlify.app/',
+                      }],
                     }))}
                 >
                   + Add Relationship Resume

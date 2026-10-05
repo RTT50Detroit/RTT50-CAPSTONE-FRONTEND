@@ -241,7 +241,7 @@ const MasterDashboard = () => {
                   ...current,
                   links: current.links.includes('Relationship Resume |')
                     ? current.links
-                    : `${current.links}${current.links ? '\n' : ''}Relationship Resume |`,
+                    : `${current.links}${current.links ? '\n' : ''}Relationship Resume | https://therelationshipresume.netlify.app/`,
                 }))}
             >
               + Add Relationship Resume
