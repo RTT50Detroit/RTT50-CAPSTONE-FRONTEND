@@ -11,6 +11,14 @@ const getRelationshipResumeUrl = (username) => {
   return url.toString();
 };
 
+const getRelationshipResumeUsername = (link) => {
+  try {
+    return new URL(link.url).searchParams.get('username') || '';
+  } catch {
+    return '';
+  }
+};
+
 const normalizeHobbies = (hobbies) => (
   Array.isArray(hobbies) ? hobbies : hobbies ? [hobbies] : []
 );
@@ -30,37 +38,34 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
     occupation: '',
     hobbies: '',
     links: [],
+    relationshipResumeUsername: '',
   });
-  const username = user?.username || user?.loginName || '';
 
   useEffect(() => {
+    const relationshipResume = user?.links?.find((link) => (
+      link.label?.toLowerCase() === 'relationship resume'
+    ));
+    const username = user?.username || user?.loginName ||
+      getRelationshipResumeUsername(relationshipResume) || '';
+
     setForm({
       age: user?.age ?? '',
       gender: user?.gender || '',
       occupation: user?.occupation || '',
       hobbies: normalizeHobbies(user?.hobbies).join(', '),
-      links: user?.links?.some((link) => (
-        link.label?.toLowerCase() === 'relationship resume'
-      )) ? [relationshipResumeLink(username)] : [],
+      links: relationshipResume ? [relationshipResumeLink(username)] : [],
+      relationshipResumeUsername: username,
     });
-  }, [user, username]);
+  }, [user]);
 
   if (!user) return <p>No member information found.</p>;
-
-  const updateLink = (index, field, value) => {
-    setForm((current) => ({
-      ...current,
-      links: current.links.map((link, linkIndex) => (
-        linkIndex === index ? { ...link, [field]: value } : link
-      )),
-    }));
-  };
 
   const handleSave = async (event) => {
     event.preventDefault();
     setIsSaving(true);
     setError('');
-    const links = form.links.length ? [relationshipResumeLink(username)] : [];
+    const username = form.relationshipResumeUsername.trim();
+    const links = username ? [relationshipResumeLink(username)] : [];
     const age = Number(form.age);
     if (!Number.isInteger(age) || age < 18 || age > 120) {
       setError('Age must be a whole number between 18 and 120.');
@@ -174,39 +179,26 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
               <legend>Links and socials</legend>
               {form.links.map((link, index) => (
                 <div className="profile-link-edit-row" key={index}>
-                  <input
-                      aria-label={`Link ${index + 1} label`}
-                      value={link.label}
-                      onChange={(event) => updateLink(index, 'label', event.target.value)}
-                      placeholder="Instagram"
-                      maxLength="50"
-                      autoComplete="off"
-                      readOnly
-                  />
-                  <input
-                      aria-label={`Link ${index + 1} URL`}
-                      type="url"
-                      value={link.url}
-                      onChange={(event) => updateLink(index, 'url', event.target.value)}
-                      placeholder="https://..."
-                      maxLength="500"
-                      autoComplete="url"
-                      readOnly
-                  />
+                  <strong>{link.label}</strong>
+                  <a href={link.url} target="_blank" rel="noreferrer">{link.url}</a>
                 </div>
               ))}
-              {!form.links.length && (
-                <button
-                    type="button"
-                    className="profile-link-add"
-                    onClick={() => setForm((current) => ({
+              <label>
+                Relationship Resume username
+                <input
+                    value={form.relationshipResumeUsername}
+                    onChange={(event) => setForm((current) => ({
                       ...current,
-                      links: [relationshipResumeLink(username)],
+                      relationshipResumeUsername: event.target.value,
+                      links: event.target.value.trim()
+                        ? [relationshipResumeLink(event.target.value.trim())]
+                        : [],
                     }))}
-                >
-                  + Add Relationship Resume
-                </button>
-              )}
+                    placeholder="Enter your username"
+                    maxLength="100"
+                    autoComplete="username"
+                />
+              </label>
             </fieldset>
             <div className="profile-details-actions">
               <button type="submit" disabled={isSaving}>
