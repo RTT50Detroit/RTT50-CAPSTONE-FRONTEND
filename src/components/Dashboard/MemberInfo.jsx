@@ -227,7 +227,6 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
                   target="_blank"
                   rel="noreferrer"
               >
-                <span>Relationship Resume</span>
                 <span>{relationshipResumeLink(getProfileRelationshipResumeUsername(user)).url}</span>
               </a>
             </div>
