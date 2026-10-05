@@ -225,7 +225,8 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
                   link.label?.toLowerCase() === 'relationship resume'
                 )).map((link) => (
                   <a key={`${link.label}-${link.url}`} href={link.url} target="_blank" rel="noreferrer">
-                    {link.label}
+                    <span>{link.label}</span>
+                    <span>{link.url}</span>
                   </a>
                 ))}
               </div>
