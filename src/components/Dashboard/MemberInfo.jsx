@@ -134,68 +134,80 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
       <section className="user-info-container">
         <p className="profile-detail-label">Member details</p>
         <h2>{user.name || 'Unnamed member'}</h2>
-        {isEditing ? (
-          <form className="profile-details-form" onSubmit={handleSave}>
+        <form className={isEditing ? 'profile-details-form' : ''} onSubmit={handleSave}>
+          <div className="additional-info">
             <label>
-              Age
-              <input
-                  type="number"
-                  min="18"
-                  max="120"
-                  step="1"
-                  value={form.age}
-                  onChange={(event) => setForm((current) => ({
-                    ...current, age: event.target.value,
-                  }))}
-                  required
-                  autoComplete="bday"
-              />
+              <strong>Age:</strong>
+              {isEditing ? (
+                <input
+                    type="number"
+                    min="18"
+                    max="120"
+                    step="1"
+                    value={form.age}
+                    onChange={(event) => setForm((current) => ({
+                      ...current, age: event.target.value,
+                    }))}
+                    required
+                    autoComplete="bday"
+                />
+              ) : user.age || 'Not provided'}
             </label>
             <label>
-              Gender
-              <select
-                  value={form.gender}
-                  onChange={(event) => setForm((current) => ({
-                    ...current, gender: event.target.value,
-                  }))}
-                  required
-              >
-                <option value="">Select gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="non-binary">Non-binary</option>
-                <option value="prefer-not-to-say">Prefer not to say</option>
-              </select>
+              <strong>Gender:</strong>
+              {isEditing ? (
+                <select
+                    value={form.gender}
+                    onChange={(event) => setForm((current) => ({
+                      ...current, gender: event.target.value,
+                    }))}
+                    required
+                >
+                  <option value="">Select gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="non-binary">Non-binary</option>
+                  <option value="prefer-not-to-say">Prefer not to say</option>
+                </select>
+              ) : user.gender || 'Not provided'}
             </label>
             <label>
-              Occupation
-              <input
-                  value={form.occupation}
-                  onChange={(event) => setForm((current) => ({
-                    ...current, occupation: event.target.value,
-                  }))}
-                  maxLength="120"
-                  autoComplete="organization-title"
-              />
+              <strong>Occupation:</strong>
+              {isEditing ? (
+                <input
+                    value={form.occupation}
+                    onChange={(event) => setForm((current) => ({
+                      ...current, occupation: event.target.value,
+                    }))}
+                    maxLength="120"
+                    autoComplete="organization-title"
+                />
+              ) : user.occupation || 'Not provided'}
             </label>
             <label>
-              Hobbies <span>(separate with commas)</span>
-              <input
-                  value={form.hobbies}
-                  onChange={(event) => setForm((current) => ({
-                    ...current, hobbies: event.target.value,
-                  }))}
-                  placeholder="Reading, hiking, cooking"
-                  autoComplete="off"
-              />
+              <strong>Hobbies:</strong>
+              {isEditing ? (
+                <input
+                    value={form.hobbies}
+                    onChange={(event) => setForm((current) => ({
+                      ...current, hobbies: event.target.value,
+                    }))}
+                    placeholder="Reading, hiking, cooking"
+                    autoComplete="off"
+                />
+              ) : normalizeHobbies(user.hobbies).join(', ') || 'Not provided'}
             </label>
-            <div className="profile-links profile-links-editor">
-              <strong>Relationship Resume</strong>
-              {form.links.map((link, index) => (
-                <div className="profile-link-edit-row" key={index}>
-                  <a href={link.url} target="_blank" rel="noreferrer">{link.url}</a>
-                </div>
-              ))}
+          </div>
+          <div className="profile-links">
+            <strong>Relationship Resume</strong>
+            <a
+                href={getProfileRelationshipResumeLink(user).url}
+                target="_blank"
+                rel="noreferrer"
+            >
+              <span>{getProfileRelationshipResumeLink(user).url}</span>
+            </a>
+            {isEditing && (
               <label>
                 Relationship Resume username
                 <input
@@ -203,49 +215,31 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
                     onChange={(event) => setForm((current) => ({
                       ...current,
                       relationshipResumeUsername: event.target.value,
-                      links: event.target.value.trim()
-                        ? [relationshipResumeLink(event.target.value.trim())]
-                        : [],
                     }))}
                     placeholder="Enter your username"
                     maxLength="100"
                     autoComplete="username"
                 />
               </label>
-            </div>
-            <div className="profile-details-actions">
-              <button type="submit" disabled={isSaving}>
-                {isSaving ? 'Saving...' : 'Save details'}
-              </button>
-              <button type="button" onClick={() => setIsEditing(false)}>Cancel</button>
-            </div>
-            {error && <p className="profile-edit-error">{error}</p>}
-          </form>
-        ) : (
-          <>
-            <div className="additional-info">
-              <p><strong>Age:</strong> {user.age || 'Not provided'}</p>
-              <p><strong>Gender:</strong> {user.gender || 'Not provided'}</p>
-              <p><strong>Occupation:</strong> {user.occupation || 'Not provided'}</p>
-              <p><strong>Hobbies:</strong> {normalizeHobbies(user.hobbies).join(', ') || 'Not provided'}</p>
-            </div>
-            <div className="profile-links">
-              <strong>Relationship Resume</strong>
-              <a
-                  href={getProfileRelationshipResumeLink(user).url}
-                  target="_blank"
-                  rel="noreferrer"
-              >
-                <span>{getProfileRelationshipResumeLink(user).url}</span>
-              </a>
-            </div>
-            {canEdit && (
-              <button className="profile-details-edit" type="button" onClick={() => setIsEditing(true)}>
-                Edit details
-              </button>
             )}
-          </>
-        )}
+          </div>
+          {isEditing && (
+            <>
+              <div className="profile-details-actions">
+                <button type="submit" disabled={isSaving}>
+                  {isSaving ? 'Saving...' : 'Save details'}
+                </button>
+                <button type="button" onClick={() => setIsEditing(false)}>Cancel</button>
+              </div>
+              {error && <p className="profile-edit-error">{error}</p>}
+            </>
+          )}
+          {!isEditing && canEdit && (
+            <button className="profile-details-edit" type="button" onClick={() => setIsEditing(true)}>
+              Edit details
+            </button>
+          )}
+        </form>
       </section>
   );
 };
