@@ -157,8 +157,14 @@ const MemberHub = () => {
               <p>Write down a moment, hold onto a lesson, or share a story with your community.</p>
               <span className="member-hub-arrow" aria-hidden="true">-&gt;</span>
             </Link>
+            <Link className="member-hub-card" to="/feedback">
+              <span className="member-hub-number">03 / FEEDBACK</span>
+              <h3>Join the conversation</h3>
+              <p>Share ideas, celebrate what works, and help shape the next version together.</p>
+              <span className="member-hub-arrow" aria-hidden="true">-&gt;</span>
+            </Link>
             <Link className="member-hub-card" to={profilePath}>
-              <span className="member-hub-number">03 / PROFILE</span>
+              <span className="member-hub-number">04 / PROFILE</span>
               <h3>Shape your profile</h3>
               <p>Let people see the details that make you you. Your profile is yours to keep current.</p>
               <span className="member-hub-arrow" aria-hidden="true">-&gt;</span>

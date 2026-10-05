@@ -153,6 +153,7 @@ Here’s an overview of the application routes, divided into **public** and **pr
 | `/dashboard`         | MembersDashboard   | Protected members' dashboard.    |
 | `/dashboard/profile` | ProfileDashboard   | User profile dashboard.           |
 | `/notes`             | NotesDashboard     | Create and manage user notes.     |
+| `/feedback`          | Feedback           | Submit and view Early Access feedback. |
 
 - Protected routes require the user to be logged in. Guests are redirected to the login page.
 - Protected routes use the `ProtectedRoute` component for authentication checks.

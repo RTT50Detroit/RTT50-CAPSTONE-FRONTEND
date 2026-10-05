@@ -15,6 +15,7 @@ import './pages/css/styles.css';
 import LogoutButton from './components/LogoutButton.jsx';
 import NotesDashboard from './components/Dashboard/note/NoteDashboard.jsx';
 import MasterDashboard from './pages/MasterDashboard.jsx';
+import Feedback from './pages/Feedback.jsx';
 import { getCurrentMemberId, hasValidAuthToken, isMasterUser } from './utils/auth.js';
 
 function Navigation() {
@@ -58,6 +59,11 @@ function Navigation() {
               <li>
                 <NavLink to="/notes" className={({ isActive }) => (isActive ? 'active' : '')}>
                   Notes
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/feedback" className={({ isActive }) => (isActive ? 'active' : '')}>
+                  Feedback
                 </NavLink>
               </li>
               <li>
@@ -161,6 +167,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <NotesDashboard />
+                  </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/feedback"
+                element={
+                  <ProtectedRoute>
+                    <Feedback />
                   </ProtectedRoute>
                 }
             />
