@@ -7,13 +7,14 @@ const relationshipResumeBaseUrl = 'https://therelationshipresume.netlify.app/';
 
 const getRelationshipResumeUrl = (username) => {
   const url = new URL(relationshipResumeBaseUrl);
-  if (username) url.searchParams.set('username', username);
-  return url.toString();
+  if (username) url.pathname = `/r/${encodeURIComponent(username)}`;
+  return url.toString().replace(/\/$/, '');
 };
 
 const getRelationshipResumeUsername = (link) => {
   try {
-    return new URL(link.url).searchParams.get('username') || '';
+    const pathParts = new URL(link.url).pathname.split('/').filter(Boolean);
+    return pathParts[0] === 'r' ? decodeURIComponent(pathParts[1] || '') : '';
   } catch {
     return '';
   }
