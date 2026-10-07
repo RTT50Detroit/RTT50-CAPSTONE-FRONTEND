@@ -349,16 +349,26 @@ body.notes-page-active .site-footer {
 .home-image-caption {
   position: absolute;
   z-index: 1;
-  top: 26px;
+  top: 24px;
   right: 24px;
   display: grid;
-  gap: 6px;
+  gap: 2px;
+  border-right: 4px solid var(--theme-gold);
+  border-radius: 10px 0 0 10px;
+  padding: 14px 18px 14px 22px;
+  background: linear-gradient(90deg, rgba(23, 15, 18, 0), rgba(23, 15, 18, 0.82) 35%);
   color: #fff4e8;
-  font-size: 0.72rem;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.35rem, 2.2vw, 2rem);
   font-weight: 700;
-  letter-spacing: 0.08em;
+  line-height: 1.15;
   text-align: right;
-  text-transform: uppercase;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
+}
+
+.home-image-caption-line--accent {
+  color: var(--theme-gold-bright);
+  font-style: italic;
 }
 
 .home-persona-card {
@@ -802,13 +812,14 @@ body.notes-page-active .site-footer {
   }
 
   .home-image-caption {
-    top: 20px;
-    right: 16px;
-    font-size: 0.62rem;
+    top: 16px;
+    right: 12px;
+    padding: 10px 14px 10px 18px;
+    font-size: 1.1rem;
   }
 
   .home-note-card--top {
-    top: 18px;
+    top: 120px;
     left: 8px;
   }
 

@@ -34,8 +34,10 @@ const LandingPage = () => {
               alt="A Black woman smiling in warm sunlight"
             />
             <div className="home-image-caption" aria-hidden="true">
-              <span>Real stories</span>
-              <span>Meaningful connection</span>
+              <span className="home-image-caption-line">Real stories.</span>
+              <span className="home-image-caption-line home-image-caption-line--accent">
+                Meaningful connections.
+              </span>
             </div>
             <div className="home-persona-card">
               <div className="home-persona-topline">
