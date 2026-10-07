@@ -30,6 +30,7 @@ const MasterDashboard = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [resetPassword, setResetPassword] = useState('');
   const [profilePhoto, setProfilePhoto] = useState(null);
+  const [profileSearch, setProfileSearch] = useState('');
 
   const loadProfiles = async () => {
     try {
@@ -77,6 +78,16 @@ const MasterDashboard = () => {
     setResetPassword('');
     setProfilePhoto(null);
   };
+
+  const filteredProfiles = profiles.filter((profile) => {
+    const searchableText = [
+      profile.name,
+      profile.email,
+      profile.occupation,
+      profile.gender,
+    ].filter(Boolean).join(' ').toLowerCase();
+    return searchableText.includes(profileSearch.trim().toLowerCase());
+  });
 
   const handlePasswordReset = async () => {
     if (!editingId || resetPassword.length < 8) {
@@ -279,8 +290,25 @@ const MasterDashboard = () => {
         </form>
 
         <section className="master-profile-list" aria-labelledby="master-profiles-heading">
-          <h2 id="master-profiles-heading">All Profiles</h2>
-          {profiles.map((profile) => {
+          <div className="master-profile-list-heading">
+            <div>
+              <p className="master-list-kicker">Directory</p>
+              <h2 id="master-profiles-heading">All Profiles</h2>
+            </div>
+            <span className="master-profile-count">{filteredProfiles.length} of {profiles.length}</span>
+          </div>
+          <label className="master-profile-search" htmlFor="master-profile-search">
+            <span aria-hidden="true">⌕</span>
+            <input
+                id="master-profile-search"
+                type="search"
+                value={profileSearch}
+                onChange={(event) => setProfileSearch(event.target.value)}
+                placeholder="Search name, email, role..."
+            />
+          </label>
+          <div className="master-profile-list-scroll">
+          {filteredProfiles.map((profile) => {
             const profileId = profile._id || profile.id || profile.memberId;
             return (
               <article className="master-profile-row" key={profileId}>
@@ -292,6 +320,12 @@ const MasterDashboard = () => {
               </article>
             );
           })}
+          {filteredProfiles.length === 0 && (
+            <p className="master-profile-empty">
+              {profiles.length ? 'No profiles match your search.' : 'No profiles found.'}
+            </p>
+          )}
+          </div>
         </section>
       </section>
     </main>

@@ -1,10 +1,12 @@
-.master-dashboard {
-  max-width: 1180px;
+.page-content.master-dashboard {
+  width: min(100% - 40px, 1480px);
+  max-width: 1480px;
+  padding-bottom: 72px;
 }
 
 .master-dashboard-heading {
   position: relative;
-  margin-bottom: 38px;
+  margin-bottom: 28px;
   border-bottom: 1px solid var(--theme-line);
   padding: 34px 0 30px;
 }
@@ -43,16 +45,16 @@
 
 .master-dashboard-grid {
   display: grid;
-  grid-template-columns: minmax(300px, 0.82fr) minmax(360px, 1.18fr);
+  grid-template-columns: minmax(300px, 0.68fr) minmax(520px, 1.32fr);
   align-items: start;
-  gap: 24px;
+  gap: 20px;
 }
 
 .master-profile-form,
 .master-profile-list {
   border: 1px solid var(--theme-line);
   border-radius: 10px;
-  padding: clamp(20px, 3vw, 30px);
+  padding: clamp(18px, 2vw, 24px);
   background: linear-gradient(145deg, var(--theme-panel), var(--theme-charcoal));
   box-shadow: 0 18px 38px rgba(0, 0, 0, 0.24);
 }
@@ -66,7 +68,7 @@
   margin: 0;
   color: var(--theme-gold-bright);
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   font-weight: 400;
 }
 
@@ -77,8 +79,8 @@
 
 .master-form-label {
   display: grid;
-  gap: 7px;
-  margin-top: 18px;
+  gap: 5px;
+  margin-top: 12px;
   color: var(--theme-muted);
   font-size: 0.76rem;
   font-weight: 800;
@@ -92,18 +94,18 @@
   width: 100%;
   border: 1px solid var(--theme-line);
   border-radius: 5px;
-  padding: 11px 12px;
+  padding: 8px 10px;
   color: var(--theme-cream);
   background: var(--theme-charcoal);
   font: inherit;
-  font-size: 0.95rem;
+  font-size: 0.86rem;
   letter-spacing: normal;
   text-transform: none;
   transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
 .master-form-label textarea {
-  min-height: 116px;
+  min-height: 82px;
   resize: vertical;
 }
 
@@ -154,7 +156,7 @@
 }
 
 .master-form-actions {
-  margin-top: 24px;
+  margin-top: 18px;
 }
 
 .master-form-actions button,
@@ -210,6 +212,74 @@
   margin-bottom: 1px;
 }
 
+.master-profile-list-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--theme-line);
+  padding-bottom: 16px;
+}
+
+.master-profile-list-heading h2 {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.master-list-kicker {
+  margin: 0 0 6px;
+  color: var(--theme-gold);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.master-profile-count {
+  color: var(--theme-muted);
+  font-size: 0.78rem;
+}
+
+.master-profile-search {
+  position: relative;
+  display: block;
+  margin: 16px 0 4px;
+}
+
+.master-profile-search span {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  color: var(--theme-gold);
+  font-size: 1.1rem;
+  transform: translateY(-52%);
+}
+
+.master-profile-search input {
+  width: 100%;
+  border: 1px solid var(--theme-line);
+  border-radius: 6px;
+  padding: 10px 12px 10px 34px;
+  color: var(--theme-cream);
+  background: var(--theme-charcoal);
+  font: inherit;
+  font-size: 0.85rem;
+}
+
+.master-profile-search input:focus {
+  border-color: var(--theme-gold);
+  box-shadow: 0 0 0 3px rgba(199, 162, 74, 0.16);
+  outline: none;
+}
+
+.master-profile-list-scroll {
+  max-height: 660px;
+  overflow-y: auto;
+  padding-right: 8px;
+  scrollbar-color: var(--theme-gold) var(--theme-charcoal);
+  scrollbar-width: thin;
+}
+
 .master-profile-row {
   display: flex;
   align-items: center;
@@ -222,6 +292,12 @@
 .master-profile-row:last-child {
   border-bottom: 0;
   padding-bottom: 0;
+}
+
+.master-profile-empty {
+  margin: 32px 0;
+  color: var(--theme-muted);
+  text-align: center;
 }
 
 .master-profile-row div {
@@ -262,6 +338,10 @@
 }
 
 @media (max-width: 760px) {
+  .page-content.master-dashboard {
+    width: min(100% - 24px, 1480px);
+  }
+
   .master-dashboard-grid {
     grid-template-columns: 1fr;
   }
@@ -279,6 +359,10 @@
   .master-profile-row {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .master-profile-list-scroll {
+    max-height: 520px;
   }
 
   .master-profile-row button {
