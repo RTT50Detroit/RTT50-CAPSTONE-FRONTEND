@@ -25,13 +25,13 @@ const normalizeHobbies = (hobbies) => (
 );
 
 const relationshipResumeLink = (username) => ({
-  label: 'Relationship Resume',
+  label: 'The Relationship Resume',
   url: getRelationshipResumeUrl(username),
 });
 
 const getProfileRelationshipResumeUsername = (user) => {
   const relationshipResume = user?.links?.find((link) => (
-    link.label?.toLowerCase() === 'relationship resume'
+    ['relationship resume', 'the relationship resume'].includes(link.label?.toLowerCase())
   ));
 
   return getRelationshipResumeUsername(relationshipResume);
@@ -39,7 +39,7 @@ const getProfileRelationshipResumeUsername = (user) => {
 
 const getProfileRelationshipResumeLink = (user) => {
   const relationshipResume = user?.links?.find((link) => (
-    link.label?.toLowerCase() === 'relationship resume'
+    ['relationship resume', 'the relationship resume'].includes(link.label?.toLowerCase())
   ));
 
   return relationshipResume || relationshipResumeLink('');
@@ -199,7 +199,7 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
             </label>
           </div>
           <div className="profile-links">
-            <strong>Relationship Resume</strong>
+            <strong>The Relationship Resume</strong>
             <a
                 href={getProfileRelationshipResumeLink(user).url}
                 target="_blank"
@@ -209,7 +209,7 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
             </a>
             {isEditing && (
               <label>
-                Relationship Resume username
+                The Relationship Resume username
                 <input
                     value={form.relationshipResumeUsername}
                     onChange={(event) => setForm((current) => ({

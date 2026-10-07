@@ -1,8 +1,13 @@
 .page-content.profile-dashboard {
+  display: flex;
+  flex-direction: column;
   width: min(100% - 40px, 1380px);
   max-width: 1380px;
   margin: 0 auto;
-  padding-bottom: 72px;
+  height: calc(100vh - 76px);
+  min-height: 560px;
+  overflow: hidden;
+  padding: 20px 0 24px;
 }
 
 .profile-detail-header {
@@ -11,12 +16,12 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: 28px;
-  min-height: 280px;
-  margin: 24px 0 20px;
+  min-height: 214px;
+  margin: 0 0 16px;
   overflow: hidden;
   border: 1px solid #294451;
   border-radius: 28px;
-  padding: 34px 42px;
+  padding: 26px 34px;
   background:
     radial-gradient(circle at 75% 5%, rgba(97, 211, 181, 0.22), transparent 28%),
     radial-gradient(circle at 100% 100%, rgba(213, 132, 91, 0.22), transparent 34%),
@@ -45,7 +50,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 34px;
+  margin-bottom: 22px;
   color: #b7c9c7;
   font-size: 0.8rem;
   font-weight: 800;
@@ -183,9 +188,12 @@
 
 .profile-detail-grid {
   display: grid;
+  flex: 1;
+  min-height: 0;
   grid-template-columns: minmax(300px, 0.78fr) minmax(0, 1.22fr);
   gap: 20px;
   align-items: start;
+  overflow: hidden;
 }
 
 .profile-widget {
@@ -196,12 +204,27 @@
 }
 
 .profile-sidebar {
-  overflow: hidden;
+  min-height: 0;
+  max-height: 100%;
+  overflow-y: auto;
+  scrollbar-color: #b7c9c7 transparent;
+  scrollbar-width: thin;
 }
 
 .profile-main-content {
-  min-height: 100%;
-  padding: 0;
+  min-height: 0;
+  max-height: 100%;
+  overflow-y: auto;
+  scrollbar-color: #b7c9c7 transparent;
+  scrollbar-width: thin;
+}
+
+.profile-sidebar {
+  overflow: hidden;
+}
+
+.profile-sidebar.profile-widget {
+  overflow-y: auto;
 }
 
 .profile-image {
@@ -456,6 +479,10 @@
 @media (max-width: 760px) {
   .page-content.profile-dashboard {
     width: min(100% - 24px, 1380px);
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    padding: 20px 0 48px;
   }
 
   .profile-detail-header {
@@ -482,10 +509,17 @@
 
   .profile-detail-grid {
     grid-template-columns: 1fr;
+    overflow: visible;
   }
 
   .profile-image img {
     height: min(115vw, 420px);
+  }
+
+  .profile-sidebar,
+  .profile-main-content {
+    max-height: none;
+    overflow: visible;
   }
 
   .user-bio {
