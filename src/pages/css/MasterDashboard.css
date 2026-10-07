@@ -1,6 +1,7 @@
 .page-content.master-dashboard {
-  width: min(100% - 40px, 1480px);
-  max-width: 1480px;
+  width: calc(100% - 40px);
+  max-width: none;
+  margin: 0 20px;
   padding-bottom: 72px;
 }
 
@@ -362,7 +363,8 @@
 
 @media (max-width: 760px) {
   .page-content.master-dashboard {
-    width: min(100% - 24px, 1480px);
+    width: calc(100% - 24px);
+    margin: 0 12px;
   }
 
   .master-dashboard-grid {

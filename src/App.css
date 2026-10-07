@@ -4,8 +4,9 @@
 }
 
 .page-content {
-  width: min(100% - 32px, 1080px);
-  margin: 0 auto;
+  width: calc(100% - 40px);
+  max-width: none;
+  margin: 0 20px;
   padding: 56px 0;
 }
 
@@ -535,7 +536,8 @@
 
 @media (max-width: 600px) {
   .page-content {
-    width: min(100% - 24px, 1080px);
+    width: calc(100% - 24px);
+    margin: 0 12px;
     padding: 32px 0;
   }
 
