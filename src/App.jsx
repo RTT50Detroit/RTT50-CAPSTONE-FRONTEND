@@ -215,18 +215,31 @@ function App() {
 
           </Routes>
           <footer className="site-footer">
-            <div>
-              <p>Part of a more intentional approach to connection.</p>
+            <div className="site-footer-inner">
+              <div className="site-footer-main">
+                <div className="site-footer-brand" aria-hidden="true">SM</div>
+                <div className="site-footer-copy">
+              <p className="site-footer-title">The Social Match Game</p>
+              <p className="site-footer-description">
+                Part of a more intentional approach to connection.
+              </p>
+                </div>
                 <a
+              className="site-footer-link"
               href="https://therelationshipresume.netlify.app/"
               target="_blank"
               rel="noreferrer"
-            >
+                >
               Explore the Relationship Resume
-            </a>
-            <p className="site-footer-copyright">
+              <span aria-hidden="true">-&gt;</span>
+                </a>
+              </div>
+              <div className="site-footer-bottom">
+                <p className="site-footer-copyright">
                 &copy; {new Date().getFullYear()} The Social Match Game. All rights reserved.
-              </p>
+                </p>
+                <p className="site-footer-note">Dating · Friendship · Community</p>
+              </div>
             </div>
           </footer>
         </div>
