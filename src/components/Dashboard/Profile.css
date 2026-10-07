@@ -218,7 +218,7 @@
   display: grid;
   flex: 1;
   min-height: 0;
-  grid-template-columns: minmax(230px, 0.48fr) minmax(0, 1.52fr);
+  grid-template-columns: 280px minmax(560px, 720px);
   gap: 16px;
   align-items: start;
   overflow: hidden;
@@ -560,6 +560,12 @@
 
   .profile-image img {
     height: 190px;
+  }
+
+  @media (min-width: 761px) and (max-width: 900px) {
+    .profile-detail-grid {
+      grid-template-columns: 250px minmax(0, 1fr);
+    }
   }
 
   .profile-sidebar,
