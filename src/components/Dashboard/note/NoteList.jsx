@@ -6,6 +6,7 @@ const NoteList = ({
   onEditNote,
   selectedNoteIds,
   editRequestIds,
+  selectionMode,
   onSelectionChange,
 }) => {
   const [editingIds, setEditingIds] = useState([]);
@@ -62,14 +63,16 @@ const NoteList = ({
     <ul className="note-cards">
       {notesToRender.map((note) => (
           <li className={`note-card note-card--${note.type === 'note' ? 'note' : 'journal'}`} key={note._id}>
-            <label className="note-selection">
-              <input
-                  type="checkbox"
-                  checked={selectedNoteIds.includes(note._id)}
-                  onChange={(event) => onSelectionChange(note._id, event.target.checked)}
-              />
-              <span>Select entry</span>
-            </label>
+            {selectionMode && !editingIds.includes(note._id) && (
+              <label className="note-selection">
+                <input
+                    type="checkbox"
+                    checked={selectedNoteIds.includes(note._id)}
+                    onChange={(event) => onSelectionChange(note._id, event.target.checked)}
+                />
+                <span>Select entry</span>
+              </label>
+            )}
             {editingIds.includes(note._id) ? (
                 <div className="note-edit-form">
                   <p className="note-editing-label">Editing selected entry</p>
@@ -176,5 +179,6 @@ NoteList.propTypes = {
   onEditNote: PropTypes.func.isRequired,
   selectedNoteIds: PropTypes.arrayOf(PropTypes.string).isRequired,
   editRequestIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selectionMode: PropTypes.bool.isRequired,
   onSelectionChange: PropTypes.func.isRequired,
 };

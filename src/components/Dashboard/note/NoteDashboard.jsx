@@ -54,6 +54,7 @@ const NotesDashboard = () => {
   const [selectedNoteIds, setSelectedNoteIds] = useState([]);
   const [editRequestIds, setEditRequestIds] = useState([]);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [selectionMode, setSelectionMode] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -161,6 +162,11 @@ const NotesDashboard = () => {
     setSelectedNoteIds(isSelected ? notes.map(getNoteId) : []);
   };
 
+  const toggleSelectionMode = () => {
+    setSelectionMode((isActive) => !isActive);
+    setSelectedNoteIds([]);
+  };
+
   const handleBatchDelete = async () => {
     if (!selectedNoteIds.length || !window.confirm(
         `Delete ${selectedNoteIds.length} selected ${selectedNoteIds.length === 1 ? 'entry' : 'entries'}?`
@@ -172,6 +178,7 @@ const NotesDashboard = () => {
       await Promise.all(selectedNoteIds.map((id) => deleteNote(id)));
       setSelectedNoteIds([]);
       setEditRequestIds([]);
+      setSelectionMode(false);
       setSettingsOpen(false);
     } catch (requestError) {
       console.error('Error while deleting selected entries:', requestError);
@@ -181,6 +188,7 @@ const NotesDashboard = () => {
   const handleBatchEdit = () => {
     if (!selectedNoteIds.length) return;
     setEditRequestIds([...selectedNoteIds]);
+    setSelectionMode(false);
     setSettingsOpen(false);
   };
 
@@ -248,13 +256,32 @@ const NotesDashboard = () => {
               <div className="notes-settings-actions">
                 <button
                     type="button"
-                    onClick={() => handleSelectAll(selectedNoteIds.length !== notes.length)}
-                    disabled={!notes.length}
+                    onClick={toggleSelectionMode}
                 >
-                  {selectedNoteIds.length === notes.length && notes.length
-                    ? 'Clear Selection'
-                    : 'Select All'}
+                  {selectionMode ? 'Cancel Selection' : 'Select Entries'}
                 </button>
+                {selectionMode && (
+                  <button
+                      type="button"
+                      onClick={() => handleSelectAll(selectedNoteIds.length !== notes.length)}
+                      disabled={!notes.length}
+                  >
+                    {selectedNoteIds.length === notes.length && notes.length
+                      ? 'Clear Selection'
+                      : 'Select All'}
+                  </button>
+                )}
+                {selectionMode && (
+                  <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedNoteIds([]);
+                        setSelectionMode(false);
+                      }}
+                  >
+                    Done Selecting
+                  </button>
+                )}
                 <button
                     type="button"
                     onClick={handleBatchEdit}
@@ -284,6 +311,7 @@ const NotesDashboard = () => {
                 onEditNote={updateNote}
                 selectedNoteIds={selectedNoteIds}
                 editRequestIds={editRequestIds}
+                selectionMode={selectionMode}
                 onSelectionChange={handleSelectionChange}
                 onSelectAll={handleSelectAll}
             />
