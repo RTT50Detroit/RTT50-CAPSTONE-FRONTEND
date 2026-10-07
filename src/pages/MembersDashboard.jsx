@@ -12,6 +12,7 @@ const MembersDashboard = () => {
   const [onlineStatusFilter, setOnlineStatusFilter] = useState('all');
   const [minAge, setMinAge] = useState('');
   const [maxAge, setMaxAge] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
@@ -57,6 +58,15 @@ const MembersDashboard = () => {
     const profileSex = profile.gender?.toLowerCase();
     const profileAge = Number(profile.age);
     const isOnline = isMemberOnline(profile, currentMemberId);
+    const searchableText = [
+      profile.name,
+      profile.occupation,
+      profile.aboutMe,
+      profile.aboutme,
+      ...(Array.isArray(profile.hobbies) ? profile.hobbies : []),
+    ].filter(Boolean).join(' ').toLowerCase();
+    const matchesSearch = !searchQuery.trim() ||
+      searchableText.includes(searchQuery.trim().toLowerCase());
     const matchesSex = sexFilter === 'all' || profileSex === sexFilter;
     const matchesOnlineStatus = onlineStatusFilter === 'all' ||
       (onlineStatusFilter === 'online' && isOnline) ||
@@ -64,10 +74,12 @@ const MembersDashboard = () => {
     const matchesMinAge = !minAge || profileAge >= Number(minAge);
     const matchesMaxAge = !maxAge || profileAge <= Number(maxAge);
 
-    return matchesSex && matchesOnlineStatus && matchesMinAge && matchesMaxAge;
+    return matchesSearch && matchesSex && matchesOnlineStatus && matchesMinAge && matchesMaxAge;
   });
 
-  const hasActiveFilters = sexFilter !== 'all' || onlineStatusFilter !== 'all' || minAge || maxAge;
+  const onlineCount = profiles.filter((profile) => isMemberOnline(profile, currentMemberId)).length;
+  const hasActiveFilters = searchQuery || sexFilter !== 'all' ||
+    onlineStatusFilter !== 'all' || minAge || maxAge;
 
   return (
       <main className="page-content dashboard-page">
@@ -82,16 +94,19 @@ const MembersDashboard = () => {
 
         <section className="dashboard-stats" aria-label="Directory summary">
           <div className="dashboard-stat">
+            <span className="dashboard-stat-icon" aria-hidden="true">◌</span>
             <span className="dashboard-stat-value">{profiles.length}</span>
             <span className="dashboard-stat-label">Members available</span>
           </div>
           <div className="dashboard-stat">
-            <span className="dashboard-stat-value">{isLoading ? '...' : 'Open'}</span>
-            <span className="dashboard-stat-label">Directory status</span>
+            <span className="dashboard-stat-icon dashboard-stat-icon--green" aria-hidden="true">●</span>
+            <span className="dashboard-stat-value">{isLoading ? '...' : onlineCount}</span>
+            <span className="dashboard-stat-label">Online right now</span>
           </div>
           <div className="dashboard-stat">
-            <span className="dashboard-stat-value">24/7</span>
-            <span className="dashboard-stat-label">Connection space</span>
+            <span className="dashboard-stat-icon dashboard-stat-icon--orange" aria-hidden="true">✦</span>
+            <span className="dashboard-stat-value">{isLoading ? '...' : filteredProfiles.length}</span>
+            <span className="dashboard-stat-label">Profiles in view</span>
           </div>
         </section>
 
@@ -106,6 +121,19 @@ const MembersDashboard = () => {
 
           {!isLoading && !error && profiles.length > 0 && (
             <div className="profile-filters" aria-label="Filter profiles">
+              <div className="profile-filter-field profile-filter-search">
+                <label htmlFor="profile-search">Search profiles</label>
+                <div className="profile-search-input">
+                  <span aria-hidden="true">⌕</span>
+                  <input
+                      id="profile-search"
+                      type="search"
+                      value={searchQuery}
+                      onChange={(event) => setSearchQuery(event.target.value)}
+                      placeholder="Name, interests, or role"
+                  />
+                </div>
+              </div>
               <div className="profile-filter-field">
                 <label htmlFor="sex-filter">Sex</label>
                 <select
@@ -162,6 +190,7 @@ const MembersDashboard = () => {
                       setOnlineStatusFilter('all');
                       setMinAge('');
                       setMaxAge('');
+                      setSearchQuery('');
                     }}
                 >
                   Clear filters

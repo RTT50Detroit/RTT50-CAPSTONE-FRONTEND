@@ -1,19 +1,29 @@
 .dashboard-page {
-  max-width: 1180px;
+  max-width: 1240px;
 }
 
 .dashboard-hero {
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: 32px;
-  padding: 36px 0 30px;
+  margin: 28px 0 22px;
+  border: 1px solid #293e49;
+  border-radius: 24px;
+  padding: 48px 52px;
+  background:
+    radial-gradient(circle at 80% 10%, rgba(97, 211, 181, 0.2), transparent 30%),
+    radial-gradient(circle at 100% 120%, rgba(237, 135, 87, 0.2), transparent 35%),
+    #102733;
+  box-shadow: 0 22px 45px rgba(16, 39, 51, 0.18);
 }
 
 .dashboard-eyebrow,
 .profile-card-kicker {
   margin: 0 0 10px;
-  color: #287c78;
+  color: #61d3b5;
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -22,7 +32,7 @@
 
 .dashboard-hero h1 {
   margin: 0;
-  color: #123b4a;
+  color: #f4fbf8;
   font-family: Georgia, 'Times New Roman', serif;
   font-size: clamp(2.5rem, 6vw, 4.7rem);
   font-weight: 400;
@@ -31,40 +41,61 @@
 
 .dashboard-welcome {
   margin: 16px 0 0;
-  color: #62777b;
+  color: #b7c9c7;
   font-size: 1.05rem;
 }
 
 .dashboard-accent {
+  position: relative;
+  z-index: 1;
   display: grid;
-  flex: 0 0 92px;
+  flex: 0 0 96px;
   place-items: center;
   aspect-ratio: 1;
   border-radius: 50%;
-  color: #fffaf3;
+  color: #102733;
   background: #d5845b;
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 1.5rem;
-  box-shadow: 12px 12px 0 #e6c9a7;
+  box-shadow: 12px 12px 0 rgba(97, 211, 181, 0.32);
 }
 
 .dashboard-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin-bottom: 54px;
+  gap: 16px;
+  margin-bottom: 52px;
 }
 
 .dashboard-stat {
   display: flex;
-  min-height: 112px;
+  position: relative;
+  min-height: 128px;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid #dbe5e1;
-  border-radius: 8px;
-  padding: 20px 24px;
+  border: 1px solid #dce8e5;
+  border-radius: 16px;
+  padding: 22px 24px;
   background: #fff;
+  box-shadow: 0 10px 26px rgba(18, 59, 74, 0.05);
+  transition: transform 180ms ease, box-shadow 180ms ease;
 }
+
+.dashboard-stat:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(18, 59, 74, 0.1);
+}
+
+.dashboard-stat-icon {
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  color: #287c78;
+  font-size: 1.2rem;
+}
+
+.dashboard-stat-icon--green { color: #54a96e; }
+.dashboard-stat-icon--orange { color: #d5845b; }
 
 .dashboard-stat-value {
   color: #123b4a;
@@ -109,17 +140,18 @@
   display: flex;
   align-items: end;
   flex-wrap: wrap;
-  gap: 14px;
+  gap: 12px;
   margin-bottom: 24px;
   border: 1px solid #dbe5e1;
-  border-radius: 8px;
-  padding: 18px;
-  background: #f8fbf9;
+  border-radius: 16px;
+  padding: 16px;
+  background: #f8fbfa;
+  box-shadow: 0 8px 20px rgba(18, 59, 74, 0.04);
 }
 
 .profile-filter-field {
   display: flex;
-  min-width: 150px;
+  min-width: 135px;
   flex: 1;
   flex-direction: column;
   gap: 6px;
@@ -135,11 +167,42 @@
 .profile-filter-field input {
   width: 100%;
   border: 1px solid #c7d8d3;
-  border-radius: 4px;
+  border-radius: 9px;
   padding: 10px 11px;
   color: #123b4a;
   background: #fff;
   font: inherit;
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.profile-filter-field select:focus,
+.profile-filter-field input:focus {
+  border-color: #287c78;
+  box-shadow: 0 0 0 3px rgba(40, 124, 120, 0.12);
+}
+
+.profile-filter-search {
+  min-width: 230px;
+  flex: 1.6;
+}
+
+.profile-search-input {
+  position: relative;
+}
+
+.profile-search-input > span {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  color: #287c78;
+  font-size: 1.2rem;
+  line-height: 1;
+  transform: translateY(-52%);
+}
+
+.profile-search-input input {
+  padding-left: 34px;
 }
 
 .profile-filter-reset {
@@ -189,7 +252,7 @@
 .profile-card {
   overflow: hidden;
   border: 1px solid #dbe5e1;
-  border-radius: 8px;
+  border-radius: 16px;
   background: #fff;
   box-shadow: 0 12px 28px rgba(18, 59, 74, 0.07);
   transition: transform 180ms ease, box-shadow 180ms ease;
@@ -203,8 +266,8 @@
 .profile-card-image {
   position: relative;
   display: grid;
-  height: 170px;
-  min-height: 170px;
+  height: 190px;
+  min-height: 190px;
   place-items: center;
   overflow: hidden;
   color: #fffaf3;
@@ -269,7 +332,7 @@
 
 .profile-card-body {
   min-height: 238px;
-  padding: 20px;
+  padding: 22px;
 }
 
 .profile-card-kicker {
