@@ -124,12 +124,10 @@
   resize: vertical;
 }
 
-#master-links,
 #master-about-me {
   min-height: 96px;
 }
 
-.master-profile-form > .master-form-label:has(#master-links),
 .master-profile-form > .master-form-label:has(#master-about-me) {
   grid-column: 1 / -1;
 }
@@ -375,7 +373,6 @@
     grid-template-columns: 1fr;
   }
 
-  .master-profile-form > .master-form-label:has(#master-links),
   .master-profile-form > .master-form-label:has(#master-about-me) {
     grid-column: auto;
   }
