@@ -41,7 +41,7 @@ body.notes-page-active .site-footer {
 }
 
 .home-page:not(.member-home-page) .page-content {
-  width: min(1360px, calc(100% - 48px));
+  width: min(1480px, calc(100% - 48px));
   margin-inline: auto;
 }
 
