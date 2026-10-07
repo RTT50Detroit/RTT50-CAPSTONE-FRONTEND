@@ -37,14 +37,6 @@ const getProfileRelationshipResumeUsername = (user) => {
   return getRelationshipResumeUsername(relationshipResume);
 };
 
-const getProfileRelationshipResumeLink = (user) => {
-  const relationshipResume = user?.links?.find((link) => (
-    ['relationship resume', 'the relationship resume'].includes(link.label?.toLowerCase())
-  ));
-
-  return relationshipResume || relationshipResumeLink('');
-};
-
 const MemberInfo = ({
   user, memberId, canEdit, onSaved, editRequested, onEditRequestHandled,
 }) => {
@@ -206,16 +198,8 @@ const MemberInfo = ({
               ) : normalizeHobbies(user.hobbies).join(', ') || 'Not provided'}
             </label>
           </div>
-          <div className="profile-links">
-            <strong>The Relationship Resume</strong>
-            <a
-                href={getProfileRelationshipResumeLink(user).url}
-                target="_blank"
-                rel="noreferrer"
-            >
-              <span>{getProfileRelationshipResumeLink(user).url}</span>
-            </a>
-            {isEditing && (
+          {isEditing && (
+            <div className="profile-links profile-links-editor">
               <label>
                 The Relationship Resume username
                 <input
@@ -229,8 +213,8 @@ const MemberInfo = ({
                     autoComplete="username"
                 />
               </label>
-            )}
-          </div>
+            </div>
+          )}
           {isEditing && (
             <>
               <div className="profile-details-actions">

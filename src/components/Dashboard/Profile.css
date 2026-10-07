@@ -50,6 +50,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .profile-back-link {
@@ -96,12 +98,48 @@
 
 .profile-hero-actions {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 14px;
   border-left: 1px solid rgba(183, 201, 199, 0.2);
   padding-left: 28px;
+}
+
+.profile-resume-link {
+  position: relative;
+  display: grid;
+  min-width: 220px;
+  gap: 5px;
+  border: 1px solid rgba(97, 211, 181, 0.35);
+  border-radius: 14px;
+  padding: 12px 36px 12px 14px;
+  color: #d9f7ed;
+  background: rgba(97, 211, 181, 0.08);
+  text-decoration: none;
+}
+
+.profile-resume-link:hover {
+  border-color: rgba(97, 211, 181, 0.7);
+  background: rgba(97, 211, 181, 0.16);
+}
+
+.profile-resume-label {
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.profile-resume-url {
+  color: #b7c9c7;
+  font-size: 0.68rem;
+}
+
+.profile-resume-arrow {
+  position: absolute;
+  top: 12px;
+  right: 13px;
+  color: #61d3b5;
+  font-size: 1rem;
 }
 
 .profile-customize-button {
@@ -350,6 +388,12 @@
   padding-top: 14px;
 }
 
+.profile-links-editor {
+  margin-top: 8px;
+  border-top: 0;
+  padding-top: 0;
+}
+
 .profile-links strong {
   color: #35646a;
   font-size: 0.76rem;
@@ -538,6 +582,10 @@
     border-left: 0;
     padding-top: 16px;
     padding-left: 0;
+  }
+
+  .profile-resume-link {
+    min-width: 200px;
   }
 
   .profile-settings-menu {
