@@ -18,6 +18,8 @@ const ProfileDashboard = () => {
     about: true,
   });
   const [editRequested, setEditRequested] = useState(false);
+  const [aboutEditRequested, setAboutEditRequested] = useState(false);
+  const [photoEditRequested, setPhotoEditRequested] = useState(false);
   const [searchParams] = useSearchParams();
   const id = searchParams.get('id');
   const token = localStorage.getItem('authToken');
@@ -57,6 +59,16 @@ const ProfileDashboard = () => {
   const requestPageEdit = () => {
     setIsCustomizeOpen(false);
     setEditRequested(true);
+  };
+
+  const requestAboutEdit = () => {
+    setIsCustomizeOpen(false);
+    setAboutEditRequested(true);
+  };
+
+  const requestPhotoEdit = () => {
+    setIsCustomizeOpen(false);
+    setPhotoEditRequested(true);
   };
 
   useEffect(() => {
@@ -185,13 +197,17 @@ const ProfileDashboard = () => {
                     </label>
                   </div>
                   {canEdit && (
-                    <button
-                        type="button"
-                        className="profile-settings-edit"
-                        onClick={requestPageEdit}
-                    >
-                      Edit profile details <span aria-hidden="true">&rarr;</span>
-                    </button>
+                    <div className="profile-settings-actions">
+                      <button type="button" onClick={requestPhotoEdit}>
+                        Change picture
+                      </button>
+                      <button type="button" onClick={requestPageEdit}>
+                        Edit details
+                      </button>
+                      <button type="button" onClick={requestAboutEdit}>
+                        Edit about me
+                      </button>
+                    </div>
                   )}
                 </section>
               )}
@@ -202,6 +218,8 @@ const ProfileDashboard = () => {
                       memberId={profileId}
                       canEdit={Boolean(currentMemberId && profileId &&
                         currentMemberId === String(profileId))}
+                      editRequested={photoEditRequested}
+                      onEditRequestHandled={() => setPhotoEditRequested(false)}
                   />
                   {visibleWidgets.details && (
                     <MemberInfo
@@ -223,6 +241,8 @@ const ProfileDashboard = () => {
                       user={userData.aboutMe ?? userData.aboutme}
                       memberId={profileId}
                       canEdit={canEdit}
+                      editRequested={aboutEditRequested}
+                      onEditRequestHandled={() => setAboutEditRequested(false)}
                   />
                   </section>
                 )}

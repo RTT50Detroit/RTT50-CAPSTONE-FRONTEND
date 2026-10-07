@@ -5,7 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { getAuthToken, isMasterUser } from '../../../utils/auth.js';
 import './AboutMe.css';
 
-const AboutMe = ({ user, memberId, canEdit }) => {
+const AboutMe = ({
+  user, memberId, canEdit, editRequested, onEditRequestHandled,
+}) => {
   const navigate = useNavigate();
   const [aboutMe, setAboutMe] = useState(user || '');
   const [isEditing, setIsEditing] = useState(false);
@@ -15,6 +17,12 @@ const AboutMe = ({ user, memberId, canEdit }) => {
   useEffect(() => {
     setAboutMe(user || '');
   }, [user]);
+
+  useEffect(() => {
+    if (!editRequested || !canEdit) return;
+    setIsEditing(true);
+    onEditRequestHandled?.();
+  }, [canEdit, editRequested, onEditRequestHandled]);
 
   const handleSave = async (event) => {
     event.preventDefault();
@@ -105,4 +113,6 @@ AboutMe.propTypes = {
   user: PropTypes.string,
   memberId: PropTypes.string,
   canEdit: PropTypes.bool,
+  editRequested: PropTypes.bool,
+  onEditRequestHandled: PropTypes.func,
 };

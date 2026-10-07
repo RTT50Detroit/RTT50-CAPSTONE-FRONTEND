@@ -229,20 +229,30 @@
   accent-color: #287c78;
 }
 
-.profile-settings-edit {
-  border: 0;
+.profile-settings-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 7px;
   border-left: 1px solid #dce8e5;
-  padding: 8px 0 8px 18px;
-  color: #287c78;
-  background: transparent;
-  cursor: pointer;
-  font: inherit;
-  font-size: 0.78rem;
-  font-weight: 800;
-  white-space: nowrap;
+  padding-left: 18px;
 }
 
-.profile-settings-edit:hover {
+.profile-settings-actions button {
+  border: 1px solid #b9d6ce;
+  border-radius: 8px;
+  padding: 7px 10px;
+  color: #287c78;
+  background: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.profile-settings-actions button:hover {
+  border-color: #287c78;
+  background: #e7f1ef;
   color: #d0734f;
 }
 
@@ -588,7 +598,7 @@
     margin-left: 0;
   }
 
-  .profile-settings-edit {
+  .profile-settings-actions {
     border-top: 1px solid #dce8e5;
     border-left: 0;
     padding: 12px 0 0;

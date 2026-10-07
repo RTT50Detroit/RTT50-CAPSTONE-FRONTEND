@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { useRef } from 'react';
 
 const apiUrl = (import.meta.env.VITE_APP_BASE_URL || '').replace(/\/$/, '');
 
@@ -8,13 +9,22 @@ const resolveImageUrl = (imageUrl) => (
   imageUrl?.startsWith('/') ? `${apiUrl}${imageUrl}` : imageUrl
 );
 
-const ProfileImage = ({ profileImageUrl, memberId, canEdit }) => {
+const ProfileImage = ({
+  profileImageUrl, memberId, canEdit, editRequested, onEditRequestHandled,
+}) => {
   const [imageUrl, setImageUrl] = useState(resolveImageUrl(profileImageUrl));
   const [error, setError] = useState('');
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     setImageUrl(resolveImageUrl(profileImageUrl));
   }, [profileImageUrl]);
+
+  useEffect(() => {
+    if (!editRequested || !canEdit) return;
+    fileInputRef.current?.click();
+    onEditRequestHandled?.();
+  }, [canEdit, editRequested, onEditRequestHandled]);
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
@@ -52,6 +62,7 @@ const ProfileImage = ({ profileImageUrl, memberId, canEdit }) => {
             </label>
             <input
                 id="image-upload"
+                ref={fileInputRef}
                 type="file"
                 accept=".jpg,.jpeg,.png"
                 onChange={handleImageUpload}
@@ -69,4 +80,6 @@ ProfileImage.propTypes = {
   profileImageUrl: PropTypes.string,
   memberId: PropTypes.string.isRequired,
   canEdit: PropTypes.bool,
+  editRequested: PropTypes.bool,
+  onEditRequestHandled: PropTypes.func,
 };
