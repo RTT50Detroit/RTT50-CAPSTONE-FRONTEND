@@ -145,7 +145,6 @@ const ProfileDashboard = () => {
                     <span className="profile-resume-url">
                       {relationshipResume?.url ? 'Open your relationship profile' : 'Create your relationship profile'}
                     </span>
-                    <span className="profile-resume-arrow" aria-hidden="true">&nearr;</span>
                   </a>
                   <button
                       type="button"

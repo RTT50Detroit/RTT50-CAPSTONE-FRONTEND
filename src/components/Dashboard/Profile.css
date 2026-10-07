@@ -134,13 +134,7 @@
   font-size: 0.68rem;
 }
 
-.profile-resume-arrow {
-  position: absolute;
-  top: 12px;
-  right: 13px;
-  color: #61d3b5;
-  font-size: 1rem;
-}
+
 
 .profile-customize-button {
   border: 1px solid rgba(97, 211, 181, 0.5);
