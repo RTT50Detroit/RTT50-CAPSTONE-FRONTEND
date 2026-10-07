@@ -28,6 +28,17 @@ const NotesDashboard = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  useEffect(() => {
+    document.body.classList.add('notes-page-active');
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.classList.remove('notes-page-active');
+      document.body.style.overflow = previousOverflow;
+    };
+  }, []);
+
   const addNote = async (note) => {
     setError('');
     try {
@@ -121,7 +132,7 @@ const NotesDashboard = () => {
       <main className="page-content notes-page">
         <section className="notes-heading">
           <p className="notes-eyebrow">Private journal</p>
-          <h1>Notes</h1>
+          <h1>Journal</h1>
           <p>Capture the thoughts, plans, and little moments worth keeping.</p>
         </section>
 

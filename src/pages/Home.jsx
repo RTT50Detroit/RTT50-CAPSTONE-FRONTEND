@@ -152,7 +152,7 @@ const MemberHub = () => {
               <span className="member-hub-arrow" aria-hidden="true">-&gt;</span>
             </Link>
             <Link className="member-hub-card" to="/notes">
-              <span className="member-hub-number">02 / NOTES</span>
+              <span className="member-hub-number">02 / JOURNAL</span>
               <h3>Open Your Journal</h3>
               <p>Write down a moment, hold onto a lesson, or share a story with your community.</p>
               <span className="member-hub-arrow" aria-hidden="true">-&gt;</span>

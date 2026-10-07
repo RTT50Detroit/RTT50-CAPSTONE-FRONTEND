@@ -7,6 +7,10 @@ body.profile-page-active .site-footer {
   display: none;
 }
 
+body.notes-page-active .site-footer {
+  display: none;
+}
+
 .page-content {
   width: calc(100% - 40px);
   max-width: none;

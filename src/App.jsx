@@ -58,7 +58,7 @@ function Navigation() {
               </li>
               <li>
                 <NavLink to="/notes" className={({ isActive }) => (isActive ? 'active' : '')}>
-                  Notes
+                Journal
                 </NavLink>
               </li>
               <li>
