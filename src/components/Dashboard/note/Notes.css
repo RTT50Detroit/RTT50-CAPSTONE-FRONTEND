@@ -244,6 +244,89 @@
     font-size: 0.8rem;
 }
 
+.notes-list-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.notes-settings-trigger,
+.notes-settings-actions button {
+    width: auto;
+    margin: 0;
+    border: 1px solid #537077;
+    border-radius: 8px;
+    padding: 8px 11px;
+    color: #e8f5f1;
+    background: #26373d;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
+.notes-settings-trigger:hover,
+.notes-settings-actions button:hover {
+    border-color: #61d3b5;
+    background: #30504f;
+}
+
+.notes-settings-trigger[aria-expanded='true'] {
+    border-color: #61d3b5;
+    background: #287c78;
+}
+
+.notes-settings-actions button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.notes-settings-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    grid-column: 1 / -1;
+    gap: 18px;
+    border: 1px solid #40545a;
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: rgba(23, 35, 40, 0.78);
+}
+
+.notes-settings-menu h3,
+.notes-settings-menu p {
+    margin: 0;
+}
+
+.notes-settings-menu h3 {
+    color: #f4fbf8;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+}
+
+.notes-settings-menu > div:first-child > p:last-child {
+    margin-top: 4px;
+    color: #a9c1c2;
+    font-size: 0.78rem;
+}
+
+.notes-settings-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.notes-settings-actions .button-danger {
+    border-color: #a65e50;
+    background: #a65e50;
+}
+
+.notes-selection-count {
+    white-space: nowrap;
+}
+
 .note-cards {
     display: grid;
     gap: 12px;
@@ -304,11 +387,41 @@
 }
 
 .note-card {
+    position: relative;
     border: 1px solid #40545a;
     border-left: 4px solid #61d3b5;
     border-radius: 12px;
     padding: 16px 18px;
     background: #26373d;
+}
+
+.note-selection {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 12px;
+    color: #a9c1c2;
+    cursor: pointer;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.note-selection input {
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    accent-color: #61d3b5;
+}
+
+.note-editing-label {
+    margin: 0;
+    color: #61d3b5;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
 .note-card--note {
@@ -435,6 +548,25 @@
     .notes-list-section {
         grid-column: 1;
         grid-row: 3;
+    }
+
+    .notes-settings-menu {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .notes-settings-actions {
+        justify-content: stretch;
+    }
+
+    .notes-settings-actions button {
+        flex: 1;
+    }
+
+    .notes-list-controls {
+        align-items: flex-end;
+        flex-direction: column;
+        gap: 6px;
     }
 
     .note-card-group .note-cards {

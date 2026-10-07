@@ -51,6 +51,9 @@ const NotesDashboard = () => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [selectedNoteIds, setSelectedNoteIds] = useState([]);
+  const [editRequestIds, setEditRequestIds] = useState([]);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -146,6 +149,41 @@ const NotesDashboard = () => {
     }
   };
 
+  const handleSelectionChange = (id, isSelected) => {
+    setSelectedNoteIds((currentIds) => (
+      isSelected
+        ? [...new Set([...currentIds, id])]
+        : currentIds.filter((currentId) => currentId !== id)
+    ));
+  };
+
+  const handleSelectAll = (isSelected) => {
+    setSelectedNoteIds(isSelected ? notes.map(getNoteId) : []);
+  };
+
+  const handleBatchDelete = async () => {
+    if (!selectedNoteIds.length || !window.confirm(
+        `Delete ${selectedNoteIds.length} selected ${selectedNoteIds.length === 1 ? 'entry' : 'entries'}?`
+    )) {
+      return;
+    }
+
+    try {
+      await Promise.all(selectedNoteIds.map((id) => deleteNote(id)));
+      setSelectedNoteIds([]);
+      setEditRequestIds([]);
+      setSettingsOpen(false);
+    } catch (requestError) {
+      console.error('Error while deleting selected entries:', requestError);
+    }
+  };
+
+  const handleBatchEdit = () => {
+    if (!selectedNoteIds.length) return;
+    setEditRequestIds([...selectedNoteIds]);
+    setSettingsOpen(false);
+  };
+
   useEffect(() => {
     const fetchNotes = async () => {
       setLoading(true);
@@ -188,15 +226,66 @@ const NotesDashboard = () => {
               <p className="notes-section-kicker">Your Posts</p>
               <h2 id="saved-notes-heading">Notes &amp; Journal</h2>
             </div>
-            <span>{notes.length} {notes.length === 1 ? 'entry' : 'entries'}</span>
+            <div className="notes-list-controls">
+              <span>{notes.length} {notes.length === 1 ? 'entry' : 'entries'}</span>
+              <button
+                  type="button"
+                  className="notes-settings-trigger"
+                  aria-expanded={settingsOpen}
+                  onClick={() => setSettingsOpen((isOpen) => !isOpen)}
+              >
+                Settings
+              </button>
+            </div>
           </div>
+          {settingsOpen && (
+            <section className="notes-settings-menu" aria-label="Journal post settings">
+              <div>
+                <p className="notes-section-kicker">Manage Posts</p>
+                <h3>Post Settings</h3>
+                <p>Select entries to edit or delete them together.</p>
+              </div>
+              <div className="notes-settings-actions">
+                <button
+                    type="button"
+                    onClick={() => handleSelectAll(selectedNoteIds.length !== notes.length)}
+                    disabled={!notes.length}
+                >
+                  {selectedNoteIds.length === notes.length && notes.length
+                    ? 'Clear Selection'
+                    : 'Select All'}
+                </button>
+                <button
+                    type="button"
+                    onClick={handleBatchEdit}
+                    disabled={!selectedNoteIds.length}
+                >
+                  Edit Selected
+                </button>
+                <button
+                    type="button"
+                    className="button-danger"
+                    onClick={handleBatchDelete}
+                    disabled={!selectedNoteIds.length}
+                >
+                  Delete Selected
+                </button>
+              </div>
+              <span className="notes-selection-count">
+                {selectedNoteIds.length} selected
+              </span>
+            </section>
+          )}
           {loading && <p className="notes-status">Opening your journal...</p>}
           {error && <p className="notes-status notes-error">{error}</p>}
           {!loading && !error && (
             <NoteList
                 notes={notes}
                 onEditNote={updateNote}
-                onDeleteNote={deleteNote}
+                selectedNoteIds={selectedNoteIds}
+                editRequestIds={editRequestIds}
+                onSelectionChange={handleSelectionChange}
+                onSelectAll={handleSelectAll}
             />
           )}
         </section>

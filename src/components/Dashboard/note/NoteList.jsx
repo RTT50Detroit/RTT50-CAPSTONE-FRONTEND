@@ -1,49 +1,60 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
-const NoteList = ({ notes, onEditNote, onDeleteNote }) => {
-  const [editingId, setEditingId] = useState(null);
-  const [editTitle, setEditTitle] = useState('');
-  const [editContent, setEditContent] = useState('');
-  const [editType, setEditType] = useState('journal');
-  const [busyId, setBusyId] = useState(null);
+const NoteList = ({
+  notes,
+  onEditNote,
+  selectedNoteIds,
+  editRequestIds,
+  onSelectionChange,
+}) => {
+  const [editingIds, setEditingIds] = useState([]);
+  const [drafts, setDrafts] = useState({});
+  const [busyIds, setBusyIds] = useState([]);
 
-  const startEditing = (note) => {
-    setEditingId(note._id);
-    setEditTitle(note.title || '');
-    setEditContent(note.content || '');
-    setEditType(note.type === 'note' ? 'note' : 'journal');
-  };
+  const notesRef = useRef(notes);
+  notesRef.current = notes;
 
-  const stopEditing = () => {
-    setEditingId(null);
-    setEditTitle('');
-    setEditContent('');
-    setEditType('journal');
-  };
-
-  const handleUpdate = async () => {
-    if (editContent.trim()) {
-      setBusyId(editingId);
-      try {
-        await onEditNote(editingId, {
-          title: editTitle.trim(),
-          content: editContent.trim(),
-          type: editType,
-        });
-      } finally {
-        setBusyId(null);
+  useEffect(() => {
+    setEditingIds(editRequestIds);
+    setDrafts((currentDrafts) => notesRef.current.reduce((nextDrafts, note) => {
+      const id = note._id;
+      if (editRequestIds.includes(id)) {
+        nextDrafts[id] = currentDrafts[id] || {
+          title: note.title || '',
+          content: note.content || '',
+          type: note.type === 'note' ? 'note' : 'journal',
+        };
       }
-      stopEditing();
-    }
+      return nextDrafts;
+    }, {}));
+  }, [editRequestIds]);
+
+  const updateDraft = (id, field, value) => {
+    setDrafts((currentDrafts) => ({
+      ...currentDrafts,
+      [id]: { ...currentDrafts[id], [field]: value },
+    }));
   };
 
-  const handleDelete = async (id) => {
-    setBusyId(id);
+  const stopEditing = (id) => {
+    setEditingIds((currentIds) => currentIds.filter((currentId) => currentId !== id));
+  };
+
+  const handleUpdate = async (id) => {
+    const draft = drafts[id];
+    if (!draft?.content.trim()) return;
+
+    setBusyIds((currentIds) => [...currentIds, id]);
     try {
-      await onDeleteNote(id);
+      await onEditNote(id, {
+        title: draft.title.trim(),
+        content: draft.content.trim(),
+        type: draft.type,
+      });
+      stopEditing(id);
     } finally {
-      setBusyId(null);
+      setBusyIds((currentIds) => currentIds.filter((currentId) => currentId !== id));
     }
   };
 
@@ -51,38 +62,47 @@ const NoteList = ({ notes, onEditNote, onDeleteNote }) => {
     <ul className="note-cards">
       {notesToRender.map((note) => (
           <li className={`note-card note-card--${note.type === 'note' ? 'note' : 'journal'}`} key={note._id}>
-            {editingId === note._id ? (
+            <label className="note-selection">
+              <input
+                  type="checkbox"
+                  checked={selectedNoteIds.includes(note._id)}
+                  onChange={(event) => onSelectionChange(note._id, event.target.checked)}
+              />
+              <span>Select entry</span>
+            </label>
+            {editingIds.includes(note._id) ? (
                 <div className="note-edit-form">
+                  <p className="note-editing-label">Editing selected entry</p>
                   <div className="post-type-picker" role="group" aria-label="Post type">
                     <button
                         type="button"
-                        className={editType === 'note' ? 'active' : ''}
-                        onClick={() => setEditType('note')}
+                        className={drafts[note._id]?.type === 'note' ? 'active' : ''}
+                        onClick={() => updateDraft(note._id, 'type', 'note')}
                     >
                       Post Note
                     </button>
                     <button
                         type="button"
-                        className={editType === 'journal' ? 'active' : ''}
-                        onClick={() => setEditType('journal')}
+                        className={drafts[note._id]?.type === 'journal' ? 'active' : ''}
+                        onClick={() => updateDraft(note._id, 'type', 'journal')}
                     >
                       Post Journal
                     </button>
                   </div>
                   <input
-                      value={editTitle}
-                      onChange={(e) => setEditTitle(e.target.value)}
+                      value={drafts[note._id]?.title || ''}
+                      onChange={(e) => updateDraft(note._id, 'title', e.target.value)}
                       placeholder="Entry title"
                   />
                   <textarea
-                      value={editContent}
-                      onChange={(e) => setEditContent(e.target.value)}
+                      value={drafts[note._id]?.content || ''}
+                      onChange={(e) => updateDraft(note._id, 'content', e.target.value)}
                   />
                   <div className="note-actions">
-                    <button type="button" onClick={handleUpdate} disabled={busyId === note._id}>
-                      {busyId === note._id ? 'Saving...' : 'Save Changes'}
+                    <button type="button" onClick={() => handleUpdate(note._id)} disabled={busyIds.includes(note._id)}>
+                      {busyIds.includes(note._id) ? 'Saving...' : 'Save Changes'}
                     </button>
-                    <button type="button" className="button-secondary" onClick={stopEditing}>
+                    <button type="button" className="button-secondary" onClick={() => stopEditing(note._id)}>
                       Cancel
                     </button>
                   </div>
@@ -97,17 +117,6 @@ const NoteList = ({ notes, onEditNote, onDeleteNote }) => {
                    </span>
                    <h3>{note.title || 'Untitled Entry'}</h3>
                    <p className="note-content">{note.content}</p>
-                   <div className="note-actions">
-                     <button type="button" onClick={() => startEditing(note)}>Edit</button>
-                     <button
-                         type="button"
-                         className="button-danger"
-                         onClick={() => handleDelete(note._id)}
-                         disabled={busyId === note._id}
-                     >
-                       {busyId === note._id ? 'Deleting...' : 'Delete'}
-                     </button>
-                   </div>
                  </article>
              )}
           </li>
@@ -165,5 +174,7 @@ NoteList.propTypes = {
     type: PropTypes.oneOf(['note', 'journal']),
   })).isRequired,
   onEditNote: PropTypes.func.isRequired,
-  onDeleteNote: PropTypes.func.isRequired,
+  selectedNoteIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+  editRequestIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onSelectionChange: PropTypes.func.isRequired,
 };
