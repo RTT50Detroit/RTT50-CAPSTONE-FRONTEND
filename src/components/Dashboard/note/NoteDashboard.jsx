@@ -6,6 +6,31 @@ import NotePosting from './NotePosting';
 import './Notes.css';
 
 const apiUrl = (import.meta.env.VITE_APP_BASE_URL || '').replace(/\/$/, '');
+const noteTypeStorageKey = 'journal-entry-types';
+
+const readStoredNoteTypes = () => {
+  try {
+    const storedTypes = JSON.parse(localStorage.getItem(noteTypeStorageKey) || '{}');
+    return storedTypes && typeof storedTypes === 'object' ? storedTypes : {};
+  } catch {
+    return {};
+  }
+};
+
+const writeStoredNoteTypes = (types) => {
+  localStorage.setItem(noteTypeStorageKey, JSON.stringify(types));
+};
+
+const getNoteId = (note) => note?._id || note?.id;
+
+const normalizeNote = (note, storedTypes = readStoredNoteTypes()) => {
+  const noteId = getNoteId(note);
+  const type = note?.type === 'note' || note?.type === 'journal'
+    ? note.type
+    : storedTypes[noteId] || 'journal';
+
+  return { ...note, type };
+};
 
 const authConfig = () => ({
   headers: { Authorization: `Bearer ${localStorage.getItem('authToken')}` },
@@ -48,11 +73,17 @@ const NotesDashboard = () => {
           authConfig()
       );
       const savedNote = data.note || data;
-      setNotes((prevNotes) => [...prevNotes, {
+      const savedNoteWithType = normalizeNote({
         ...note,
         ...savedNote,
         type: savedNote.type || note.type || 'journal',
-      }]);
+      });
+      const savedNoteId = getNoteId(savedNoteWithType);
+      if (savedNoteId) {
+        const storedTypes = readStoredNoteTypes();
+        writeStoredNoteTypes({ ...storedTypes, [savedNoteId]: savedNoteWithType.type });
+      }
+      setNotes((prevNotes) => [...prevNotes, savedNoteWithType]);
     } catch (requestError) {
       console.error('Error while saving note:', requestError);
       const message = handleRequestError(
@@ -74,8 +105,14 @@ const NotesDashboard = () => {
           authConfig()
       );
       const updatedNote = data.note || data;
+      const updatedNoteWithType = normalizeNote({ ...updatedNote, ...updates });
+      const updatedNoteId = getNoteId(updatedNoteWithType);
+      if (updatedNoteId) {
+        const storedTypes = readStoredNoteTypes();
+        writeStoredNoteTypes({ ...storedTypes, [updatedNoteId]: updatedNoteWithType.type });
+      }
       setNotes((prevNotes) => prevNotes.map((note) => (
-        note._id === id ? { ...note, ...updatedNote, ...updates } : note
+        note._id === id ? { ...note, ...updatedNoteWithType } : note
       )));
     } catch (requestError) {
       console.error('Error while updating note:', requestError);
@@ -93,6 +130,9 @@ const NotesDashboard = () => {
     setError('');
     try {
       await axios.delete(`${apiUrl}/api/members/notes/${id}`, authConfig());
+      const storedTypes = readStoredNoteTypes();
+      delete storedTypes[id];
+      writeStoredNoteTypes(storedTypes);
       setNotes((prevNotes) => prevNotes.filter((note) => note._id !== id));
     } catch (requestError) {
       console.error('Error while deleting note:', requestError);
@@ -112,7 +152,8 @@ const NotesDashboard = () => {
       setError('');
       try {
         const { data } = await axios.get(`${apiUrl}/api/members/notes`, authConfig());
-        setNotes(Array.isArray(data) ? data : data?.notes || []);
+        const fetchedNotes = Array.isArray(data) ? data : data?.notes || [];
+        setNotes(fetchedNotes.map((note) => normalizeNote(note)));
       } catch (requestError) {
         console.error('Error while fetching notes:', requestError);
         const message = handleRequestError(
