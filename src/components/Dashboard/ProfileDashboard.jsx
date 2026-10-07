@@ -176,7 +176,7 @@ const ProfileDashboard = () => {
                 <section className="profile-settings-menu" aria-label="Profile page settings">
                   <div className="profile-settings-heading">
                     <p className="profile-detail-label">Page settings</p>
-                    <h2>Customize your profile</h2>
+                    <h2>Customize Your Profile</h2>
                   </div>
                   <div className="profile-widget-toggles" aria-label="Widget visibility">
                     <label>

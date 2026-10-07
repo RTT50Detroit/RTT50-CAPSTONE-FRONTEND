@@ -74,7 +74,7 @@ const NoteList = ({ notes, onEditNote, onDeleteNote }) => {
                            <p className="note-date">
                              {note.createdAt ? new Date(note.createdAt).toLocaleDateString() : 'Journal entry'}
                            </p>
-                           <h3>{note.title || 'Untitled entry'}</h3>
+                           <h3>{note.title || 'Untitled Entry'}</h3>
                            <p className="note-content">{note.content}</p>
                            <div className="note-actions">
                              <button type="button" onClick={() => startEditing(note)}>Edit</button>

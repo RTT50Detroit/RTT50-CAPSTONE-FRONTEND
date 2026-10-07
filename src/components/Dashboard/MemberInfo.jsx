@@ -132,7 +132,7 @@ const MemberInfo = ({
 
   return (
       <section className="user-info-container">
-        <p className="profile-detail-label">Member details</p>
+        <p className="profile-detail-label">Member Details</p>
         <h2>{user.name || 'Unnamed member'}</h2>
         <form className={isEditing ? 'profile-details-form' : ''} onSubmit={handleSave}>
           <div className="additional-info">

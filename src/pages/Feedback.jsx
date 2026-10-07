@@ -158,7 +158,7 @@ const Feedback = () => {
       <main className="page-content feedback-page">
         <section className="feedback-heading">
           <p className="feedback-eyebrow">Early Access forum</p>
-          <h1>Feedback board</h1>
+          <h1>Feedback Board</h1>
           <p>
             Share what is working, what could be better, and the ideas you would
             love to see next. Your fellow members can learn from every post.
@@ -170,7 +170,7 @@ const Feedback = () => {
             <div className="feedback-composer-heading">
               <div>
                 <p className="feedback-eyebrow">Start a conversation</p>
-                <h2>What is on your mind, {memberName}?</h2>
+                <h2>What Is On Your Mind, {memberName}?</h2>
               </div>
               <span className="feedback-composer-mark" aria-hidden="true">+</span>
             </div>
@@ -217,7 +217,7 @@ const Feedback = () => {
             <div className="feedback-board-heading">
               <div>
                 <p className="feedback-eyebrow">The conversation</p>
-                <h2 id="feedback-board-heading">Community posts</h2>
+                <h2 id="feedback-board-heading">Community Posts</h2>
               </div>
               <span>{feedback.length} {feedback.length === 1 ? 'post' : 'posts'}</span>
             </div>
@@ -239,7 +239,7 @@ const Feedback = () => {
                         {formatDate(post.createdAt || post.created_at)}
                       </time>
                     </div>
-                    <h3>{post.title || 'Untitled feedback'}</h3>
+                    <h3>{post.title || 'Untitled Feedback'}</h3>
                     <p>{post.content}</p>
                     <div className="feedback-post-author">
                       <span className="feedback-avatar" aria-hidden="true">

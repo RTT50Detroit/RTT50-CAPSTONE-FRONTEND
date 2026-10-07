@@ -59,7 +59,7 @@ const LandingPage = () => {
         <section className="home-pillars page-content" aria-labelledby="home-pillars-heading">
           <div className="home-section-heading">
             <p className="home-eyebrow">More than a match</p>
-            <h2 id="home-pillars-heading">Bring your whole self.</h2>
+            <h2 id="home-pillars-heading">Bring Your Whole Self.</h2>
           </div>
           <div className="home-pillar-grid">
             <article className="home-pillar">
@@ -82,7 +82,7 @@ const LandingPage = () => {
         <section className="home-companion page-content" aria-labelledby="home-companion-heading">
           <div>
             <p className="home-eyebrow">A companion for your story</p>
-            <h2 id="home-companion-heading">Know what you bring.</h2>
+            <h2 id="home-companion-heading">Know What You Bring.</h2>
           </div>
           <div>
             <p>
@@ -130,7 +130,7 @@ const MemberHub = () => {
           <div className="member-home-notice-mark" aria-hidden="true">!</div>
           <div>
             <p className="home-eyebrow">Early access</p>
-            <h2 id="member-home-notice-heading">You are helping us build what comes next.</h2>
+            <h2 id="member-home-notice-heading">You Are Helping Us Build What Comes Next.</h2>
             <p>
               The Social Match Game is still under development. Try the features below,
               let us know what feels useful, and share your feedback as you explore.
@@ -142,30 +142,30 @@ const MemberHub = () => {
         <section className="member-home-content page-content" aria-labelledby="member-home-heading">
           <div className="home-section-heading">
             <p className="home-eyebrow">Available now</p>
-            <h2 id="member-home-heading">Start exploring the community.</h2>
+            <h2 id="member-home-heading">Start Exploring the Community.</h2>
           </div>
           <div className="member-hub-grid">
             <Link className="member-hub-card member-hub-card--primary" to="/dashboard">
               <span className="member-hub-number">01 / PROFILES</span>
-              <h3>Meet the community</h3>
+              <h3>Meet the Community</h3>
               <p>Explore member profiles and find the people, ideas, and energy that fit your world.</p>
               <span className="member-hub-arrow" aria-hidden="true">-&gt;</span>
             </Link>
             <Link className="member-hub-card" to="/notes">
               <span className="member-hub-number">02 / NOTES</span>
-              <h3>Open your journal</h3>
+              <h3>Open Your Journal</h3>
               <p>Write down a moment, hold onto a lesson, or share a story with your community.</p>
               <span className="member-hub-arrow" aria-hidden="true">-&gt;</span>
             </Link>
             <Link className="member-hub-card" to="/feedback">
               <span className="member-hub-number">03 / FEEDBACK</span>
-              <h3>Join the conversation</h3>
+              <h3>Join the Conversation</h3>
               <p>Share ideas, celebrate what works, and help shape the next version together.</p>
               <span className="member-hub-arrow" aria-hidden="true">-&gt;</span>
             </Link>
             <Link className="member-hub-card" to={profilePath}>
               <span className="member-hub-number">04 / PROFILE</span>
-              <h3>Shape your profile</h3>
+              <h3>Shape Your Profile</h3>
               <p>Let people see the details that make you you. Your profile is yours to keep current.</p>
               <span className="member-hub-arrow" aria-hidden="true">-&gt;</span>
             </Link>

@@ -84,7 +84,7 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
         {onlineProfiles.length > 0 && (
           <section className="profile-card-group" aria-labelledby="online-profiles-heading">
             <h3 id="online-profiles-heading" className="profile-card-group-heading">
-              Online now
+            Online Now
             </h3>
             {renderProfileCards(onlineProfiles)}
           </section>

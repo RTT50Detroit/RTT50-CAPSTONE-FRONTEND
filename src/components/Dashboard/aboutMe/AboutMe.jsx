@@ -68,7 +68,7 @@ const AboutMe = ({
 
   return (
       <div className="user-bio">
-        <h2>About me</h2>
+        <h2>About Me</h2>
         {isEditing ? (
           <form className="about-me-edit-form" onSubmit={handleSave}>
             <textarea
