@@ -211,10 +211,15 @@
 .notes-list-section {
     width: 100%;
     grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: start;
+    gap: 16px;
     padding: 22px;
 }
 
 .notes-list-heading {
+    grid-column: 1 / -1;
     display: flex;
     align-items: baseline;
     justify-content: space-between;
@@ -245,10 +250,7 @@
 }
 
 .note-card-groups {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-    margin-top: 16px;
+    display: contents;
 }
 
 .note-card-group {
@@ -258,6 +260,10 @@
     border-radius: 14px;
     padding: 14px;
     background: rgba(23, 35, 40, 0.72);
+}
+
+.note-card-group .note-cards {
+    margin-top: 12px;
 }
 
 .note-card-group-heading {
@@ -404,15 +410,12 @@
 
     .journal-editor,
     .notes-list-section {
+        display: block;
         padding: 18px;
     }
 
     .journal-composer {
         width: 100%;
-    }
-
-    .note-card-groups {
-        grid-template-columns: 1fr;
     }
 
     .note-card-group .note-cards {
