@@ -70,21 +70,48 @@ const LandingPage = () => {
             <h2 id="home-pillars-heading">Bring Your Whole Self.</h2>
           </div>
           <div className="home-pillar-grid">
-            <article className="home-pillar">
+            <Link className="home-pillar" to="/register">
+              <img
+                className="home-pillar-image"
+                src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=900&q=80"
+                alt="Friends enjoying time together outdoors"
+                loading="lazy"
+              />
               <span className="home-pillar-number">01</span>
               <h3>Meet</h3>
               <p>Discover people through the details that make them uniquely themselves.</p>
-            </article>
-            <article className="home-pillar">
+              <span className="home-pillar-action">
+                Join to meet <span aria-hidden="true">-&gt;</span>
+              </span>
+            </Link>
+            <Link className="home-pillar" to="/register">
+              <img
+                className="home-pillar-image"
+                src="https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=900&q=80"
+                alt="A journal and pen ready for a story"
+                loading="lazy"
+              />
               <span className="home-pillar-number">02</span>
               <h3>Share</h3>
               <p>Keep a journal of moments, lessons, and stories worth passing along.</p>
-            </article>
-            <article className="home-pillar">
+              <span className="home-pillar-action">
+                Join to share <span aria-hidden="true">-&gt;</span>
+              </span>
+            </Link>
+            <Link className="home-pillar" to="/register">
+              <img
+                className="home-pillar-image"
+                src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=900&q=80"
+                alt="Friends supporting one another as they enjoy a sunset"
+                loading="lazy"
+              />
               <span className="home-pillar-number">03</span>
               <h3>Collaborate</h3>
               <p>Turn shared interests into thoughtful conversations and real momentum.</p>
-            </article>
+              <span className="home-pillar-action">
+                Join the conversation <span aria-hidden="true">-&gt;</span>
+              </span>
+            </Link>
           </div>
         </section>
         <section className="home-companion page-content" aria-labelledby="home-companion-heading">
