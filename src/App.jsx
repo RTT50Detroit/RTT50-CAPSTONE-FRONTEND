@@ -230,7 +230,7 @@ function App() {
               target="_blank"
               rel="noreferrer"
                 >
-              Explore the Relationship Resume
+              Explore The Relationship Resume
               <span aria-hidden="true">-&gt;</span>
                 </a>
               </div>

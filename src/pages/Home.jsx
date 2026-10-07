@@ -20,9 +20,9 @@ const LandingPage = () => {
             </p>
             <div className="home-actions">
               <Link className="home-primary-action" to="/register">
-                Join the community <span aria-hidden="true">-&gt;</span>
+                Join the Community <span aria-hidden="true">-&gt;</span>
               </Link>
-              <Link className="home-secondary-action" to="/login">Sign in</Link>
+              <Link className="home-secondary-action" to="/login">Sign In</Link>
             </div>
             <p className="home-note">Come as you are. Connection starts here.</p>
           </div>
@@ -83,7 +83,7 @@ const LandingPage = () => {
               <h3>Meet</h3>
               <p>Discover people through the details that make them uniquely themselves.</p>
               <span className="home-pillar-action">
-                Join to meet <span aria-hidden="true">-&gt;</span>
+                Join to Meet <span aria-hidden="true">-&gt;</span>
               </span>
             </Link>
             <Link className="home-pillar" to="/register">
@@ -97,7 +97,7 @@ const LandingPage = () => {
               <h3>Share</h3>
               <p>Keep a journal of moments, lessons, and stories worth passing along.</p>
               <span className="home-pillar-action">
-                Join to share <span aria-hidden="true">-&gt;</span>
+                Join to Share <span aria-hidden="true">-&gt;</span>
               </span>
             </Link>
             <Link className="home-pillar" to="/register">
@@ -111,7 +111,7 @@ const LandingPage = () => {
               <h3>Collaborate</h3>
               <p>Turn shared interests into thoughtful conversations and real momentum.</p>
               <span className="home-pillar-action">
-                Join the conversation <span aria-hidden="true">-&gt;</span>
+                Join the Conversation <span aria-hidden="true">-&gt;</span>
               </span>
             </Link>
           </div>
@@ -212,7 +212,7 @@ const MemberHub = () => {
         <section className="member-home-prompt page-content" aria-label="Member prompt">
           <p className="home-eyebrow">A small invitation</p>
           <blockquote>“What would make this space more useful, welcoming, and meaningful for you?”</blockquote>
-          <Link className="home-secondary-action" to="/notes">Write a note</Link>
+          <Link className="home-secondary-action" to="/notes">Write a Note</Link>
         </section>
       </main>
   );
