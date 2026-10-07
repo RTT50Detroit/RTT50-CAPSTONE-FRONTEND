@@ -218,7 +218,7 @@
   display: grid;
   flex: 1;
   min-height: 0;
-  grid-template-columns: minmax(260px, 0.62fr) minmax(0, 1.38fr);
+  grid-template-columns: minmax(230px, 0.48fr) minmax(0, 1.52fr);
   gap: 16px;
   align-items: start;
   overflow: hidden;
@@ -264,7 +264,8 @@
 .profile-image img {
   display: block;
   width: 100%;
-  height: clamp(190px, 23vw, 280px);
+  aspect-ratio: 1.35 / 1;
+  height: auto;
   object-fit: cover;
 }
 
