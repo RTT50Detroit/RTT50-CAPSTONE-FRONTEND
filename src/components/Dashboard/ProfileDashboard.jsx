@@ -24,6 +24,17 @@ const ProfileDashboard = () => {
   const currentMemberId = getCurrentMemberId();
 
   useEffect(() => {
+    document.body.classList.add('profile-page-active');
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.classList.remove('profile-page-active');
+      document.body.style.overflow = previousOverflow;
+    };
+  }, []);
+
+  useEffect(() => {
     if (!id) return;
     try {
       const savedWidgets = JSON.parse(localStorage.getItem(`profile-widgets-${id}`));

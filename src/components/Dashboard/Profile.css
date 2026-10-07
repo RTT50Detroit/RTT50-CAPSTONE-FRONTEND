@@ -4,7 +4,7 @@
   width: calc(100% - 40px);
   max-width: none;
   margin: 0 20px;
-  height: calc(100vh - 76px);
+  height: calc(100dvh - 76px);
   min-height: 560px;
   overflow: hidden;
   padding: 20px 0 24px;
@@ -499,10 +499,10 @@
   .page-content.profile-dashboard {
     width: calc(100% - 24px);
     margin: 0 12px;
-    height: auto;
+    height: calc(100dvh - 112px);
     min-height: 0;
-    overflow: visible;
-    padding: 20px 0 48px;
+    overflow: hidden;
+    padding: 12px 0;
   }
 
   .profile-detail-header {
@@ -536,17 +536,18 @@
 
   .profile-detail-grid {
     grid-template-columns: 1fr;
-    overflow: visible;
+    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+    overflow: hidden;
   }
 
   .profile-image img {
-    height: min(115vw, 420px);
+    height: 220px;
   }
 
   .profile-sidebar,
   .profile-main-content {
-    max-height: none;
-    overflow: visible;
+    max-height: 100%;
+    overflow-y: auto;
   }
 
   .user-bio {
