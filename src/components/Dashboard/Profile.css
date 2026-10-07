@@ -1,9 +1,9 @@
 .page-content.profile-dashboard {
   display: flex;
   flex-direction: column;
-  width: min(100% - 40px, 1380px);
-  max-width: 1380px;
-  margin: 0 auto;
+  width: calc(100% - 40px);
+  max-width: none;
+  margin: 0 20px;
   height: calc(100vh - 76px);
   min-height: 560px;
   overflow: hidden;
@@ -497,7 +497,8 @@
 
 @media (max-width: 760px) {
   .page-content.profile-dashboard {
-    width: min(100% - 24px, 1380px);
+    width: calc(100% - 24px);
+    margin: 0 12px;
     height: auto;
     min-height: 0;
     overflow: visible;
