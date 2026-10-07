@@ -95,7 +95,7 @@ const LandingPage = () => {
                 target="_blank"
                 rel="noreferrer"
             >
-              Visit Relationship Resume <span aria-hidden="true">-&gt;</span>
+              Explore The Relationship Resume <span aria-hidden="true">-&gt;</span>
             </a>
           </div>
         </section>
