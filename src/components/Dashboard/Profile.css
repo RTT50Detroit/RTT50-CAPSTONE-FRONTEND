@@ -415,6 +415,7 @@
 
 .profile-details-form {
   display: grid;
+  width: 100%;
   gap: 8px;
 }
 
@@ -432,13 +433,15 @@
 }
 
 .profile-details-form .additional-info label strong {
-  flex: 0 0 82px;
+  flex: 0 0 68px;
+  white-space: nowrap;
 }
 
 .profile-details-form input,
 .profile-details-form select {
-  width: auto;
+  width: 0;
   min-width: 0;
+  box-sizing: border-box;
   border: 1px solid #c7d8d3;
   border-radius: 9px;
   padding: 6px 9px;
@@ -454,25 +457,24 @@
 }
 
 .profile-details-form .additional-info label input[type='number'] {
-  width: 96px;
-  flex: 0 0 96px;
+  width: 64px;
+  flex: 0 0 64px;
 }
 
 .profile-details-form .additional-info label select {
-  max-width: 180px;
+  max-width: none;
 }
 
 .profile-details-form .profile-links label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  display: grid;
+  gap: 5px;
   max-width: 100%;
   color: #708287;
   font-size: 0.82rem;
 }
 
 .profile-details-form .profile-links label input {
-  flex: 1 1 auto;
+  width: 100%;
 }
 
 .profile-details-actions,
