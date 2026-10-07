@@ -12,11 +12,11 @@
 
 .profile-detail-header {
   position: relative;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 28px;
-  min-height: 214px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.34fr);
+  align-items: stretch;
+  gap: 32px;
+  min-height: 190px;
   margin: 0 0 16px;
   overflow: hidden;
   border: 1px solid #294451;
@@ -46,11 +46,17 @@
   z-index: 1;
 }
 
+.profile-hero-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .profile-back-link {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
   color: #b7c9c7;
   font-size: 0.8rem;
   font-weight: 800;
@@ -90,9 +96,12 @@
 
 .profile-hero-actions {
   display: flex;
-  align-items: flex-end;
+  align-items: stretch;
+  justify-content: center;
   flex-direction: column;
-  gap: 22px;
+  gap: 14px;
+  border-left: 1px solid rgba(183, 201, 199, 0.2);
+  padding-left: 28px;
 }
 
 .profile-customize-button {
@@ -209,15 +218,15 @@
   display: grid;
   flex: 1;
   min-height: 0;
-  grid-template-columns: minmax(300px, 0.78fr) minmax(0, 1.22fr);
-  gap: 20px;
+  grid-template-columns: minmax(260px, 0.62fr) minmax(0, 1.38fr);
+  gap: 16px;
   align-items: start;
   overflow: hidden;
 }
 
 .profile-widget {
   border: 1px solid #dce8e5;
-  border-radius: 20px;
+  border-radius: 16px;
   background: #fff;
   box-shadow: 0 14px 34px rgba(18, 59, 74, 0.07);
 }
@@ -255,7 +264,7 @@
 .profile-image img {
   display: block;
   width: 100%;
-  height: clamp(280px, 34vw, 440px);
+  height: clamp(190px, 23vw, 280px);
   object-fit: cover;
 }
 
@@ -292,15 +301,15 @@
 }
 
 .user-info-container {
-  padding: 26px 28px 30px;
+  padding: 18px 20px 20px;
 }
 
 .user-info-container h2,
 .user-bio h2 {
-  margin: 0 0 16px;
+  margin: 0 0 10px;
   color: #123b4a;
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 1.85rem;
+  font-size: 1.45rem;
   font-weight: 400;
 }
 
@@ -315,9 +324,9 @@
   gap: 18px;
   margin: 0;
   border-bottom: 1px solid #e6eeeb;
-  padding: 13px 0;
+  padding: 8px 0;
   color: #708287;
-  font-size: 0.88rem;
+  font-size: 0.8rem;
   line-height: 1.5;
 }
 
@@ -335,9 +344,9 @@
 .profile-links {
   display: grid;
   gap: 8px;
-  margin-top: 22px;
+  margin-top: 14px;
   border-top: 1px solid #e6eeeb;
-  padding-top: 20px;
+  padding-top: 14px;
 }
 
 .profile-links strong {
@@ -374,7 +383,7 @@
 }
 
 .profile-details-edit {
-  margin-top: 22px;
+  margin-top: 14px;
 }
 
 .profile-details-form {
@@ -462,7 +471,7 @@
   margin: 0;
   border: 0;
   border-radius: 20px;
-  padding: 34px;
+  padding: 24px 26px;
   background: #fff;
   text-align: left;
   box-shadow: none;
@@ -470,7 +479,7 @@
 
 .user-bio p {
   max-width: 680px;
-  margin: 0 0 24px;
+  margin: 0 0 16px;
   color: #62777b;
   font-size: 1rem;
   line-height: 1.9;
@@ -512,6 +521,10 @@
     padding: 28px 24px;
   }
 
+  .profile-detail-header {
+    grid-template-columns: 1fr;
+  }
+
   .profile-back-link {
     margin-bottom: 28px;
   }
@@ -520,6 +533,10 @@
     align-items: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
+    border-top: 1px solid rgba(183, 201, 199, 0.2);
+    border-left: 0;
+    padding-top: 16px;
+    padding-left: 0;
   }
 
   .profile-settings-menu {
@@ -541,7 +558,7 @@
   }
 
   .profile-image img {
-    height: 220px;
+    height: 190px;
   }
 
   .profile-sidebar,
