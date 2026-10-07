@@ -4,15 +4,21 @@ import PropTypes from 'prop-types';
 const NotePosting = ({ onAddNote }) => {
   const [title, setTitle] = useState('');
   const [noteContent, setNoteContent] = useState('');
+  const [postType, setPostType] = useState('journal');
   const [isSaving, setIsSaving] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSaving(true);
     try {
-      await onAddNote({ title: title.trim(), content: noteContent.trim() });
+      await onAddNote({
+        title: title.trim(),
+        content: noteContent.trim(),
+        type: postType,
+      });
       setTitle('');
       setNoteContent('');
+      setPostType('journal');
     } finally {
       setIsSaving(false);
     }
@@ -20,6 +26,22 @@ const NotePosting = ({ onAddNote }) => {
 
   return (
       <form className="journal-editor" onSubmit={handleSubmit}>
+        <div className="post-type-picker" role="group" aria-label="Post type">
+          <button
+              type="button"
+              className={postType === 'note' ? 'active' : ''}
+              onClick={() => setPostType('note')}
+          >
+            Post Note
+          </button>
+          <button
+              type="button"
+              className={postType === 'journal' ? 'active' : ''}
+              onClick={() => setPostType('journal')}
+          >
+            Post Journal
+          </button>
+        </div>
         <label htmlFor="note-title">Entry title</label>
         <input
             id="note-title"
@@ -36,7 +58,7 @@ const NotePosting = ({ onAddNote }) => {
             rows="6"
         />
         <button type="submit" disabled={!noteContent.trim() || isSaving}>
-          {isSaving ? 'Saving...' : 'Add Note'}
+          {isSaving ? 'Saving...' : postType === 'journal' ? 'Post Journal' : 'Post Note'}
         </button>
       </form>
   );

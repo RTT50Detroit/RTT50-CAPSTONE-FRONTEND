@@ -5,18 +5,21 @@ const NoteList = ({ notes, onEditNote, onDeleteNote }) => {
   const [editingId, setEditingId] = useState(null);
   const [editTitle, setEditTitle] = useState('');
   const [editContent, setEditContent] = useState('');
+  const [editType, setEditType] = useState('journal');
   const [busyId, setBusyId] = useState(null);
 
   const startEditing = (note) => {
     setEditingId(note._id);
     setEditTitle(note.title || '');
     setEditContent(note.content || '');
+    setEditType(note.type === 'note' ? 'note' : 'journal');
   };
 
   const stopEditing = () => {
     setEditingId(null);
     setEditTitle('');
     setEditContent('');
+    setEditType('journal');
   };
 
   const handleUpdate = async () => {
@@ -26,6 +29,7 @@ const NoteList = ({ notes, onEditNote, onDeleteNote }) => {
         await onEditNote(editingId, {
           title: editTitle.trim(),
           content: editContent.trim(),
+          type: editType,
         });
       } finally {
         setBusyId(null);
@@ -48,9 +52,25 @@ const NoteList = ({ notes, onEditNote, onDeleteNote }) => {
         {notes.length > 0 ? (
             <ul className="note-cards">
               {notes.map((note) => (
-                  <li className="note-card" key={note._id}>
+                  <li className={`note-card note-card--${note.type === 'note' ? 'note' : 'journal'}`} key={note._id}>
                     {editingId === note._id ? (
                         <div className="note-edit-form">
+                          <div className="post-type-picker" role="group" aria-label="Post type">
+                            <button
+                                type="button"
+                                className={editType === 'note' ? 'active' : ''}
+                                onClick={() => setEditType('note')}
+                            >
+                              Post Note
+                            </button>
+                            <button
+                                type="button"
+                                className={editType === 'journal' ? 'active' : ''}
+                                onClick={() => setEditType('journal')}
+                            >
+                              Post Journal
+                            </button>
+                          </div>
                           <input
                               value={editTitle}
                               onChange={(e) => setEditTitle(e.target.value)}
@@ -74,6 +94,9 @@ const NoteList = ({ notes, onEditNote, onDeleteNote }) => {
                            <p className="note-date">
                              {note.createdAt ? new Date(note.createdAt).toLocaleDateString() : 'Journal entry'}
                            </p>
+                           <span className="note-type-label">
+                             {note.type === 'note' ? 'Note' : 'Journal'}
+                           </span>
                            <h3>{note.title || 'Untitled Entry'}</h3>
                            <p className="note-content">{note.content}</p>
                            <div className="note-actions">
@@ -107,6 +130,7 @@ NoteList.propTypes = {
     title: PropTypes.string,
     content: PropTypes.string,
     createdAt: PropTypes.string,
+    type: PropTypes.oneOf(['note', 'journal']),
   })).isRequired,
   onEditNote: PropTypes.func.isRequired,
   onDeleteNote: PropTypes.func.isRequired,

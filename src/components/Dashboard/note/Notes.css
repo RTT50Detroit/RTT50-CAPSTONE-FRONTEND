@@ -4,7 +4,7 @@
     max-width: none;
     height: calc(100dvh - 76px);
     min-height: 560px;
-    grid-template-columns: minmax(280px, 0.42fr) minmax(0, 1.58fr);
+    grid-template-columns: 360px minmax(0, 760px);
     grid-template-rows: auto minmax(0, 1fr);
     gap: 18px;
     margin: 0 20px;
@@ -93,7 +93,33 @@
     align-content: start;
     gap: 10px;
     margin: 0;
-    padding: 22px;
+    padding: 20px;
+}
+
+.post-type-picker {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    border: 1px solid #dce8e5;
+    border-radius: 10px;
+    padding: 4px;
+    background: #f8fbfa;
+}
+
+.post-type-picker button {
+    width: auto;
+    margin: 0;
+    border: 0;
+    border-radius: 7px;
+    padding: 8px 6px;
+    color: #708287;
+    background: transparent;
+    font-size: 0.72rem;
+}
+
+.post-type-picker button.active {
+    color: #fff;
+    background: #287c78;
 }
 
 .journal-editor label,
@@ -121,7 +147,7 @@
 }
 
 .journal-editor textarea {
-    min-height: 180px;
+    min-height: 140px;
 }
 
 .journal-editor input:focus,
@@ -157,6 +183,24 @@
 .note-actions button:disabled {
     cursor: wait;
     opacity: 0.6;
+}
+
+.journal-editor .post-type-picker button,
+.note-edit-form .post-type-picker button {
+    width: auto;
+    margin: 0;
+    border: 0;
+    border-radius: 7px;
+    padding: 8px 6px;
+    color: #708287;
+    background: transparent;
+    font-size: 0.72rem;
+}
+
+.journal-editor .post-type-picker button.active,
+.note-edit-form .post-type-picker button.active {
+    color: #fff;
+    background: #287c78;
 }
 
 .notes-list-section {
@@ -199,6 +243,30 @@
     border-radius: 12px;
     padding: 16px 18px;
     background: #f8fbfa;
+}
+
+.note-card--note {
+    border-left-color: #287c78;
+    background: #f8fbfa;
+}
+
+.note-card--journal {
+    border-left-color: #d5845b;
+    background: #fffaf3;
+}
+
+.note-type-label {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: #287c78;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.note-card--journal .note-type-label {
+    color: #a2643d;
 }
 
 .note-card h3 {
@@ -257,6 +325,12 @@
 
 .notes-error {
     color: #a04f43;
+}
+
+@media (min-width: 761px) and (max-width: 1180px) {
+    .page-content.notes-page {
+        grid-template-columns: 300px minmax(0, 1fr);
+    }
 }
 
 @media (max-width: 760px) {

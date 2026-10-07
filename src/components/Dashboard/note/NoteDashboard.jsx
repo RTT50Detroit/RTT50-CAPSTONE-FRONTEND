@@ -51,6 +51,7 @@ const NotesDashboard = () => {
       setNotes((prevNotes) => [...prevNotes, {
         ...note,
         ...savedNote,
+        type: savedNote.type || note.type || 'journal',
       }]);
     } catch (requestError) {
       console.error('Error while saving note:', requestError);
