@@ -45,7 +45,7 @@
 
 .master-dashboard-grid {
   display: grid;
-  grid-template-columns: minmax(300px, 0.68fr) minmax(520px, 1.32fr);
+  grid-template-columns: minmax(0, 1.35fr) minmax(360px, 0.65fr);
   align-items: start;
   gap: 20px;
 }
@@ -60,7 +60,18 @@
 }
 
 .master-profile-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 16px;
   border-top: 3px solid var(--theme-gold);
+}
+
+.master-profile-form h2,
+.master-profile-form > .dashboard-status,
+.master-profile-form > .master-success,
+.master-profile-form > .master-password-reset,
+.master-profile-form > .master-form-actions {
+  grid-column: 1 / -1;
 }
 
 .master-profile-form h2,
@@ -70,6 +81,10 @@
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 1.5rem;
   font-weight: 400;
+}
+
+.master-profile-list h2 {
+  min-width: 0;
 }
 
 .master-profile-list h2 {
@@ -107,6 +122,16 @@
 .master-form-label textarea {
   min-height: 82px;
   resize: vertical;
+}
+
+#master-links,
+#master-about-me {
+  min-height: 96px;
+}
+
+.master-profile-form > .master-form-label:has(#master-links),
+.master-profile-form > .master-form-label:has(#master-about-me) {
+  grid-column: 1 / -1;
 }
 
 .master-form-label input:focus,
@@ -344,6 +369,15 @@
 
   .master-dashboard-grid {
     grid-template-columns: 1fr;
+  }
+
+  .master-profile-form {
+    grid-template-columns: 1fr;
+  }
+
+  .master-profile-form > .master-form-label:has(#master-links),
+  .master-profile-form > .master-form-label:has(#master-about-me) {
+    grid-column: auto;
   }
 }
 
