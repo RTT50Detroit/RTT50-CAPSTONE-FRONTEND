@@ -97,11 +97,6 @@ const AboutMe = ({
         ) : (
           <p>{aboutMe || 'No biography added yet.'}</p>
         )}
-        {canEdit && !isEditing && (
-          <button onClick={() => setIsEditing(true)} disabled={isSaving}>
-            Edit about me
-          </button>
-        )}
         {error && <p className="about-me-error">{error}</p>}
       </div>
   );

@@ -311,23 +311,6 @@
   object-fit: cover;
 }
 
-.profile-image-button {
-  display: block;
-  margin: 16px 22px 10px;
-  border-radius: 10px;
-  padding: 11px 14px;
-  color: #fff;
-  background: #287c78;
-  cursor: pointer;
-  font-size: 0.82rem;
-  font-weight: 800;
-  text-align: center;
-}
-
-.profile-image-button:hover {
-  background: #1d625f;
-}
-
 .profile-image input[type='file'] {
   position: absolute;
   width: 1px;
@@ -417,7 +400,6 @@
   color: #d0734f;
 }
 
-.profile-details-edit,
 .profile-details-actions button,
 .user-bio button {
   border: 0;
@@ -429,10 +411,6 @@
   font: inherit;
   font-size: 0.8rem;
   font-weight: 800;
-}
-
-.profile-details-edit {
-  margin-top: 14px;
 }
 
 .profile-details-form {

@@ -226,11 +226,6 @@ const MemberInfo = ({
               {error && <p className="profile-edit-error">{error}</p>}
             </>
           )}
-          {!isEditing && canEdit && (
-            <button className="profile-details-edit" type="button" onClick={() => setIsEditing(true)}>
-              Edit details
-            </button>
-          )}
         </form>
       </section>
   );

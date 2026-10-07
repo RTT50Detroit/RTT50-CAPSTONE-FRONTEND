@@ -57,9 +57,6 @@ const ProfileImage = ({
         />
         {canEdit && (
           <>
-            <label className="profile-image-button" htmlFor="image-upload">
-              Change profile picture
-            </label>
             <input
                 id="image-upload"
                 ref={fileInputRef}
