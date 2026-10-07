@@ -17,6 +17,7 @@ const ProfileDashboard = () => {
     details: true,
     about: true,
   });
+  const [editRequested, setEditRequested] = useState(false);
   const [searchParams] = useSearchParams();
   const id = searchParams.get('id');
   const token = localStorage.getItem('authToken');
@@ -40,6 +41,11 @@ const ProfileDashboard = () => {
       localStorage.setItem(`profile-widgets-${id}`, JSON.stringify(next));
       return next;
     });
+  };
+
+  const requestPageEdit = () => {
+    setIsCustomizeOpen(false);
+    setEditRequested(true);
   };
 
   useEffect(() => {
@@ -101,9 +107,6 @@ const ProfileDashboard = () => {
       <main className="page-content profile-dashboard">
         {userData ? (
             <>
-              <Link className="profile-back-link" to="/dashboard">
-                &lt;- Back to profiles
-              </Link>
               <header className="profile-detail-header profile-hero">
                 <div className="profile-hero-copy">
                   <Link className="profile-back-link" to="/dashboard">
@@ -122,7 +125,7 @@ const ProfileDashboard = () => {
                       onClick={() => setIsCustomizeOpen((current) => !current)}
                       aria-expanded={isCustomizeOpen}
                   >
-                    <span aria-hidden="true">☷</span> Customize layout
+                    <span aria-hidden="true">⚙</span> Settings
                   </button>
                   <p className={`profile-detail-status${isOnline ? ' profile-detail-status--online' : ''}`}>
                     <span className="profile-detail-status-dot" aria-hidden="true" />
@@ -131,12 +134,12 @@ const ProfileDashboard = () => {
                 </div>
               </header>
               {isCustomizeOpen && (
-                <section className="profile-customize-panel" aria-label="Customize profile layout">
-                  <div>
-                    <p className="profile-detail-label">Your view</p>
-                    <h2>Choose your widgets</h2>
+                <section className="profile-settings-menu" aria-label="Profile page settings">
+                  <div className="profile-settings-heading">
+                    <p className="profile-detail-label">Page settings</p>
+                    <h2>Customize your profile</h2>
                   </div>
-                  <div className="profile-widget-toggles">
+                  <div className="profile-widget-toggles" aria-label="Widget visibility">
                     <label>
                       <input
                           type="checkbox"
@@ -154,6 +157,15 @@ const ProfileDashboard = () => {
                       About me
                     </label>
                   </div>
+                  {canEdit && (
+                    <button
+                        type="button"
+                        className="profile-settings-edit"
+                        onClick={requestPageEdit}
+                    >
+                      Edit profile details <span aria-hidden="true">&rarr;</span>
+                    </button>
+                  )}
                 </section>
               )}
               <div className="profile-detail-grid">
@@ -169,6 +181,8 @@ const ProfileDashboard = () => {
                         user={userData}
                         memberId={profileId}
                         canEdit={canEdit}
+                        editRequested={editRequested}
+                        onEditRequestHandled={() => setEditRequested(false)}
                         onSaved={(profile) => setUserData((current) => ({
                           ...current,
                           ...profile,

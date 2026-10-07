@@ -45,7 +45,9 @@ const getProfileRelationshipResumeLink = (user) => {
   return relationshipResume || relationshipResumeLink('');
 };
 
-const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
+const MemberInfo = ({
+  user, memberId, canEdit, onSaved, editRequested, onEditRequestHandled,
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState('');
@@ -70,6 +72,12 @@ const MemberInfo = ({ user, memberId, canEdit, onSaved }) => {
       relationshipResumeUsername: username,
     });
   }, [user]);
+
+  useEffect(() => {
+    if (!editRequested || !canEdit) return;
+    setIsEditing(true);
+    onEditRequestHandled?.();
+  }, [canEdit, editRequested, onEditRequestHandled]);
 
   if (!user) return <p>No member information found.</p>;
 
@@ -265,4 +273,6 @@ MemberInfo.propTypes = {
   canEdit: PropTypes.bool,
   memberId: PropTypes.string,
   onSaved: PropTypes.func,
+  editRequested: PropTypes.bool,
+  onEditRequestHandled: PropTypes.func,
 };
