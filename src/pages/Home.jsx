@@ -6,52 +6,60 @@ const LandingPage = () => {
       <main className="home-page">
         <section className="home-hero page-content">
           <div className="home-hero-copy">
-            <p className="home-eyebrow">The Social Match Game</p>
-            <h1>Make room for a better kind of connection.</h1>
+            <p className="home-eyebrow">Connection, with intention</p>
+            <h1>
+              A space for Black connection, <span>built around the whole you.</span>
+            </h1>
             <p className="home-intro">
-              Meet someone who gets your pace, share the stories that shaped you,
-              and find a community where showing up as yourself feels natural.
+              Meet people who get your rhythm. Share the stories that shaped you.
+              Find your people in a community made for real conversation and
+              showing up as yourself.
             </p>
             <p className="home-companion-note">
-              Build a fuller picture of what you bring to a relationship with our
-              companion tool, Relationship Resume.
+              Dating, friendship, and a little more room to be yourself.
             </p>
             <div className="home-actions">
-              <Link className="home-primary-action" to="/register">Join the conversation</Link>
+              <Link className="home-primary-action" to="/register">
+                Join the community <span aria-hidden="true">-&gt;</span>
+              </Link>
               <Link className="home-secondary-action" to="/login">Sign in</Link>
             </div>
-            <p className="home-note">Dating, friendship, and a place to put your thoughts.</p>
+            <p className="home-note">Come as you are. Connection starts here.</p>
           </div>
 
-          <div className="home-persona-stage" aria-label="A Social Match Game member profile">
+          <div className="home-persona-stage">
+            <img
+              className="home-portrait"
+              src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=1100&q=85"
+              alt="A Black woman smiling in warm sunlight"
+            />
+            <div className="home-image-caption" aria-hidden="true">
+              <span>Real stories</span>
+              <span>Meaningful connection</span>
+            </div>
             <div className="home-persona-card">
               <div className="home-persona-topline">
-                <span>Member spotlight</span>
-                <span className="home-online-status">● online</span>
+                <span>A community for you</span>
+                <span className="home-online-status">Here together</span>
               </div>
-              <div className="home-persona-avatar" aria-hidden="true">MC</div>
-              <p className="home-persona-label">The thoughtful connector</p>
-              <h2>Maya Chen, 29</h2>
+              <p className="home-persona-label">Your next chapter</p>
+              <h2>Good people. Real connection.</h2>
               <p className="home-persona-bio">
-                Product designer, Sunday cook, and collector of small, good stories.
+                A welcoming place to meet, share your story, and find common ground.
               </p>
               <div className="home-persona-tags">
-                <span>Curious minds</span>
-                <span>Long walks</span>
-                <span>Good questions</span>
-              </div>
-              <div className="home-persona-footer">
-                <span>Looking for meaningful conversations</span>
-                <span aria-hidden="true">-&gt;</span>
+                <span>Dating</span>
+                <span>Friendship</span>
+                <span>Community</span>
               </div>
             </div>
             <div className="home-note-card home-note-card--top">
-              <span>Journal note</span>
-              <strong>What made you smile today?</strong>
+              <span>A little reminder</span>
+              <strong>Your story belongs here.</strong>
             </div>
             <div className="home-note-card home-note-card--bottom">
-              <span>Shared interest</span>
-              <strong>Slow mornings + live music</strong>
+              <span>Make room for</span>
+              <strong>Good conversation &amp; new connections</strong>
             </div>
           </div>
         </section>
