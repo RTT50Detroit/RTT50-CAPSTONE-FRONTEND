@@ -1,24 +1,20 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './css/Login.css';
 
-// Set to true to re-enable email/password authentication.
-const CREDENTIAL_AUTH_ENABLED = false;
-
 const Login = () => {
+  // Email/password state is disabled; members sign in with social accounts.
+  /*
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  */
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
-  const [previewImage, setPreviewImage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [configuredProviders, setConfiguredProviders] = useState([]);
-  const fileInputRef = useRef(null);
-  const navigate = useNavigate();
   const location = useLocation();
   const isRegister = location.pathname === '/register';
   const apiUrl = (import.meta.env.VITE_APP_BASE_URL || '').replace(/\/$/, '');
@@ -39,6 +35,8 @@ const Login = () => {
     if (!location.search.includes('oauthError=')) setError('');
   }, [isRegister, location.search]);
 
+  // Email/password handlers are disabled; restore with the form below to re-enable.
+  /*
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (!file) {
@@ -53,7 +51,6 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!CREDENTIAL_AUTH_ENABLED) return;
     setIsSubmitting(true);
     setMessage('');
     setError('');
@@ -119,6 +116,7 @@ const Login = () => {
       setIsSubmitting(false);
     }
   };
+  */
 
   return (
     <main className="page-content auth-page">
@@ -172,6 +170,7 @@ const Login = () => {
           {message && <p className="success-message" role="status">{message}</p>}
           {error && <p className="error-message" role="alert">{error}</p>}
 
+          {/* Email/password form disabled; members sign in with social accounts.
           <form onSubmit={handleSubmit} className="login-form">
             <div
               className={`auth-field${isRegister ? '' : ' auth-field-reserved'}`}
@@ -240,7 +239,6 @@ const Login = () => {
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 required
-                disabled={!CREDENTIAL_AUTH_ENABLED}
                 placeholder="you@example.com"
                 autoComplete="email"
               />
@@ -255,7 +253,6 @@ const Login = () => {
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 required
-                disabled={!CREDENTIAL_AUTH_ENABLED}
                 placeholder={isRegister ? 'Create a password' : 'Enter your password'}
                 autoComplete={isRegister ? 'new-password' : 'current-password'}
               />
@@ -283,18 +280,19 @@ const Login = () => {
               )}
             </div>
 
-            <button type="submit" className="submit-button" disabled={isSubmitting || !CREDENTIAL_AUTH_ENABLED}>
+            <button type="submit" className="submit-button" disabled={isSubmitting}>
               {isSubmitting
                 ? (isRegister ? 'Creating Account...' : 'Signing In...')
                 : (isRegister ? 'Create Account' : 'Sign In')}
               {!isSubmitting && <span aria-hidden="true">→</span>}
             </button>
           </form>
+          */}
 
           <div className="social-login-slot">
-            {!isRegister && configuredProviders.length > 0 && (
+            {configuredProviders.length > 0 && (
               <div className="social-login" aria-label="Social Sign-In Options">
-                <p className="social-login-divider"><span>Or Continue With</span></p>
+                <p className="social-login-divider"><span>{isRegister ? 'Register With' : 'Sign In With'}</span></p>
                 <div className="social-login-options">
                   {[
                     ['google', 'Google'],
