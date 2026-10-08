@@ -211,3 +211,19 @@
   line-height: 1;
   cursor: pointer;
 }
+
+.complete-profile-actions {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.complete-profile-card a.submit-button {
+  color: #211719;
+  text-decoration: none;
+}
+
+.complete-profile-card .resume-secondary {
+  color: var(--theme-link);
+  background: transparent;
+}

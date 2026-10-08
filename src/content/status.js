@@ -8,13 +8,14 @@ export const statusContent = {
   companion: [
     'The Relationship Resume is the companion site to The Social Match Game, and a core part of how this community works. It is a one-page “resume” for your love life: your objective, ideal candidate, core qualities, likes, dislikes, dealbreakers, love languages, relevant experience, and references.',
     'You build it with a live preview and publish it to a shareable link for your dating profile, bio, or matchmaking friends. You can also print it.',
+    'A Relationship Resume is required to use The Social Match Game. Members without one are asked to create it first and cannot use member features until their resume is linked.',
     'It is a separate site with its own sign-in (email, Google, Facebook, or GitHub) and optional two-factor authentication. Your Social Match Game account does not sign you in there, and it is also in development.',
   ],
   companionSteps: [
-    'Create and publish your Relationship Resume on its own site. Publishing requires signing in there.',
-    'Copy your resume’s link name (the part after /r/ in your resume’s address).',
-    'Edit your profile details here and paste it into the Relationship Resume username field.',
-    'Your profile then links to your resume, so members can learn who you are beyond a photo.',
+    'Start at The Relationship Resume. Create and publish your resume there. Publishing requires signing in on that site.',
+    'Choose to send your resume to The Social Match Game. You are brought here to sign in with Google or GitHub.',
+    'Confirm you are 21 or older and accept our policies.',
+    'Once you pass these checks, your resume link is added to your profile automatically. You cannot enter or edit it by hand.',
   ],
   phase: [
     'We are in a public demo phase. The site is live and you can create an account, but features are still being added and refined.',
@@ -24,7 +25,7 @@ export const statusContent = {
     ['Social Sign-In', 'Sign in or register with a Google or GitHub account. We do not use passwords.'],
     ['Age Verification', 'Members must be 21 or older. Everyone confirms a date of birth and accepts our policies before entering.'],
     ['Member Directory', 'Browse the profiles of verified members.'],
-    ['Relationship Resume Link', 'Link your profile to your published Relationship Resume.'],
+    ['Relationship Resume Requirement', 'Your published Relationship Resume is sent here from its own site and linked to your profile after you pass verification.'],
     ['Profiles', 'Share your age, gender, occupation, hobbies, an About Me, links, and a profile photo.'],
     ['Journal', 'Keep private notes and short entries in your own journal.'],
     ['Feedback Board', 'Post feedback and replies to help shape the site.'],
@@ -36,7 +37,6 @@ export const statusContent = {
     'Blocking and in-app reporting tools',
     'Notifications',
     'Additional sign-in options',
-    'One-click linking between your Relationship Resume and your Social Match profile (for members who sign in with Google or GitHub)',
   ],
   expectations: [
     'Expect bugs, rough edges, and occasional downtime. The server may take up to a minute to wake up after a quiet period.',

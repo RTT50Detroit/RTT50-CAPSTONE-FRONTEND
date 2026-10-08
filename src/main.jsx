@@ -20,6 +20,9 @@ axios.interceptors.response.use(
       && window.location.pathname !== '/complete-profile') {
       requireProfileCompletion();
       window.location.replace('/complete-profile');
+    } else if (error.response?.data?.code === 'RESUME_REQUIRED'
+      && window.location.pathname !== '/resume-required') {
+      window.location.replace('/resume-required');
     }
     return Promise.reject(error);
   },

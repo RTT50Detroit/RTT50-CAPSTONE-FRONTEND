@@ -341,7 +341,7 @@ export const OAuthCallback = () => {
     axios.get(`${apiUrl}/api/auth/session/current`)
         .then(({ data }) => {
           localStorage.setItem('authUser', JSON.stringify(data.user));
-          navigate(isProfileComplete() ? '/dashboard' : '/complete-profile', { replace: true });
+          navigate(isProfileComplete() ? '/resume-required' : '/complete-profile', { replace: true });
         })
         .catch(() => {
           setError('Social sign-in could not be completed. Please try again.');

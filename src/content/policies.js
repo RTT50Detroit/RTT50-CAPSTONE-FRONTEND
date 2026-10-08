@@ -52,6 +52,19 @@ export const policies = [
         ],
       },
       {
+        heading: 'Relationship Resume Requirement',
+        paragraphs: [
+          'A Relationship Resume is required to use The Social Match Game. It is the core of every profile.',
+        ],
+        items: [
+          'Create and publish your resume on The Relationship Resume, then send it to The Social Match Game from there.',
+          'Your resume link is added to your profile automatically after you sign in and pass our age verification and policy acceptance. It cannot be typed in, pasted, or edited by hand.',
+          'Until your resume is linked, you cannot use member features such as the directory, journal, or feedback board.',
+          'Your resume must be your own and must follow these policies. Resumes that are false, impersonate someone else, or violate our guidelines can be unlinked and your account removed.',
+          'Your published resume is visible to anyone with its link. Share only what you are comfortable making public.',
+        ],
+      },
+      {
         heading: 'Be Respectful',
         items: [
           'Treat every member with dignity. Harassment, bullying, threats, and intimidation are not allowed.',
@@ -102,6 +115,19 @@ export const policies = [
         heading: 'Accepting These Terms',
         paragraphs: [
           'By creating an account or using The Social Match Game, you agree to these Terms, our Privacy Policy, our Community Guidelines, and our Age Policy. If you do not agree, do not use the service.',
+        ],
+      },
+      {
+        heading: 'Relationship Resume Requirement',
+        paragraphs: [
+          'A Relationship Resume is required to use The Social Match Game. It is the core of every profile.',
+        ],
+        items: [
+          'Create and publish your resume on The Relationship Resume, then send it to The Social Match Game from there.',
+          'Your resume link is added to your profile automatically after you sign in and pass our age verification and policy acceptance. It cannot be typed in, pasted, or edited by hand.',
+          'Until your resume is linked, you cannot use member features such as the directory, journal, or feedback board.',
+          'Your resume must be your own and must follow these policies. Resumes that are false, impersonate someone else, or violate our guidelines can be unlinked and your account removed.',
+          'Your published resume is visible to anyone with its link. Share only what you are comfortable making public.',
         ],
       },
       {

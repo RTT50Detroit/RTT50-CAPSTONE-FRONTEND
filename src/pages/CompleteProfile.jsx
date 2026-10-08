@@ -66,7 +66,7 @@ const CompleteProfile = () => {
         policyVersion: POLICY_VERSION,
         policiesAcceptedAt: acceptedAt,
       });
-      navigate('/dashboard', { replace: true });
+      navigate('/resume-required', { replace: true });
     } catch (requestError) {
       if (requestError.response?.data?.code === 'UNDERAGE') {
         localStorage.removeItem('authToken');
@@ -102,7 +102,7 @@ const CompleteProfile = () => {
   }
 
   if (!hasValidAuthToken()) return <Navigate to="/login" replace />;
-  if (isProfileComplete()) return <Navigate to="/dashboard" replace />;
+  if (isProfileComplete()) return <Navigate to="/resume-required" replace />;
 
   return (
     <main className="page-content complete-profile-page">

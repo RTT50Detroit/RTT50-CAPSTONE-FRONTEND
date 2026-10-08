@@ -4,39 +4,9 @@ import PropTypes from 'prop-types';
 import { getAuthToken, isMasterUser } from '../../utils/auth.js';
 import { MINIMUM_AGE } from '../../utils/age.js';
 
-const relationshipResumeBaseUrl = 'https://therelationshipresume.netlify.app/';
-
-const getRelationshipResumeUrl = (username) => {
-  const url = new URL(relationshipResumeBaseUrl);
-  if (username) url.pathname = `/r/${encodeURIComponent(username)}`;
-  return url.toString().replace(/\/$/, '');
-};
-
-const getRelationshipResumeUsername = (link) => {
-  try {
-    const pathParts = new URL(link.url).pathname.split('/').filter(Boolean);
-    return pathParts[0] === 'r' ? decodeURIComponent(pathParts[1] || '') : '';
-  } catch {
-    return '';
-  }
-};
-
 const normalizeHobbies = (hobbies) => (
   Array.isArray(hobbies) ? hobbies : hobbies ? [hobbies] : []
 );
-
-const relationshipResumeLink = (username) => ({
-  label: 'The Relationship Resume',
-  url: getRelationshipResumeUrl(username),
-});
-
-const getProfileRelationshipResumeUsername = (user) => {
-  const relationshipResume = user?.links?.find((link) => (
-    ['relationship resume', 'the relationship resume'].includes(link.label?.toLowerCase())
-  ));
-
-  return getRelationshipResumeUsername(relationshipResume);
-};
 
 const MemberInfo = ({
   user, memberId, canEdit, onSaved, editRequested, onEditRequestHandled,
@@ -49,20 +19,14 @@ const MemberInfo = ({
     gender: '',
     occupation: '',
     hobbies: '',
-    links: [],
-    relationshipResumeUsername: '',
   });
 
   useEffect(() => {
-    const username = getProfileRelationshipResumeUsername(user);
-
     setForm({
       age: user?.age ?? '',
       gender: user?.gender || '',
       occupation: user?.occupation || '',
       hobbies: normalizeHobbies(user?.hobbies).join(', '),
-      links: [relationshipResumeLink(username)],
-      relationshipResumeUsername: username,
     });
   }, [user]);
 
@@ -78,8 +42,6 @@ const MemberInfo = ({
     event.preventDefault();
     setIsSaving(true);
     setError('');
-    const username = form.relationshipResumeUsername.trim();
-    const links = username ? [relationshipResumeLink(username)] : [];
     const age = Number(form.age);
     if (!Number.isInteger(age) || age < MINIMUM_AGE || age > 120) {
       setError(`Age must be a whole number between ${MINIMUM_AGE} and 120.`);
@@ -105,7 +67,6 @@ const MemberInfo = ({
         aboutMe: user.aboutMe ?? user.aboutme ?? '',
         occupation: form.occupation.trim(),
         hobbies: form.hobbies.split(',').map((hobby) => hobby.trim()).filter(Boolean),
-        links,
       };
       const { data } = await axios[saveMethod](
           saveUrl,
@@ -119,7 +80,6 @@ const MemberInfo = ({
         gender: form.gender.trim(),
         occupation: form.occupation.trim(),
         hobbies: form.hobbies.split(',').map((hobby) => hobby.trim()).filter(Boolean),
-        links,
       });
       setIsEditing(false);
     } catch (requestError) {
@@ -200,21 +160,10 @@ const MemberInfo = ({
             </label>
           </div>
           {isEditing && (
-            <div className="profile-links profile-links-editor">
-              <label>
-                The Relationship Resume Username
-                <input
-                    value={form.relationshipResumeUsername}
-                    onChange={(event) => setForm((current) => ({
-                      ...current,
-                      relationshipResumeUsername: event.target.value,
-                    }))}
-                    placeholder="Enter your username"
-                    maxLength="100"
-                    autoComplete="username"
-                />
-              </label>
-            </div>
+            <p className="profile-links-editor">
+              Your Relationship Resume link is added automatically when you send your resume from
+              The Relationship Resume. It cannot be edited here.
+            </p>
           )}
           {isEditing && (
             <>
