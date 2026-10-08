@@ -36,18 +36,16 @@ function Navigation() {
             </NavLink>
           </li>
           {!isLoggedIn && (
-            <>
-              <li>
-                <NavLink to="/register" className={({ isActive }) => (isActive ? 'active' : '')}>
-                  Register
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/login" className={({ isActive }) => (isActive ? 'active' : '')}>
-                  Login
-                </NavLink>
-              </li>
-            </>
+            <li>
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  isActive || window.location.pathname === '/register' ? 'active' : ''
+                }
+              >
+                Register / Login
+              </NavLink>
+            </li>
           )}
           {isLoggedIn && (
             <>
