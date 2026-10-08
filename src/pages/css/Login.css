@@ -167,7 +167,7 @@
 .auth-panel {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   padding: clamp(32px, 5vw, 68px);
   background:
     radial-gradient(ellipse at 100% 0, rgba(242, 184, 91, 0.045), transparent 40%),
@@ -248,6 +248,10 @@
 
 .auth-field-full {
   grid-column: 1 / -1;
+}
+
+.auth-field-reserved {
+  visibility: hidden;
 }
 
 .form-label {
@@ -373,7 +377,11 @@
 }
 
 .social-login {
-  margin-top: 20px;
+  margin-top: 0;
+}
+
+.social-login-slot {
+  min-height: 98px;
 }
 
 .social-login-divider {

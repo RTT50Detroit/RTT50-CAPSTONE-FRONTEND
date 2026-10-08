@@ -172,54 +172,62 @@ const Login = () => {
           {error && <p className="error-message" role="alert">{error}</p>}
 
           <form onSubmit={handleSubmit} className="login-form">
-            {isRegister && (
-              <>
-                <div className="auth-field">
-                  <label htmlFor="name" className="form-label">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    className="form-input"
-                    value={name}
-                    onChange={(event) => setName(event.target.value)}
-                    required
-                    placeholder="Your name"
-                    autoComplete="name"
-                  />
-                </div>
-                <div className="auth-field">
-                  <label htmlFor="age" className="form-label">Age</label>
-                  <input
-                    type="number"
-                    id="age"
-                    name="age"
-                    className="form-input"
-                    value={age}
-                    onChange={(event) => setAge(event.target.value)}
-                    required
-                    placeholder="Your age"
-                    autoComplete="off"
-                  />
-                </div>
-                <div className="auth-field">
-                  <label htmlFor="gender" className="form-label">Gender</label>
-                  <select
-                    id="gender"
-                    name="gender"
-                    className="form-input"
-                    value={gender}
-                    onChange={(event) => setGender(event.target.value)}
-                    required
-                  >
-                    <option value="">Select an option</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-              </>
-            )}
+            <div
+              className={`auth-field${isRegister ? '' : ' auth-field-reserved'}`}
+              aria-hidden={!isRegister}
+            >
+              <label htmlFor="name" className="form-label">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                className="form-input"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+                required={isRegister}
+                disabled={!isRegister}
+                placeholder="Your name"
+                autoComplete="name"
+              />
+            </div>
+            <div
+              className={`auth-field${isRegister ? '' : ' auth-field-reserved'}`}
+              aria-hidden={!isRegister}
+            >
+              <label htmlFor="age" className="form-label">Age</label>
+              <input
+                type="number"
+                id="age"
+                name="age"
+                className="form-input"
+                value={age}
+                onChange={(event) => setAge(event.target.value)}
+                required={isRegister}
+                disabled={!isRegister}
+                placeholder="Your age"
+                autoComplete="off"
+              />
+            </div>
+            <div
+              className={`auth-field${isRegister ? '' : ' auth-field-reserved'}`}
+              aria-hidden={!isRegister}
+            >
+              <label htmlFor="gender" className="form-label">Gender</label>
+              <select
+                id="gender"
+                name="gender"
+                className="form-input"
+                value={gender}
+                onChange={(event) => setGender(event.target.value)}
+                required={isRegister}
+                disabled={!isRegister}
+              >
+                <option value="">Select an option</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
 
             <div className="auth-field auth-field-full">
               <label htmlFor="email" className="form-label">Email address</label>
@@ -250,25 +258,27 @@ const Login = () => {
               />
             </div>
 
-            {isRegister && (
-              <div className="auth-field auth-field-full">
-                <label htmlFor="profileImage" className="form-label">
-                  Profile image <span className="auth-optional">(optional)</span>
-                </label>
-                <input
-                  type="file"
-                  id="profileImage"
-                  name="profileImage"
-                  className="form-input auth-file-input"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  ref={fileInputRef}
-                />
-                {previewImage && (
-                  <img src={previewImage} alt="Selected profile preview" className="image-preview" />
-                )}
-              </div>
-            )}
+            <div
+              className={`auth-field auth-field-full${isRegister ? '' : ' auth-field-reserved'}`}
+              aria-hidden={!isRegister}
+            >
+              <label htmlFor="profileImage" className="form-label">
+                Profile image <span className="auth-optional">(optional)</span>
+              </label>
+              <input
+                type="file"
+                id="profileImage"
+                name="profileImage"
+                className="form-input auth-file-input"
+                accept="image/*"
+                onChange={handleImageChange}
+                ref={fileInputRef}
+                disabled={!isRegister}
+              />
+              {previewImage && isRegister && (
+                <img src={previewImage} alt="Selected profile preview" className="image-preview" />
+              )}
+            </div>
 
             <button type="submit" className="submit-button" disabled={isSubmitting}>
               {isSubmitting
@@ -278,26 +288,28 @@ const Login = () => {
             </button>
           </form>
 
-          {!isRegister && configuredProviders.length > 0 && (
-            <div className="social-login" aria-label="Social sign-in options">
-              <p className="social-login-divider"><span>or continue with</span></p>
-              <div className="social-login-options">
-                {[
-                  ['google', 'Google'],
-                  ['github', 'GitHub'],
-                ].filter(([provider]) => configuredProviders.includes(provider))
-                    .map(([provider, label]) => (
-                      <a
-                        className="social-login-button"
-                        href={`${apiUrl}/api/auth/${provider}`}
-                        key={provider}
-                      >
-                        {label}
-                      </a>
-                    ))}
+          <div className="social-login-slot">
+            {!isRegister && configuredProviders.length > 0 && (
+              <div className="social-login" aria-label="Social sign-in options">
+                <p className="social-login-divider"><span>or continue with</span></p>
+                <div className="social-login-options">
+                  {[
+                    ['google', 'Google'],
+                    ['github', 'GitHub'],
+                  ].filter(([provider]) => configuredProviders.includes(provider))
+                      .map(([provider, label]) => (
+                        <a
+                          className="social-login-button"
+                          href={`${apiUrl}/api/auth/${provider}`}
+                          key={provider}
+                        >
+                          {label}
+                        </a>
+                      ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
 
           <p className="auth-privacy-note">
             Your next meaningful connection starts with a hello.
