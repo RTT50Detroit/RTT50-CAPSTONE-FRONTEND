@@ -85,44 +85,44 @@ const MembersDashboard = () => {
       <main className="page-content dashboard-page">
         <section className="dashboard-hero">
           <div>
-            <p className="dashboard-eyebrow">Member directory</p>
+            <p className="dashboard-eyebrow">Member Directory</p>
             <h1>Find Your People</h1>
             <p className="dashboard-welcome">Welcome back, {loginName}.</p>
           </div>
           <div className="dashboard-accent" aria-hidden="true">SM</div>
         </section>
 
-        <section className="dashboard-stats" aria-label="Directory summary">
+        <section className="dashboard-stats" aria-label="Directory Summary">
           <div className="dashboard-stat">
             <span className="dashboard-stat-icon" aria-hidden="true">◌</span>
             <span className="dashboard-stat-value">{profiles.length}</span>
-            <span className="dashboard-stat-label">Members available</span>
+            <span className="dashboard-stat-label">Members Available</span>
           </div>
           <div className="dashboard-stat">
             <span className="dashboard-stat-icon dashboard-stat-icon--green" aria-hidden="true">●</span>
             <span className="dashboard-stat-value">{isLoading ? '...' : onlineCount}</span>
-            <span className="dashboard-stat-label">Online right now</span>
+            <span className="dashboard-stat-label">Online Right Now</span>
           </div>
           <div className="dashboard-stat">
             <span className="dashboard-stat-icon dashboard-stat-icon--orange" aria-hidden="true">✦</span>
             <span className="dashboard-stat-value">{isLoading ? '...' : filteredProfiles.length}</span>
-            <span className="dashboard-stat-label">Profiles in view</span>
+            <span className="dashboard-stat-label">Profiles in View</span>
           </div>
         </section>
 
         <section className="profiles-section" aria-labelledby="profiles-heading">
           <div className="profiles-section-heading">
             <div>
-              <p className="dashboard-eyebrow">Explore the community</p>
+              <p className="dashboard-eyebrow">Explore the Community</p>
               <h2 id="profiles-heading">Profile Cards</h2>
             </div>
             {!isLoading && !error && <span>{filteredProfiles.length} results</span>}
           </div>
 
           {!isLoading && !error && profiles.length > 0 && (
-            <div className="profile-filters" aria-label="Filter profiles">
+            <div className="profile-filters" aria-label="Filter Profiles">
               <div className="profile-filter-field profile-filter-search">
-                <label htmlFor="profile-search">Search profiles</label>
+                <label htmlFor="profile-search">Search Profiles</label>
                 <div className="profile-search-input">
                   <span aria-hidden="true">⌕</span>
                   <input
@@ -141,26 +141,26 @@ const MembersDashboard = () => {
                     value={sexFilter}
                     onChange={(event) => setSexFilter(event.target.value)}
                 >
-                  <option value="all">All sexes</option>
+                  <option value="all">All Sexes</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                   <option value="other">Other</option>
                 </select>
               </div>
               <div className="profile-filter-field">
-                <label htmlFor="online-status-filter">Online status</label>
+                <label htmlFor="online-status-filter">Online Status</label>
                 <select
                     id="online-status-filter"
                     value={onlineStatusFilter}
                     onChange={(event) => setOnlineStatusFilter(event.target.value)}
                 >
-                  <option value="all">All statuses</option>
+                  <option value="all">All Statuses</option>
                   <option value="online">Online</option>
                   <option value="offline">Offline</option>
                 </select>
               </div>
               <div className="profile-filter-field">
-                <label htmlFor="min-age">Minimum age</label>
+                <label htmlFor="min-age">Minimum Age</label>
                 <input
                     id="min-age"
                     type="number"
@@ -171,7 +171,7 @@ const MembersDashboard = () => {
                 />
               </div>
               <div className="profile-filter-field">
-                <label htmlFor="max-age">Maximum age</label>
+                <label htmlFor="max-age">Maximum Age</label>
                 <input
                     id="max-age"
                     type="number"
@@ -193,7 +193,7 @@ const MembersDashboard = () => {
                       setSearchQuery('');
                     }}
                 >
-                  Clear filters
+                  Clear Filters
                 </button>
               )}
             </div>

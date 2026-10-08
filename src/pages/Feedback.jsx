@@ -157,7 +157,7 @@ const Feedback = () => {
   return (
       <main className="page-content feedback-page">
         <section className="feedback-heading">
-          <p className="feedback-eyebrow">Early Access forum</p>
+          <p className="feedback-eyebrow">Early Access Forum</p>
           <h1>Feedback Board</h1>
           <p>
             Share what is working, what could be better, and the ideas you would
@@ -169,7 +169,7 @@ const Feedback = () => {
           <form className="feedback-composer" onSubmit={handleSubmit}>
             <div className="feedback-composer-heading">
               <div>
-                <p className="feedback-eyebrow">Start a conversation</p>
+                <p className="feedback-eyebrow">Start a Conversation</p>
                 <h2>What Is On Your Mind, {memberName}?</h2>
               </div>
               <span className="feedback-composer-mark" aria-hidden="true">+</span>
@@ -189,10 +189,10 @@ const Feedback = () => {
                 value={category}
                 onChange={(event) => setCategory(event.target.value)}
             >
-              <option>Product idea</option>
-              <option>Something is not working</option>
-              <option>Love this</option>
-              <option>Community experience</option>
+              <option>Product Idea</option>
+              <option>Something Is Not Working</option>
+              <option>Love This</option>
+              <option>Community Experience</option>
             </select>
             <label htmlFor="feedback-content">Details</label>
             <textarea
@@ -207,7 +207,7 @@ const Feedback = () => {
             <div className="feedback-composer-footer">
               <span>{content.length}/2000</span>
               <button type="submit" disabled={isSubmitting || !title.trim() || !content.trim()}>
-                {isSubmitting ? 'Posting...' : 'Post feedback'}
+                {isSubmitting ? 'Posting...' : 'Post Feedback'}
               </button>
             </div>
             {success && <p className="feedback-success" role="status">{success}</p>}
@@ -216,7 +216,7 @@ const Feedback = () => {
           <section className="feedback-board" aria-labelledby="feedback-board-heading">
             <div className="feedback-board-heading">
               <div>
-                <p className="feedback-eyebrow">The conversation</p>
+                <p className="feedback-eyebrow">The Conversation</p>
                 <h2 id="feedback-board-heading">Community Posts</h2>
               </div>
               <span>{feedback.length} {feedback.length === 1 ? 'post' : 'posts'}</span>
@@ -272,7 +272,7 @@ const Feedback = () => {
                       )}
                       {postId && (
                         <form className="feedback-reply-form" onSubmit={(event) => handleReplySubmit(event, post)}>
-                          <label htmlFor={`reply-${postId}`}>Add a reply</label>
+                          <label htmlFor={`reply-${postId}`}>Add a Reply</label>
                           <div className="feedback-reply-input">
                             <textarea
                                 id={`reply-${postId}`}

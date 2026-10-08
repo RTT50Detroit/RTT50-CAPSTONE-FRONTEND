@@ -127,7 +127,7 @@ const Login = () => {
           />
           <div className="auth-brand-mark" aria-hidden="true">SM</div>
           <p className="auth-eyebrow">THE SOCIAL MATCH GAME</p>
-          <h1>Make room for more meaningful connection.</h1>
+          <h1>Make Room for More Meaningful Connection.</h1>
           <p className="auth-story-copy">
             A thoughtful space to meet people, share what matters, and find
             your kind of connection.
@@ -140,7 +140,7 @@ const Login = () => {
             <p className="auth-panel-eyebrow">
               {isRegister ? 'YOUR NEXT CHAPTER' : 'GOOD TO SEE YOU'}
             </p>
-            <h2 id="auth-title">{isRegister ? 'Create your account' : 'Welcome back'}</h2>
+            <h2 id="auth-title">{isRegister ? 'Create Your Account' : 'Welcome Back'}</h2>
             <p>
               {isRegister
                 ? 'Start building more intentional connections.'
@@ -148,20 +148,20 @@ const Login = () => {
             </p>
           </div>
 
-          <nav className="auth-switch" aria-label="Choose an account action">
+          <nav className="auth-switch" aria-label="Choose an Account Action">
             <Link
               to="/login"
               className={!isRegister ? 'auth-switch-link is-active' : 'auth-switch-link'}
               aria-current={!isRegister ? 'page' : undefined}
             >
-              Sign in
+              Sign In
             </Link>
             <Link
               to="/register"
               className={isRegister ? 'auth-switch-link is-active' : 'auth-switch-link'}
               aria-current={isRegister ? 'page' : undefined}
             >
-              Create account
+              Create Account
             </Link>
           </nav>
 
@@ -219,7 +219,7 @@ const Login = () => {
                 required={isRegister}
                 disabled={!isRegister}
               >
-                <option value="">Select an option</option>
+                <option value="">Select an Option</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
                 <option value="other">Other</option>
@@ -227,7 +227,7 @@ const Login = () => {
             </div>
 
             <div className="auth-field auth-field-full">
-              <label htmlFor="email" className="form-label">Email address</label>
+              <label htmlFor="email" className="form-label">Email Address</label>
               <input
                 type="email"
                 id="email"
@@ -260,7 +260,7 @@ const Login = () => {
               aria-hidden={!isRegister}
             >
               <label htmlFor="profileImage" className="form-label">
-                Profile image <span className="auth-optional">(optional)</span>
+                Profile Image <span className="auth-optional">(Optional)</span>
               </label>
               <input
                 type="file"
@@ -279,16 +279,16 @@ const Login = () => {
 
             <button type="submit" className="submit-button" disabled={isSubmitting}>
               {isSubmitting
-                ? (isRegister ? 'Creating account...' : 'Signing in...')
-                : (isRegister ? 'Create account' : 'Sign in')}
+                ? (isRegister ? 'Creating Account...' : 'Signing In...')
+                : (isRegister ? 'Create Account' : 'Sign In')}
               {!isSubmitting && <span aria-hidden="true">→</span>}
             </button>
           </form>
 
           <div className="social-login-slot">
             {!isRegister && configuredProviders.length > 0 && (
-              <div className="social-login" aria-label="Social sign-in options">
-                <p className="social-login-divider"><span>or continue with</span></p>
+              <div className="social-login" aria-label="Social Sign-In Options">
+                <p className="social-login-divider"><span>Or Continue With</span></p>
                 <div className="social-login-options">
                   {[
                     ['google', 'Google'],

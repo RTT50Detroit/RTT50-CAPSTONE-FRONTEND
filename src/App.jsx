@@ -70,8 +70,8 @@ function Navigation() {
                 <NavLink
                     to={currentMemberId ? `/dashboard/profile?id=${currentMemberId}` : '/dashboard'}
                     className={({ isActive }) => `profile-nav-link${isActive ? ' active' : ''}`}
-                    aria-label="View my profile"
-                    title="My profile"
+                    aria-label="View My Profile"
+                    title="My Profile"
                 >
                   <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
                     <circle cx="12" cy="8" r="3.5" />

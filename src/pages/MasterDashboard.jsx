@@ -157,7 +157,7 @@ const MasterDashboard = () => {
   return (
     <main className="page-content master-dashboard">
       <header className="master-dashboard-heading">
-        <p className="dashboard-eyebrow">Master controls</p>
+        <p className="dashboard-eyebrow">Master Controls</p>
         <h1>Manage Profiles</h1>
         <p>Create profiles and update any member in the community.</p>
       </header>
@@ -183,14 +183,14 @@ const MasterDashboard = () => {
           <label className="master-form-label" htmlFor="master-gender">
             Gender
             <select id="master-gender" name="gender" value={form.gender} onChange={handleChange} required>
-              <option value="">Select gender</option>
+              <option value="">Select Gender</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
             </select>
           </label>
           <label className="master-form-label" htmlFor="master-profile-photo">
-            Profile photo
+            Profile Photo
             <input
                 id="master-profile-photo"
                 type="file"
@@ -212,7 +212,7 @@ const MasterDashboard = () => {
             />
           </label>
           <label className="master-form-label" htmlFor="master-hobbies">
-            Hobbies / interests <span className="master-form-hint">(separate with commas)</span>
+            Hobbies / Interests <span className="master-form-hint">(Separate With Commas)</span>
             <input
                 id="master-hobbies"
                 name="hobbies"
@@ -222,13 +222,13 @@ const MasterDashboard = () => {
             />
           </label>
           <label className="master-form-label" htmlFor="master-about-me">
-            About me
+            About Me
             <textarea id="master-about-me" name="aboutMe" value={form.aboutMe} onChange={handleChange} rows="5" />
           </label>
           {editingId && (
             <div className="master-password-reset">
               <label className="master-form-label" htmlFor="master-reset-password">
-                New password
+                New Password
                 <input
                     id="master-reset-password"
                     type="password"
@@ -240,13 +240,13 @@ const MasterDashboard = () => {
                 />
               </label>
               <button type="button" onClick={handlePasswordReset} disabled={isSaving}>
-                Reset password
+                Reset Password
               </button>
             </div>
           )}
           <div className="master-form-actions">
             <button type="submit" disabled={isSaving}>
-              {isSaving ? 'Saving...' : editingId ? 'Update profile' : 'Create profile'}
+              {isSaving ? 'Saving...' : editingId ? 'Update Profile' : 'Create Profile'}
             </button>
             {editingId && <button type="button" onClick={resetForm}>Cancel</button>}
           </div>

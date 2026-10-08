@@ -59,7 +59,7 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
               <div className="profile-card-body">
                 <p className="profile-card-kicker">
                   {genderKey === 'male' ? 'Male member' :
-                    genderKey === 'female' ? 'Female member' : 'Community member'}
+                    genderKey === 'female' ? 'Female Member' : 'Community Member'}
                 </p>
                 <h3>{profile.name || 'Unnamed member'}</h3>
                 <div className="profile-card-details">

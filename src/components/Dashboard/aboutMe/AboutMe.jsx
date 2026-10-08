@@ -80,7 +80,7 @@ const AboutMe = ({
             />
             <div className="about-me-actions">
               <button type="submit" disabled={isSaving}>
-                {isSaving ? 'Saving...' : 'Save about me'}
+                {isSaving ? 'Saving...' : 'Save About Me'}
               </button>
               <button
                   type="button"

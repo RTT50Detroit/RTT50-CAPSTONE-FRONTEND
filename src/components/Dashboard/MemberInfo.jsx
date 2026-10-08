@@ -163,11 +163,11 @@ const MemberInfo = ({
                     }))}
                     required
                 >
-                  <option value="">Select gender</option>
+                  <option value="">Select Gender</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
-                  <option value="non-binary">Non-binary</option>
-                  <option value="prefer-not-to-say">Prefer not to say</option>
+                  <option value="non-binary">Non-Binary</option>
+                  <option value="prefer-not-to-say">Prefer Not to Say</option>
                 </select>
               ) : user.gender || 'Not provided'}
             </label>
@@ -201,7 +201,7 @@ const MemberInfo = ({
           {isEditing && (
             <div className="profile-links profile-links-editor">
               <label>
-                The Relationship Resume username
+                The Relationship Resume Username
                 <input
                     value={form.relationshipResumeUsername}
                     onChange={(event) => setForm((current) => ({
@@ -219,7 +219,7 @@ const MemberInfo = ({
             <>
               <div className="profile-details-actions">
                 <button type="submit" disabled={isSaving}>
-                  {isSaving ? 'Saving...' : 'Save details'}
+                  {isSaving ? 'Saving...' : 'Save Details'}
                 </button>
                 <button type="button" onClick={() => setIsEditing(false)}>Cancel</button>
               </div>

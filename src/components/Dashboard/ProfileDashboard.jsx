@@ -155,7 +155,7 @@ const ProfileDashboard = () => {
                   >
                     <span className="profile-resume-label">The Relationship Resume</span>
                     <span className="profile-resume-url">
-                      {relationshipResume?.url ? 'Open your relationship profile' : 'Create your relationship profile'}
+                      {relationshipResume?.url ? 'Open Your Relationship Profile' : 'Create Your Relationship Profile'}
                     </span>
                   </a>
                   <button
@@ -168,17 +168,17 @@ const ProfileDashboard = () => {
                   </button>
                   <p className={`profile-detail-status${isOnline ? ' profile-detail-status--online' : ''}`}>
                     <span className="profile-detail-status-dot" aria-hidden="true" />
-                    {isOnline ? 'Online now' : 'Offline'}
+                    {isOnline ? 'Online Now' : 'Offline'}
                   </p>
                 </div>
               </header>
               {isCustomizeOpen && (
-                <section className="profile-settings-menu" aria-label="Profile page settings">
+                <section className="profile-settings-menu" aria-label="Profile Page Settings">
                   <div className="profile-settings-heading">
-                    <p className="profile-detail-label">Page settings</p>
+                    <p className="profile-detail-label">Page Settings</p>
                     <h2>Customize Your Profile</h2>
                   </div>
-                  <div className="profile-widget-toggles" aria-label="Widget visibility">
+                  <div className="profile-widget-toggles" aria-label="Widget Visibility">
                     <label>
                       <input
                           type="checkbox"
@@ -193,19 +193,19 @@ const ProfileDashboard = () => {
                           checked={visibleWidgets.about}
                           onChange={() => toggleWidget('about')}
                       />
-                      About me
+                      About Me
                     </label>
                   </div>
                   {canEdit && (
                     <div className="profile-settings-actions">
                       <button type="button" onClick={requestPhotoEdit}>
-                        Change picture
+                        Change Picture
                       </button>
                       <button type="button" onClick={requestPageEdit}>
-                        Edit details
+                        Edit Details
                       </button>
                       <button type="button" onClick={requestAboutEdit}>
-                        Edit about me
+                        Edit About Me
                       </button>
                     </div>
                   )}

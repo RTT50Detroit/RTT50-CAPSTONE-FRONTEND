@@ -219,7 +219,7 @@ const NotesDashboard = () => {
   return (
       <main className="page-content notes-page">
         <section className="notes-heading">
-          <p className="notes-eyebrow">Private journal</p>
+          <p className="notes-eyebrow">Private Journal</p>
           <h1>Journal</h1>
           <p>Capture the thoughts, plans, and little moments worth keeping.</p>
         </section>
@@ -247,7 +247,7 @@ const NotesDashboard = () => {
             </div>
           </div>
           {settingsOpen && (
-            <section className="notes-settings-menu" aria-label="Journal post settings">
+            <section className="notes-settings-menu" aria-label="Journal Post Settings">
               <div>
                 <p className="notes-section-kicker">Manage Posts</p>
                 <h3>Post Settings</h3>

@@ -75,8 +75,8 @@ const NoteList = ({
             )}
             {editingIds.includes(note._id) ? (
                 <div className="note-edit-form">
-                  <p className="note-editing-label">Editing selected entry</p>
-                  <div className="post-type-picker" role="group" aria-label="Post type">
+                  <p className="note-editing-label">Editing Selected Entry</p>
+                  <div className="post-type-picker" role="group" aria-label="Post Type">
                     <button
                         type="button"
                         className={drafts[note._id]?.type === 'note' ? 'active' : ''}
@@ -138,7 +138,7 @@ const NoteList = ({
                 <section className="note-card-group" aria-labelledby="posted-notes-heading">
                   <div className="note-card-group-heading">
                     <div>
-                      <p className="notes-section-kicker">Short-form Posts</p>
+                      <p className="notes-section-kicker">Short-Form Posts</p>
                       <h3 id="posted-notes-heading">Notes</h3>
                     </div>
                     <span>{postedNotes.length}</span>
@@ -150,7 +150,7 @@ const NoteList = ({
                 <section className="note-card-group" aria-labelledby="journal-entries-heading">
                   <div className="note-card-group-heading">
                     <div>
-                      <p className="notes-section-kicker">Long-form Reflections</p>
+                      <p className="notes-section-kicker">Long-Form Reflections</p>
                       <h3 id="journal-entries-heading">Journal</h3>
                     </div>
                     <span>{journalNotes.length}</span>

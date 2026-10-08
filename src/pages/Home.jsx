@@ -6,9 +6,9 @@ const LandingPage = () => {
       <main className="home-page">
         <section className="home-hero page-content">
           <div className="home-hero-copy">
-            <p className="home-eyebrow">Connection, with intention</p>
+            <p className="home-eyebrow">Connection, With Intention</p>
             <h1>
-              A space for Black connection, <span>built around the whole you.</span>
+              A Space for Black Connection, <span>Built Around the Whole You.</span>
             </h1>
             <p className="home-intro">
               Meet people who get your rhythm. Share the stories that shaped you.
@@ -35,18 +35,18 @@ const LandingPage = () => {
               fetchPriority="high"
             />
             <div className="home-image-caption" aria-hidden="true">
-              <span className="home-image-caption-line">Real stories.</span>
+              <span className="home-image-caption-line">Real Stories.</span>
               <span className="home-image-caption-line home-image-caption-line--accent">
-                Meaningful connections.
+                Meaningful Connections.
               </span>
             </div>
             <div className="home-persona-card">
               <div className="home-persona-topline">
-                <span>A community for you</span>
-                <span className="home-online-status">Here together</span>
+                <span>A Community for You</span>
+                <span className="home-online-status">Here Together</span>
               </div>
-              <p className="home-persona-label">Your next chapter</p>
-              <h2>Good people. Real connection.</h2>
+              <p className="home-persona-label">Your Next Chapter</p>
+              <h2>Good People. Real Connection.</h2>
               <p className="home-persona-bio">
                 A welcoming place to meet, share your story, and find common ground.
               </p>
@@ -57,19 +57,19 @@ const LandingPage = () => {
               </div>
             </div>
             <div className="home-note-card home-note-card--top">
-              <span>A little reminder</span>
-              <strong>Your story belongs here.</strong>
+              <span>A Little Reminder</span>
+              <strong>Your Story Belongs Here.</strong>
             </div>
             <div className="home-note-card home-note-card--bottom">
-              <span>Make room for</span>
-              <strong>Good conversation &amp; new connections</strong>
+              <span>Make Room for</span>
+              <strong>Good Conversation &amp; New Connections</strong>
             </div>
           </div>
         </section>
 
         <section className="home-pillars page-content" aria-labelledby="home-pillars-heading">
           <div className="home-section-heading">
-            <p className="home-eyebrow">More than a match</p>
+            <p className="home-eyebrow">More Than a Match</p>
             <h2 id="home-pillars-heading">Bring Your Whole Self.</h2>
           </div>
           <div className="home-pillar-grid">
@@ -119,7 +119,7 @@ const LandingPage = () => {
         </section>
         <section className="home-companion page-content" aria-labelledby="home-companion-heading">
           <div>
-            <p className="home-eyebrow">A companion for your story</p>
+            <p className="home-eyebrow">A Companion for Your Story</p>
             <h2 id="home-companion-heading">Know What You Bring.</h2>
           </div>
           <div>
@@ -151,7 +151,7 @@ const MemberHub = () => {
       <main className="home-page member-home-page">
         <section className="member-home-hero page-content">
           <div>
-            <p className="home-eyebrow">Welcome to the beta</p>
+            <p className="home-eyebrow">Welcome to the Beta</p>
             <h1>Welcome Back, {memberName}.</h1>
             <p className="home-intro">
               Your space to meet people, keep your story moving, and stay close to
@@ -160,14 +160,14 @@ const MemberHub = () => {
           </div>
           <div className="member-home-mark" aria-hidden="true">
             <span>SM</span>
-            <small>your space</small>
+            <small>Your Space</small>
           </div>
         </section>
 
         <section className="member-home-notice page-content" aria-labelledby="member-home-notice-heading">
           <div className="member-home-notice-mark" aria-hidden="true">!</div>
           <div>
-            <p className="home-eyebrow">Early access</p>
+            <p className="home-eyebrow">Early Access</p>
             <h2 id="member-home-notice-heading">You Are Helping Us Build What Comes Next.</h2>
             <p>
               The Social Match Game is still under development. Try the features below,
@@ -179,7 +179,7 @@ const MemberHub = () => {
 
         <section className="member-home-content page-content" aria-labelledby="member-home-heading">
           <div className="home-section-heading">
-            <p className="home-eyebrow">Available now</p>
+            <p className="home-eyebrow">Available Now</p>
             <h2 id="member-home-heading">Start Exploring the Community.</h2>
           </div>
           <div className="member-hub-grid">
@@ -211,7 +211,7 @@ const MemberHub = () => {
         </section>
 
         <section className="member-home-prompt page-content" aria-label="Member prompt">
-          <p className="home-eyebrow">A small invitation</p>
+          <p className="home-eyebrow">A Small Invitation</p>
           <blockquote>“What would make this space more useful, welcoming, and meaningful for you?”</blockquote>
           <Link className="home-secondary-action" to="/notes">Write a Note</Link>
         </section>

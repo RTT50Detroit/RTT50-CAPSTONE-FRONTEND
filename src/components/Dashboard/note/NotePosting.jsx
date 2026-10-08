@@ -26,7 +26,7 @@ const NotePosting = ({ onAddNote }) => {
 
   return (
       <form className="journal-editor" onSubmit={handleSubmit}>
-        <div className="post-type-picker" role="group" aria-label="Post type">
+        <div className="post-type-picker" role="group" aria-label="Post Type">
           <button
               type="button"
               className={postType === 'note' ? 'active' : ''}
@@ -42,14 +42,14 @@ const NotePosting = ({ onAddNote }) => {
             Post Journal
           </button>
         </div>
-        <label htmlFor="note-title">Entry title</label>
+        <label htmlFor="note-title">Entry Title</label>
         <input
             id="note-title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="A title for today"
         />
-        <label htmlFor="note-content">What is on your mind?</label>
+        <label htmlFor="note-content">What Is on Your Mind?</label>
         <textarea
             id="note-content"
             value={noteContent}
