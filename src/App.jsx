@@ -16,6 +16,10 @@ import LogoutButton from './components/LogoutButton.jsx';
 import NotesDashboard from './components/Dashboard/note/NoteDashboard.jsx';
 import MasterDashboard from './pages/MasterDashboard.jsx';
 import Feedback from './pages/Feedback.jsx';
+import CompleteProfile from './pages/CompleteProfile.jsx';
+import PolicyPage, { PoliciesIndex } from './pages/PolicyPage.jsx';
+import { policies } from './content/policies.js';
+import './pages/css/Policy.css';
 import { getCurrentMemberId, hasValidAuthToken, isMasterUser } from './utils/auth.js';
 
 function Navigation() {
@@ -168,6 +172,9 @@ function App() {
             <Route path="/register" element={<Registration />} />
             <Route path="/login" element={<Login />} />
             <Route path="/auth/callback" element={<OAuthCallback />} />
+            <Route path="/complete-profile" element={<CompleteProfile />} />
+            <Route path="/policies" element={<PoliciesIndex />} />
+            <Route path="/policies/:slug" element={<PolicyPage />} />
 
             {/* Protected Routes */}
             <Route
@@ -232,6 +239,13 @@ function App() {
               <span aria-hidden="true">-&gt;</span>
                 </a>
               </div>
+              <ul className="site-footer-policies" aria-label="Policies">
+                {policies.map((policy) => (
+                  <li key={policy.slug}>
+                    <Link to={`/policies/${policy.slug}`}>{policy.title}</Link>
+                  </li>
+                ))}
+              </ul>
               <div className="site-footer-bottom">
                 <p className="site-footer-copyright">
                 &copy; {new Date().getFullYear()} The Social Match Game. All rights reserved.

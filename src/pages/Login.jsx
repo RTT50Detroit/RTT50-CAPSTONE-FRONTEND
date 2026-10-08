@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { isProfileComplete } from '../utils/profileCompletion.js';
 import './css/Login.css';
 
 const Login = () => {
@@ -312,6 +313,14 @@ const Login = () => {
             )}
           </div>
 
+          <p className="auth-policy-note">
+            You must be 21 or older. By continuing, you agree to our{' '}
+            <Link to="/policies/terms">Terms of Service</Link>,{' '}
+            <Link to="/policies/privacy">Privacy Policy</Link>, and{' '}
+            <Link to="/policies/community-guidelines">Community Guidelines</Link>.
+            You will confirm your age in the next step.
+          </p>
+
           <p className="auth-privacy-note">
             Your next meaningful connection starts with a hello.
           </p>
@@ -332,7 +341,7 @@ export const OAuthCallback = () => {
     axios.get(`${apiUrl}/api/auth/session/current`)
         .then(({ data }) => {
           localStorage.setItem('authUser', JSON.stringify(data.user));
-          navigate('/dashboard', { replace: true });
+          navigate(isProfileComplete() ? '/dashboard' : '/complete-profile', { replace: true });
         })
         .catch(() => {
           setError('Social sign-in could not be completed. Please try again.');

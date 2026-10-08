@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { getAuthToken, isMasterUser } from '../../utils/auth.js';
+import { MINIMUM_AGE } from '../../utils/age.js';
 
 const relationshipResumeBaseUrl = 'https://therelationshipresume.netlify.app/';
 
@@ -80,8 +81,8 @@ const MemberInfo = ({
     const username = form.relationshipResumeUsername.trim();
     const links = username ? [relationshipResumeLink(username)] : [];
     const age = Number(form.age);
-    if (!Number.isInteger(age) || age < 18 || age > 120) {
-      setError('Age must be a whole number between 18 and 120.');
+    if (!Number.isInteger(age) || age < MINIMUM_AGE || age > 120) {
+      setError(`Age must be a whole number between ${MINIMUM_AGE} and 120.`);
       setIsSaving(false);
       return;
     }
@@ -141,7 +142,7 @@ const MemberInfo = ({
               {isEditing ? (
                 <input
                     type="number"
-                    min="18"
+                    min={MINIMUM_AGE}
                     max="120"
                     step="1"
                     value={form.age}

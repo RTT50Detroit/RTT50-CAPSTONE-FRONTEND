@@ -1,9 +1,11 @@
 import { Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { hasValidAuthToken, isMasterUser } from '../utils/auth.js';
+import { isProfileComplete } from '../utils/profileCompletion.js';
 
 const ProtectedRoute = ({ children, requiredRole }) => {
   if (!hasValidAuthToken()) return <Navigate to="/login" replace />;
+  if (!isProfileComplete()) return <Navigate to="/complete-profile" replace />;
   if (requiredRole === 'master' && !isMasterUser()) {
     return <Navigate to="/dashboard" replace />;
   }
