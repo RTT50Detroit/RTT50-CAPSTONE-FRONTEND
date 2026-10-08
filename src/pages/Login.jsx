@@ -3,6 +3,9 @@ import axios from 'axios';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './css/Login.css';
 
+// Set to true to re-enable email/password authentication.
+const CREDENTIAL_AUTH_ENABLED = false;
+
 const Login = () => {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
@@ -50,6 +53,7 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!CREDENTIAL_AUTH_ENABLED) return;
     setIsSubmitting(true);
     setMessage('');
     setError('');
@@ -236,6 +240,7 @@ const Login = () => {
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 required
+                disabled={!CREDENTIAL_AUTH_ENABLED}
                 placeholder="you@example.com"
                 autoComplete="email"
               />
@@ -250,6 +255,7 @@ const Login = () => {
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 required
+                disabled={!CREDENTIAL_AUTH_ENABLED}
                 placeholder={isRegister ? 'Create a password' : 'Enter your password'}
                 autoComplete={isRegister ? 'new-password' : 'current-password'}
               />
@@ -277,7 +283,7 @@ const Login = () => {
               )}
             </div>
 
-            <button type="submit" className="submit-button" disabled={isSubmitting}>
+            <button type="submit" className="submit-button" disabled={isSubmitting || !CREDENTIAL_AUTH_ENABLED}>
               {isSubmitting
                 ? (isRegister ? 'Creating Account...' : 'Signing In...')
                 : (isRegister ? 'Create Account' : 'Sign In')}
