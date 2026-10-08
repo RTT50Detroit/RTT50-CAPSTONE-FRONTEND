@@ -30,8 +30,9 @@ const LandingPage = () => {
           <div className="home-persona-stage">
             <img
               className="home-portrait"
-              src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=1100&q=85"
-              alt="A Black woman smiling in warm sunlight"
+              src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/BLACK_COUPLE_AND_THEIR_DOG_IN_THEIR_APARTMENT_IN_SOUTH_SIDE_CHICAGO._FROM_1960_TO_1970_THE_PERCENTAGE_OF_CHICAGO..._-_NARA_-_556171.jpg/960px-BLACK_COUPLE_AND_THEIR_DOG_IN_THEIR_APARTMENT_IN_SOUTH_SIDE_CHICAGO._FROM_1960_TO_1970_THE_PERCENTAGE_OF_CHICAGO..._-_NARA_-_556171.jpg"
+              alt="A Black couple at home with their dog in Chicago, photographed in 1973"
+              fetchPriority="high"
             />
             <div className="home-image-caption" aria-hidden="true">
               <span className="home-image-caption-line">Real stories.</span>
@@ -75,8 +76,8 @@ const LandingPage = () => {
             <Link className="home-pillar" to="/register">
               <img
                 className="home-pillar-image"
-                src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=900&q=80"
-                alt="Friends enjoying time together outdoors"
+                src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/Black_couple%2C_August_1973.jpg/500px-Black_couple%2C_August_1973.jpg"
+                alt="A Black couple together in a 1973 portrait"
                 loading="lazy"
               />
               <span className="home-pillar-number">01</span>
@@ -89,8 +90,8 @@ const LandingPage = () => {
             <Link className="home-pillar" to="/register">
               <img
                 className="home-pillar-image"
-                src="https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=900&q=80"
-                alt="A journal and pen ready for a story"
+                src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/BLACK_COUPLE_AND_THEIR_DOG_IN_THEIR_APARTMENT_IN_SOUTH_SIDE_CHICAGO._FROM_1960_TO_1970_THE_PERCENTAGE_OF_CHICAGO..._-_NARA_-_556171.jpg/960px-BLACK_COUPLE_AND_THEIR_DOG_IN_THEIR_APARTMENT_IN_SOUTH_SIDE_CHICAGO._FROM_1960_TO_1970_THE_PERCENTAGE_OF_CHICAGO..._-_NARA_-_556171.jpg"
+                alt="A Black couple sharing a moment together at home"
                 loading="lazy"
               />
               <span className="home-pillar-number">02</span>
@@ -103,8 +104,8 @@ const LandingPage = () => {
             <Link className="home-pillar" to="/register">
               <img
                 className="home-pillar-image"
-                src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=900&q=80"
-                alt="Friends supporting one another as they enjoy a sunset"
+                src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/Black_couple%2C_August_1973.jpg/500px-Black_couple%2C_August_1973.jpg"
+                alt="A Black couple photographed together in August 1973"
                 loading="lazy"
               />
               <span className="home-pillar-number">03</span>
