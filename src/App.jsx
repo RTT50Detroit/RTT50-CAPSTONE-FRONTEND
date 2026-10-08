@@ -35,7 +35,10 @@ function Navigation() {
   return (
     <header>
       <h1>
-        <Link className="header-brand" to="/">The Social Match Game</Link>
+        <Link className="header-brand" to="/">
+          <img className="header-brand-icon" src="/favicon.svg" alt="" />
+          <span>The Social Match Game</span>
+        </Link>
       </h1>
       <nav>
         <ul>
@@ -232,7 +235,7 @@ function App() {
           <footer className="site-footer">
             <div className="site-footer-inner">
               <div className="site-footer-main">
-                <div className="site-footer-brand" aria-hidden="true">SM</div>
+                <img className="site-footer-brand" src="/favicon.svg" alt="" />
                 <div className="site-footer-copy">
               <p className="site-footer-title">The Social Match Game</p>
               <p className="site-footer-description">

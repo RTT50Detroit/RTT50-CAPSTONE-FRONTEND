@@ -159,7 +159,7 @@ const MemberHub = () => {
             </p>
           </div>
           <div className="member-home-mark" aria-hidden="true">
-            <span>SM</span>
+            <img src="/favicon.svg" alt="" />
             <small>Your Space</small>
           </div>
         </section>

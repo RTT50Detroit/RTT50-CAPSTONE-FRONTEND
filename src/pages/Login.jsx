@@ -135,7 +135,7 @@ const Login = () => {
             src="/images/black-love/after-dark.jpg"
             alt="A Black couple posing together against a dark backdrop"
           />
-          <div className="auth-brand-mark" aria-hidden="true">SM</div>
+          <img className="auth-brand-mark" src="/favicon.svg" alt="" />
           <p className="auth-eyebrow">THE SOCIAL MATCH GAME</p>
           <h1>Make Room for More Meaningful Connection.</h1>
           <p className="auth-story-copy">

@@ -89,7 +89,7 @@ const MembersDashboard = () => {
             <h1>Find Your People</h1>
             <p className="dashboard-welcome">Welcome back, {loginName}.</p>
           </div>
-          <div className="dashboard-accent" aria-hidden="true">SM</div>
+          <img className="dashboard-accent" src="/favicon.svg" alt="" />
         </section>
 
         <section className="dashboard-stats" aria-label="Directory Summary">

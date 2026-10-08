@@ -167,16 +167,10 @@ body.notes-page-active .site-footer {
 }
 
 .site-footer-brand {
-  display: grid;
   width: 48px;
   height: 48px;
   flex: 0 0 48px;
-  place-items: center;
-  border: 1px solid rgba(242, 184, 91, 0.55);
-  border-radius: 50%;
-  color: var(--theme-gold-bright);
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 1.05rem;
+  border-radius: 8px;
 }
 
 .site-footer-copy {
@@ -659,20 +653,16 @@ body.notes-page-active .site-footer {
 
 .member-home-mark {
   display: grid;
-  flex: 0 0 132px;
+  flex: 0 0 152px;
   aspect-ratio: 1;
   place-items: center;
   align-content: center;
-  border: 1px solid var(--theme-gold-muted);
-  border-radius: 50%;
-  color: var(--theme-black);
-  background: var(--theme-gold);
-  transform: rotate(7deg);
 }
 
-.member-home-mark span {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 2rem;
+.member-home-mark img {
+  width: 112px;
+  height: 112px;
+  border-radius: 14px;
 }
 
 .member-home-mark small {
@@ -854,6 +844,11 @@ body.notes-page-active .site-footer {
   .member-home-mark {
     flex-basis: 94px;
     align-self: flex-end;
+  }
+
+  .member-home-mark img {
+    width: 92px;
+    height: 92px;
   }
 
   .member-hub-grid {

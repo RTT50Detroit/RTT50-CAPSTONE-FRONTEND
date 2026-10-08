@@ -35,15 +35,9 @@
 }
 
 .auth-brand-mark {
-  display: grid;
   width: 48px;
   height: 48px;
-  place-items: center;
-  border: 1px solid rgba(242, 184, 91, 0.55);
-  border-radius: 50%;
-  color: #ffd58a;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 1rem;
+  border-radius: 9px;
 }
 
 .auth-eyebrow,
