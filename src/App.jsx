@@ -10,6 +10,8 @@ import Login, { OAuthCallback } from './pages/Login';
 import MembersDashboard from './pages/MembersDashboard.jsx';
 import ProfileDashboard from './components/Dashboard/ProfileDashboard.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
+import ResumeInviteClaimer from './components/ResumeInviteClaimer.jsx';
+import JoinFromResume from './pages/JoinFromResume.jsx';
 import './App.css';
 import './pages/css/styles.css';
 import LogoutButton from './components/LogoutButton.jsx';
@@ -162,6 +164,7 @@ function EnterKeySubmitter() {
 function App() {
   return (
       <Router>
+        <ResumeInviteClaimer />
         <div className="App">
           <PresenceTracker />
           <EnterKeySubmitter />
@@ -176,6 +179,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/auth/callback" element={<OAuthCallback />} />
             <Route path="/complete-profile" element={<CompleteProfile />} />
+            <Route path="/join" element={<JoinFromResume />} />
             <Route path="/status" element={<StatusPage />} />
             <Route path="/policies" element={<PoliciesIndex />} />
             <Route path="/policies/:slug" element={<PolicyPage />} />
