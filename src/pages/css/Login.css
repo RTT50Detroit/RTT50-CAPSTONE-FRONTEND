@@ -34,18 +34,6 @@
     linear-gradient(145deg, #211719, #140f11 82%);
 }
 
-.auth-story::after {
-  position: absolute;
-  right: -130px;
-  bottom: -200px;
-  width: 400px;
-  height: 400px;
-  border: 1px solid rgba(242, 184, 91, 0.1);
-  border-radius: 50%;
-  content: "";
-  pointer-events: none;
-}
-
 .auth-brand-mark {
   display: grid;
   width: 48px;
@@ -90,70 +78,33 @@
   line-height: 1.8;
 }
 
-.auth-connection-card {
-  position: relative;
-  display: grid;
-  width: 220px;
-  height: 174px;
-  place-items: center;
-  margin: auto 0 4px;
-}
-
-.auth-connection-orbit {
+.auth-story-image {
   position: absolute;
-  width: 148px;
-  height: 100px;
-  border: 1px solid rgba(242, 184, 91, 0.25);
-  border-radius: 50%;
-  transform: rotate(-26deg);
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
 }
 
-.auth-connection-orbit-two {
-  width: 190px;
-  height: 128px;
-  border-color: rgba(255, 230, 211, 0.13);
-  transform: rotate(24deg);
-}
-
-.auth-connection-dot {
+.auth-story::before {
   position: absolute;
-  display: grid;
-  width: 42px;
-  height: 42px;
-  place-items: center;
-  border: 1px solid rgba(255, 213, 138, 0.45);
-  border-radius: 50%;
-  color: #ffd58a;
-  background: #392629;
-  font-family: Georgia, 'Times New Roman', serif;
-}
-
-.auth-connection-dot-one {
-  top: 24px;
-  left: 36px;
-}
-
-.auth-connection-dot-two {
-  top: 42px;
-  right: 20px;
-}
-
-.auth-connection-dot-three {
-  bottom: 14px;
-  left: 83px;
-}
-
-.auth-connection-caption {
+  inset: 0;
   z-index: 1;
-  margin-top: 2px;
-  color: #fff4e8;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 0.94rem;
-  font-style: italic;
+  background: linear-gradient(180deg, rgba(20, 15, 17, 0.72) 0%, rgba(20, 15, 17, 0.35) 45%, rgba(20, 15, 17, 0.88) 100%);
+  content: "";
+  pointer-events: none;
+}
+
+.auth-story > :not(.auth-story-image) {
+  position: relative;
+  z-index: 2;
 }
 
 .auth-story-note {
-  margin: 24px 0 0;
+  margin: auto 0 0;
+  padding-top: 24px;
   color: #c6a99f;
   font-size: 0.75rem;
   letter-spacing: 0.04em;
@@ -501,10 +452,6 @@
   .auth-story-copy {
     margin-top: 12px;
     font-size: 0.86rem;
-  }
-
-  .auth-connection-card {
-    display: none;
   }
 
   .auth-story-note {

@@ -120,6 +120,11 @@ const Login = () => {
     <main className="page-content auth-page">
       <section className="auth-shell" aria-labelledby="auth-title">
         <aside className="auth-story">
+          <img
+            className="auth-story-image"
+            src="/images/black-love/after-dark.jpg"
+            alt="A Black couple posing together against a dark backdrop"
+          />
           <div className="auth-brand-mark" aria-hidden="true">SM</div>
           <p className="auth-eyebrow">THE SOCIAL MATCH GAME</p>
           <h1>Make room for more meaningful connection.</h1>
@@ -127,14 +132,6 @@ const Login = () => {
             A thoughtful space to meet people, share what matters, and find
             your kind of connection.
           </p>
-          <div className="auth-connection-card" aria-hidden="true">
-            <span className="auth-connection-orbit auth-connection-orbit-one" />
-            <span className="auth-connection-orbit auth-connection-orbit-two" />
-            <span className="auth-connection-dot auth-connection-dot-one">D</span>
-            <span className="auth-connection-dot auth-connection-dot-two">F</span>
-            <span className="auth-connection-dot auth-connection-dot-three">C</span>
-            <span className="auth-connection-caption">Connection, your way</span>
-          </div>
           <p className="auth-story-note">Dating <span>·</span> Friendship <span>·</span> Community</p>
         </aside>
 

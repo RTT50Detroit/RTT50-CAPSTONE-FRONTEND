@@ -30,8 +30,8 @@ const LandingPage = () => {
           <div className="home-persona-stage">
             <img
               className="home-portrait"
-              src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/BLACK_COUPLE_AND_THEIR_DOG_IN_THEIR_APARTMENT_IN_SOUTH_SIDE_CHICAGO._FROM_1960_TO_1970_THE_PERCENTAGE_OF_CHICAGO..._-_NARA_-_556171.jpg/960px-BLACK_COUPLE_AND_THEIR_DOG_IN_THEIR_APARTMENT_IN_SOUTH_SIDE_CHICAGO._FROM_1960_TO_1970_THE_PERCENTAGE_OF_CHICAGO..._-_NARA_-_556171.jpg"
-              alt="A Black couple at home with their dog in Chicago, photographed in 1973"
+              src="/images/black-love/field-embrace.jpg"
+              alt="A Black couple embracing in a sunlit field, the man resting his head on his partner"
               fetchPriority="high"
             />
             <div className="home-image-caption" aria-hidden="true">
@@ -76,8 +76,8 @@ const LandingPage = () => {
             <Link className="home-pillar" to="/register">
               <img
                 className="home-pillar-image"
-                src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/Black_couple%2C_August_1973.jpg/500px-Black_couple%2C_August_1973.jpg"
-                alt="A Black couple together in a 1973 portrait"
+                src="/images/black-love/forehead-kiss.jpg"
+                alt="A Black man kissing his partner’s forehead outdoors on a bright day"
                 loading="lazy"
               />
               <span className="home-pillar-number">01</span>
@@ -90,8 +90,8 @@ const LandingPage = () => {
             <Link className="home-pillar" to="/register">
               <img
                 className="home-pillar-image"
-                src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/BLACK_COUPLE_AND_THEIR_DOG_IN_THEIR_APARTMENT_IN_SOUTH_SIDE_CHICAGO._FROM_1960_TO_1970_THE_PERCENTAGE_OF_CHICAGO..._-_NARA_-_556171.jpg/960px-BLACK_COUPLE_AND_THEIR_DOG_IN_THEIR_APARTMENT_IN_SOUTH_SIDE_CHICAGO._FROM_1960_TO_1970_THE_PERCENTAGE_OF_CHICAGO..._-_NARA_-_556171.jpg"
-                alt="A Black couple sharing a moment together at home"
+                src="/images/black-love/hands-on-heart.jpg"
+                alt="A woman’s hands, wearing an engagement ring, resting on the chest of a Black man"
                 loading="lazy"
               />
               <span className="home-pillar-number">02</span>
@@ -104,8 +104,8 @@ const LandingPage = () => {
             <Link className="home-pillar" to="/register">
               <img
                 className="home-pillar-image"
-                src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/Black_couple%2C_August_1973.jpg/500px-Black_couple%2C_August_1973.jpg"
-                alt="A Black couple photographed together in August 1973"
+                src="/images/black-love/close-embrace.jpg"
+                alt="A Black couple holding each other close, about to kiss"
                 loading="lazy"
               />
               <span className="home-pillar-number">03</span>
