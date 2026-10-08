@@ -234,6 +234,16 @@ export const policies = [
         ],
       },
       {
+        heading: 'Facebook User Data Deletion',
+        paragraphs: [
+          'You can request deletion of Social Match Game account data linked to a Facebook user ID. We verify and automatically process valid Meta data deletion requests.',
+          `If you cannot use Facebook’s deletion flow or need help, email ${CONTACT_EMAIL}.`,
+        ],
+        links: [
+          { to: '/data-deletion', label: 'Open the Facebook User Data Deletion Page' },
+        ],
+      },
+      {
         heading: 'Retention and Security',
         paragraphs: [
           'We keep your information while your account is active and for a limited time afterward where needed for safety, legal, or fraud-prevention reasons. We use reasonable safeguards to protect it, but no system is completely secure.',

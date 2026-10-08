@@ -145,6 +145,7 @@ Here’s an overview of the application routes, divided into **public** and **pr
 | `/`            | Home            | Home page.                    |
 | `/register`    | Registration    | User registration page.       |
 | `/login`       | Login           | User login page.              |
+| `/data-deletion` | DataDeletionPage | Facebook data deletion instructions and request status. |
 
 ### Protected Routes
 

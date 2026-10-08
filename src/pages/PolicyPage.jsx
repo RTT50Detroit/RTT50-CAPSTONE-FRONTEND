@@ -46,6 +46,9 @@ const PolicyPage = () => {
                 {section.items.map((item) => <li key={item}>{item}</li>)}
               </ul>
             )}
+            {section.links?.map((link) => (
+              <p key={link.to}><Link to={link.to}>{link.label}</Link></p>
+            ))}
           </section>
         ))}
 

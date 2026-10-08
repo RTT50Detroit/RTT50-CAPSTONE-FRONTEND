@@ -22,6 +22,7 @@ import StatusBanner from './components/StatusBanner.jsx';
 import StatusPage from './pages/StatusPage.jsx';
 import CompleteProfile from './pages/CompleteProfile.jsx';
 import PolicyPage, { PoliciesIndex } from './pages/PolicyPage.jsx';
+import DataDeletionPage from './pages/DataDeletionPage.jsx';
 import { policies } from './content/policies.js';
 import './pages/css/Policy.css';
 import { getCurrentMemberId, hasValidAuthToken, isMasterUser } from './utils/auth.js';
@@ -183,6 +184,7 @@ function App() {
             <Route path="/status" element={<StatusPage />} />
             <Route path="/policies" element={<PoliciesIndex />} />
             <Route path="/policies/:slug" element={<PolicyPage />} />
+            <Route path="/data-deletion" element={<DataDeletionPage />} />
 
             {/* Protected Routes */}
             <Route
@@ -249,6 +251,7 @@ function App() {
               </div>
               <ul className="site-footer-policies" aria-label="Policies">
                 <li><Link to="/status">Project Status</Link></li>
+                <li><Link to="/data-deletion">Facebook User Data Deletion</Link></li>
                 {policies.map((policy) => (
                   <li key={policy.slug}>
                     <Link to={`/policies/${policy.slug}`}>{policy.title}</Link>

@@ -22,8 +22,15 @@ const Login = () => {
 
   useEffect(() => {
     const oauthError = new URLSearchParams(location.search).get('oauthError');
-    if (oauthError) setError(oauthError);
-  }, [location.search]);
+    if (oauthError) {
+      setError(oauthError);
+      // replaceState keeps the router's location (and the error) intact while cleaning the address bar.
+      const params = new URLSearchParams(location.search);
+      params.delete('oauthError');
+      const query = params.toString();
+      window.history.replaceState(window.history.state, '', location.pathname + (query ? `?${query}` : '') + location.hash);
+    }
+  }, [location.search, location.pathname, location.hash]);
 
   useEffect(() => {
     axios.get(`${apiUrl}/api/auth/providers`)
