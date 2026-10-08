@@ -197,7 +197,7 @@ export const policies = [
         heading: 'Information We Collect',
         items: [
           'Account information from your social sign-in provider, such as your name, email address, and profile picture.',
-          'The name, date of birth, and sex you declared on The Relationship Resume, sent with your resume invite so we can check them against your verified profile. We delete them once the check is finished.',
+          'The name, date of birth, and sex you declared on The Relationship Resume, sent with your resume invite so we can check them against your verified profile. We delete them once the check is finished or the invite expires.',
           'Profile information you provide, such as your date of birth, age, gender, occupation, hobbies, and About Me.',
           'Content you post, including notes, feedback, and photos.',
           'Age verification records, including your date of birth, the date you confirmed you are 21 or older, and the policy version you accepted.',

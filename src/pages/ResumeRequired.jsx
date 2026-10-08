@@ -56,7 +56,7 @@ const ResumeRequired = () => {
             Create My Relationship Resume
           </a>
           <button type="button" className="submit-button resume-secondary" onClick={check} disabled={state === 'checking'}>
-            I Sent My Resume
+            {notice ? 'Check Again' : 'I Sent My Resume'}
           </button>
         </div>
         <p className="complete-profile-hint">
