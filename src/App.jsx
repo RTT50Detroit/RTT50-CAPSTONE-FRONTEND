@@ -72,11 +72,6 @@ function Navigation() {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/feedback" className={({ isActive }) => (isActive ? 'active' : '')}>
-                  Feedback
-                </NavLink>
-              </li>
-              <li>
                 <NavLink
                     to={currentMemberId ? `/dashboard/profile?id=${currentMemberId}` : '/dashboard'}
                     className={({ isActive }) => `profile-nav-link${isActive ? ' active' : ''}`}
@@ -165,6 +160,52 @@ function EnterKeySubmitter() {
   return null;
 }
 
+function SiteFooter() {
+  useLocation();
+  const isLoggedIn = hasValidAuthToken();
+
+  return (
+    <footer className="site-footer">
+      <div className="site-footer-inner">
+        <div className="site-footer-main">
+          <img className="site-footer-brand" src="/favicon.svg" alt="" />
+          <div className="site-footer-copy">
+            <p className="site-footer-title">The Social Match Game</p>
+            <p className="site-footer-description">
+              Part of a more intentional approach to connection.
+            </p>
+          </div>
+          <a
+            className="site-footer-link"
+            href="https://therelationshipresume.netlify.app/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Explore The Relationship Resume
+            <span aria-hidden="true">-&gt;</span>
+          </a>
+        </div>
+        <ul className="site-footer-policies" aria-label="Footer Links">
+          <li><Link to="/status">Project Status</Link></li>
+          {isLoggedIn && <li><Link to="/feedback">Feedback</Link></li>}
+          <li><Link to="/data-deletion">Facebook User Data Deletion</Link></li>
+          {policies.map((policy) => (
+            <li key={policy.slug}>
+              <Link to={`/policies/${policy.slug}`}>{policy.title}</Link>
+            </li>
+          ))}
+        </ul>
+        <div className="site-footer-bottom">
+          <p className="site-footer-copyright">
+            &copy; {new Date().getFullYear()} The Social Match Game. All rights reserved.
+          </p>
+          <p className="site-footer-note">Dating · Friendship · Community</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
 function App() {
   return (
       <Router>
@@ -232,43 +273,7 @@ function App() {
             />
 
           </Routes>
-          <footer className="site-footer">
-            <div className="site-footer-inner">
-              <div className="site-footer-main">
-                <img className="site-footer-brand" src="/favicon.svg" alt="" />
-                <div className="site-footer-copy">
-              <p className="site-footer-title">The Social Match Game</p>
-              <p className="site-footer-description">
-                Part of a more intentional approach to connection.
-              </p>
-                </div>
-                <a
-              className="site-footer-link"
-              href="https://therelationshipresume.netlify.app/"
-              target="_blank"
-              rel="noreferrer"
-                >
-              Explore The Relationship Resume
-              <span aria-hidden="true">-&gt;</span>
-                </a>
-              </div>
-              <ul className="site-footer-policies" aria-label="Policies">
-                <li><Link to="/status">Project Status</Link></li>
-                <li><Link to="/data-deletion">Facebook User Data Deletion</Link></li>
-                {policies.map((policy) => (
-                  <li key={policy.slug}>
-                    <Link to={`/policies/${policy.slug}`}>{policy.title}</Link>
-                  </li>
-                ))}
-              </ul>
-              <div className="site-footer-bottom">
-                <p className="site-footer-copyright">
-                &copy; {new Date().getFullYear()} The Social Match Game. All rights reserved.
-                </p>
-                <p className="site-footer-note">Dating · Friendship · Community</p>
-              </div>
-            </div>
-          </footer>
+          <SiteFooter />
         </div>
       </Router>
   );
