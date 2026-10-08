@@ -57,7 +57,8 @@
   line-height: 1.7;
 }
 
-.policy-section ul {
+.policy-section ul,
+.policy-section ol {
   margin: 8px 0 0;
   padding-left: 22px;
 }
@@ -165,4 +166,48 @@
 .site-footer-policies a:focus-visible {
   color: var(--theme-gold-bright);
   text-decoration: underline;
+}
+
+.status-phase-badge {
+  display: inline-block;
+  margin: 4px 0 14px;
+  border: 1px solid var(--theme-gold);
+  border-radius: 999px;
+  padding: 6px 14px;
+  color: var(--theme-gold-bright);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.status-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 9px 16px;
+  border-bottom: 1px solid var(--theme-gold-muted);
+  background: #2a2314;
+  color: var(--theme-cream);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.status-banner p {
+  margin: 0;
+}
+
+.status-banner a {
+  color: var(--theme-link);
+  font-weight: 700;
+}
+
+.status-banner button {
+  flex: none;
+  border: 0;
+  background: transparent;
+  color: var(--theme-cream);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
 }

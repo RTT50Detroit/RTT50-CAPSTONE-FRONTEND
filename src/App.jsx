@@ -16,6 +16,8 @@ import LogoutButton from './components/LogoutButton.jsx';
 import NotesDashboard from './components/Dashboard/note/NoteDashboard.jsx';
 import MasterDashboard from './pages/MasterDashboard.jsx';
 import Feedback from './pages/Feedback.jsx';
+import StatusBanner from './components/StatusBanner.jsx';
+import StatusPage from './pages/StatusPage.jsx';
 import CompleteProfile from './pages/CompleteProfile.jsx';
 import PolicyPage, { PoliciesIndex } from './pages/PolicyPage.jsx';
 import { policies } from './content/policies.js';
@@ -163,6 +165,7 @@ function App() {
         <div className="App">
           <PresenceTracker />
           <EnterKeySubmitter />
+          <StatusBanner />
           {/* Navigation */}
           <Navigation />
 
@@ -173,6 +176,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/auth/callback" element={<OAuthCallback />} />
             <Route path="/complete-profile" element={<CompleteProfile />} />
+            <Route path="/status" element={<StatusPage />} />
             <Route path="/policies" element={<PoliciesIndex />} />
             <Route path="/policies/:slug" element={<PolicyPage />} />
 
@@ -240,6 +244,7 @@ function App() {
                 </a>
               </div>
               <ul className="site-footer-policies" aria-label="Policies">
+                <li><Link to="/status">Project Status</Link></li>
                 {policies.map((policy) => (
                   <li key={policy.slug}>
                     <Link to={`/policies/${policy.slug}`}>{policy.title}</Link>
