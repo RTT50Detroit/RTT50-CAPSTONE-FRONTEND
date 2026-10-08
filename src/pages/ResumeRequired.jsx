@@ -11,11 +11,13 @@ import './css/Policy.css';
 // arrived by invite, forwards members who already have one, and otherwise sends them to create it.
 const ResumeRequired = () => {
   const [state, setState] = useState('checking');
+  const [notice, setNotice] = useState('');
 
   const check = async () => {
     setState('checking');
     try {
-      await claimStoredInvite();
+      const claim = await claimStoredInvite();
+      setNotice(claim.message);
       setState(await fetchResumeLinked() ? 'linked' : 'missing');
     } catch {
       setState('error');
@@ -42,6 +44,7 @@ const ResumeRequired = () => {
         </p>
 
         {state === 'checking' && <p role="status">Checking Your Resume…</p>}
+        {notice && <p className="error-message" role="alert">{notice}</p>}
         {state === 'error' && (
           <p className="error-message" role="alert">
             We could not check your resume just now. Please try again.

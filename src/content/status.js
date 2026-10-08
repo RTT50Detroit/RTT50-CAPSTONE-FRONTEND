@@ -15,7 +15,7 @@ export const statusContent = {
   companionSteps: [
     'Start at The Relationship Resume. Create and publish your resume there. Publishing requires signing in on that site.',
     'Choose to send your resume to The Social Match Game. You are brought here to sign in with Google or GitHub.',
-    'Confirm you are 21 or older and accept our policies.',
+    'Confirm you are 21 or older and accept our policies. Your name, date of birth, and sex on the resume must match your verified profile and your Google or GitHub account.',
     'Once you pass these checks, your resume link is added to your profile automatically. You cannot enter or edit it by hand.',
   ],
   phase: [
@@ -39,7 +39,8 @@ export const statusContent = {
     'Blocking and in-app reporting tools',
     'Notifications',
     'Additional sign-in options',
-    'Age verification on The Relationship Resume itself',
+    'Sign-in on The Relationship Resume with the same Google and GitHub accounts, with no email and password',
+    'Age and identity checks on The Relationship Resume itself: resumes from age 18, sending to The Social Match Game from age 21',
   ],
   expectations: [
     'Expect bugs, rough edges, and occasional downtime. The server may take up to a minute to wake up after a quiet period.',
@@ -50,6 +51,7 @@ export const statusContent = {
     'We verify age and enforce our policies. Accounts that do not meet them are removed.',
     'Members without a linked Relationship Resume cannot use member features yet. Existing accounts are not deleted for this, but they must send a resume to continue.',
     'Policies were updated on October 8, 2026, so everyone is asked to accept them again.',
+    'Truthful information is required. What you say you are is who you are: name, age, and sex must be accurate and consistent across both sites. Mismatches are refused.',
     'A resume invite is a private link. Do not share it, and use it only for your own resume.',
   ],
   safety: [

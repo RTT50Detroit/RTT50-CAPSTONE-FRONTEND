@@ -2,7 +2,7 @@ import { getCurrentMemberId, getTokenPayload, isMasterUser } from './auth.js';
 
 // Bump when the Terms, Privacy Policy, Community Guidelines, or Age Policy change materially.
 // Members who accepted an older version are asked to review and accept again.
-export const POLICY_VERSION = '2026-10-08.3';
+export const POLICY_VERSION = '2026-10-08.4';
 
 const storageKey = (memberId) => `profileCompletion:${memberId}`;
 
