@@ -119,6 +119,13 @@
   padding-bottom: 14px;
 }
 
+.profiles-section-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
 .profiles-section-heading .dashboard-eyebrow {
   margin-bottom: 6px;
 }
@@ -131,7 +138,7 @@
   font-weight: 400;
 }
 
-.profiles-section-heading > span {
+.profiles-section-actions > span {
   color: #708287;
   font-size: 0.85rem;
 }
@@ -909,6 +916,10 @@
   border-bottom-color: rgba(89, 225, 220, 0.28);
 }
 
+.dashboard-game-ui .profiles-section-actions {
+  flex: none;
+}
+
 .dashboard-game-ui .profiles-section-heading h2 {
   color: #efffff;
   font-family: "Arial Narrow", "Segoe UI", sans-serif;
@@ -918,7 +929,7 @@
   text-transform: uppercase;
 }
 
-.dashboard-game-ui .profiles-section-heading > span {
+.dashboard-game-ui .profiles-section-actions > span {
   border: 1px solid rgba(89, 225, 220, 0.3);
   padding: 7px 10px;
   color: #59e1dc;
@@ -1305,6 +1316,10 @@
   border-bottom-color: rgba(89, 225, 220, 0.28);
 }
 
+.dashboard-game-ui .profiles-section-actions {
+  flex: none;
+}
+
 .dashboard-game-ui .profiles-section-heading h2 {
   color: #efffff;
   font-family: "Arial Narrow", "Segoe UI", sans-serif;
@@ -1314,7 +1329,7 @@
   text-transform: uppercase;
 }
 
-.dashboard-game-ui .profiles-section-heading > span {
+.dashboard-game-ui .profiles-section-actions > span {
   border: 1px solid rgba(89, 225, 220, 0.3);
   padding: 7px 10px;
   color: #59e1dc;
@@ -1574,6 +1589,11 @@
     gap: 8px;
   }
 
+  .profiles-section-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
   .profile-filters {
     align-items: stretch;
     flex-direction: column;
@@ -1740,7 +1760,7 @@
   border-color: rgba(190, 151, 66, 0.3);
 }
 
-.dashboard-game-ui .profiles-section-heading > span {
+.dashboard-game-ui .profiles-section-actions > span {
   border-color: rgba(190, 151, 66, 0.34);
   color: #e7b547;
   background: rgba(56, 43, 20, 0.58);
@@ -1876,10 +1896,8 @@
 }
 
 .dashboard-game-ui .profile-layout-controls {
-  position: absolute;
+  position: relative;
   z-index: 5;
-  top: 0;
-  right: 0;
   width: 222px;
   height: 62px;
   align-items: flex-end;
@@ -1934,10 +1952,6 @@
   font-family: "Segoe UI", sans-serif;
   font-size: 1.1rem;
   line-height: 0.8;
-}
-
-.dashboard-game-ui .profile-card-group:first-of-type .profile-card-group-heading {
-  padding-right: 242px;
 }
 
 .dashboard-game-ui .profile-layout-toggle {
@@ -2126,19 +2140,13 @@
 @media (max-width: 520px) {
   .dashboard-game-ui .profile-layout-controls {
     position: relative;
-    top: auto;
-    right: auto;
-    width: 100%;
-    height: 40px;
-    margin-bottom: 12px;
+    width: 222px;
+    height: 62px;
+    margin-bottom: 0;
   }
 
   .dashboard-game-ui .profile-layout-controls.is-toggle-visible {
     height: 62px;
-  }
-
-  .dashboard-game-ui .profile-card-group:first-of-type .profile-card-group-heading {
-    padding-right: 0;
   }
 
   .dashboard-game-ui .profile-layout-controls.is-open {

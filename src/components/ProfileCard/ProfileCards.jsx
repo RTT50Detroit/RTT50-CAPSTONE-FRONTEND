@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 import { getMemberId, getProfileImage, isMemberOnline } from '../../utils/member.js';
 
-const ProfileCards = ({ profiles, currentMemberId }) => {
-  const [layout, setLayout] = useState('current');
+export const ProfileLayoutControls = ({ layout, onLayoutChange }) => {
   const [isLayoutControlVisible, setIsLayoutControlVisible] = useState(false);
   const [isLayoutMenuOpen, setIsLayoutMenuOpen] = useState(false);
   const layoutControlsRef = useRef(null);
@@ -45,6 +44,108 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
     };
   }, [isLayoutControlVisible, isLayoutMenuOpen]);
 
+  return (
+    <div
+        className={`profile-layout-controls${isLayoutMenuOpen ? ' is-open' : ''}${isLayoutControlVisible ? ' is-toggle-visible' : ''}`}
+        ref={layoutControlsRef}
+    >
+      <button
+          type="button"
+          className="profile-layout-launcher"
+          ref={layoutLauncherRef}
+          aria-label="Show Card Layouts Toggle"
+          aria-controls="profile-layout-toggle"
+          aria-expanded={isLayoutControlVisible}
+          onClick={() => setIsLayoutControlVisible(true)}
+      >
+        <span aria-hidden="true">Layout</span>
+        <span className="profile-layout-launcher-icon" aria-hidden="true">‹</span>
+      </button>
+      <button
+          type="button"
+          className={`profile-layout-toggle${isLayoutControlVisible ? ' is-visible' : ''}`}
+          id="profile-layout-toggle"
+          ref={layoutToggleRef}
+          aria-expanded={isLayoutMenuOpen}
+          aria-controls="profile-layout-choices"
+          tabIndex={isLayoutControlVisible ? 0 : -1}
+          aria-hidden={!isLayoutControlVisible}
+          onClick={() => {
+            if (!isLayoutControlVisible) {
+              setIsLayoutControlVisible(true);
+              return;
+            }
+            setIsLayoutMenuOpen((isOpen) => !isOpen);
+          }}
+      >
+        <span className="profile-layout-toggle-icon" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+          <span />
+        </span>
+        <span className="profile-layout-toggle-copy">
+          <span className="profile-layout-toggle-label">Card Layouts</span>
+          <span className="profile-layout-current">{layoutLabels[layout]}</span>
+        </span>
+        <span className="profile-layout-switch" aria-hidden="true">
+          <span />
+        </span>
+      </button>
+      <div
+          id="profile-layout-choices"
+          className={`profile-layout-switcher${isLayoutMenuOpen ? ' is-open' : ''}`}
+          role="group"
+          aria-label="Choose a card layout"
+          aria-hidden={!isLayoutMenuOpen}
+      >
+        <button
+            type="button"
+            className={layout === 'current' ? 'is-active' : ''}
+            aria-pressed={layout === 'current'}
+            tabIndex={isLayoutMenuOpen ? 0 : -1}
+            onClick={() => {
+              onLayoutChange('current');
+              setIsLayoutMenuOpen(false);
+            }}
+        >
+          Default
+        </button>
+        <button
+            type="button"
+            className={layout === 'photo' ? 'is-active' : ''}
+            aria-pressed={layout === 'photo'}
+            tabIndex={isLayoutMenuOpen ? 0 : -1}
+            onClick={() => {
+              onLayoutChange('photo');
+              setIsLayoutMenuOpen(false);
+            }}
+        >
+          Photo-Forward
+        </button>
+        <button
+            type="button"
+            className={layout === 'magazine' ? 'is-active' : ''}
+            aria-pressed={layout === 'magazine'}
+            tabIndex={isLayoutMenuOpen ? 0 : -1}
+            onClick={() => {
+              onLayoutChange('magazine');
+              setIsLayoutMenuOpen(false);
+            }}
+        >
+          Magazine
+        </button>
+      </div>
+    </div>
+  );
+};
+
+ProfileLayoutControls.propTypes = {
+  layout: PropTypes.oneOf(['current', 'photo', 'magazine']).isRequired,
+  onLayoutChange: PropTypes.func.isRequired,
+};
+
+const ProfileCards = ({ profiles, currentMemberId, layout }) => {
   const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
   const onlineProfiles = profiles.filter((profile) => {
     return isMemberOnline(profile, currentMemberId);
@@ -133,98 +234,6 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
 
   return (
       <div className={`profile-card-groups${layout === 'photo' ? ' profile-card-groups--photo' : ''}${layout === 'magazine' ? ' profile-card-groups--magazine' : ''}`}>
-        <div
-            className={`profile-layout-controls${isLayoutMenuOpen ? ' is-open' : ''}${isLayoutControlVisible ? ' is-toggle-visible' : ''}`}
-            ref={layoutControlsRef}
-        >
-          <button
-              type="button"
-              className="profile-layout-launcher"
-              ref={layoutLauncherRef}
-              aria-label="Show Card Layouts Toggle"
-              aria-controls="profile-layout-toggle"
-              aria-expanded={isLayoutControlVisible}
-              onClick={() => setIsLayoutControlVisible(true)}
-          >
-            <span aria-hidden="true">Layout</span>
-            <span className="profile-layout-launcher-icon" aria-hidden="true">‹</span>
-          </button>
-          <button
-              type="button"
-              className={`profile-layout-toggle${isLayoutControlVisible ? ' is-visible' : ''}`}
-              id="profile-layout-toggle"
-              ref={layoutToggleRef}
-              aria-expanded={isLayoutMenuOpen}
-              aria-controls="profile-layout-choices"
-              tabIndex={isLayoutControlVisible ? 0 : -1}
-              aria-hidden={!isLayoutControlVisible}
-              onClick={() => {
-                if (!isLayoutControlVisible) {
-                  setIsLayoutControlVisible(true);
-                  return;
-                }
-                setIsLayoutMenuOpen((isOpen) => !isOpen);
-              }}
-          >
-            <span className="profile-layout-toggle-icon" aria-hidden="true">
-              <span />
-              <span />
-              <span />
-              <span />
-            </span>
-            <span className="profile-layout-toggle-copy">
-              <span className="profile-layout-toggle-label">Card Layouts</span>
-              <span className="profile-layout-current">{layoutLabels[layout]}</span>
-            </span>
-            <span className="profile-layout-switch" aria-hidden="true">
-              <span />
-            </span>
-          </button>
-          <div
-              id="profile-layout-choices"
-              className={`profile-layout-switcher${isLayoutMenuOpen ? ' is-open' : ''}`}
-              role="group"
-              aria-label="Choose a card layout"
-              aria-hidden={!isLayoutMenuOpen}
-          >
-            <button
-                type="button"
-                className={layout === 'current' ? 'is-active' : ''}
-                aria-pressed={layout === 'current'}
-                tabIndex={isLayoutMenuOpen ? 0 : -1}
-                onClick={() => {
-                  setLayout('current');
-                  setIsLayoutMenuOpen(false);
-                }}
-            >
-              Default
-            </button>
-            <button
-                type="button"
-                className={layout === 'photo' ? 'is-active' : ''}
-                aria-pressed={layout === 'photo'}
-                tabIndex={isLayoutMenuOpen ? 0 : -1}
-                onClick={() => {
-                  setLayout('photo');
-                  setIsLayoutMenuOpen(false);
-                }}
-            >
-              Photo-Forward
-            </button>
-            <button
-                type="button"
-                className={layout === 'magazine' ? 'is-active' : ''}
-                aria-pressed={layout === 'magazine'}
-                tabIndex={isLayoutMenuOpen ? 0 : -1}
-                onClick={() => {
-                  setLayout('magazine');
-                  setIsLayoutMenuOpen(false);
-                }}
-            >
-              Magazine
-            </button>
-          </div>
-        </div>
         {onlineProfiles.length > 0 && (
           <section className="profile-card-group" aria-labelledby="online-profiles-heading">
             <h3 id="online-profiles-heading" className="profile-card-group-heading">
@@ -250,4 +259,5 @@ export default ProfileCards;
 ProfileCards.propTypes = {
   profiles: PropTypes.arrayOf(PropTypes.object).isRequired,
   currentMemberId: PropTypes.string,
+  layout: PropTypes.oneOf(['current', 'photo', 'magazine']).isRequired,
 };

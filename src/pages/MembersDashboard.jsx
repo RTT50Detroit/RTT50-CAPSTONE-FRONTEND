@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import ProfileCards from '../components/ProfileCard/ProfileCards';
+import ProfileCards, { ProfileLayoutControls } from '../components/ProfileCard/ProfileCards';
 import { getCurrentMemberId, getTokenPayload } from '../utils/auth.js';
 import { getMemberId, isMemberOnline } from '../utils/member.js';
 import './css/members_dashboard.css';
@@ -12,6 +12,7 @@ const MembersDashboard = () => {
   const [minAge, setMinAge] = useState('');
   const [maxAge, setMaxAge] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+  const [cardLayout, setCardLayout] = useState('current');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
@@ -117,7 +118,12 @@ const MembersDashboard = () => {
               <p className="dashboard-eyebrow">Explore the Community</p>
               <h2 id="profiles-heading">Game Roster</h2>
             </div>
-            {!isLoading && !error && <span>{filteredProfiles.length} results</span>}
+            <div className="profiles-section-actions">
+              {!isLoading && !error && filteredProfiles.length > 0 && (
+                <ProfileLayoutControls layout={cardLayout} onLayoutChange={setCardLayout} />
+              )}
+              {!isLoading && !error && <span>{filteredProfiles.length} results</span>}
+            </div>
           </div>
 
           <div className="directory-console">
@@ -212,7 +218,11 @@ const MembersDashboard = () => {
                 <p className="dashboard-status">No profiles match these filters.</p>
               )}
               {!isLoading && !error && filteredProfiles.length > 0 && (
-                <ProfileCards profiles={filteredProfiles} currentMemberId={currentMemberId} />
+                <ProfileCards
+                    profiles={filteredProfiles}
+                    currentMemberId={currentMemberId}
+                    layout={cardLayout}
+                />
               )}
             </div>
           </div>
