@@ -126,11 +126,6 @@ const ProfileDashboard = () => {
   const canEdit = isMasterUser() || Boolean(currentMemberId && profileId &&
     currentMemberId === String(profileId));
   const isOnline = isMemberOnline(userData, currentMemberId);
-  const relationshipResume = userData.links?.find((link) => (
-    ['relationship resume', 'the relationship resume'].includes(link.label?.toLowerCase())
-  ));
-  const relationshipResumeUrl = relationshipResume?.url ||
-    'https://therelationshipresume.netlify.app/';
 
   return (
       <main className="page-content profile-dashboard game-interface">
@@ -148,17 +143,6 @@ const ProfileDashboard = () => {
                   </p>
                 </div>
                 <div className="profile-hero-actions">
-                  <a
-                      className="profile-resume-link"
-                      href={relationshipResumeUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                  >
-                    <span className="profile-resume-label">The Relationship Resume</span>
-                    <span className="profile-resume-url">
-                      {relationshipResume?.url ? 'Open Your Relationship Profile' : 'Create Your Relationship Profile'}
-                    </span>
-                  </a>
                   <button
                       type="button"
                       className="profile-customize-button"
