@@ -5,6 +5,7 @@ import { getMemberId, getProfileImage, isMemberOnline } from '../../utils/member
 
 const ProfileCards = ({ profiles, currentMemberId }) => {
   const [layout, setLayout] = useState('current');
+  const [isLayoutControlVisible, setIsLayoutControlVisible] = useState(false);
   const [isLayoutMenuOpen, setIsLayoutMenuOpen] = useState(false);
   const [layoutMenuTop, setLayoutMenuTop] = useState(0);
   const layoutControlsRef = useRef(null);
@@ -171,11 +172,29 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
         >
           <button
               type="button"
-              className="profile-layout-toggle"
+              className="profile-layout-launcher"
+              aria-label="Show Card Layouts Toggle"
+              aria-expanded={isLayoutControlVisible}
+              onClick={() => setIsLayoutControlVisible(true)}
+          >
+            <span aria-hidden="true">LAYOUT</span>
+            <span className="profile-layout-launcher-icon" aria-hidden="true">‹</span>
+          </button>
+          <button
+              type="button"
+              className={`profile-layout-toggle${isLayoutControlVisible ? ' is-visible' : ''}`}
               ref={layoutToggleRef}
               aria-expanded={isLayoutMenuOpen}
               aria-controls="profile-layout-choices"
-              onClick={() => setIsLayoutMenuOpen((isOpen) => !isOpen)}
+              tabIndex={isLayoutControlVisible ? 0 : -1}
+              aria-hidden={!isLayoutControlVisible}
+              onClick={() => {
+                if (!isLayoutControlVisible) {
+                  setIsLayoutControlVisible(true);
+                  return;
+                }
+                setIsLayoutMenuOpen((isOpen) => !isOpen);
+              }}
           >
             <span className="profile-layout-toggle-icon" aria-hidden="true">
               <span />
