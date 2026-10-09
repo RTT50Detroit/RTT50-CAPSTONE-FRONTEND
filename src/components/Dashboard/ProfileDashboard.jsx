@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import ProfileImage from './ProfileImage.jsx';
 import MemberInfo from './MemberInfo.jsx';
@@ -21,6 +21,7 @@ const ProfileDashboard = () => {
   const [editRequested, setEditRequested] = useState(false);
   const [aboutEditRequested, setAboutEditRequested] = useState(false);
   const [photoEditRequested, setPhotoEditRequested] = useState(false);
+  const profileHeaderRef = useRef(null);
   const [searchParams] = useSearchParams();
   const id = searchParams.get('id');
   const token = localStorage.getItem('authToken');
@@ -48,6 +49,26 @@ const ProfileDashboard = () => {
       // Use the default layout when a saved preference is unavailable.
     }
   }, [id]);
+
+  useEffect(() => {
+    if (!isCustomizeOpen) return undefined;
+
+    const handlePointerDown = (event) => {
+      if (!profileHeaderRef.current?.contains(event.target)) {
+        setIsCustomizeOpen(false);
+      }
+    };
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setIsCustomizeOpen(false);
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isCustomizeOpen]);
 
   const toggleWidget = (widget) => {
     setVisibleWidgets((current) => {
@@ -131,7 +152,7 @@ const ProfileDashboard = () => {
       <main className="page-content profile-dashboard game-interface">
         {userData ? (
             <>
-              <div className="profile-hero-wrap">
+              <div className="profile-hero-wrap" ref={profileHeaderRef}>
               <header className="profile-detail-header profile-hero">
                 <div className="profile-hero-copy">
                   <Link className="profile-back-link" to="/dashboard">

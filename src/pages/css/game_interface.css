@@ -627,3 +627,47 @@
     border-top-color: rgba(190, 151, 66, 0.28);
   }
 }
+
+.game-interface .profile-settings-menu {
+  border-color: rgba(231, 181, 71, 0.56);
+  border-radius: 4px;
+  color: #f0e4c6;
+  background: rgba(20, 17, 12, 0.58);
+  box-shadow: inset 0 1px rgba(255, 225, 157, 0.08), 0 14px 34px rgba(0, 0, 0, 0.36);
+  backdrop-filter: blur(14px);
+}
+
+.game-interface .profile-settings-menu::before {
+  position: absolute;
+  top: 0;
+  left: 18px;
+  width: 44px;
+  height: 3px;
+  background: #e7b547;
+  content: "";
+}
+
+.game-interface .profile-settings-menu .profile-detail-label {
+  color: #e7b547;
+}
+
+.game-interface .profile-settings-menu h2,
+.game-interface .profile-settings-menu .profile-widget-toggles label {
+  color: #f0e4c6;
+}
+
+.game-interface .profile-settings-menu .profile-settings-actions {
+  border-color: rgba(231, 181, 71, 0.3);
+}
+
+.game-interface .profile-settings-menu .profile-settings-actions button {
+  border-color: rgba(231, 181, 71, 0.48);
+  color: #f0c75f;
+  background: rgba(231, 181, 71, 0.08);
+}
+
+.game-interface .profile-settings-menu .profile-settings-actions button:hover {
+  border-color: #ffe19a;
+  color: #201706;
+  background: #ffd66e;
+}
