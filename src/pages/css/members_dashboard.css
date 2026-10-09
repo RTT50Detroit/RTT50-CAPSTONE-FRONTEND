@@ -1888,24 +1888,103 @@
 }
 
 .dashboard-game-ui .profile-layout-toggle {
-  min-height: 40px;
-  border-color: rgba(231, 181, 71, 0.46);
-  padding: 8px 12px;
+  display: inline-flex;
+  min-width: 222px;
+  min-height: 62px;
+  justify-content: flex-start;
+  gap: 11px;
+  border-color: rgba(231, 181, 71, 0.5);
+  border-radius: 8px;
+  padding: 9px 12px;
   color: #f0e4c6;
-  background: linear-gradient(145deg, rgba(42, 34, 21, 0.96), rgba(23, 20, 14, 0.96));
-  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.22);
+  background: linear-gradient(145deg, rgba(42, 34, 21, 0.98), rgba(23, 20, 14, 0.98));
+  box-shadow: inset 0 1px rgba(255, 225, 157, 0.08), 0 6px 18px rgba(0, 0, 0, 0.3);
+  text-align: left;
 }
 
 .dashboard-game-ui .profile-layout-toggle:hover,
 .dashboard-game-ui .profile-layout-toggle[aria-expanded="true"] {
   border-color: #e7b547;
   color: #ffe6a5;
-  box-shadow: 0 0 16px rgba(231, 181, 71, 0.16), 0 5px 16px rgba(0, 0, 0, 0.22);
+  box-shadow: inset 0 1px rgba(255, 225, 157, 0.1), 0 0 18px rgba(231, 181, 71, 0.16), 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+.dashboard-game-ui .profile-layout-toggle-icon {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+  border: 1px solid rgba(231, 181, 71, 0.34);
+  border-radius: 5px;
+  padding: 5px;
+  background: rgba(231, 181, 71, 0.08);
+}
+
+.dashboard-game-ui .profile-layout-toggle-icon span {
+  border: 1px solid rgba(240, 199, 95, 0.8);
+  border-radius: 1px;
+  background: rgba(231, 181, 71, 0.24);
+}
+
+.dashboard-game-ui .profile-layout-toggle-copy {
+  display: grid;
+  flex: 1;
+  gap: 3px;
+}
+
+.dashboard-game-ui .profile-layout-toggle-label {
+  color: #f3ead6;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
 }
 
 .dashboard-game-ui .profile-layout-current {
-  color: #201706;
-  background: #e7b547;
+  padding: 0;
+  color: #b8a982;
+  background: transparent;
+  font-family: "Courier New", monospace;
+  font-size: 0.64rem;
+  font-weight: 400;
+}
+
+.dashboard-game-ui .profile-layout-switch {
+  position: relative;
+  width: 39px;
+  height: 22px;
+  flex: 0 0 39px;
+  border: 1px solid rgba(177, 145, 78, 0.56);
+  border-radius: 999px;
+  background: #17140e;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+  transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.dashboard-game-ui .profile-layout-switch > span {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #a99975;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.dashboard-game-ui .profile-layout-toggle[aria-expanded="true"] .profile-layout-switch {
+  border-color: #e7b547;
+  background: rgba(126, 91, 23, 0.58);
+  box-shadow: inset 0 0 10px rgba(231, 181, 71, 0.16), 0 0 10px rgba(231, 181, 71, 0.12);
+}
+
+.dashboard-game-ui .profile-layout-toggle[aria-expanded="true"] .profile-layout-switch > span {
+  background: #ffd66e;
+  box-shadow: 0 0 8px rgba(255, 214, 110, 0.48);
+  transform: translateX(17px);
 }
 
 .dashboard-game-ui .profile-layout-switcher {

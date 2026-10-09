@@ -157,9 +157,19 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
               aria-controls="profile-layout-choices"
               onClick={() => setIsLayoutMenuOpen((isOpen) => !isOpen)}
           >
-            <span>Card Layouts</span>
-            <span className="profile-layout-current">{layoutLabels[layout]}</span>
-            <span className="profile-layout-chevron" aria-hidden="true" />
+            <span className="profile-layout-toggle-icon" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+              <span />
+            </span>
+            <span className="profile-layout-toggle-copy">
+              <span className="profile-layout-toggle-label">Card Layouts</span>
+              <span className="profile-layout-current">{layoutLabels[layout]}</span>
+            </span>
+            <span className="profile-layout-switch" aria-hidden="true">
+              <span />
+            </span>
           </button>
           <div
               id="profile-layout-choices"
