@@ -38,6 +38,12 @@ const MemberInfo = ({
 
   if (!user) return <p>No member information found.</p>;
 
+  const relationshipResume = user.links?.find((link) => (
+    ['relationship resume', 'the relationship resume'].includes(
+        String(link.label || '').trim().toLowerCase(),
+    ) && typeof link.url === 'string' && link.url.trim()
+  ));
+
   const handleSave = async (event) => {
     event.preventDefault();
     setIsSaving(true);
@@ -159,6 +165,20 @@ const MemberInfo = ({
               ) : normalizeHobbies(user.hobbies).join(', ') || 'Not provided'}
             </label>
           </div>
+          {relationshipResume && (
+            <a
+                className="profile-details-resume-badge"
+                href={relationshipResume.url.trim()}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Open ${user.name || 'member'}'s Relationship Resume`}
+                title="Open Relationship Resume"
+            >
+              <span className="profile-details-resume-mark" aria-hidden="true">RR</span>
+              <span>Relationship Resume</span>
+              <span className="profile-details-resume-arrow" aria-hidden="true">↗</span>
+            </a>
+          )}
           {isEditing && (
             <p className="profile-links-editor">
               Your Relationship Resume link is added automatically when you send your resume from

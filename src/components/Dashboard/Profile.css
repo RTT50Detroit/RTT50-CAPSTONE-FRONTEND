@@ -367,6 +367,56 @@
   text-transform: uppercase;
 }
 
+.profile-details-resume-badge {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  align-items: center;
+  gap: 9px;
+  margin-top: 14px;
+  border: 1px solid var(--theme-gold-muted);
+  border-radius: 999px;
+  padding: 7px 11px 7px 7px;
+  color: var(--theme-gold-bright);
+  background: rgba(199, 162, 74, 0.12);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: border-color 160ms ease, color 160ms ease, background 160ms ease,
+    transform 160ms ease;
+}
+
+.profile-details-resume-mark {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+}
+
+.profile-details-resume-arrow {
+  font-size: 0.9rem;
+}
+
+.profile-details-resume-badge:hover,
+.profile-details-resume-badge:focus-visible {
+  transform: translateY(-1px);
+  border-color: var(--theme-gold-bright);
+  color: var(--theme-black);
+  background: var(--theme-gold);
+}
+
+.profile-details-resume-badge:focus-visible {
+  outline: 2px solid var(--theme-gold-bright);
+  outline-offset: 2px;
+}
+
 .profile-links {
   display: grid;
   gap: 8px;

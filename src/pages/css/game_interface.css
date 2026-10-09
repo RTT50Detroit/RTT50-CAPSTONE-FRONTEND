@@ -462,6 +462,20 @@
   color: #b8a982;
 }
 
+.game-interface .profile-details-resume-badge {
+  border-color: rgba(231, 181, 71, 0.52);
+  color: #f0c75f;
+  background: rgba(76, 57, 20, 0.24);
+}
+
+.game-interface .profile-details-resume-badge:hover,
+.game-interface .profile-details-resume-badge:focus-visible {
+  border-color: #ffe19a;
+  color: #201706;
+  background: #ffd66e;
+  box-shadow: 0 0 14px rgba(231, 181, 71, 0.2);
+}
+
 .game-interface :is(.journal-editor, .notes-list-section, .profile-widget, .profile-settings-menu, .master-profile-form, .master-profile-list) {
   border-color: rgba(190, 151, 66, 0.34);
   color: #e5dcc8;

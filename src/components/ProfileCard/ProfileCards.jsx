@@ -70,12 +70,6 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
           const isOnline = isMemberOnline(profile, currentMemberId);
           const summary = profile.aboutMe || profile.aboutme ||
             'Open to making a meaningful connection.';
-          const relationshipResume = profile.links?.find((link) => (
-            ['relationship resume', 'the relationship resume'].includes(
-                String(link.label || '').trim().toLowerCase(),
-            ) && typeof link.url === 'string' && link.url.trim()
-          ));
-
         return (
           <article key={profileId} className={`profile-card ${genderClass}`}>
               <div className="profile-card-image">
@@ -128,20 +122,6 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
                         <path d="M5.5 20a6.5 6.5 0 0 1 13 0" />
                       </svg>
                     </Link>
-                  )}
-                  {relationshipResume && (
-                    <a
-                        className="profile-card-resume-link"
-                        href={relationshipResume.url.trim()}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label={`Open ${profile.name || 'member'}'s Relationship Resume`}
-                        title="Open Relationship Resume"
-                    >
-                      <span className="profile-card-resume-mark" aria-hidden="true">
-                        RR
-                      </span>
-                    </a>
                   )}
                 </div>
               </div>
