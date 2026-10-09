@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
 import ProfileCards from '../components/ProfileCard/ProfileCards';
-import { getCurrentMemberId } from '../utils/auth.js';
-import { isMemberOnline } from '../utils/member.js';
+import { getCurrentMemberId, getTokenPayload } from '../utils/auth.js';
+import { getMemberId, isMemberOnline } from '../utils/member.js';
 import './css/members_dashboard.css';
 
 const MembersDashboard = () => {
@@ -18,15 +17,12 @@ const MembersDashboard = () => {
   const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
   const token = localStorage.getItem('authToken');
   const currentMemberId = getCurrentMemberId();
-  let loginName = 'Member';
-
-  try {
-    const tokenPayload = jwtDecode(token);
-    loginName = tokenPayload.loginName || tokenPayload.username ||
-      tokenPayload.name || tokenPayload.email || loginName;
-  } catch {
-    // Keep the dashboard usable when the token has no readable identity claim.
-  }
+  const tokenPayload = getTokenPayload();
+  const currentProfile = profiles.find((profile) => (
+    String(getMemberId(profile)) === String(currentMemberId)
+  ));
+  const loginName = currentProfile?.name || tokenPayload?.loginName ||
+    tokenPayload?.username || tokenPayload?.name;
 
   useEffect(() => {
     const fetchProfiles = async () => {
@@ -87,7 +83,9 @@ const MembersDashboard = () => {
           <div className="dashboard-hero-copy">
             <p className="dashboard-eyebrow">Member Directory</p>
             <h1>Find Your People</h1>
-            <p className="dashboard-welcome">Welcome back, {loginName}.</p>
+            <p className="dashboard-welcome">
+              Welcome Back{loginName ? `, ${loginName}` : ''}.
+            </p>
           </div>
           <img className="dashboard-accent" src="/favicon.svg" alt="" />
           <div className="dashboard-hero-readout" aria-hidden="true">
