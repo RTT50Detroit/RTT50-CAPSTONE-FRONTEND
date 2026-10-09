@@ -63,7 +63,7 @@ function Navigation() {
             <>
               <li>
                 <NavLink to="/dashboard" className={({ isActive }) => (isActive ? 'active' : '')}>
-                  Profiles
+                  Roster
                 </NavLink>
               </li>
               <li>
