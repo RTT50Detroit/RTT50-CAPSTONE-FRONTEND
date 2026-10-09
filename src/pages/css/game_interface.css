@@ -602,6 +602,25 @@
   color: #9be2a4;
 }
 
+.game-interface .profile-customize-button {
+  top: 14px;
+  right: 14px;
+  width: 42px;
+  height: 42px;
+  border-color: rgba(231, 181, 71, 0.58);
+  border-radius: 8px;
+  color: #f0c75f;
+  background: rgba(76, 57, 20, 0.48);
+}
+
+.game-interface .profile-customize-button:hover,
+.game-interface .profile-customize-button[aria-expanded='true'] {
+  border-color: #ffe19a;
+  color: #201706;
+  background: #ffd66e;
+  box-shadow: 0 0 16px rgba(231, 181, 71, 0.22);
+}
+
 @media (max-width: 700px) {
   .game-interface .profile-hero-actions,
   .game-interface .profile-settings-actions {

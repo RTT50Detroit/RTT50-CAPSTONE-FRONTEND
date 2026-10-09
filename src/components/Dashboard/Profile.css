@@ -143,18 +143,35 @@
 
 
 .profile-customize-button {
+  position: absolute;
+  z-index: 2;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
   border: 1px solid rgba(97, 211, 181, 0.5);
-  border-radius: 999px;
-  padding: 10px 15px;
+  border-radius: 8px;
+  padding: 0;
   color: #d9f7ed;
   background: rgba(97, 211, 181, 0.09);
   cursor: pointer;
-  font: inherit;
-  font-size: 0.78rem;
-  font-weight: 800;
+  transition: border-color 160ms ease, color 160ms ease, background 160ms ease,
+    box-shadow 160ms ease, transform 160ms ease;
 }
 
-.profile-customize-button:hover {
+.profile-customize-button svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.profile-customize-button:hover,
+.profile-customize-button[aria-expanded='true'] {
+  transform: rotate(18deg);
+  border-color: #287c78;
+  color: #287c78;
   background: rgba(97, 211, 181, 0.18);
 }
 

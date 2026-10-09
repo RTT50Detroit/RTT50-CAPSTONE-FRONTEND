@@ -144,19 +144,23 @@ const ProfileDashboard = () => {
                   </p>
                 </div>
                 <div className="profile-hero-actions">
-                  <button
-                      type="button"
-                      className="profile-customize-button"
-                      onClick={() => setIsCustomizeOpen((current) => !current)}
-                      aria-expanded={isCustomizeOpen}
-                  >
-                    <span aria-hidden="true">⚙</span> Settings
-                  </button>
                   <p className={`profile-detail-status${isOnline ? ' profile-detail-status--online' : ''}`}>
                     <span className="profile-detail-status-dot" aria-hidden="true" />
                     {isOnline ? 'Online Now' : 'Offline'}
                   </p>
                 </div>
+                <button
+                    type="button"
+                    className="profile-customize-button"
+                    onClick={() => setIsCustomizeOpen((current) => !current)}
+                    aria-expanded={isCustomizeOpen}
+                    aria-label={isCustomizeOpen ? 'Close Profile Settings' : 'Open Profile Settings'}
+                    title={isCustomizeOpen ? 'Close Profile Settings' : 'Open Profile Settings'}
+                >
+                  <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                    <path d="M19.14 12.94a7.5 7.5 0 0 0 .05-.94 7.5 7.5 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.61-.22l-2.39.96a7.2 7.2 0 0 0-1.63-.94l-.36-2.54A.49.49 0 0 0 13.89 2h-3.78a.49.49 0 0 0-.49.42L9.26 4.96c-.6.23-1.15.55-1.63.94l-2.39-.96a.5.5 0 0 0-.61.22L2.71 8.48a.5.5 0 0 0 .12.64l2.03 1.58a7.5 7.5 0 0 0-.05.94c0 .32.02.63.05.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32c.12.21.37.3.61.22l2.39-.96c.48.39 1.03.71 1.63.94l.36 2.54c.04.24.24.42.49.42h3.78c.25 0 .45-.18.49-.42l.36-2.54c.6-.23 1.15-.55 1.63-.94l2.39.96c.24.09.49-.01.61-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58ZM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z" />
+                  </svg>
+                </button>
               </header>
               {isCustomizeOpen && (
                 <section className="profile-settings-menu" aria-label="Profile Page Settings">
