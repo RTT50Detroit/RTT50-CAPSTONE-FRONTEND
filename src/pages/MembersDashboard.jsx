@@ -118,7 +118,7 @@ const MembersDashboard = () => {
           <div className="profiles-section-heading">
             <div>
               <p className="dashboard-eyebrow">Explore the Community</p>
-              <h2 id="profiles-heading">Profile Cards</h2>
+              <h2 id="profiles-heading">Game Roster</h2>
             </div>
             {!isLoading && !error && <span>{filteredProfiles.length} results</span>}
           </div>
