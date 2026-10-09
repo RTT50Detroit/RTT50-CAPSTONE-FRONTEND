@@ -246,9 +246,11 @@ const NotesDashboard = () => {
   return (
       <main className="page-content notes-page game-interface">
         <section className="notes-heading">
-          <p className="notes-eyebrow">Private Journal</p>
-          <h1>Journal</h1>
-          <p>Capture the thoughts, plans, and little moments worth keeping.</p>
+          <div className="page-header-copy">
+            <p className="notes-eyebrow">Private Journal</p>
+            <h1>Journal</h1>
+            <p>Capture the thoughts, plans, and little moments worth keeping.</p>
+          </div>
         </section>
 
         <div className="notes-page-settings" ref={settingsControlsRef}>

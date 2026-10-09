@@ -82,7 +82,7 @@ const MembersDashboard = () => {
   return (
       <main className="page-content dashboard-page dashboard-game-ui game-interface">
         <section className="dashboard-hero">
-          <div className="dashboard-hero-copy">
+          <div className="page-header-copy dashboard-hero-copy">
             <p className="dashboard-eyebrow">Member Directory</p>
             <h1>Find Your People</h1>
             <p className="dashboard-welcome">

@@ -43,7 +43,7 @@
     content: '';
 }
 
-.notes-heading > div {
+.notes-heading .page-header-copy {
     position: relative;
     z-index: 1;
 }
@@ -68,7 +68,7 @@
     line-height: 0.95;
 }
 
-.notes-heading > p:last-child {
+.notes-heading .page-header-copy > p:last-child {
     position: relative;
     z-index: 1;
     max-width: 560px;

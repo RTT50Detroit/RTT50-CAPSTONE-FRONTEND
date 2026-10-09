@@ -158,9 +158,11 @@ const MasterDashboard = () => {
   return (
     <main className="page-content master-dashboard game-interface">
       <header className="master-dashboard-heading">
-        <p className="dashboard-eyebrow">Master Controls</p>
-        <h1>Manage Profiles</h1>
-        <p>Create profiles and update any member in the community.</p>
+        <div className="page-header-copy">
+          <p className="dashboard-eyebrow">Master Controls</p>
+          <h1>Manage Profiles</h1>
+          <p className="master-dashboard-description">Create profiles and update any member in the community.</p>
+        </div>
       </header>
 
       <section className="master-dashboard-grid">

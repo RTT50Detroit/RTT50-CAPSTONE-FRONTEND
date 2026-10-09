@@ -154,7 +154,7 @@ const ProfileDashboard = () => {
             <>
               <div className="profile-hero-wrap" ref={profileHeaderRef}>
               <header className="profile-detail-header profile-hero">
-                <div className="profile-hero-copy">
+                <div className="page-header-copy profile-hero-copy">
                   <Link className="profile-back-link" to="/dashboard">
                     <span aria-hidden="true">&larr;</span> Back to profiles
                   </Link>

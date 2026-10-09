@@ -80,7 +80,7 @@
   text-shadow: 0 0 24px rgba(74, 225, 222, 0.24);
 }
 
-.game-interface :is(.notes-heading > p:last-child, .profile-hero-subtitle, .master-dashboard-heading > p:last-child) {
+.game-interface :is(.notes-heading .page-header-copy > p:last-child, .profile-hero-subtitle, .master-dashboard-description) {
   color: #91b8c0;
   font-family: "Courier New", monospace;
 }
@@ -323,7 +323,7 @@
   font-size: clamp(2.5rem, 6vw, 4.6rem);
 }
 
-.game-interface .master-dashboard-heading p:last-child {
+.game-interface .master-dashboard-description {
   max-width: 620px;
   margin-top: 14px;
 }
@@ -458,7 +458,7 @@
   text-shadow: 0 0 24px rgba(231, 181, 71, 0.22);
 }
 
-.game-interface :is(.notes-heading > p:last-child, .profile-hero-subtitle, .master-dashboard-heading > p:last-child, .profile-resume-url) {
+.game-interface :is(.notes-heading .page-header-copy > p:last-child, .profile-hero-subtitle, .master-dashboard-description, .profile-resume-url) {
   color: #b8a982;
 }
 
@@ -626,6 +626,39 @@
   .game-interface .profile-settings-actions {
     border-top-color: rgba(190, 151, 66, 0.28);
   }
+}
+
+.game-interface :is(.dashboard-hero, .notes-heading, .profile-detail-header, .master-dashboard-heading) {
+  padding: clamp(24px, 4vw, 36px);
+}
+
+.game-interface .page-header-copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  min-width: 0;
+  align-content: center;
+  justify-items: start;
+  gap: 10px;
+  text-align: left;
+}
+
+.game-interface .page-header-copy > :is(.dashboard-eyebrow, .notes-eyebrow, .profile-detail-eyebrow) {
+  margin: 0;
+}
+
+.game-interface .page-header-copy > h1 {
+  margin: 0;
+}
+
+.game-interface .page-header-copy > p:last-child {
+  max-width: 620px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.game-interface .page-header-copy .profile-back-link {
+  margin: 0;
 }
 
 .game-interface .profile-settings-menu {
