@@ -87,7 +87,6 @@ const MembersDashboard = () => {
               Welcome Back{loginName ? `, ${loginName}` : ''}.
             </p>
           </div>
-          <img className="dashboard-accent" src="/favicon.svg" alt="" />
           <div className="dashboard-hero-readout" aria-hidden="true">
             <span>Community Network</span>
             <span className="dashboard-network-status">Connected</span>
