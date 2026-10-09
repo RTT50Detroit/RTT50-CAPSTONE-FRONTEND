@@ -112,7 +112,7 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
   );
 
   return (
-      <div className={`profile-card-groups${layout === 'editorial' ? ' profile-card-groups--editorial' : ''}`}>
+      <div className={`profile-card-groups${layout === 'editorial' ? ' profile-card-groups--editorial' : ''}${layout === 'compact' ? ' profile-card-groups--compact' : ''}`}>
         <div className="profile-layout-controls">
           <span className="profile-layout-label">Card Layout</span>
           <div className="profile-layout-switcher" role="group" aria-label="Choose a card layout">
@@ -131,6 +131,14 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
                 onClick={() => setLayout('editorial')}
             >
               Editorial
+            </button>
+            <button
+                type="button"
+                className={layout === 'compact' ? 'is-active' : ''}
+                aria-pressed={layout === 'compact'}
+                onClick={() => setLayout('compact')}
+            >
+              Compact List
             </button>
           </div>
         </div>
