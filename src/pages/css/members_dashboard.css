@@ -1995,10 +1995,9 @@
 }
 
 .dashboard-game-ui .profile-layout-switcher {
-  position: absolute;
-  z-index: 10;
-  top: 50%;
-  right: calc(100% + 10px);
+  position: fixed;
+  z-index: 20;
+  right: 12px;
   left: auto;
   display: flex;
   width: max-content;
@@ -2014,7 +2013,7 @@
   backdrop-filter: blur(16px);
   opacity: 0;
   pointer-events: none;
-  transform: translate(14px, -50%);
+  transform: translate(calc(100% + 20px), -50%);
   transform-origin: right center;
   transition:
     opacity 180ms ease,
@@ -2077,23 +2076,23 @@
   }
 
   .dashboard-game-ui .profile-layout-switcher {
-    top: calc(100% + 8px);
-    right: 0;
+    right: 8px;
     left: auto;
     width: max-content;
-    max-width: min(100vw - 32px, 360px);
+    max-width: calc(100vw - 16px);
     height: auto;
     justify-content: flex-end;
-    transform: translate(14px, 0);
+    transform: translate(calc(100% + 16px), -50%);
   }
 
   .dashboard-game-ui .profile-layout-switcher button {
     min-width: 0;
-    padding: 7px 6px;
-    font-size: 0.62rem;
+    padding: 7px 5px;
+    font-size: 0.58rem;
+    letter-spacing: 0;
   }
 
   .dashboard-game-ui .profile-layout-switcher.is-open {
-    transform: translate(0, 0);
+    transform: translate(0, -50%);
   }
 }

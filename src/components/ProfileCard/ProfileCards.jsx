@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { getMemberId, getProfileImage, isMemberOnline } from '../../utils/member.js';
 
 const ProfileCards = ({ profiles, currentMemberId }) => {
   const [layout, setLayout] = useState('current');
   const [isLayoutMenuOpen, setIsLayoutMenuOpen] = useState(false);
+  const [layoutMenuTop, setLayoutMenuTop] = useState(0);
   const layoutControlsRef = useRef(null);
   const layoutToggleRef = useRef(null);
   const layoutLabels = {
@@ -34,6 +35,25 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
     return () => {
       document.removeEventListener('pointerdown', handlePointerDown);
       document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isLayoutMenuOpen]);
+
+  useLayoutEffect(() => {
+    if (!isLayoutMenuOpen) return undefined;
+
+    const updateMenuPosition = () => {
+      const toggleBounds = layoutToggleRef.current?.getBoundingClientRect();
+      if (toggleBounds) {
+        setLayoutMenuTop(toggleBounds.top + toggleBounds.height / 2);
+      }
+    };
+
+    updateMenuPosition();
+    window.addEventListener('resize', updateMenuPosition);
+    window.addEventListener('scroll', updateMenuPosition, true);
+    return () => {
+      window.removeEventListener('resize', updateMenuPosition);
+      window.removeEventListener('scroll', updateMenuPosition, true);
     };
   }, [isLayoutMenuOpen]);
 
@@ -177,6 +197,7 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
               role="group"
               aria-label="Choose a card layout"
               aria-hidden={!isLayoutMenuOpen}
+              style={{ top: `${layoutMenuTop}px` }}
           >
             <button
                 type="button"
