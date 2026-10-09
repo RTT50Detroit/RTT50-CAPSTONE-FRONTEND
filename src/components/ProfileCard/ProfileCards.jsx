@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { getMemberId, getProfileImage, isMemberOnline } from '../../utils/member.js';
 
 const ProfileCards = ({ profiles, currentMemberId }) => {
+  const [layout, setLayout] = useState('current');
   const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
   const onlineProfiles = profiles.filter((profile) => {
     return isMemberOnline(profile, currentMemberId);
@@ -104,7 +106,28 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
   );
 
   return (
-      <div className="profile-card-groups">
+      <div className={`profile-card-groups${layout === 'editorial' ? ' profile-card-groups--editorial' : ''}`}>
+        <div className="profile-layout-controls">
+          <span className="profile-layout-label">Card Layout</span>
+          <div className="profile-layout-switcher" role="group" aria-label="Choose a card layout">
+            <button
+                type="button"
+                className={layout === 'current' ? 'is-active' : ''}
+                aria-pressed={layout === 'current'}
+                onClick={() => setLayout('current')}
+            >
+              Current Design
+            </button>
+            <button
+                type="button"
+                className={layout === 'editorial' ? 'is-active' : ''}
+                aria-pressed={layout === 'editorial'}
+                onClick={() => setLayout('editorial')}
+            >
+              Editorial
+            </button>
+          </div>
+        </div>
         {onlineProfiles.length > 0 && (
           <section className="profile-card-group" aria-labelledby="online-profiles-heading">
             <h3 id="online-profiles-heading" className="profile-card-group-heading">
