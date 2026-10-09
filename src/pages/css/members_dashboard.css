@@ -2133,6 +2133,10 @@
     margin-bottom: 12px;
   }
 
+  .dashboard-game-ui .profile-layout-controls.is-toggle-visible {
+    height: 62px;
+  }
+
   .dashboard-game-ui .profile-card-group:first-of-type .profile-card-group-heading {
     padding-right: 0;
   }

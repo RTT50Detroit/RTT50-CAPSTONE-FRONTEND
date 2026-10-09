@@ -174,7 +174,7 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
   return (
       <div className={`profile-card-groups${layout === 'photo' ? ' profile-card-groups--photo' : ''}${layout === 'magazine' ? ' profile-card-groups--magazine' : ''}`}>
         <div
-            className={`profile-layout-controls${isLayoutMenuOpen ? ' is-open' : ''}`}
+            className={`profile-layout-controls${isLayoutMenuOpen ? ' is-open' : ''}${isLayoutControlVisible ? ' is-toggle-visible' : ''}`}
             ref={layoutControlsRef}
         >
           <button
@@ -232,6 +232,7 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
                 type="button"
                 className={layout === 'current' ? 'is-active' : ''}
                 aria-pressed={layout === 'current'}
+                tabIndex={isLayoutMenuOpen ? 0 : -1}
                 onClick={() => {
                   setLayout('current');
                   setIsLayoutMenuOpen(false);
@@ -243,6 +244,7 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
                 type="button"
                 className={layout === 'photo' ? 'is-active' : ''}
                 aria-pressed={layout === 'photo'}
+                tabIndex={isLayoutMenuOpen ? 0 : -1}
                 onClick={() => {
                   setLayout('photo');
                   setIsLayoutMenuOpen(false);
@@ -254,6 +256,7 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
                 type="button"
                 className={layout === 'magazine' ? 'is-active' : ''}
                 aria-pressed={layout === 'magazine'}
+                tabIndex={isLayoutMenuOpen ? 0 : -1}
                 onClick={() => {
                   setLayout('magazine');
                   setIsLayoutMenuOpen(false);
