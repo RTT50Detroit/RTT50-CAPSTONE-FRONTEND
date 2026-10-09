@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import NoteList from './NoteList';
@@ -56,7 +56,35 @@ const NotesDashboard = () => {
   const [editRequestIds, setEditRequestIds] = useState([]);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [selectionMode, setSelectionMode] = useState(false);
+  const settingsTriggerRef = useRef(null);
+  const settingsMenuRef = useRef(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!settingsOpen) return undefined;
+
+    const handlePointerDown = (event) => {
+      if (
+        !settingsMenuRef.current?.contains(event.target) &&
+        !settingsTriggerRef.current?.contains(event.target)
+      ) {
+        setSettingsOpen(false);
+      }
+    };
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setSettingsOpen(false);
+        settingsTriggerRef.current?.focus();
+      }
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [settingsOpen]);
 
   useEffect(() => {
     document.body.classList.add('notes-page-active');
@@ -240,7 +268,9 @@ const NotesDashboard = () => {
               <button
                   type="button"
                   className="notes-settings-trigger"
+                  ref={settingsTriggerRef}
                   aria-expanded={settingsOpen}
+                  aria-controls="journal-post-settings"
                   onClick={() => setSettingsOpen((isOpen) => !isOpen)}
               >
                 Settings
@@ -248,7 +278,12 @@ const NotesDashboard = () => {
             </div>
           </div>
           {settingsOpen && (
-            <section className="notes-settings-menu" aria-label="Journal Post Settings">
+            <section
+                className="notes-settings-menu"
+                id="journal-post-settings"
+                ref={settingsMenuRef}
+                aria-label="Journal Post Settings"
+            >
               <div>
                 <p className="notes-section-kicker">Manage Posts</p>
                 <h3>Post Settings</h3>
