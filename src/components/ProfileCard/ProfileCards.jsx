@@ -119,7 +119,7 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
 
   return (
       <div className={`profile-card-groups${layout === 'photo' ? ' profile-card-groups--photo' : ''}${layout === 'magazine' ? ' profile-card-groups--magazine' : ''}`}>
-        <div className="profile-layout-controls">
+        <div className={`profile-layout-controls${isLayoutMenuOpen ? ' is-open' : ''}`}>
           <button
               type="button"
               className="profile-layout-toggle"
