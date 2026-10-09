@@ -20,7 +20,6 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
             ? `${apiUrl}${rawProfileImage}`
             : rawProfileImage;
           const nameParts = (profile.name || '').trim().split(/\s+/).filter(Boolean);
-          const firstName = nameParts[0] || 'member';
           const initials = nameParts.length > 1
             ? `${nameParts[0][0]}${nameParts[nameParts.length - 1][0]}`
             : (nameParts[0]?.slice(0, 2) || '?');
@@ -78,9 +77,16 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
                 <p className="profile-card-summary">{summary}</p>
                 <div className="profile-card-actions">
                   {profileId && (
-                    <Link className="profile-card-link" to={`/dashboard/profile?id=${profileId}`}>
-                      <span>View {firstName}&apos;s Profile</span>
-                      <span aria-hidden="true">-&gt;</span>
+                    <Link
+                        className="profile-card-profile-link"
+                        to={`/dashboard/profile?id=${profileId}`}
+                        aria-label={`View ${profile.name || 'member'}'s Profile`}
+                        title={`View ${profile.name || 'Member'}'s Profile`}
+                    >
+                      <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                        <circle cx="12" cy="8" r="3.25" />
+                        <path d="M5.5 20a6.5 6.5 0 0 1 13 0" />
+                      </svg>
                     </Link>
                   )}
                   {relationshipResume && (

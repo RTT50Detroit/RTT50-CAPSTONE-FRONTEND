@@ -459,34 +459,52 @@
   -webkit-line-clamp: 4;
 }
 
-.profile-card-link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: auto;
-  border-top: 1px solid var(--theme-line);
-  padding-top: 15px;
-  flex: 1;
-  color: #287c78;
-  font-size: 0.85rem;
-  font-weight: 800;
-  text-decoration: none;
-  transition: color 160ms ease;
-}
-
 .profile-card-actions {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 12px;
   margin-top: auto;
   border-top: 1px solid var(--theme-line);
+  padding-top: 12px;
 }
 
-.profile-card-actions .profile-card-link {
-  margin-top: 0;
-  border-top: 0;
-  padding-top: 15px;
+.profile-card-profile-link {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: none;
+  place-items: center;
+  border: 1px solid #287c78;
+  border-radius: 12px;
+  color: #287c78;
+  background: #e7f1ef;
+  transition: border-color 160ms ease, color 160ms ease, background 160ms ease,
+    transform 160ms ease;
+}
+
+.profile-card-profile-link svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.profile-card-profile-link:hover,
+.profile-card-profile-link:focus-visible {
+  transform: translateY(-2px);
+  border-color: #123b4a;
+  color: #fff;
+  background: #287c78;
+}
+
+.profile-card-profile-link:focus-visible,
+.profile-card-resume-link:focus-visible {
+  outline: 2px solid var(--theme-gold-bright);
+  outline-offset: 2px;
 }
 
 .profile-card-resume-link {
@@ -516,20 +534,6 @@
   border-color: var(--theme-gold-bright);
   color: var(--theme-black);
   background: var(--theme-gold);
-}
-
-.profile-card-link span:last-child {
-  color: var(--theme-gold);
-  font-size: 1.1rem;
-  transition: transform 160ms ease;
-}
-
-.profile-card-link:hover {
-  color: #d0734f;
-}
-
-.profile-card-link:hover span:last-child {
-  transform: translateX(4px);
 }
 
 .profile-card-groups--editorial .profile-card {

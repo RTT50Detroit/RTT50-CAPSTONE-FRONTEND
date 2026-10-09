@@ -137,12 +137,12 @@ nav a:focus-visible {
   background: rgba(199, 162, 74, 0.14);
 }
 
-.profile-card-link,
+.profile-card-profile-link,
 .profile-back-link {
   color: var(--theme-gold-bright);
 }
 
-.profile-card-link:hover,
+.profile-card-profile-link:hover,
 .profile-back-link:hover {
   color: var(--theme-cream);
 }
