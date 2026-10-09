@@ -234,7 +234,7 @@
 
 .profile-layout-controls {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
   gap: 8px;
   min-height: 0;
@@ -308,7 +308,7 @@
 
 .profile-layout-switcher button {
   position: absolute;
-  width: 32%;
+  width: 30%;
   min-width: 0;
   border: 1px solid rgba(255, 255, 255, 0.72);
   border-radius: 999px;
@@ -323,19 +323,19 @@
 }
 
 .profile-layout-switcher button:nth-child(1) {
-  bottom: 14px;
+  top: 27%;
   left: 1%;
 }
 
 .profile-layout-switcher button:nth-child(2) {
-  top: 12px;
+  top: 3%;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .profile-layout-switcher button:nth-child(3) {
+  top: 27%;
   right: 1%;
-  bottom: 14px;
 }
 
 .profile-layout-switcher button.is-active {
@@ -791,7 +791,7 @@
   }
 
   .profile-layout-controls {
-    align-items: center;
+    align-items: flex-start;
   }
 
   .profile-layout-switcher {
