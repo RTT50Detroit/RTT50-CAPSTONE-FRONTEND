@@ -145,12 +145,83 @@ ProfileLayoutControls.propTypes = {
   onLayoutChange: PropTypes.func.isRequired,
 };
 
-const ProfileCards = ({ profiles, currentMemberId, layout }) => {
+const ProfileDirectory = ({ profiles, currentMemberId }) => {
+  const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
+  return (
+    <div className="roster-directory" aria-label="All Directory">
+      {profiles.map((profile) => {
+        const profileId = getMemberId(profile);
+        const name = profile.name || 'Unnamed Member';
+        const rawProfileImage = getProfileImage(profile);
+        const profileImage = rawProfileImage?.startsWith('/')
+          ? `${apiUrl}${rawProfileImage}`
+          : rawProfileImage;
+        const nameParts = name.trim().split(/\s+/).filter(Boolean);
+        const initials = nameParts.length > 1
+          ? `${nameParts[0][0]}${nameParts[nameParts.length - 1][0]}`
+          : (nameParts[0]?.slice(0, 2) || '?');
+        const isOnline = isMemberOnline(profile, currentMemberId);
+
+        return (
+          <article className="roster-directory-row" key={profileId}>
+            <div className="roster-directory-photo">
+              {profileImage ? (
+                <>
+                  <img
+                      src={profileImage}
+                      alt={`${name}'s profile`}
+                      onError={(event) => {
+                        event.currentTarget.hidden = true;
+                        event.currentTarget.nextElementSibling.hidden = false;
+                      }}
+                  />
+                  <span hidden aria-hidden="true">{initials.toUpperCase()}</span>
+                </>
+              ) : (
+                <span aria-hidden="true">{initials.toUpperCase()}</span>
+              )}
+            </div>
+            <div className="roster-directory-details">
+              <strong>{name}</strong>
+              <span>
+                {profile.age ? `${profile.age} Years` : 'Age Private'}
+                {profile.gender ? ` · ${profile.gender}` : ''}
+              </span>
+            </div>
+            <span className={`roster-directory-status${isOnline ? ' is-online' : ''}`}>
+              {isOnline ? 'Online' : 'Offline'}
+            </span>
+            {profileId && (
+              <Link
+                  className="roster-directory-link"
+                  to={`/dashboard/profile?id=${profileId}`}
+                  aria-label={`View ${name}'s Profile`}
+              >
+                View Profile
+              </Link>
+            )}
+          </article>
+        );
+      })}
+    </div>
+  );
+};
+
+ProfileDirectory.propTypes = {
+  profiles: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentMemberId: PropTypes.string,
+};
+
+const ProfileCards = ({ profiles, currentMemberId, layout, view }) => {
   const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
   const onlineProfiles = profiles.filter((profile) => {
     return isMemberOnline(profile, currentMemberId);
   });
   const offlineProfiles = profiles.filter((profile) => !onlineProfiles.includes(profile));
+
+  if (view === 'directory') {
+    return <ProfileDirectory profiles={profiles} currentMemberId={currentMemberId} />;
+  }
 
   const renderProfileCards = (profilesToRender) => (
     <div className="profile-cards-grid">
@@ -260,4 +331,5 @@ ProfileCards.propTypes = {
   profiles: PropTypes.arrayOf(PropTypes.object).isRequired,
   currentMemberId: PropTypes.string,
   layout: PropTypes.oneOf(['current', 'photo', 'magazine']).isRequired,
+  view: PropTypes.oneOf(['cards', 'directory']).isRequired,
 };

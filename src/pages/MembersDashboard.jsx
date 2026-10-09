@@ -13,6 +13,7 @@ const MembersDashboard = () => {
   const [maxAge, setMaxAge] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [cardLayout, setCardLayout] = useState('current');
+  const [rosterView, setRosterView] = useState('cards');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
@@ -120,7 +121,29 @@ const MembersDashboard = () => {
             </div>
             <div className="profiles-section-actions">
               {!isLoading && !error && filteredProfiles.length > 0 && (
-                <ProfileLayoutControls layout={cardLayout} onLayoutChange={setCardLayout} />
+                <div className="roster-view-toggle" role="group" aria-label="Roster View">
+                  <button
+                      type="button"
+                      className={rosterView === 'cards' ? 'is-active' : ''}
+                      aria-pressed={rosterView === 'cards'}
+                      onClick={() => setRosterView('cards')}
+                  >
+                    Cards
+                  </button>
+                  <button
+                      type="button"
+                      className={rosterView === 'directory' ? 'is-active' : ''}
+                      aria-pressed={rosterView === 'directory'}
+                      onClick={() => setRosterView('directory')}
+                  >
+                    All Directory
+                  </button>
+                </div>
+              )}
+              {!isLoading && !error && filteredProfiles.length > 0 && (
+                rosterView === 'cards' && (
+                  <ProfileLayoutControls layout={cardLayout} onLayoutChange={setCardLayout} />
+                )
               )}
             </div>
           </div>
@@ -224,6 +247,7 @@ const MembersDashboard = () => {
                     profiles={filteredProfiles}
                     currentMemberId={currentMemberId}
                     layout={cardLayout}
+                    view={rosterView}
                 />
               )}
             </div>

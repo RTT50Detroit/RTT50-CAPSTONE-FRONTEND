@@ -1880,6 +1880,199 @@
   }
 }
 
+.dashboard-game-ui .roster-view-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid rgba(190, 151, 66, 0.34);
+  border-radius: 5px;
+  padding: 3px;
+  background: rgba(23, 20, 14, 0.82);
+}
+
+.dashboard-game-ui .roster-view-toggle button {
+  min-height: 34px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  padding: 7px 10px;
+  color: #c5bda9;
+  background: transparent;
+  font-family: "Courier New", monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.dashboard-game-ui .roster-view-toggle button:hover,
+.dashboard-game-ui .roster-view-toggle button:focus-visible {
+  border-color: rgba(231, 181, 71, 0.55);
+  color: #ffe6a5;
+}
+
+.dashboard-game-ui .roster-view-toggle button:focus-visible {
+  outline: 2px solid #e7b547;
+  outline-offset: 2px;
+}
+
+.dashboard-game-ui .roster-view-toggle button.is-active {
+  border-color: rgba(231, 181, 71, 0.52);
+  color: #ffe6a5;
+  background: rgba(126, 91, 23, 0.42);
+}
+
+.roster-directory {
+  display: grid;
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid rgba(190, 151, 66, 0.34);
+  border-radius: 5px;
+  background: linear-gradient(160deg, rgba(39, 32, 21, 0.98), rgba(21, 18, 13, 0.98));
+}
+
+.roster-directory-row {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  border-bottom: 1px solid rgba(190, 151, 66, 0.2);
+  padding: 12px 16px;
+}
+
+.roster-directory-row:last-child {
+  border-bottom: 0;
+}
+
+.roster-directory-photo {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  overflow: hidden;
+  place-items: center;
+  border: 1px solid rgba(231, 181, 71, 0.42);
+  border-radius: 4px;
+  color: #ffe6a5;
+  background: rgba(126, 91, 23, 0.3);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.2rem;
+}
+
+.roster-directory-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.roster-directory-photo span {
+  grid-area: 1 / 1;
+}
+
+.roster-directory-details {
+  display: grid;
+  min-width: 0;
+  gap: 5px;
+}
+
+.roster-directory-details strong {
+  overflow: hidden;
+  color: #f3ead6;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.roster-directory-details > span {
+  overflow: hidden;
+  color: #c5bda9;
+  font-size: 0.78rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.roster-directory-status {
+  color: #c5bda9;
+  font-family: "Courier New", monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.roster-directory-status::before {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: #a99975;
+  content: "";
+}
+
+.roster-directory-status.is-online {
+  color: #73f5b1;
+}
+
+.roster-directory-status.is-online::before {
+  background: #73f5b1;
+  box-shadow: 0 0 8px rgba(115, 245, 177, 0.5);
+}
+
+.roster-directory-link {
+  border: 1px solid rgba(231, 181, 71, 0.42);
+  border-radius: 3px;
+  padding: 7px 10px;
+  color: #ffe6a5;
+  font-family: "Courier New", monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.roster-directory-link:hover,
+.roster-directory-link:focus-visible {
+  border-color: #e7b547;
+  background: rgba(126, 91, 23, 0.42);
+}
+
+@media (max-width: 640px) {
+  .roster-directory-row {
+    grid-template-columns: 48px minmax(0, 1fr) auto;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .roster-directory-photo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .roster-directory-status {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .roster-directory-link {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+  }
+}
+
+@media (max-width: 520px) {
+  .profiles-section-actions {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .dashboard-game-ui .roster-view-toggle {
+    flex-wrap: wrap;
+  }
+}
+
 .dashboard-game-ui .profile-layout-controls {
   position: relative;
   z-index: 5;
