@@ -112,7 +112,7 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
   );
 
   return (
-      <div className={`profile-card-groups${layout === 'editorial' ? ' profile-card-groups--editorial' : ''}${layout === 'compact' ? ' profile-card-groups--compact' : ''}${layout === 'photo' ? ' profile-card-groups--photo' : ''}`}>
+      <div className={`profile-card-groups${layout === 'editorial' ? ' profile-card-groups--editorial' : ''}${layout === 'compact' ? ' profile-card-groups--compact' : ''}${layout === 'photo' ? ' profile-card-groups--photo' : ''}${layout === 'masonry' ? ' profile-card-groups--masonry' : ''}`}>
         <div className="profile-layout-controls">
           <span className="profile-layout-label">Card Layout</span>
           <div className="profile-layout-switcher" role="group" aria-label="Choose a card layout">
@@ -147,6 +147,14 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
                 onClick={() => setLayout('photo')}
             >
               Photo-Forward
+            </button>
+            <button
+                type="button"
+                className={layout === 'masonry' ? 'is-active' : ''}
+                aria-pressed={layout === 'masonry'}
+                onClick={() => setLayout('masonry')}
+            >
+              Masonry
             </button>
           </div>
         </div>
