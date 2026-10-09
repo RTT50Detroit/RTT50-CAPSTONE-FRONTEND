@@ -5,6 +5,12 @@ import { getMemberId, getProfileImage, isMemberOnline } from '../../utils/member
 
 const ProfileCards = ({ profiles, currentMemberId }) => {
   const [layout, setLayout] = useState('current');
+  const [isLayoutMenuOpen, setIsLayoutMenuOpen] = useState(false);
+  const layoutLabels = {
+    current: 'Current Design',
+    photo: 'Photo-Forward',
+    magazine: 'Magazine',
+  };
   const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
   const onlineProfiles = profiles.filter((profile) => {
     return isMemberOnline(profile, currentMemberId);
@@ -112,47 +118,56 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
   );
 
   return (
-      <div className={`profile-card-groups${layout === 'editorial' ? ' profile-card-groups--editorial' : ''}${layout === 'photo' ? ' profile-card-groups--photo' : ''}${layout === 'masonry' ? ' profile-card-groups--masonry' : ''}${layout === 'magazine' ? ' profile-card-groups--magazine' : ''}`}>
+      <div className={`profile-card-groups${layout === 'photo' ? ' profile-card-groups--photo' : ''}${layout === 'magazine' ? ' profile-card-groups--magazine' : ''}`}>
         <div className="profile-layout-controls">
-          <span className="profile-layout-label">Card Layout</span>
-          <div className="profile-layout-switcher" role="group" aria-label="Choose a card layout">
+          <button
+              type="button"
+              className="profile-layout-toggle"
+              aria-expanded={isLayoutMenuOpen}
+              aria-controls="profile-layout-choices"
+              onClick={() => setIsLayoutMenuOpen((isOpen) => !isOpen)}
+          >
+            <span>Card Layouts</span>
+            <span className="profile-layout-current">{layoutLabels[layout]}</span>
+            <span className="profile-layout-chevron" aria-hidden="true" />
+          </button>
+          <div
+              id="profile-layout-choices"
+              className={`profile-layout-switcher${isLayoutMenuOpen ? ' is-open' : ''}`}
+              role="group"
+              aria-label="Choose a card layout"
+              hidden={!isLayoutMenuOpen}
+          >
             <button
                 type="button"
                 className={layout === 'current' ? 'is-active' : ''}
                 aria-pressed={layout === 'current'}
-                onClick={() => setLayout('current')}
+                onClick={() => {
+                  setLayout('current');
+                  setIsLayoutMenuOpen(false);
+                }}
             >
               Current Design
             </button>
             <button
                 type="button"
-                className={layout === 'editorial' ? 'is-active' : ''}
-                aria-pressed={layout === 'editorial'}
-                onClick={() => setLayout('editorial')}
-            >
-              Editorial
-            </button>
-            <button
-                type="button"
                 className={layout === 'photo' ? 'is-active' : ''}
                 aria-pressed={layout === 'photo'}
-                onClick={() => setLayout('photo')}
+                onClick={() => {
+                  setLayout('photo');
+                  setIsLayoutMenuOpen(false);
+                }}
             >
               Photo-Forward
             </button>
             <button
                 type="button"
-                className={layout === 'masonry' ? 'is-active' : ''}
-                aria-pressed={layout === 'masonry'}
-                onClick={() => setLayout('masonry')}
-            >
-              Masonry
-            </button>
-            <button
-                type="button"
                 className={layout === 'magazine' ? 'is-active' : ''}
                 aria-pressed={layout === 'magazine'}
-                onClick={() => setLayout('magazine')}
+                onClick={() => {
+                  setLayout('magazine');
+                  setIsLayoutMenuOpen(false);
+                }}
             >
               Magazine
             </button>
