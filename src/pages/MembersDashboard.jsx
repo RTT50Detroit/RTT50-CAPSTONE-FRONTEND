@@ -82,14 +82,18 @@ const MembersDashboard = () => {
     onlineStatusFilter !== 'all' || minAge || maxAge;
 
   return (
-      <main className="page-content dashboard-page">
+      <main className="page-content dashboard-page dashboard-game-ui">
         <section className="dashboard-hero">
-          <div>
+          <div className="dashboard-hero-copy">
             <p className="dashboard-eyebrow">Member Directory</p>
             <h1>Find Your People</h1>
             <p className="dashboard-welcome">Welcome back, {loginName}.</p>
           </div>
           <img className="dashboard-accent" src="/favicon.svg" alt="" />
+          <div className="dashboard-hero-readout" aria-hidden="true">
+            <span>Community Network</span>
+            <span className="dashboard-network-status">Connected</span>
+          </div>
         </section>
 
         <section className="dashboard-stats" aria-label="Directory Summary">
@@ -119,97 +123,102 @@ const MembersDashboard = () => {
             {!isLoading && !error && <span>{filteredProfiles.length} results</span>}
           </div>
 
-          {!isLoading && !error && profiles.length > 0 && (
-            <div className="profile-filters" aria-label="Filter Profiles">
-              <div className="profile-filter-field profile-filter-search">
-                <label htmlFor="profile-search">Search Profiles</label>
-                <div className="profile-search-input">
-                  <span aria-hidden="true">⌕</span>
+          <div className="directory-console">
+            {!isLoading && !error && profiles.length > 0 && (
+              <aside className="profile-filters" aria-label="Filter Profiles">
+                <p className="directory-panel-kicker">Search Parameters</p>
+                <div className="profile-filter-field profile-filter-search">
+                  <label htmlFor="profile-search">Search Profiles</label>
+                  <div className="profile-search-input">
+                    <span aria-hidden="true">⌕</span>
+                    <input
+                        id="profile-search"
+                        type="search"
+                        value={searchQuery}
+                        onChange={(event) => setSearchQuery(event.target.value)}
+                        placeholder="Name, interests, or role"
+                    />
+                  </div>
+                </div>
+                <div className="profile-filter-field">
+                  <label htmlFor="sex-filter">Sex</label>
+                  <select
+                      id="sex-filter"
+                      value={sexFilter}
+                      onChange={(event) => setSexFilter(event.target.value)}
+                  >
+                    <option value="all">All Sexes</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div className="profile-filter-field">
+                  <label htmlFor="online-status-filter">Online Status</label>
+                  <select
+                      id="online-status-filter"
+                      value={onlineStatusFilter}
+                      onChange={(event) => setOnlineStatusFilter(event.target.value)}
+                  >
+                    <option value="all">All Statuses</option>
+                    <option value="online">Online</option>
+                    <option value="offline">Offline</option>
+                  </select>
+                </div>
+                <div className="profile-filter-field">
+                  <label htmlFor="min-age">Minimum Age</label>
                   <input
-                      id="profile-search"
-                      type="search"
-                      value={searchQuery}
-                      onChange={(event) => setSearchQuery(event.target.value)}
-                      placeholder="Name, interests, or role"
+                      id="min-age"
+                      type="number"
+                      min="0"
+                      value={minAge}
+                      onChange={(event) => setMinAge(event.target.value)}
+                      placeholder="Any"
                   />
                 </div>
-              </div>
-              <div className="profile-filter-field">
-                <label htmlFor="sex-filter">Sex</label>
-                <select
-                    id="sex-filter"
-                    value={sexFilter}
-                    onChange={(event) => setSexFilter(event.target.value)}
-                >
-                  <option value="all">All Sexes</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              <div className="profile-filter-field">
-                <label htmlFor="online-status-filter">Online Status</label>
-                <select
-                    id="online-status-filter"
-                    value={onlineStatusFilter}
-                    onChange={(event) => setOnlineStatusFilter(event.target.value)}
-                >
-                  <option value="all">All Statuses</option>
-                  <option value="online">Online</option>
-                  <option value="offline">Offline</option>
-                </select>
-              </div>
-              <div className="profile-filter-field">
-                <label htmlFor="min-age">Minimum Age</label>
-                <input
-                    id="min-age"
-                    type="number"
-                    min="0"
-                    value={minAge}
-                    onChange={(event) => setMinAge(event.target.value)}
-                    placeholder="Any"
-                />
-              </div>
-              <div className="profile-filter-field">
-                <label htmlFor="max-age">Maximum Age</label>
-                <input
-                    id="max-age"
-                    type="number"
-                    min="0"
-                    value={maxAge}
-                    onChange={(event) => setMaxAge(event.target.value)}
-                    placeholder="Any"
-                />
-              </div>
-              {hasActiveFilters && (
-                <button
-                    type="button"
-                    className="profile-filter-reset"
-                    onClick={() => {
-                      setSexFilter('all');
-                      setOnlineStatusFilter('all');
-                      setMinAge('');
-                      setMaxAge('');
-                      setSearchQuery('');
-                    }}
-                >
-                  Clear Filters
-                </button>
+                <div className="profile-filter-field">
+                  <label htmlFor="max-age">Maximum Age</label>
+                  <input
+                      id="max-age"
+                      type="number"
+                      min="0"
+                      value={maxAge}
+                      onChange={(event) => setMaxAge(event.target.value)}
+                      placeholder="Any"
+                  />
+                </div>
+                {hasActiveFilters && (
+                  <button
+                      type="button"
+                      className="profile-filter-reset"
+                      onClick={() => {
+                        setSexFilter('all');
+                        setOnlineStatusFilter('all');
+                        setMinAge('');
+                        setMaxAge('');
+                        setSearchQuery('');
+                      }}
+                  >
+                    Clear Filters
+                  </button>
+                )}
+              </aside>
+            )}
+
+            <div className="directory-roster">
+              {isLoading && <p className="dashboard-status">Loading member profiles...</p>}
+              {error && <p className="dashboard-status dashboard-error">{error}</p>}
+              {!isLoading && !error && profiles.length === 0 && (
+                <p className="dashboard-status">No profiles found yet.</p>
+              )}
+              {!isLoading && !error && profiles.length > 0 && filteredProfiles.length === 0 && (
+                <p className="dashboard-status">No profiles match these filters.</p>
+              )}
+              {!isLoading && !error && filteredProfiles.length > 0 && (
+                <ProfileCards profiles={filteredProfiles} currentMemberId={currentMemberId} />
               )}
             </div>
-          )}
-
-          {isLoading && <p className="dashboard-status">Loading member profiles...</p>}
-          {error && <p className="dashboard-status dashboard-error">{error}</p>}
-          {!isLoading && !error && profiles.length === 0 && (
-            <p className="dashboard-status">No profiles found yet.</p>
-          )}
-          {!isLoading && !error && profiles.length > 0 && filteredProfiles.length === 0 && (
-            <p className="dashboard-status">No profiles match these filters.</p>
-          )}
-          {!isLoading && !error && filteredProfiles.length > 0 && (
-            <ProfileCards profiles={filteredProfiles} currentMemberId={currentMemberId} />
-          )}
+          </div>
         </section>
       </main>
   );
