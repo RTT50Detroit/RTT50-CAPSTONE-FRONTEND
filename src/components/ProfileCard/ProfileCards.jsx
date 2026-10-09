@@ -176,7 +176,7 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
               className={`profile-layout-switcher${isLayoutMenuOpen ? ' is-open' : ''}`}
               role="group"
               aria-label="Choose a card layout"
-              hidden={!isLayoutMenuOpen}
+              aria-hidden={!isLayoutMenuOpen}
           >
             <button
                 type="button"
