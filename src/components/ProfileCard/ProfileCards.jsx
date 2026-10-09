@@ -9,6 +9,7 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
   const [isLayoutMenuOpen, setIsLayoutMenuOpen] = useState(false);
   const [layoutMenuTop, setLayoutMenuTop] = useState(0);
   const layoutControlsRef = useRef(null);
+  const layoutLauncherRef = useRef(null);
   const layoutToggleRef = useRef(null);
   const layoutLabels = {
     current: 'Default',
@@ -17,17 +18,23 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
   };
 
   useEffect(() => {
-    if (!isLayoutMenuOpen) return undefined;
+    if (!isLayoutMenuOpen && !isLayoutControlVisible) return undefined;
 
     const handlePointerDown = (event) => {
       if (!layoutControlsRef.current?.contains(event.target)) {
         setIsLayoutMenuOpen(false);
+        setIsLayoutControlVisible(false);
       }
     };
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
-        setIsLayoutMenuOpen(false);
-        layoutToggleRef.current?.focus();
+        if (isLayoutMenuOpen) {
+          setIsLayoutMenuOpen(false);
+          layoutToggleRef.current?.focus();
+        } else {
+          setIsLayoutControlVisible(false);
+          layoutLauncherRef.current?.focus();
+        }
       }
     };
 
@@ -37,7 +44,7 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
       document.removeEventListener('pointerdown', handlePointerDown);
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isLayoutMenuOpen]);
+  }, [isLayoutControlVisible, isLayoutMenuOpen]);
 
   useLayoutEffect(() => {
     if (!isLayoutMenuOpen) return undefined;
@@ -173,7 +180,9 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
           <button
               type="button"
               className="profile-layout-launcher"
+              ref={layoutLauncherRef}
               aria-label="Show Card Layouts Toggle"
+              aria-controls="profile-layout-toggle"
               aria-expanded={isLayoutControlVisible}
               onClick={() => setIsLayoutControlVisible(true)}
           >
@@ -183,6 +192,7 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
           <button
               type="button"
               className={`profile-layout-toggle${isLayoutControlVisible ? ' is-visible' : ''}`}
+              id="profile-layout-toggle"
               ref={layoutToggleRef}
               aria-expanded={isLayoutMenuOpen}
               aria-controls="profile-layout-choices"
