@@ -112,7 +112,7 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
   );
 
   return (
-      <div className={`profile-card-groups${layout === 'editorial' ? ' profile-card-groups--editorial' : ''}${layout === 'compact' ? ' profile-card-groups--compact' : ''}${layout === 'photo' ? ' profile-card-groups--photo' : ''}${layout === 'masonry' ? ' profile-card-groups--masonry' : ''}`}>
+      <div className={`profile-card-groups${layout === 'editorial' ? ' profile-card-groups--editorial' : ''}${layout === 'compact' ? ' profile-card-groups--compact' : ''}${layout === 'photo' ? ' profile-card-groups--photo' : ''}${layout === 'masonry' ? ' profile-card-groups--masonry' : ''}${layout === 'magazine' ? ' profile-card-groups--magazine' : ''}`}>
         <div className="profile-layout-controls">
           <span className="profile-layout-label">Card Layout</span>
           <div className="profile-layout-switcher" role="group" aria-label="Choose a card layout">
@@ -155,6 +155,14 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
                 onClick={() => setLayout('masonry')}
             >
               Masonry
+            </button>
+            <button
+                type="button"
+                className={layout === 'magazine' ? 'is-active' : ''}
+                aria-pressed={layout === 'magazine'}
+                onClick={() => setLayout('magazine')}
+            >
+              Magazine
             </button>
           </div>
         </div>

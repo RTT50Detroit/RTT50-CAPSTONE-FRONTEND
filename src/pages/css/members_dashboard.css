@@ -853,6 +853,80 @@
   -webkit-line-clamp: unset;
 }
 
+.profile-card-groups--magazine .profile-card {
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  min-height: 320px;
+  border: 1px solid #d6c9aa;
+  border-left: 1px solid #d6c9aa;
+  border-radius: 3px;
+  background: #fbf8ef;
+  box-shadow: 4px 5px 0 rgba(18, 59, 74, 0.08);
+}
+
+.profile-card-groups--magazine .profile-card-image {
+  min-height: 320px;
+}
+
+.profile-card-groups--magazine .profile-card-image::after {
+  inset: 35% 0 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(9, 9, 10, 0.76) 100%);
+}
+
+.profile-card-groups--magazine .profile-card-identity {
+  padding: 42px 18px 20px;
+}
+
+.profile-card-groups--magazine .profile-card-identity .profile-card-kicker {
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+}
+
+.profile-card-groups--magazine .profile-card-identity h3 {
+  font-size: clamp(1.25rem, 2vw, 1.8rem);
+  white-space: normal;
+}
+
+.profile-card-groups--magazine .profile-card-status {
+  top: 12px;
+  left: 12px;
+}
+
+.profile-card-groups--magazine .profile-card-body {
+  justify-content: flex-start;
+  padding: 24px 22px 20px;
+}
+
+.profile-card-groups--magazine .profile-card-details {
+  gap: 6px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #d6c9aa;
+}
+
+.profile-card-groups--magazine .profile-card-details span {
+  border-radius: 2px;
+  padding: 5px 7px;
+  color: #5b564a;
+  background: #eee8d9;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.profile-card-groups--magazine .profile-card-summary {
+  min-height: 0;
+  margin-bottom: 20px;
+  color: #55544e;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.96rem;
+  line-height: 1.65;
+  -webkit-line-clamp: 5;
+}
+
+.profile-card-groups--magazine .profile-card-actions {
+  border-color: #d6c9aa;
+}
+
 .dashboard-status {
   margin: 38px 0;
   color: #708287;
@@ -930,6 +1004,19 @@
   .profile-card-groups--photo .profile-card-image {
     min-height: 0;
     aspect-ratio: 4 / 5;
+  }
+
+  .profile-card-groups--magazine .profile-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .profile-card-groups--magazine .profile-card-image {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  .profile-card-groups--magazine .profile-card-body {
+    padding: 18px 20px 20px;
   }
 
   .profile-card-groups--masonry .profile-cards-grid {
