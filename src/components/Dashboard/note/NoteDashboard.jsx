@@ -56,6 +56,7 @@ const NotesDashboard = () => {
   const [editRequestIds, setEditRequestIds] = useState([]);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [selectionMode, setSelectionMode] = useState(false);
+  const settingsControlsRef = useRef(null);
   const settingsTriggerRef = useRef(null);
   const settingsMenuRef = useRef(null);
   const navigate = useNavigate();
@@ -64,10 +65,7 @@ const NotesDashboard = () => {
     if (!settingsOpen) return undefined;
 
     const handlePointerDown = (event) => {
-      if (
-        !settingsMenuRef.current?.contains(event.target) &&
-        !settingsTriggerRef.current?.contains(event.target)
-      ) {
+      if (!settingsControlsRef.current?.contains(event.target)) {
         setSettingsOpen(false);
       }
     };
@@ -253,30 +251,21 @@ const NotesDashboard = () => {
           <p>Capture the thoughts, plans, and little moments worth keeping.</p>
         </section>
 
-        <div className="journal-composer">
-          <NotePosting onAddNote={addNote} />
-        </div>
-
-        <section className="notes-list-section" aria-labelledby="saved-notes-heading">
-          <div className="notes-list-heading">
-            <div>
-              <p className="notes-section-kicker">Your Posts</p>
-              <h2 id="saved-notes-heading">Notes &amp; Journal</h2>
-            </div>
-            <div className="notes-list-controls">
-              <span>{notes.length} {notes.length === 1 ? 'entry' : 'entries'}</span>
-              <button
-                  type="button"
-                  className="notes-settings-trigger"
-                  ref={settingsTriggerRef}
-                  aria-expanded={settingsOpen}
-                  aria-controls="journal-post-settings"
-                  onClick={() => setSettingsOpen((isOpen) => !isOpen)}
-              >
-                Settings
-              </button>
-            </div>
-          </div>
+        <div className="notes-page-settings" ref={settingsControlsRef}>
+          <button
+              type="button"
+              className="notes-settings-trigger"
+              ref={settingsTriggerRef}
+              aria-expanded={settingsOpen}
+              aria-controls="journal-post-settings"
+              aria-label={settingsOpen ? 'Close Journal Settings' : 'Open Journal Settings'}
+              title={settingsOpen ? 'Close Journal Settings' : 'Open Journal Settings'}
+              onClick={() => setSettingsOpen((isOpen) => !isOpen)}
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+              <path d="M19.14 12.94a7.5 7.5 0 0 0 .05-.94 7.5 7.5 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.61-.22l-2.39.96a7.2 7.2 0 0 0-1.63-.94l-.36-2.54A.49.49 0 0 0 13.89 2h-3.78a.49.49 0 0 0-.49.42L9.26 4.96c-.6.23-1.15.55-1.63.94l-2.39-.96a.5.5 0 0 0-.61.22L2.71 8.48a.5.5 0 0 0 .12.64l2.03 1.58a7.5 7.5 0 0 0-.05.94c0 .32.02.63.05.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32c.12.21.37.3.61.22l2.39-.96c.48.39 1.03.71 1.63.94l.36 2.54c.04.24.24.42.49.42h3.78c.25 0 .45-.18.49-.42l.36-2.54c.6-.23 1.15-.55 1.63-.94l2.39.96c.24.09.49-.01.61-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58ZM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z" />
+            </svg>
+          </button>
           {settingsOpen && (
             <section
                 className="notes-settings-menu"
@@ -290,10 +279,7 @@ const NotesDashboard = () => {
                 <p>Select entries to edit or delete them together.</p>
               </div>
               <div className="notes-settings-actions">
-                <button
-                    type="button"
-                    onClick={toggleSelectionMode}
-                >
+                <button type="button" onClick={toggleSelectionMode}>
                   {selectionMode ? 'Cancel Selection' : 'Select Entries'}
                 </button>
                 {selectionMode && (
@@ -318,11 +304,7 @@ const NotesDashboard = () => {
                     Done Selecting
                   </button>
                 )}
-                <button
-                    type="button"
-                    onClick={handleBatchEdit}
-                    disabled={!selectedNoteIds.length}
-                >
+                <button type="button" onClick={handleBatchEdit} disabled={!selectedNoteIds.length}>
                   Edit Selected
                 </button>
                 <button
@@ -339,6 +321,22 @@ const NotesDashboard = () => {
               </span>
             </section>
           )}
+        </div>
+
+        <div className="journal-composer">
+          <NotePosting onAddNote={addNote} />
+        </div>
+
+        <section className="notes-list-section" aria-labelledby="saved-notes-heading">
+          <div className="notes-list-heading">
+            <div>
+              <p className="notes-section-kicker">Your Posts</p>
+              <h2 id="saved-notes-heading">Notes &amp; Journal</h2>
+            </div>
+            <div className="notes-list-controls">
+              <span>{notes.length} {notes.length === 1 ? 'entry' : 'entries'}</span>
+            </div>
+          </div>
           {loading && <p className="notes-status">Opening your journal...</p>}
           {error && <p className="notes-status notes-error">{error}</p>}
           {!loading && !error && (

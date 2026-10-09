@@ -16,3 +16,7 @@ Title Case rules:
 - Hyphenated terms capitalize each part (for example, "Short-Form Posts").
 
 Keep sentence case for full-sentence body copy, descriptions, placeholders, and messages (for example, "No profiles found yet.").
+
+## Page Settings Controls
+
+When adding a page settings control, place it in the page header's top-right corner. Use the established video-game HUD styling: a transparent or translucent background with gold accents and a gear icon. The control toggles its settings menu; clicking outside the menu or toggling the control again closes it, and Escape dismisses it. Render the menu as an overlay so opening it does not shift surrounding page layout. Keep the control accessible with an accurate `aria-expanded` state, an accessible name, and keyboard focus behavior.
