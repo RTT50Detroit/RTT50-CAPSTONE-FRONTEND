@@ -1880,12 +1880,11 @@
   width: 100%;
   align-items: flex-end;
   gap: 0;
-  transition: margin-bottom 180ms ease;
 }
 
 .dashboard-game-ui .profile-layout-controls.is-open {
   min-height: 0;
-  margin-bottom: 160px;
+  margin-bottom: 0;
 }
 
 .dashboard-game-ui .profile-layout-toggle {
@@ -1976,7 +1975,7 @@
 
 @media (max-width: 520px) {
   .dashboard-game-ui .profile-layout-controls.is-open {
-    margin-bottom: 160px;
+    margin-bottom: 0;
   }
 
   .dashboard-game-ui .profile-layout-switcher {
