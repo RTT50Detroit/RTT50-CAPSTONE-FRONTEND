@@ -1,5 +1,6 @@
 .dashboard-page {
   max-width: none;
+  padding-top: 20px;
 }
 
 .dashboard-hero {
@@ -9,7 +10,7 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: 32px;
-  margin: 28px 0 22px;
+  margin: 0 0 22px;
   border: 1px solid #293e49;
   border-radius: 24px;
   padding: 48px 52px;
@@ -756,7 +757,6 @@
 .dashboard-game-ui .dashboard-hero {
   min-height: 250px;
   align-items: center;
-  margin-top: 20px;
   border-color: rgba(85, 226, 224, 0.42);
   border-radius: 4px;
   padding: clamp(28px, 5vw, 58px);
@@ -1160,7 +1160,6 @@
 .dashboard-game-ui .dashboard-hero {
   min-height: 250px;
   align-items: center;
-  margin-top: 20px;
   border-color: rgba(85, 226, 224, 0.42);
   border-radius: 4px;
   padding: clamp(28px, 5vw, 58px);
@@ -2070,6 +2069,12 @@
 
   .dashboard-game-ui .roster-view-toggle {
     flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 600px) {
+  .page-content.dashboard-page {
+    padding-top: 12px;
   }
 }
 

@@ -2,6 +2,7 @@
   width: calc(100% - 40px);
   max-width: none;
   margin: 0 20px;
+  padding-top: 20px;
   padding-bottom: 72px;
 }
 
@@ -380,11 +381,13 @@
   }
 }
 
-@media (max-width: 480px) {
-  .master-dashboard {
-    padding-top: 28px;
+@media (max-width: 600px) {
+  .page-content.master-dashboard {
+    padding-top: 12px;
   }
+}
 
+@media (max-width: 480px) {
   .master-dashboard-heading {
     padding-top: 20px;
   }
