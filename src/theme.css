@@ -92,6 +92,10 @@ nav a:focus-visible {
   color: var(--theme-gold-bright);
 }
 
+.profile-card-identity h3 {
+  color: var(--theme-cream);
+}
+
 .home-card p,
 .dashboard-welcome,
 .dashboard-stat-label,

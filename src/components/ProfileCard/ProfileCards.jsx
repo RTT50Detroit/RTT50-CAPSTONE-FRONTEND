@@ -48,6 +48,13 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
                 ) : (
                   <span className="profile-card-initials">{initials.toUpperCase()}</span>
                 )}
+                <div className="profile-card-identity">
+                  <p className="profile-card-kicker">
+                    {genderKey === 'male' ? 'Male Member' :
+                      genderKey === 'female' ? 'Female Member' : 'Community Member'}
+                  </p>
+                  <h3>{profile.name || 'Unnamed Member'}</h3>
+                </div>
                 <span
                     className={`profile-card-status${isOnline ? ' profile-card-status--online' : ''}`}
                     aria-label={`${profile.name || 'Member'} is ${isOnline ? 'online' : 'offline'}`}
@@ -57,11 +64,6 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
                 </span>
               </div>
               <div className="profile-card-body">
-                <p className="profile-card-kicker">
-                  {genderKey === 'male' ? 'Male member' :
-                    genderKey === 'female' ? 'Female Member' : 'Community Member'}
-                </p>
-                <h3>{profile.name || 'Unnamed member'}</h3>
                 <div className="profile-card-details">
                   <span>{profile.age ? `${profile.age} years` : 'Age private'}</span>
                   <span>{profile.gender || 'Not specified'}</span>
@@ -69,7 +71,8 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
                 <p className="profile-card-summary">{summary}</p>
                 {profileId && (
                   <Link className="profile-card-link" to={`/dashboard/profile?id=${profileId}`}>
-                    View {firstName}&apos;s profile <span aria-hidden="true">-&gt;</span>
+                    <span>View {firstName}&apos;s Profile</span>
+                    <span aria-hidden="true">-&gt;</span>
                   </Link>
                 )}
               </div>
