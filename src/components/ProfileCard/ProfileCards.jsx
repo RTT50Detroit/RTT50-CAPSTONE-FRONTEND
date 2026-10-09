@@ -90,18 +90,9 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
                         aria-label={`Open ${profile.name || 'member'}'s Relationship Resume`}
                         title="Open Relationship Resume"
                     >
-                        <svg aria-hidden="true" viewBox="0 0 24 24">
-                          <text
-                              x="12"
-                              y="17"
-                              fill="currentColor"
-                              fontFamily="Arial, Helvetica, sans-serif"
-                              fontSize="12"
-                              fontWeight="800"
-                              letterSpacing="-0.8"
-                              textAnchor="middle"
-                          >RR</text>
-                        </svg>
+                      <span className="profile-card-resume-mark" aria-hidden="true">
+                        RR
+                      </span>
                     </a>
                   )}
                 </div>
