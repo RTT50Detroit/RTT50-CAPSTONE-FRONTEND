@@ -29,9 +29,14 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
           const isOnline = isMemberOnline(profile, currentMemberId);
           const summary = profile.aboutMe || profile.aboutme ||
             'Open to making a meaningful connection.';
+          const relationshipResume = profile.links?.find((link) => (
+            ['relationship resume', 'the relationship resume'].includes(
+                String(link.label || '').trim().toLowerCase(),
+            ) && typeof link.url === 'string' && link.url.trim()
+          ));
 
         return (
-          <article key={profileId} className={`profile-card profile-card--editorial ${genderClass}`}>
+          <article key={profileId} className={`profile-card ${genderClass}`}>
               <div className="profile-card-image">
                 {profileImage ? (
                   <>
@@ -69,12 +74,46 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
                   <span>{profile.gender || 'Not specified'}</span>
                 </div>
                 <p className="profile-card-summary">{summary}</p>
-                {profileId && (
-                  <Link className="profile-card-link" to={`/dashboard/profile?id=${profileId}`}>
-                    <span>View {firstName}&apos;s Profile</span>
-                    <span aria-hidden="true">-&gt;</span>
-                  </Link>
-                )}
+                <div className="profile-card-actions">
+                  {profileId && (
+                    <Link className="profile-card-link" to={`/dashboard/profile?id=${profileId}`}>
+                      <span>View {firstName}&apos;s Profile</span>
+                      <span aria-hidden="true">-&gt;</span>
+                    </Link>
+                  )}
+                  {relationshipResume && (
+                    <a
+                        className="profile-card-resume-link"
+                        href={relationshipResume.url.trim()}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`Open ${profile.name || 'member'}'s Relationship Resume`}
+                        title="Open Relationship Resume"
+                    >
+                      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M7 3.75h7l4 4v12.5H7a2 2 0 0 1-2-2V5.75a2 2 0 0 1 2-2Z"
+                            stroke="currentColor"
+                            strokeWidth="1.7"
+                            strokeLinejoin="round"
+                        />
+                        <path
+                            d="M14 3.75v4h4M8.5 12h7M8.5 15.5h4"
+                            stroke="currentColor"
+                            strokeWidth="1.7"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                        <path
+                            d="m16.8 14.4.8-.8a1.7 1.7 0 0 1 2.4 2.4l-1.7 1.7a1.7 1.7 0 0 1-2.4 0"
+                            stroke="currentColor"
+                            strokeWidth="1.7"
+                            strokeLinecap="round"
+                        />
+                      </svg>
+                    </a>
+                  )}
+                </div>
               </div>
           </article>
         );

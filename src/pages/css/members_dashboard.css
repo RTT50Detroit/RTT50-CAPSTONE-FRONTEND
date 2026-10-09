@@ -420,15 +420,56 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  width: 100%;
   margin-top: auto;
   border-top: 1px solid var(--theme-line);
   padding-top: 15px;
+  flex: 1;
   color: #287c78;
   font-size: 0.85rem;
   font-weight: 800;
   text-decoration: none;
   transition: color 160ms ease;
+}
+
+.profile-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  border-top: 1px solid var(--theme-line);
+}
+
+.profile-card-actions .profile-card-link {
+  margin-top: 0;
+  border-top: 0;
+  padding-top: 15px;
+}
+
+.profile-card-resume-link {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: none;
+  place-items: center;
+  border: 1px solid var(--theme-gold-muted);
+  border-radius: 12px;
+  color: var(--theme-gold-bright);
+  background: rgba(199, 162, 74, 0.12);
+  transition: border-color 160ms ease, color 160ms ease, background 160ms ease,
+    transform 160ms ease;
+}
+
+.profile-card-resume-link svg {
+  width: 22px;
+  height: 22px;
+}
+
+.profile-card-resume-link:hover,
+.profile-card-resume-link:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--theme-gold-bright);
+  color: var(--theme-black);
+  background: var(--theme-gold);
 }
 
 .profile-card-link span:last-child {
