@@ -9,7 +9,7 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
   const layoutControlsRef = useRef(null);
   const layoutToggleRef = useRef(null);
   const layoutLabels = {
-    current: 'Current Design',
+    current: 'Default',
     photo: 'Photo-Forward',
     magazine: 'Magazine',
   };
@@ -187,7 +187,7 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
                   setIsLayoutMenuOpen(false);
                 }}
             >
-              Current Design
+              Default
             </button>
             <button
                 type="button"
