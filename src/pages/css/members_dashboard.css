@@ -1885,7 +1885,7 @@
 
 .dashboard-game-ui .profile-layout-controls.is-open {
   min-height: 0;
-  margin-bottom: 126px;
+  margin-bottom: 160px;
 }
 
 .dashboard-game-ui .profile-layout-toggle {
@@ -1931,6 +1931,10 @@
   animation: layout-menu-flyout 160ms ease-out both;
 }
 
+.dashboard-game-ui .profile-layout-switcher[hidden] {
+  display: none;
+}
+
 .dashboard-game-ui .profile-layout-switcher button {
   position: static;
   width: 100%;
@@ -1972,7 +1976,7 @@
 
 @media (max-width: 520px) {
   .dashboard-game-ui .profile-layout-controls.is-open {
-    margin-bottom: 126px;
+    margin-bottom: 160px;
   }
 
   .dashboard-game-ui .profile-layout-switcher {

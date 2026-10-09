@@ -1,16 +1,42 @@
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getMemberId, getProfileImage, isMemberOnline } from '../../utils/member.js';
 
 const ProfileCards = ({ profiles, currentMemberId }) => {
   const [layout, setLayout] = useState('current');
   const [isLayoutMenuOpen, setIsLayoutMenuOpen] = useState(false);
+  const layoutControlsRef = useRef(null);
+  const layoutToggleRef = useRef(null);
   const layoutLabels = {
     current: 'Current Design',
     photo: 'Photo-Forward',
     magazine: 'Magazine',
   };
+
+  useEffect(() => {
+    if (!isLayoutMenuOpen) return undefined;
+
+    const handlePointerDown = (event) => {
+      if (!layoutControlsRef.current?.contains(event.target)) {
+        setIsLayoutMenuOpen(false);
+      }
+    };
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setIsLayoutMenuOpen(false);
+        layoutToggleRef.current?.focus();
+      }
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isLayoutMenuOpen]);
+
   const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
   const onlineProfiles = profiles.filter((profile) => {
     return isMemberOnline(profile, currentMemberId);
@@ -119,10 +145,14 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
 
   return (
       <div className={`profile-card-groups${layout === 'photo' ? ' profile-card-groups--photo' : ''}${layout === 'magazine' ? ' profile-card-groups--magazine' : ''}`}>
-        <div className={`profile-layout-controls${isLayoutMenuOpen ? ' is-open' : ''}`}>
+        <div
+            className={`profile-layout-controls${isLayoutMenuOpen ? ' is-open' : ''}`}
+            ref={layoutControlsRef}
+        >
           <button
               type="button"
               className="profile-layout-toggle"
+              ref={layoutToggleRef}
               aria-expanded={isLayoutMenuOpen}
               aria-controls="profile-layout-choices"
               onClick={() => setIsLayoutMenuOpen((isOpen) => !isOpen)}
