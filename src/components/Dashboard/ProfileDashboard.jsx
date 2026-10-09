@@ -131,6 +131,7 @@ const ProfileDashboard = () => {
       <main className="page-content profile-dashboard game-interface">
         {userData ? (
             <>
+              <div className="profile-hero-wrap">
               <header className="profile-detail-header profile-hero">
                 <div className="profile-hero-copy">
                   <Link className="profile-back-link" to="/dashboard">
@@ -196,6 +197,7 @@ const ProfileDashboard = () => {
                   )}
                 </section>
               )}
+              </div>
               <div className="profile-detail-grid">
                 <aside className="profile-sidebar profile-widget">
                   <ProfileImage

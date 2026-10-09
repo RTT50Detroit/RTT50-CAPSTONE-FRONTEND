@@ -29,6 +29,12 @@
   box-shadow: 0 22px 48px rgba(16, 39, 51, 0.18);
 }
 
+.profile-hero-wrap {
+  position: relative;
+  z-index: 4;
+  flex: none;
+}
+
 .profile-detail-header::after {
   position: absolute;
   right: 9%;
@@ -185,13 +191,17 @@
 }
 
 .profile-settings-menu {
-  position: relative;
-  z-index: 3;
+  position: absolute;
+  z-index: 5;
+  top: calc(100% - 8px);
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  margin: -4px 0 16px auto;
+  width: max-content;
+  max-width: min(100%, 960px);
+  margin: 0;
   border: 1px solid #dce8e5;
   border-radius: 18px;
   padding: 16px 18px;
