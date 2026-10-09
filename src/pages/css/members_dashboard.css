@@ -1873,3 +1873,112 @@
     box-shadow: 7px 7px 0 rgba(231, 181, 71, 0.3);
   }
 }
+
+.dashboard-game-ui .profile-layout-controls {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  align-items: flex-end;
+  gap: 0;
+  transition: margin-bottom 180ms ease;
+}
+
+.dashboard-game-ui .profile-layout-controls.is-open {
+  min-height: 0;
+  margin-bottom: 126px;
+}
+
+.dashboard-game-ui .profile-layout-toggle {
+  min-height: 40px;
+  border-color: rgba(231, 181, 71, 0.46);
+  padding: 8px 12px;
+  color: #f0e4c6;
+  background: linear-gradient(145deg, rgba(42, 34, 21, 0.96), rgba(23, 20, 14, 0.96));
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.22);
+}
+
+.dashboard-game-ui .profile-layout-toggle:hover,
+.dashboard-game-ui .profile-layout-toggle[aria-expanded="true"] {
+  border-color: #e7b547;
+  color: #ffe6a5;
+  box-shadow: 0 0 16px rgba(231, 181, 71, 0.16), 0 5px 16px rgba(0, 0, 0, 0.22);
+}
+
+.dashboard-game-ui .profile-layout-current {
+  color: #201706;
+  background: #e7b547;
+}
+
+.dashboard-game-ui .profile-layout-switcher {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 8px);
+  right: 0;
+  left: auto;
+  display: grid;
+  width: min(260px, calc(100vw - 40px));
+  height: auto;
+  gap: 6px;
+  border: 1px solid rgba(231, 181, 71, 0.55);
+  border-radius: 5px;
+  padding: 8px;
+  background: linear-gradient(145deg, rgba(42, 34, 21, 0.98), rgba(20, 17, 12, 0.98));
+  box-shadow: inset 0 1px rgba(255, 225, 157, 0.08), 0 16px 34px rgba(0, 0, 0, 0.48);
+  backdrop-filter: blur(16px);
+}
+
+.dashboard-game-ui .profile-layout-switcher.is-open:not([hidden]) {
+  animation: layout-menu-flyout 160ms ease-out both;
+}
+
+.dashboard-game-ui .profile-layout-switcher button {
+  position: static;
+  width: 100%;
+  min-height: 40px;
+  border-color: rgba(190, 151, 66, 0.32);
+  border-radius: 3px;
+  padding: 9px 11px;
+  color: #e5dcc8;
+  background: rgba(23, 20, 14, 0.9);
+  text-align: left;
+  transform: none;
+}
+
+.dashboard-game-ui .profile-layout-switcher button:hover,
+.dashboard-game-ui .profile-layout-switcher button.is-active {
+  border-color: #e7b547;
+  color: #ffe6a5;
+  background: rgba(104, 77, 26, 0.42);
+  box-shadow: inset 3px 0 #e7b547, 0 0 12px rgba(231, 181, 71, 0.12);
+}
+
+.dashboard-game-ui .profile-layout-switcher button.is-active {
+  padding-left: 15px;
+}
+
+@keyframes layout-menu-flyout {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+    transform-origin: top right;
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transform-origin: top right;
+  }
+}
+
+@media (max-width: 520px) {
+  .dashboard-game-ui .profile-layout-controls.is-open {
+    margin-bottom: 126px;
+  }
+
+  .dashboard-game-ui .profile-layout-switcher {
+    right: 0;
+    left: auto;
+    width: min(260px, calc(100vw - 40px));
+    height: auto;
+  }
+}
