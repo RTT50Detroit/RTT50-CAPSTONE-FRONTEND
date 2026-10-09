@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getAuthToken } from '../utils/auth.js';
 import './css/MasterDashboard.css';
+import './css/game_interface.css';
 
 const emptyProfile = {
   name: '',
@@ -155,7 +156,7 @@ const MasterDashboard = () => {
   };
 
   return (
-    <main className="page-content master-dashboard">
+    <main className="page-content master-dashboard game-interface">
       <header className="master-dashboard-heading">
         <p className="dashboard-eyebrow">Master Controls</p>
         <h1>Manage Profiles</h1>

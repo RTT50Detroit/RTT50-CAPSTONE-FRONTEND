@@ -1,0 +1,430 @@
+.game-interface {
+  color: #d6e8ea;
+  font-family: "Arial Narrow", "Segoe UI", sans-serif;
+}
+
+.game-interface h1,
+.game-interface h2,
+.game-interface h3 {
+  color: #efffff;
+  font-family: "Arial Narrow", "Segoe UI", sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.game-interface :is(button, input, select, textarea):focus-visible {
+  outline: 2px solid #ffc56f;
+  outline-offset: 2px;
+}
+
+.game-interface .notes-heading,
+.game-interface .profile-detail-header,
+.game-interface .master-dashboard-heading {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(85, 226, 224, 0.42);
+  border-radius: 4px;
+  background:
+    linear-gradient(rgba(70, 212, 219, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(70, 212, 219, 0.045) 1px, transparent 1px),
+    radial-gradient(ellipse at 78% 40%, rgba(12, 177, 180, 0.22), transparent 34%),
+    linear-gradient(115deg, #081722 0%, #102b3a 55%, #091a28 100%);
+  background-size: 28px 28px, 28px 28px, auto, auto;
+  box-shadow: inset 0 0 44px rgba(22, 182, 192, 0.08), 0 18px 44px rgba(0, 0, 0, 0.28);
+}
+
+.game-interface .notes-heading::before,
+.game-interface .profile-detail-header::before,
+.game-interface .master-dashboard-heading::before {
+  position: absolute;
+  top: 0;
+  left: 26px;
+  width: 58px;
+  height: 4px;
+  background: #5de4df;
+  content: "";
+}
+
+.game-interface .notes-heading::after,
+.game-interface .profile-detail-header::after,
+.game-interface .master-dashboard-heading::after {
+  right: 26px;
+  bottom: 0;
+  width: 58px;
+  height: 4px;
+  border: 0;
+  border-radius: 0;
+  background: #5de4df;
+  content: "";
+}
+
+.game-interface :is(.notes-eyebrow, .profile-detail-eyebrow, .profile-detail-label, .master-list-kicker) {
+  color: #59e1dc;
+  font-family: "Courier New", monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.game-interface .notes-heading h1,
+.game-interface .profile-detail-header h1,
+.game-interface .master-dashboard-heading h1 {
+  color: #f1ffff;
+  font-family: "Arial Narrow", "Segoe UI", sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4.8rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-shadow: 0 0 24px rgba(74, 225, 222, 0.24);
+}
+
+.game-interface :is(.notes-heading > p:last-child, .profile-hero-subtitle, .master-dashboard-heading > p:last-child) {
+  color: #91b8c0;
+  font-family: "Courier New", monospace;
+}
+
+.game-interface :is(.journal-editor, .notes-list-section, .profile-widget, .profile-settings-menu, .master-profile-form, .master-profile-list) {
+  border: 1px solid rgba(76, 192, 203, 0.32);
+  border-radius: 4px;
+  color: #d6e8ea;
+  background: linear-gradient(145deg, rgba(19, 43, 58, 0.98), rgba(9, 24, 36, 0.98));
+  box-shadow: inset 0 1px rgba(115, 245, 228, 0.06), 0 14px 30px rgba(0, 0, 0, 0.24);
+}
+
+.game-interface :is(.journal-editor, .notes-list-section) {
+  scrollbar-color: #347984 #091923;
+}
+
+.game-interface :is(.journal-editor label, .note-edit-form label, .master-form-label) {
+  color: #93b8c1;
+  font-family: "Courier New", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+}
+
+.game-interface :is(.journal-editor input, .journal-editor textarea, .note-edit-form input, .note-edit-form textarea, .profile-details-form input, .profile-details-form select, .about-me-edit-form textarea, .master-form-label input, .master-form-label select, .master-form-label textarea, .master-profile-search input) {
+  border: 1px solid rgba(94, 166, 179, 0.4);
+  border-radius: 3px;
+  color: #e1f5f6;
+  background: #091923;
+  font-family: "Courier New", monospace;
+}
+
+.game-interface :is(.journal-editor input, .journal-editor textarea, .note-edit-form input, .note-edit-form textarea, .profile-details-form input, .profile-details-form select, .about-me-edit-form textarea, .master-form-label input, .master-form-label select, .master-form-label textarea, .master-profile-search input)::placeholder {
+  color: #638793;
+}
+
+.game-interface :is(.journal-editor input, .journal-editor textarea, .note-edit-form input, .note-edit-form textarea, .profile-details-form input, .profile-details-form select, .about-me-edit-form textarea, .master-form-label input, .master-form-label select, .master-form-label textarea, .master-profile-search input):focus {
+  border-color: #59e1dc;
+  box-shadow: 0 0 0 2px rgba(89, 225, 220, 0.14), 0 0 12px rgba(89, 225, 220, 0.12);
+  outline: none;
+}
+
+.game-interface :is(.journal-editor button, .note-actions button, .notes-settings-trigger, .notes-settings-actions button, .profile-details-actions button, .about-me-actions button, .profile-customize-button, .profile-settings-actions button, .master-form-actions button, .master-password-reset button, .master-profile-row button) {
+  border: 1px solid rgba(89, 225, 220, 0.52);
+  border-radius: 3px;
+  color: #06171c;
+  background: #65e8df;
+  font-family: "Courier New", monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.game-interface :is(.journal-editor button, .note-actions button, .notes-settings-trigger, .notes-settings-actions button, .profile-details-actions button, .about-me-actions button, .profile-customize-button, .profile-settings-actions button, .master-form-actions button, .master-password-reset button, .master-profile-row button):hover {
+  border-color: #a0fff5;
+  color: #06171c;
+  background: #9af5ec;
+  box-shadow: 0 0 14px rgba(89, 225, 220, 0.22);
+}
+
+.game-interface :is(.note-actions .button-danger, .notes-settings-actions .button-danger) {
+  border-color: #e58d6c;
+  color: #24120d;
+  background: #e58d6c;
+}
+
+.game-interface :is(.note-actions .button-danger, .notes-settings-actions .button-danger):hover {
+  border-color: #ffb28e;
+  color: #24120d;
+  background: #ffb28e;
+  box-shadow: 0 0 14px rgba(229, 141, 108, 0.22);
+}
+
+.game-interface :is(.note-actions button, .notes-settings-actions button, .profile-details-actions button, .about-me-actions button, .master-form-actions button, .master-password-reset button, .master-profile-row button):disabled {
+  cursor: not-allowed;
+  opacity: 0.52;
+}
+
+.game-interface :is(.profile-details-actions button:last-child, .about-me-actions button:last-child) {
+  border-color: rgba(125, 163, 171, 0.42);
+  color: #d6e8ea;
+  background: #314b57;
+}
+
+.game-interface :is(.post-type-picker, .notes-settings-menu, .note-card-group, .note-card) {
+  border-color: rgba(76, 192, 203, 0.3);
+  border-radius: 4px;
+  background: rgba(9, 24, 36, 0.84);
+}
+
+.game-interface :is(.post-type-picker button, .journal-editor .post-type-picker button, .note-edit-form .post-type-picker button) {
+  border: 0;
+  color: #9ab4be;
+  background: transparent;
+}
+
+.game-interface :is(.post-type-picker button.active, .journal-editor .post-type-picker button.active, .note-edit-form .post-type-picker button.active) {
+  color: #06171c;
+  background: #65e8df;
+}
+
+.game-interface :is(.notes-list-heading, .note-card-group-heading, .master-profile-list-heading) {
+  border-color: rgba(89, 225, 220, 0.28);
+}
+
+.game-interface :is(.notes-list-heading h2, .note-card-group-heading h3, .note-card h3, .profile-settings-heading h2, .user-info-container h2, .user-bio h2, .master-profile-form h2, .master-profile-list h2) {
+  color: #efffff;
+  font-family: "Arial Narrow", "Segoe UI", sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.game-interface :is(.note-content, .notes-list-heading span, .note-card-group-heading > span, .user-info-container .additional-info, .user-bio p, .master-profile-count, .master-profile-row span) {
+  color: #9ab4be;
+}
+
+.game-interface .note-card {
+  border-left-color: #59e1dc;
+  color: #d6e8ea;
+}
+
+.game-interface .note-card--journal {
+  border-left-color: #ffba66;
+  background: rgba(49, 41, 34, 0.76);
+}
+
+.game-interface .note-card--note {
+  background: rgba(12, 50, 62, 0.76);
+}
+
+.game-interface .profile-detail-header {
+  min-height: 220px;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.4fr);
+  border-radius: 4px;
+}
+
+.game-interface .profile-hero-copy {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.game-interface .profile-hero-actions {
+  border-color: rgba(89, 225, 220, 0.24);
+}
+
+.game-interface :is(.profile-back-link, .profile-resume-link, .profile-detail-status, .profile-widget-toggles label, .additional-info p, .additional-info label) {
+  color: #a9c6cc;
+}
+
+.game-interface :is(.profile-back-link:hover, .profile-links a:hover) {
+  color: #65e8df;
+}
+
+.game-interface .profile-resume-link {
+  border-color: rgba(89, 225, 220, 0.38);
+  border-radius: 4px;
+  color: #d8ffff;
+  background: rgba(12, 65, 76, 0.45);
+}
+
+.game-interface .profile-resume-url {
+  color: #91b8c0;
+}
+
+.game-interface .profile-detail-status--online {
+  border-color: rgba(115, 245, 177, 0.4);
+  color: #b3ffd0;
+}
+
+.game-interface :is(.profile-settings-menu, .profile-settings-actions) {
+  border-color: rgba(89, 225, 220, 0.3);
+}
+
+.game-interface .profile-settings-heading .profile-detail-label,
+.game-interface .additional-info strong,
+.game-interface .profile-links strong {
+  color: #59e1dc;
+}
+
+.game-interface .profile-widget-toggles input {
+  accent-color: #59e1dc;
+}
+
+.game-interface .profile-settings-actions {
+  border-color: rgba(89, 225, 220, 0.24);
+}
+
+.game-interface .profile-widget {
+  min-width: 0;
+}
+
+.game-interface .profile-image {
+  background: #0b3442;
+}
+
+.game-interface .profile-image img {
+  border-bottom: 1px solid rgba(89, 225, 220, 0.25);
+}
+
+.game-interface .user-info-container,
+.game-interface .user-bio {
+  color: #d6e8ea;
+}
+
+.game-interface .user-info-container h2,
+.game-interface .user-bio h2 {
+  color: #efffff;
+}
+
+.game-interface .additional-info p,
+.game-interface .additional-info label,
+.game-interface .profile-links {
+  border-color: rgba(89, 225, 220, 0.18);
+}
+
+.game-interface .profile-links a {
+  color: #76e9e2;
+}
+
+.game-interface .user-bio {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.game-interface .master-dashboard-heading {
+  margin-bottom: 28px;
+  border-bottom-color: rgba(89, 225, 220, 0.3);
+  border-radius: 4px;
+  padding: 32px;
+}
+
+.game-interface .master-dashboard-heading::after {
+  display: none;
+}
+
+.game-interface .master-dashboard-heading h1 {
+  font-size: clamp(2.5rem, 6vw, 4.6rem);
+}
+
+.game-interface .master-dashboard-heading p:last-child {
+  max-width: 620px;
+  margin-top: 14px;
+}
+
+.game-interface .master-profile-form,
+.game-interface .master-profile-list {
+  border-top-color: #59e1dc;
+}
+
+.game-interface .master-form-label,
+.game-interface .master-list-kicker {
+  color: #93b8c1;
+}
+
+.game-interface .master-form-hint {
+  color: #87abb5;
+}
+
+.game-interface .master-profile-preview {
+  border: 1px solid rgba(89, 225, 220, 0.4);
+}
+
+.game-interface .master-success {
+  color: #73f5b1;
+}
+
+.game-interface .master-profile-row {
+  border-color: rgba(89, 225, 220, 0.18);
+}
+
+.game-interface .master-profile-row strong {
+  color: #efffff;
+  font-family: "Arial Narrow", "Segoe UI", sans-serif;
+  font-weight: 700;
+}
+
+.game-interface .master-profile-search span {
+  color: #59e1dc;
+}
+
+@media (max-width: 900px) {
+  .game-interface.profile-dashboard {
+    height: auto;
+    min-height: calc(100dvh - 76px);
+    overflow: visible;
+  }
+
+  .game-interface .profile-detail-grid {
+    grid-template-columns: minmax(0, 1fr);
+    overflow: visible;
+  }
+
+  .game-interface :is(.profile-sidebar, .profile-main-content) {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .game-interface .master-dashboard-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .game-interface.notes-page {
+    display: flex;
+    height: auto;
+    min-height: calc(100dvh - 76px);
+    flex-direction: column;
+    overflow: visible;
+  }
+
+  .game-interface :is(.journal-editor, .notes-list-section) {
+    min-height: auto;
+    overflow: visible;
+  }
+
+  .game-interface .notes-list-section {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .game-interface .profile-detail-header {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .game-interface .profile-hero-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(89, 225, 220, 0.24);
+    border-left: 0;
+    padding: 16px 0 0;
+  }
+
+  .game-interface :is(.profile-settings-menu, .notes-settings-menu) {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .game-interface .profile-settings-actions {
+    justify-content: flex-start;
+    border-top: 1px solid rgba(89, 225, 220, 0.24);
+    border-left: 0;
+    padding: 12px 0 0;
+  }
+}

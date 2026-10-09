@@ -7,6 +7,7 @@ import axios from 'axios';
 import { getCurrentMemberId, isMasterUser } from '../../utils/auth.js';
 import { getMemberId, getProfileImage, isMemberOnline } from '../../utils/member.js';
 import './Profile.css';
+import '../../pages/css/game_interface.css';
 
 const ProfileDashboard = () => {
   const [userData, setUserData] = useState(null);
@@ -132,7 +133,7 @@ const ProfileDashboard = () => {
     'https://therelationshipresume.netlify.app/';
 
   return (
-      <main className="page-content profile-dashboard">
+      <main className="page-content profile-dashboard game-interface">
         {userData ? (
             <>
               <header className="profile-detail-header profile-hero">

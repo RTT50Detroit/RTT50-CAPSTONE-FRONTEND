@@ -82,7 +82,7 @@ const MembersDashboard = () => {
     onlineStatusFilter !== 'all' || minAge || maxAge;
 
   return (
-      <main className="page-content dashboard-page dashboard-game-ui">
+      <main className="page-content dashboard-page dashboard-game-ui game-interface">
         <section className="dashboard-hero">
           <div className="dashboard-hero-copy">
             <p className="dashboard-eyebrow">Member Directory</p>

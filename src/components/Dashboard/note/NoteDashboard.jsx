@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import NoteList from './NoteList';
 import NotePosting from './NotePosting';
 import './Notes.css';
+import '../../../pages/css/game_interface.css';
 
 const apiUrl = (import.meta.env.VITE_APP_BASE_URL || '').replace(/\/$/, '');
 const noteTypeStorageKey = 'journal-entry-types';
@@ -217,7 +218,7 @@ const NotesDashboard = () => {
   }, [navigate]);
 
   return (
-      <main className="page-content notes-page">
+      <main className="page-content notes-page game-interface">
         <section className="notes-heading">
           <p className="notes-eyebrow">Private Journal</p>
           <h1>Journal</h1>
