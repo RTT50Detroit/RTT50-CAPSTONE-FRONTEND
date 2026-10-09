@@ -228,8 +228,9 @@
 }
 
 .profile-card-groups {
+  position: relative;
   display: grid;
-  gap: 42px;
+  gap: 22px;
 }
 
 .profile-layout-controls {
@@ -1875,9 +1876,11 @@
 }
 
 .dashboard-game-ui .profile-layout-controls {
-  position: relative;
+  position: absolute;
   z-index: 5;
-  width: 100%;
+  top: 0;
+  right: 0;
+  width: auto;
   align-items: flex-end;
   gap: 0;
 }
@@ -1885,6 +1888,10 @@
 .dashboard-game-ui .profile-layout-controls.is-open {
   min-height: 0;
   margin-bottom: 0;
+}
+
+.dashboard-game-ui .profile-card-group:first-of-type .profile-card-group-heading {
+  padding-right: 242px;
 }
 
 .dashboard-game-ui .profile-layout-toggle {
@@ -2053,6 +2060,18 @@
 }
 
 @media (max-width: 520px) {
+  .dashboard-game-ui .profile-layout-controls {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .dashboard-game-ui .profile-card-group:first-of-type .profile-card-group-heading {
+    padding-right: 0;
+  }
+
   .dashboard-game-ui .profile-layout-controls.is-open {
     margin-bottom: 0;
   }
