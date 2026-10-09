@@ -148,11 +148,11 @@ nav a:focus-visible {
 }
 
 .profile-card {
-  border-top: 3px solid var(--theme-gold);
+  border-left: 3px solid var(--theme-gold);
 }
 
 .profile-card--male {
-  border-top-color: #8297ad;
+  border-left-color: #8297ad;
 }
 
 .profile-card--male .profile-card-image {
@@ -170,7 +170,7 @@ nav a:focus-visible {
 }
 
 .profile-card--female {
-  border-top-color: #d39a9d;
+  border-left-color: #d39a9d;
 }
 
 .profile-card--female .profile-card-image {

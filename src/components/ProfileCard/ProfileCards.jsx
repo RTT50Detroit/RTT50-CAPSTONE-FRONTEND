@@ -31,7 +31,7 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
             'Open to making a meaningful connection.';
 
         return (
-          <article key={profileId} className={`profile-card ${genderClass}`}>
+          <article key={profileId} className={`profile-card profile-card--editorial ${genderClass}`}>
               <div className="profile-card-image">
                 {profileImage ? (
                   <>
