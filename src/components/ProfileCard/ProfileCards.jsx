@@ -90,27 +90,18 @@ const ProfileCards = ({ profiles, currentMemberId }) => {
                         aria-label={`Open ${profile.name || 'member'}'s Relationship Resume`}
                         title="Open Relationship Resume"
                     >
-                      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
-                        <path
-                            d="M7 3.75h7l4 4v12.5H7a2 2 0 0 1-2-2V5.75a2 2 0 0 1 2-2Z"
-                            stroke="currentColor"
-                            strokeWidth="1.7"
-                            strokeLinejoin="round"
-                        />
-                        <path
-                            d="M14 3.75v4h4M8.5 12h7M8.5 15.5h4"
-                            stroke="currentColor"
-                            strokeWidth="1.7"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                        <path
-                            d="m16.8 14.4.8-.8a1.7 1.7 0 0 1 2.4 2.4l-1.7 1.7a1.7 1.7 0 0 1-2.4 0"
-                            stroke="currentColor"
-                            strokeWidth="1.7"
-                            strokeLinecap="round"
-                        />
-                      </svg>
+                        <svg aria-hidden="true" viewBox="0 0 24 24">
+                          <text
+                              x="12"
+                              y="17"
+                              fill="currentColor"
+                              fontFamily="Arial, Helvetica, sans-serif"
+                              fontSize="12"
+                              fontWeight="800"
+                              letterSpacing="-0.8"
+                              textAnchor="middle"
+                          >RR</text>
+                        </svg>
                     </a>
                   )}
                 </div>
