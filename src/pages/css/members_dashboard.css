@@ -546,6 +546,37 @@
   padding-top: 12px;
 }
 
+.profile-reaction-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-right: auto;
+}
+
+.profile-reaction-button {
+  min-height: 36px;
+  border: 1px solid #c7d8d3;
+  border-radius: 6px;
+  padding: 7px 12px;
+  color: #35646a;
+  background: #f8fbfa;
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.profile-reaction-button:hover:not(:disabled),
+.profile-reaction-button:focus-visible {
+  border-color: #287c78;
+  color: #123b4a;
+}
+
+.profile-reaction-button:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
 .profile-card-profile-link {
   display: grid;
   width: 42px;
@@ -1083,14 +1114,62 @@
 }
 
 .dashboard-game-ui .profile-card-profile-link,
-.dashboard-game-ui .profile-card-resume-link {
+.dashboard-game-ui .profile-card-resume-link,
+.dashboard-game-ui .profile-reaction-button {
   border-radius: 4px;
   background: rgba(27, 108, 117, 0.2);
+}
+
+.dashboard-game-ui .profile-reaction-button {
+  border-color: rgba(89, 225, 220, 0.38);
+  color: #a9d5d8;
+  font-family: "Courier New", monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.dashboard-game-ui .profile-reaction-button.is-like.is-selected {
+  border-color: #73f5b1;
+  color: #b5ffd0;
+  background: rgba(25, 116, 68, 0.3);
+}
+
+.dashboard-game-ui .profile-reaction-button.is-pass.is-selected {
+  border-color: #e58d6c;
+  color: #ffc0a2;
+  background: rgba(112, 52, 37, 0.38);
 }
 
 .dashboard-game-ui .profile-card-profile-link {
   border-color: rgba(89, 225, 220, 0.6);
   color: #75eee7;
+}
+
+.roster-directory-actions .profile-reaction-actions {
+  margin-right: 0;
+}
+
+.dashboard-game-ui .roster-directory-actions .profile-reaction-button {
+  min-height: 32px;
+  padding: 6px 8px;
+  font-size: 0.58rem;
+}
+
+.dashboard-game-ui .profile-reaction-button.is-like.is-selected {
+  border-color: #73f5b1;
+  color: #b5ffd0;
+  background: rgba(25, 116, 68, 0.3);
+}
+
+.dashboard-game-ui .profile-reaction-button.is-pass.is-selected {
+  border-color: #e58d6c;
+  color: #ffc0a2;
+  background: rgba(112, 52, 37, 0.38);
+}
+
+.roster-directory-actions .roster-directory-link {
+  white-space: nowrap;
 }
 
 .dashboard-game-ui .profile-card-profile-link:hover,
@@ -1944,6 +2023,26 @@
   border-bottom: 0;
 }
 
+.roster-directory-actions {
+  display: grid;
+  justify-items: end;
+  gap: 8px;
+}
+
+.roster-directory-actions .profile-reaction-actions {
+  margin-right: 0;
+}
+
+.dashboard-game-ui .roster-directory-actions .profile-reaction-button {
+  min-height: 32px;
+  padding: 6px 8px;
+  font-size: 0.58rem;
+}
+
+.roster-directory-actions .roster-directory-link {
+  white-space: nowrap;
+}
+
 .roster-directory-photo {
   display: grid;
   width: 58px;
@@ -2040,7 +2139,7 @@
 
 @media (max-width: 640px) {
   .roster-directory-row {
-    grid-template-columns: 48px minmax(0, 1fr) auto;
+    grid-template-columns: 48px minmax(0, 1fr);
     gap: 10px;
     padding: 10px;
   }
@@ -2055,9 +2154,17 @@
     grid-row: 2;
   }
 
-  .roster-directory-link {
-    grid-column: 3;
-    grid-row: 1 / span 2;
+  .roster-directory-actions {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .roster-directory-actions .profile-reaction-actions {
+    margin-right: auto;
   }
 }
 

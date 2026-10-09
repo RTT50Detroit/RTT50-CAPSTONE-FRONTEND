@@ -680,6 +680,133 @@
   content: "";
 }
 
+.game-interface .member-reaction-decks {
+  border-color: rgba(190, 151, 66, 0.34);
+  border-radius: 4px;
+  background: linear-gradient(145deg, rgba(19, 43, 58, 0.98), rgba(9, 24, 36, 0.98));
+  box-shadow: inset 0 1px rgba(255, 225, 157, 0.06), 0 14px 30px rgba(0, 0, 0, 0.24);
+}
+
+.game-interface .reaction-decks-heading {
+  border-color: rgba(190, 151, 66, 0.28);
+}
+
+.game-interface .reaction-decks-heading .profile-detail-label {
+  color: #e7b547;
+  font-family: "Courier New", monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+}
+
+.game-interface .reaction-decks-heading h2 {
+  color: #f3ead6;
+}
+
+.game-interface .reaction-deck-tabs button,
+.game-interface .reaction-deck-actions button {
+  border-color: rgba(231, 181, 71, 0.42);
+  border-radius: 4px;
+  color: #f0c75f;
+  background: rgba(76, 57, 20, 0.24);
+  font-family: "Courier New", monospace;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.game-interface .reaction-deck-tabs button.is-active {
+  border-color: #e7b547;
+  color: #201706;
+  background: #ffd66e;
+}
+
+.game-interface .reaction-deck-card {
+  border-color: rgba(190, 151, 66, 0.24);
+  border-radius: 4px;
+  background: rgba(8, 18, 25, 0.56);
+}
+
+.game-interface .reaction-deck-photo {
+  border: 1px solid rgba(231, 181, 71, 0.35);
+  border-radius: 3px;
+  color: #ffe6a5;
+  background: rgba(126, 91, 23, 0.3);
+}
+
+.game-interface .reaction-deck-member strong {
+  color: #f3ead6;
+}
+
+.game-interface .reaction-deck-member > span,
+.game-interface .reaction-deck-status,
+.game-interface .reaction-deck-empty {
+  color: #c5bda9;
+}
+
+.game-interface .reaction-deck-status.is-online {
+  color: #73f5b1;
+}
+
+.game-interface .reaction-deck-status.is-online::before {
+  background: #73f5b1;
+}
+
+.game-interface .reaction-deck-error {
+  color: #ffc0a2;
+}
+
+.game-interface .reaction-deck-actions .reaction-deck-remove {
+  border-color: rgba(229, 141, 108, 0.5);
+  color: #ffc0a2;
+}
+
+@media (max-width: 640px) {
+  .reaction-deck-card {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .reaction-deck-status {
+    grid-column: 1;
+    grid-row: 2;
+    padding-left: 60px;
+  }
+
+  .reaction-deck-actions {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .member-reaction-decks {
+    margin: 16px 12px;
+    padding: 14px;
+  }
+
+  .reaction-decks-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .reaction-deck-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .reaction-deck-status,
+  .reaction-deck-actions {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .reaction-deck-status {
+    padding-left: 60px;
+  }
+
+  .reaction-deck-actions {
+    justify-content: flex-start;
+    padding-left: 60px;
+  }
+}
+
 .game-interface .profile-settings-menu .profile-detail-label {
   color: #e7b547;
 }

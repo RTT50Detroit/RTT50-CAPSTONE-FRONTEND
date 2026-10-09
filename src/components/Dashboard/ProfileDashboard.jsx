@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import ProfileImage from './ProfileImage.jsx';
 import MemberInfo from './MemberInfo.jsx';
 import AboutMe from './aboutMe/AboutMe.jsx';
+import MemberReactionDecks from './MemberReactionDecks.jsx';
 import axios from 'axios';
 import { getCurrentMemberId, isMasterUser } from '../../utils/auth.js';
 import { getMemberId, getProfileImage, isMemberOnline } from '../../utils/member.js';
@@ -144,6 +145,8 @@ const ProfileDashboard = () => {
   if (error) return <p className="profile-status">{error}</p>;
 
   const profileId = getMemberId(userData) || id;
+  const isOwnProfile = Boolean(currentMemberId && profileId &&
+    currentMemberId === String(profileId));
   const canEdit = isMasterUser() || Boolean(currentMemberId && profileId &&
     currentMemberId === String(profileId));
   const isOnline = isMemberOnline(userData, currentMemberId);
@@ -247,15 +250,18 @@ const ProfileDashboard = () => {
                     />
                   )}
                 </aside>
-                {visibleWidgets.about && (
+                {(visibleWidgets.about || isOwnProfile) && (
                   <section className="profile-main-content profile-widget">
-                  <AboutMe
-                      user={userData.aboutMe ?? userData.aboutme}
-                      memberId={profileId}
-                      canEdit={canEdit}
-                      editRequested={aboutEditRequested}
-                      onEditRequestHandled={() => setAboutEditRequested(false)}
-                  />
+                    {visibleWidgets.about && (
+                      <AboutMe
+                          user={userData.aboutMe ?? userData.aboutme}
+                          memberId={profileId}
+                          canEdit={canEdit}
+                          editRequested={aboutEditRequested}
+                          onEditRequestHandled={() => setAboutEditRequested(false)}
+                      />
+                    )}
+                    {isOwnProfile && <MemberReactionDecks />}
                   </section>
                 )}
               </div>

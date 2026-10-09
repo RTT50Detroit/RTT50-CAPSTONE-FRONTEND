@@ -300,6 +300,199 @@
   box-shadow: 0 14px 34px rgba(18, 59, 74, 0.07);
 }
 
+.member-reaction-decks {
+  display: grid;
+  gap: 16px;
+  margin: 24px;
+  border: 1px solid #dce8e5;
+  border-radius: 12px;
+  padding: 20px;
+  background: #f8fbfa;
+}
+
+.reaction-decks-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  border-bottom: 1px solid #dce8e5;
+  padding-bottom: 14px;
+}
+
+.reaction-decks-heading .profile-detail-label {
+  margin-bottom: 5px;
+}
+
+.reaction-decks-heading h2 {
+  margin: 0;
+  color: #123b4a;
+  font-size: 1.25rem;
+}
+
+.reaction-deck-tabs {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.reaction-deck-tabs button,
+.reaction-deck-actions button {
+  border: 1px solid #b9d6ce;
+  border-radius: 6px;
+  padding: 8px 11px;
+  color: #287c78;
+  background: #fff;
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.reaction-deck-tabs button span {
+  margin-left: 4px;
+}
+
+.reaction-deck-tabs button.is-active {
+  border-color: #287c78;
+  color: #fff;
+  background: #287c78;
+}
+
+.reaction-deck-tabs button:focus-visible,
+.reaction-deck-actions button:focus-visible,
+.reaction-deck-profile:focus-visible {
+  outline: 2px solid #c7a24a;
+  outline-offset: 2px;
+}
+
+.reaction-deck-content {
+  min-height: 80px;
+}
+
+.reaction-deck-empty,
+.reaction-deck-error {
+  margin: 10px 0;
+  color: #708287;
+  font-size: 0.85rem;
+}
+
+.reaction-deck-error {
+  color: #a04f43;
+}
+
+.reaction-deck-list {
+  display: grid;
+  gap: 8px;
+}
+
+.reaction-deck-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  border: 1px solid #dce8e5;
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: #fff;
+}
+
+.reaction-deck-profile {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 12px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.reaction-deck-photo {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  flex: none;
+  overflow: hidden;
+  place-items: center;
+  border-radius: 6px;
+  color: #fff;
+  background: #287c78;
+  font-weight: 800;
+}
+
+.reaction-deck-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reaction-deck-photo > span {
+  grid-area: 1 / 1;
+}
+
+.reaction-deck-member {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+}
+
+.reaction-deck-member strong,
+.reaction-deck-member > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reaction-deck-member strong {
+  color: #123b4a;
+  font-size: 0.9rem;
+}
+
+.reaction-deck-member > span,
+.reaction-deck-status {
+  color: #708287;
+  font-size: 0.74rem;
+}
+
+.reaction-deck-status {
+  white-space: nowrap;
+}
+
+.reaction-deck-status::before {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: #8ca4a5;
+  content: "";
+}
+
+.reaction-deck-status.is-online::before {
+  background: #61d3b5;
+}
+
+.reaction-deck-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.reaction-deck-actions button {
+  padding: 7px 9px;
+  font-size: 0.68rem;
+}
+
+.reaction-deck-actions button:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+.reaction-deck-actions .reaction-deck-remove {
+  color: #a04f43;
+}
+
 .profile-sidebar {
   min-height: 0;
   max-height: 100%;

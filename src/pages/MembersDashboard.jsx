@@ -3,6 +3,7 @@ import axios from 'axios';
 import ProfileCards, { ProfileLayoutControls } from '../components/ProfileCard/ProfileCards';
 import { getCurrentMemberId, getTokenPayload } from '../utils/auth.js';
 import { getMemberId, isMemberOnline } from '../utils/member.js';
+import { fetchMemberReactions, saveMemberReaction, clearMemberReaction } from '../utils/memberReactions.js';
 import './css/members_dashboard.css';
 
 const MembersDashboard = () => {
@@ -16,6 +17,10 @@ const MembersDashboard = () => {
   const [rosterView, setRosterView] = useState('cards');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [reactionMap, setReactionMap] = useState({});
+  const [reactionError, setReactionError] = useState(null);
+  const [isReactionLoading, setIsReactionLoading] = useState(true);
+  const [busyTargetId, setBusyTargetId] = useState(null);
   const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
   const token = localStorage.getItem('authToken');
   const currentMemberId = getCurrentMemberId();
@@ -51,6 +56,63 @@ const MembersDashboard = () => {
 
     fetchProfiles();
   }, [apiUrl, token]);
+
+  useEffect(() => {
+    let isActive = true;
+    setIsReactionLoading(true);
+    fetchMemberReactions()
+        .then((decks) => {
+          if (!isActive) return;
+          const allReactions = [
+            ...(Array.isArray(decks.likes) ? decks.likes : []),
+            ...(Array.isArray(decks.dislikes) ? decks.dislikes : []),
+          ];
+          setReactionMap(Object.fromEntries(
+              allReactions.map((profile) => [String(getMemberId(profile)), profile.reaction]),
+          ));
+          setReactionError(null);
+        })
+        .catch((requestError) => {
+          console.error('Error fetching member reaction decks:', requestError);
+          if (isActive) {
+            setReactionError(
+                requestError.response?.data?.message || 'Your reactions could not be loaded.',
+            );
+          }
+        })
+        .finally(() => {
+          if (isActive) setIsReactionLoading(false);
+        });
+
+    return () => {
+      isActive = false;
+    };
+  }, [token]);
+
+  const handleReactionChange = async (targetId, reaction) => {
+    setBusyTargetId(targetId);
+    setReactionError(null);
+    try {
+      if (reaction) {
+        await saveMemberReaction(targetId, reaction);
+        setReactionMap((current) => ({ ...current, [targetId]: reaction }));
+      } else {
+        await clearMemberReaction(targetId);
+        setReactionMap((current) => {
+          const next = { ...current };
+          delete next[targetId];
+          return next;
+        });
+      }
+    } catch (requestError) {
+      console.error('Error updating member reaction:', requestError);
+      setReactionError(
+          requestError.response?.data?.message || 'Your reaction could not be saved. Please try again.',
+      );
+    } finally {
+      setBusyTargetId(null);
+    }
+  };
 
   const filteredProfiles = profiles.filter((profile) => {
     const profileSex = profile.gender?.toLowerCase();
@@ -234,6 +296,9 @@ const MembersDashboard = () => {
             )}
 
             <div className="directory-roster">
+              {reactionError && (
+                <p className="dashboard-status dashboard-error" role="alert">{reactionError}</p>
+              )}
               {isLoading && <p className="dashboard-status">Loading member profiles...</p>}
               {error && <p className="dashboard-status dashboard-error">{error}</p>}
               {!isLoading && !error && profiles.length === 0 && (
@@ -248,6 +313,10 @@ const MembersDashboard = () => {
                     currentMemberId={currentMemberId}
                     layout={cardLayout}
                     view={rosterView}
+                    reactionMap={reactionMap}
+                    busyTargetId={busyTargetId}
+                    isReactionLoading={isReactionLoading}
+                    onReactionChange={handleReactionChange}
                 />
               )}
             </div>

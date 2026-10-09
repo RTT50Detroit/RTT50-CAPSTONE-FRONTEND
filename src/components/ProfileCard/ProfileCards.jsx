@@ -145,7 +145,53 @@ ProfileLayoutControls.propTypes = {
   onLayoutChange: PropTypes.func.isRequired,
 };
 
-const ProfileDirectory = ({ profiles, currentMemberId }) => {
+const ReactionActions = ({
+  profileId,
+  profileName,
+  currentReaction,
+  busy,
+  isReactionLoading,
+  onReactionChange,
+}) => (
+  <div className="profile-reaction-actions" aria-label={`React to ${profileName}'s Profile`}>
+    <button
+        type="button"
+        className={`profile-reaction-button is-like${currentReaction === 'like' ? ' is-selected' : ''}`}
+        aria-pressed={currentReaction === 'like'}
+        disabled={busy || isReactionLoading}
+        onClick={() => onReactionChange(profileId, currentReaction === 'like' ? null : 'like')}
+    >
+      Like
+    </button>
+    <button
+        type="button"
+        className={`profile-reaction-button is-pass${currentReaction === 'dislike' ? ' is-selected' : ''}`}
+        aria-pressed={currentReaction === 'dislike'}
+        disabled={busy || isReactionLoading}
+        onClick={() => onReactionChange(profileId, currentReaction === 'dislike' ? null : 'dislike')}
+    >
+      Pass
+    </button>
+  </div>
+);
+
+ReactionActions.propTypes = {
+  profileId: PropTypes.string.isRequired,
+  profileName: PropTypes.string.isRequired,
+  currentReaction: PropTypes.oneOf(['like', 'dislike']),
+  busy: PropTypes.bool.isRequired,
+  isReactionLoading: PropTypes.bool.isRequired,
+  onReactionChange: PropTypes.func.isRequired,
+};
+
+const ProfileDirectory = ({
+  profiles,
+  currentMemberId,
+  reactionMap,
+  busyTargetId,
+  isReactionLoading,
+  onReactionChange,
+}) => {
   const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
   return (
     <div className="roster-directory" aria-label="All Directory">
@@ -191,15 +237,27 @@ const ProfileDirectory = ({ profiles, currentMemberId }) => {
             <span className={`roster-directory-status${isOnline ? ' is-online' : ''}`}>
               {isOnline ? 'Online' : 'Offline'}
             </span>
-            {profileId && (
-              <Link
-                  className="roster-directory-link"
-                  to={`/dashboard/profile?id=${profileId}`}
-                  aria-label={`View ${name}'s Profile`}
-              >
-                View Profile
-              </Link>
-            )}
+            <div className="roster-directory-actions">
+              {profileId && String(profileId) !== String(currentMemberId) && (
+                <ReactionActions
+                    profileId={String(profileId)}
+                    profileName={name}
+                    currentReaction={reactionMap[String(profileId)]}
+                    busy={busyTargetId === String(profileId)}
+                    isReactionLoading={isReactionLoading}
+                    onReactionChange={onReactionChange}
+                />
+              )}
+              {profileId && (
+                <Link
+                    className="roster-directory-link"
+                    to={`/dashboard/profile?id=${profileId}`}
+                    aria-label={`View ${name}'s Profile`}
+                >
+                  View Profile
+                </Link>
+              )}
+            </div>
           </article>
         );
       })}
@@ -210,9 +268,22 @@ const ProfileDirectory = ({ profiles, currentMemberId }) => {
 ProfileDirectory.propTypes = {
   profiles: PropTypes.arrayOf(PropTypes.object).isRequired,
   currentMemberId: PropTypes.string,
+  reactionMap: PropTypes.objectOf(PropTypes.oneOf(['like', 'dislike'])).isRequired,
+  busyTargetId: PropTypes.string,
+  isReactionLoading: PropTypes.bool.isRequired,
+  onReactionChange: PropTypes.func.isRequired,
 };
 
-const ProfileCards = ({ profiles, currentMemberId, layout, view }) => {
+const ProfileCards = ({
+  profiles,
+  currentMemberId,
+  layout,
+  view,
+  reactionMap,
+  busyTargetId,
+  isReactionLoading,
+  onReactionChange,
+}) => {
   const apiUrl = import.meta.env.VITE_APP_BASE_URL.replace(/\/$/, '');
   const onlineProfiles = profiles.filter((profile) => {
     return isMemberOnline(profile, currentMemberId);
@@ -220,7 +291,16 @@ const ProfileCards = ({ profiles, currentMemberId, layout, view }) => {
   const offlineProfiles = profiles.filter((profile) => !onlineProfiles.includes(profile));
 
   if (view === 'directory') {
-    return <ProfileDirectory profiles={profiles} currentMemberId={currentMemberId} />;
+    return (
+      <ProfileDirectory
+          profiles={profiles}
+          currentMemberId={currentMemberId}
+          reactionMap={reactionMap}
+          busyTargetId={busyTargetId}
+          isReactionLoading={isReactionLoading}
+          onReactionChange={onReactionChange}
+      />
+    );
   }
 
   const renderProfileCards = (profilesToRender) => (
@@ -282,6 +362,16 @@ const ProfileCards = ({ profiles, currentMemberId, layout, view }) => {
                 </div>
                 <p className="profile-card-summary">{summary}</p>
                 <div className="profile-card-actions">
+                  {profileId && String(profileId) !== String(currentMemberId) && (
+                    <ReactionActions
+                        profileId={String(profileId)}
+                        profileName={profile.name || 'Member'}
+                        currentReaction={reactionMap[String(profileId)]}
+                        busy={busyTargetId === String(profileId)}
+                        isReactionLoading={isReactionLoading}
+                        onReactionChange={onReactionChange}
+                    />
+                  )}
                   {profileId && (
                     <Link
                         className="profile-card-profile-link"
@@ -332,4 +422,8 @@ ProfileCards.propTypes = {
   currentMemberId: PropTypes.string,
   layout: PropTypes.oneOf(['current', 'photo', 'magazine']).isRequired,
   view: PropTypes.oneOf(['cards', 'directory']).isRequired,
+  reactionMap: PropTypes.objectOf(PropTypes.oneOf(['like', 'dislike'])).isRequired,
+  busyTargetId: PropTypes.string,
+  isReactionLoading: PropTypes.bool.isRequired,
+  onReactionChange: PropTypes.func.isRequired,
 };
