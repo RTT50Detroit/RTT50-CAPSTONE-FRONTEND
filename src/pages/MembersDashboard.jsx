@@ -122,14 +122,16 @@ const MembersDashboard = () => {
               {!isLoading && !error && filteredProfiles.length > 0 && (
                 <ProfileLayoutControls layout={cardLayout} onLayoutChange={setCardLayout} />
               )}
-              {!isLoading && !error && <span>{filteredProfiles.length} results</span>}
             </div>
           </div>
 
           <div className="directory-console">
             {!isLoading && !error && profiles.length > 0 && (
               <aside className="profile-filters" aria-label="Filter Profiles">
-                <p className="directory-panel-kicker">Search Parameters</p>
+                <div className="directory-panel-heading">
+                  <p className="directory-panel-kicker">Search Parameters</p>
+                  <span className="directory-results-count">{filteredProfiles.length} Results</span>
+                </div>
                 <div className="profile-filter-field profile-filter-search">
                   <label htmlFor="profile-search">Search Profiles</label>
                   <div className="profile-search-input">
