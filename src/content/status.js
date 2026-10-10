@@ -1,7 +1,9 @@
 export const STATUS_UPDATED = 'October 8, 2026';
 export const STATUS_PHASE = 'Public Demo (Beta)';
 
-export const RESUME_URL = 'https://therelationshipresume.netlify.app/';
+// export const RESUME_URL = 'https://therelationshipresume.netlify.app/';
+
+export const RESUME_URL = 'https://therelationshipresume.onrender.com/';
 
 export const statusContent = {
   summary: 'The Social Match Game is a live demo. It is real and working, but it is still being built, tested, and shaped by the people who use it.',

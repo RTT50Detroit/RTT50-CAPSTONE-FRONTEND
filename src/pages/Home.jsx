@@ -129,7 +129,8 @@ const LandingPage = () => {
             </p>
             <a
                 className="home-secondary-action"
-                href="https://therelationshipresume.netlify.app/"
+                // href="https://therelationshipresume.netlify.app/"
+                   href="https://therelationshipresume.onrender.com/"
                 target="_blank"
                 rel="noreferrer"
             >
