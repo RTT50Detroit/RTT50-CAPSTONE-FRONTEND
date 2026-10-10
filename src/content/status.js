@@ -1,8 +1,6 @@
 export const STATUS_UPDATED = 'October 8, 2026';
 export const STATUS_PHASE = 'Public Demo (Beta)';
 
-// export const RESUME_URL = 'https://therelationshipresume.netlify.app/';
-
 export const RESUME_URL = 'https://therelationshipresume.onrender.com/';
 
 export const statusContent = {

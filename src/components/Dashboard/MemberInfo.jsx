@@ -8,6 +8,14 @@ const normalizeHobbies = (hobbies) => (
   Array.isArray(hobbies) ? hobbies : hobbies ? [hobbies] : []
 );
 
+const getResumeUrl = (url) => {
+  const trimmedUrl = url.trim();
+  return trimmedUrl.replace(
+      /^https?:\/\/therelationshipresume\.netlify\.app(?=\/|$)/i,
+      'https://therelationshipresume.onrender.com',
+  );
+};
+
 const MemberInfo = ({
   user, memberId, canEdit, onSaved, editRequested, onEditRequestHandled,
 }) => {
@@ -168,7 +176,7 @@ const MemberInfo = ({
           {relationshipResume && (
             <a
                 className="profile-details-resume-badge"
-                href={relationshipResume.url.trim()}
+                href={getResumeUrl(relationshipResume.url)}
                 target="_blank"
                 rel="noreferrer"
                 aria-label={`Open ${user.name || 'member'}'s Relationship Resume`}
