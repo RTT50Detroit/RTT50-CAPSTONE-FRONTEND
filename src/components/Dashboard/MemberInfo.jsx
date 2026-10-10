@@ -175,7 +175,7 @@ const MemberInfo = ({
                 title="Open Relationship Resume"
             >
               <span className="profile-details-resume-mark" aria-hidden="true">RR</span>
-              <span>Relationship Resume</span>
+              <span>The Relationship Resume</span>
               <span className="profile-details-resume-arrow" aria-hidden="true">↗</span>
             </a>
           )}
